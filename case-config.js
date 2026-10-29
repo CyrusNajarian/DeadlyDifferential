@@ -4458,13 +4458,13 @@ window.CASE_CONFIG={
       "description": "Personal belongings left on the shared desk. Look for their owners’ names.",
       "photos": [
         {
-          "src": "assets/suspects/team-room-head-wrap.webp",
+          "src": "assets/suspects/team-room-prevention.webp",
           "title": "Shared workroom",
           "people": [
             "A",
-            "F"
+            "B"
           ],
-          "alt": "Personal bags, lunch items and everyday belongings on a shared hospital workroom desk.",
+          "alt": "Shared hospital workroom desk with belongings labeled Dr. Silver and Dr. Emerald.",
           "width": 1536,
           "height": 1024
         }
@@ -4607,106 +4607,86 @@ window.CASE_CONFIG={
           ]
         },
         {
-          "id": "F",
-          "name": "Dr. Rust",
-          "color": "#dc986d",
-          "look": "Rust dress · pearl earrings · curls",
+          "id": "B",
+          "name": "Dr. Emerald",
+          "color": "#5ab38c",
+          "look": "Emerald sari",
           "observable": true,
           "cover": 0,
           "symptoms": [
             {
-              "term": "Possible photosensitivity",
+              "term": "Antiplatelet and statin use",
               "aliases": [
-                "sun protection",
-                "sunscreen",
-                "SPF",
-                "SPF 50",
-                "concealer",
-                "makeup",
-                "foundation",
-                "skin camouflage",
-                "rash concealment",
-                "covering a rash",
-                "photosensitivity",
-                "photosensitive rash",
-                "photosensitive skin",
-                "sun sensitivity",
-                "sensitivity to sunlight",
-                "Possible photosensitivity"
+                "aspirin",
+                "atorvastatin",
+                "aspirin and atorvastatin",
+                "antiplatelet",
+                "statin",
+                "antiplatelet therapy",
+                "statin therapy",
+                "vascular risk reduction",
+                "stroke prevention medications",
+                "secondary prevention",
+                "secondary stroke prevention",
+                "medications for stroke prevention",
+                "aspirin 81 mg",
+                "atorvastatin 80 mg"
               ],
-              "info": "Skin changes aggravated by sunlight could prompt sun protection or cosmetic coverage.",
+              "info": "Aspirin and atorvastatin are visible in a pouch labeled Dr. Emerald. These medicines can be used for vascular prevention; they do not establish a prior stroke or a specific neurologic deficit.",
               "type": "symptom",
-              "hint": "Consider whether exposure to light could aggravate a skin change.",
-              "id": "symptom-possible-photosensitivity"
+              "hint": "Read the two medication labels and consider their shared use.",
+              "id": "symptom-antiplatelet-and-statin-use"
             }
           ],
           "diagnoses": [
             {
-              "term": "Dermatomyositis",
+              "term": "Prior ischemic stroke",
               "aliases": [
-                "DM",
-                "dermatomiositis",
-                "dermatomyositits",
-                "cutaneous dermatomyositis",
-                "amyopathic dermatomyositis",
-                "Dermatomyositis",
-                "dermatomyositis",
-                "dermatomyosytis",
-                "dermatomyostitis"
+                "stroke",
+                "ischemic stroke",
+                "ischaemic stroke",
+                "prior stroke",
+                "previous stroke",
+                "old stroke",
+                "CVA",
+                "cerebrovascular accident",
+                "secondary stroke prevention"
               ],
-              "info": "An inflammatory muscle and skin condition can produce eyelid or knuckle changes and photosensitive rashes.",
+              "info": "Antiplatelet therapy and intensive lipid lowering can be used after an ischemic stroke. The photograph alone cannot confirm this history.",
+              "hint": "Consider a previous vascular injury to the brain.",
               "type": "disease",
-              "hint": "Consider disease affecting muscle tissue itself, sometimes with skin involvement.",
-              "id": "disease-dermatomyositis"
+              "id": "disease-prior-ischemic-stroke"
             },
             {
-              "term": "Cutaneous lupus erythematosus",
+              "term": "Transient ischemic attack",
               "aliases": [
-                "cutaneous lupus",
-                "lupus",
-                "SLE",
-                "systemic lupus erythematosus",
-                "discoid lupus",
-                "Cutaneous lupus erythematosus"
+                "TIA",
+                "transient ischaemic attack",
+                "prior TIA"
               ],
-              "info": "Autoimmune skin inflammation can cause discoloration or a sun-sensitive rash.",
+              "info": "These medicines may also be prescribed after a transient ischemic attack, which does not require a persistent neurologic deficit.",
+              "hint": "Consider transient symptoms caused by reduced brain blood flow.",
               "type": "disease",
-              "hint": "Consider the distribution and character of changes in the skin.",
-              "id": "disease-cutaneous-lupus-erythematosus"
+              "id": "disease-transient-ischemic-attack"
             },
             {
-              "term": "Rosacea",
+              "term": "Coronary artery disease",
               "aliases": [
-                "acne rosacea",
-                "Rosacea"
+                "CAD",
+                "ischemic heart disease",
+                "ischaemic heart disease",
+                "coronary heart disease",
+                "prior myocardial infarction",
+                "heart attack",
+                "MI",
+                "atherosclerotic cardiovascular disease",
+                "ASCVD"
               ],
-              "info": "Facial skin inflammation can cause redness that prompts sun protection or cosmetic coverage.",
+              "info": "Aspirin and atorvastatin can also be used for coronary disease. Medication use is not specific to cerebrovascular disease.",
+              "hint": "Consider another organ affected by atherosclerotic vascular disease.",
               "type": "disease",
-              "hint": "Consider the distribution and character of changes in the skin.",
-              "id": "disease-rosacea"
-            },
-            {
-              "term": "Contact dermatitis",
-              "aliases": [
-                "eczema",
-                "allergic contact dermatitis",
-                "irritant contact dermatitis",
-                "eyelid dermatitis",
-                "Contact dermatitis"
-              ],
-              "info": "Skin inflammation after an exposure can produce redness or other changes involving exposed areas.",
-              "type": "disease",
-              "hint": "Consider the distribution and character of changes in the skin.",
-              "id": "disease-contact-dermatitis"
+              "id": "disease-coronary-artery-disease"
             }
-          ],
-          "prompts": [
-            "Which personal-care items belong to Dr. Rust? What might explain their use?",
-            "How might these belongings fit with the other clues you have seen?"
-          ],
-          "hints": [
-            "Consider the purposes of sunscreen and concealer.",
-            "Use the skin distribution seen elsewhere to refine your possibilities."
           ],
           "symptomsNeeded": 1,
           "diagnosesNeeded": 1,
@@ -4715,24 +4695,32 @@ window.CASE_CONFIG={
           "questions": [
             {
               "label": "Notice the finding",
-              "prompt": "Which personal-care items belong to Dr. Rust? What might explain their use?",
-              "hint": "Consider the purposes of sunscreen and concealer."
+              "prompt": "Which medicines belong to Dr. Emerald?",
+              "hint": "Use the ownership tag and the labels on the bottles."
             },
             {
-              "label": "Describe the symptom",
-              "prompt": "Which clinical term describes the observation?",
-              "hint": "Describe the change in appearance or function, and distinguish observation from a possible explanation."
+              "label": "Describe the observation",
+              "prompt": "What type of treatment do the medicines suggest?",
+              "hint": "Consider platelet inhibition and cholesterol lowering; these are treatment clues, not visible neurologic symptoms."
             },
             {
               "label": "Where is it localized?",
-              "prompt": "Which structures or functional systems could produce the observation?",
-              "hint": "Consider central pathways, peripheral pathways, the nerve–muscle connection, muscle, and local tissues as appropriate to what is visible."
+              "prompt": "Can these medicines alone localize a neurologic problem?",
+              "hint": "They do not establish a deficit or localize a lesion. Look for other evidence."
             },
             {
               "label": "Build the differential",
-              "prompt": "How might these belongings fit with the other clues you have seen?",
-              "hint": "Use the skin distribution seen elsewhere to refine your possibilities."
+              "prompt": "What medical histories could explain taking both medicines?",
+              "hint": "Consider cerebrovascular and coronary disease; distinguish an observation from an unconfirmed history."
             }
+          ],
+          "prompts": [
+            "Which medicines belong to Dr. Emerald?",
+            "What medical histories could explain taking both medicines?"
+          ],
+          "hints": [
+            "Use the ownership tag and the labels on the bottles.",
+            "Consider cerebrovascular and coronary disease; distinguish an observation from an unconfirmed history."
           ]
         }
       ],
@@ -4757,17 +4745,17 @@ window.CASE_CONFIG={
     },
     {
       "id": "interview-notes",
-      "label": "Interview notes",
-      "title": "The handwritten interview notes",
-      "description": "Dr. Emerald wrote these notes during a patient interview. Examine the document as well as its contents.",
+      "label": "Annual review",
+      "title": "The yearly department review",
+      "description": "Dr. Emerald returned this annual activity log. Both columns request the same type of entry for the same review year.",
       "photos": [
         {
-          "src": "assets/suspects/annual-review.webp",
-          "title": "Patient-interview notes",
+          "src": "assets/suspects/annual-activity-log.webp",
+          "title": "Annual activity log",
           "people": [
             "B"
           ],
-          "alt": "A printed patient-interview form completed in blue handwriting and signed by Dr. Emerald.",
+          "alt": "Dr. Emerald’s annual activity log, with equivalent activity/date entry boxes in both columns.",
           "width": 1024,
           "height": 1536
         }
@@ -4805,9 +4793,18 @@ window.CASE_CONFIG={
                 "left half blank",
                 "writing crowded to the right",
                 "writing confined to the right side",
-                "Left sided spatial neglect"
+                "Left sided spatial neglect",
+                "left column blank",
+                "blank left column",
+                "left column unfilled",
+                "only right column filled",
+                "only right side completed",
+                "omitted left column",
+                "incomplete left side",
+                "ignoring left side",
+                "left column neglected"
               ],
-              "info": "Reduced attention to the left side of space can leave that side underused during a written task.",
+              "info": "The same activity/date entry boxes appear on both sides of one annual log, but only the right column contains entries spanning the year. This pattern suggests reduced attention to the left side of space.",
               "type": "symptom",
               "hint": "Consider whether attention is distributed equally across both sides of space.",
               "id": "symptom-left-sided-spatial-neglect"
@@ -4880,8 +4877,8 @@ window.CASE_CONFIG={
             }
           ],
           "prompts": [
-            "What do you notice about how Dr. Emerald used the page?",
-            "What could account for this pattern in the author’s writing?"
+            "What do you notice about how Dr. Emerald completed the form?",
+            "What could account for this pattern of completion?"
           ],
           "hints": [
             "Compare the two sides of the sheet.",
@@ -4894,8 +4891,8 @@ window.CASE_CONFIG={
           "questions": [
             {
               "label": "Notice the finding",
-              "prompt": "What do you notice about how Dr. Emerald used the page?",
-              "hint": "Compare the two sides of the sheet."
+              "prompt": "What do you notice about where Dr. Emerald entered the activities?",
+              "hint": "Compare equivalent entry boxes on the two sides. Both columns belong to the same annual log."
             },
             {
               "label": "Describe the symptom",
@@ -4909,7 +4906,7 @@ window.CASE_CONFIG={
             },
             {
               "label": "Build the differential",
-              "prompt": "What could account for this pattern in the author’s writing?",
+              "prompt": "What could explain this spatial pattern of completion?",
               "hint": "Consider a persistent change in spatial attention."
             }
           ]
