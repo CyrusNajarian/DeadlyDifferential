@@ -1432,13 +1432,13 @@ window.CASE_CONFIG={
       "title": "The Neck",
       "stages": [
         {
-          "title": "Autopsy Photograph",
+          "title": "Autopsy Report",
           "revealThreshold": 2,
           "media": {
-            "type": "none",
-            "src": "",
-            "alt": "",
-            "caption": ""
+            "type": "image",
+            "src": "assets/culprit/autopsy-bilateral.webp",
+            "alt": "Medical examiner report with neck examination photographs and case findings.",
+            "caption": "Medical examiner report"
           },
           "questions": [
             {

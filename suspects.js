@@ -24,8 +24,10 @@ function suspectRoute(){
   state.suspectPerson=people.some(p=>p.id===parts[2])?parts[2]:people[0].id;
   state.suspectPhase=parts[3]==='diagnoses'?'diagnoses':'symptoms';
   if(parts[1]!==state.suspectSet||parts[2]!==state.suspectPerson){state.suspectPhase='symptoms';history.replaceState(null,'',`#suspects/${state.suspectSet}/${state.suspectPerson}/symptoms`)}
- }else if(parts[0]==='culprit')state.section='culprit';
+ }else if(parts[0]==='culprit'){state.section='culprit';if(parts[1]!==undefined)state.clue=Number(parts[1]);if(parts[2]!==undefined)state.stage=Number(parts[2]);}
+ else if(parts[0]==='notes')state.section='notes';
  state.section=state.section||'culprit';
+ enforceInvestigationRoute();
 }
 function suspectProgress(id){
  state.suspectProgress=state.suspectProgress||{};
@@ -40,9 +42,10 @@ function suspectNavigate(id,phase='symptoms'){
  if(location.hash===hash){suspectRoute();save();render()}else location.hash=hash;
 }
 function renderSectionNav(){
- suspectRoute();const s=state.section,set=suspectSet();
- const people=set.people.filter(p=>p.observable!==false),current=people.some(p=>p.id===state.suspectPerson)?state.suspectPerson:people[0].id;
- $('#sectionNav').innerHTML=`<a class="section-link ${s==='culprit'?'selected':''}" href="#culprit" ${s==='culprit'?'aria-current="page"':''}>Culprit clues</a><a class="section-link ${s==='suspects'?'selected':''}" href="#suspects/${set.id}/${current}/symptoms" ${s==='suspects'?'aria-current="page"':''}>Suspect clues</a>`;
+ suspectRoute();const section=state.section,steps=investigationSteps(),culprit=steps.filter(s=>s.section==='culprit'),suspects=steps.filter(s=>s.section==='suspects');
+ const ci=culprit.find(s=>s.ci===state.clue&&s.si===state.stage)||culprit[0];
+ const si=suspects.find(s=>s.setId===state.suspectSet&&s.personId===state.suspectPerson)||suspects[0];
+ $('#sectionNav').innerHTML=`<a class="section-link ${section==='culprit'?'selected':''}" href="${ci.route}">Culprit clues ${milestoneBadge(groupStatus(culprit))}</a>${suspects.length?(isStepUnlocked(suspects[0].id)?`<a class="section-link ${section==='suspects'?'selected':''}" href="${si.route}">Suspect clues ${milestoneBadge(groupStatus(suspects))}</a>`:'<span class="section-link nav-locked" aria-disabled="true">Suspect clues · Locked</span>'):''}<a class="section-link ${section==='notes'?'selected':''}" href="#notes">Notes</a>`;
 }
 function renderSuspects(){
   $('#clueNav').hidden=true;
@@ -53,11 +56,12 @@ function renderSuspects(){
   const unlocked=progress.symptoms.length>=1;
   const photo=Number.isInteger(state.suspectPhoto)&&set.photos[state.suspectPhoto]?.people.includes(person.id)?state.suspectPhoto:person.cover;
   const image=set.photos[photo];
-  const complete=people.filter(p=>{const x=suspectProgress(p.id);return x.symptoms.length&&x.diagnoses.length}).length;
+  const steps=investigationSteps(),setSteps=steps.filter(s=>s.setId===set.id),current=steps.find(s=>s.id===`suspect-${set.id}-${person.id}`);
+  const complete=setSteps.filter(s=>stepStatus(s).complete).length;
   const next=people[people.indexOf(person)+1];
   $('#roundContent').innerHTML=`
-    <div class="suspect-set-head"><nav class="clue-set-nav" aria-label="Suspect clue sets">${(window.SUSPECT_SETS||[set]).map(clue=>`<a class="section-link ${clue.id===set.id?'selected':''}" href="#suspects/${clue.id}/${clue.people.find(p=>p.observable!==false).id}/symptoms" ${clue.id===set.id?'aria-current="page"':''}>${esc(clue.label||clue.title)}</a>`).join('')}</nav><span class="eyebrow">SUSPECT CLUES</span><h2 class="section-title">${esc(set.title)}</h2><p class="section-copy">${esc(set.description)}</p></div>
-    <nav class="person-nav" aria-label="People in this clue">${people.map(p=>{const x=suspectProgress(p.id),finished=x.symptoms.length&&x.diagnoses.length;return `<a href="#suspects/${set.id}/${p.id}/symptoms" class="person-link ${p.id===person.id?'selected':''}" ${p.id===person.id?'aria-current="page"':''}><b><i class="person-color" style="background:${p.color}" aria-hidden="true"></i>${esc(p.name)}</b><span>${esc(p.look)}</span>${finished?'<span class="person-done" aria-label="Completed">✓</span>':''}</a>`}).join('')}</nav>
+    <div class="suspect-set-head"><nav class="clue-set-nav" aria-label="Suspect clue sets">${(window.SUSPECT_SETS||[set]).map(clue=>{const group=steps.filter(s=>s.setId===clue.id),first=group[0],label=esc(clue.label||clue.title);return isStepUnlocked(first.id)?`<a class="section-link ${clue.id===set.id?'selected':''}" href="${first.route}">${label} ${milestoneBadge(groupStatus(group))}</a>`:`<span class="section-link nav-locked" aria-disabled="true">${label} · Locked</span>`}).join('')}</nav><span class="eyebrow">SUSPECT CLUES</span><h2 class="section-title">${esc(set.title)}</h2><p class="section-copy">${esc(set.description)}</p></div>
+    <nav class="person-nav" aria-label="People in this clue">${people.map(p=>{const step=setSteps.find(s=>s.personId===p.id),label=`<b><i class="person-color" style="background:${p.color}" aria-hidden="true"></i>${esc(p.name)} ${milestoneBadge(stepStatus(step))}</b><span>${esc(p.look)}</span>`;return isStepUnlocked(step.id)?`<a href="${step.route}" class="person-link ${p.id===person.id?'selected':''}">${label}</a>`:`<span class="person-link nav-locked" aria-disabled="true">${label}<span>Locked</span></span>`}).join('')}</nav>
     <div class="person-heading"><div><span class="eyebrow">${esc(person.name)}</span><h3>${esc(person.look)}</h3></div><span class="small-status">${complete}/${people.length} complete</span></div>
     <figure class="reception-gallery card ${set.id==='interview-notes'?'document-gallery':''}">
       <a href="${image.src}" target="_blank" rel="noopener" aria-label="Open photograph ${photo+1} at full size"><img class="reception-main" src="${image.src}" alt="${esc(image.alt)}" width="${image.width||1536}" height="${image.height||1024}" fetchpriority="high"></a>
@@ -66,18 +70,18 @@ function renderSuspects(){
     </figure>
     <details class="photo-key card"><summary>Who’s who in this clue</summary><dl>${set.people.map(p=>`<div><dt><i class="person-color" style="background:${p.color}" aria-hidden="true"></i>${esc(p.name)}</dt><dd>${esc(p.look)}</dd></div>`).join('')}</dl></details>
     <div id="sharedFlow"></div>
-    ${next?`<button type="button" class="primary" id="nextPerson" ${progress.diagnoses.length||progress.revealed.diagnoses?'':'disabled'}>Next: ${esc(next.name)}<span>→</span></button>`:`<p class="completion-note">${complete===people.length?'Everyone in this clue is complete.':'Revisit any person using the tabs above.'}</p>`}
+    ${renderFlowNext(current)}
     <dialog id="photoDialog" class="photo-dialog"><div class="dialog-bar"><span>Photo ${photo+1} · ${esc(image.title)}</span><button type="button" id="closePhoto" aria-label="Close enlarged photograph">Close ×</button></div><div class="zoom-scroll"><img src="${image.src}" alt="${esc(image.alt)}" width="${image.width||1536}" height="${image.height||1024}"></div><p>Scroll to inspect the full photograph. You can also <a href="${image.src}" target="_blank" rel="noopener">open the original</a>.</p></dialog>`;
   save();
   $$('[data-photo]').forEach(b=>b.onclick=()=>{state.suspectPhoto=+b.dataset.photo;save();render()});
   state.flow=state.flow||{};
   const flowId='suspect-'+set.id+'-'+person.id;
   const p=state.flow[flowId]=state.flow[flowId]||{};
-  const stage={...person,accepted:[...person.symptoms.map(a=>({...a,type:'symptom'})),...person.diagnoses.map(a=>({...a,type:'disease'}))]};
+  const stage=suspectStage(person);
   p.commit=()=>{progress.symptoms=p.matches.filter(i=>stage.accepted[i]?.type==='symptom');progress.diagnoses=p.matches.filter(i=>stage.accepted[i]?.type==='disease').map(i=>i-person.symptoms.length)};
   mountFlow($('#sharedFlow'),stage,p,{section:'suspects',clue:set.title,stage:person.name});
   DDLog?.screen(flowId,{section:'suspects',clue:set.title,stage:person.name});
-  $('#nextPerson')?.addEventListener('click',()=>{if(next)suspectNavigate(next.id,'symptoms')});
+  $('#nextClue')?.addEventListener('click',e=>navigateStep(e.currentTarget.dataset.nextStep));
   const dialog=$('#photoDialog');
   $('#zoomPhoto').onclick=()=>dialog.showModal();
   $('#closePhoto').onclick=()=>dialog.close();

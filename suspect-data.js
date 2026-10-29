@@ -4,7 +4,7 @@ window.SUSPECT_SETS=[
     "title": "The reception photographs",
     "photos": [
       {
-        "src": "assets/suspects/reception-1.webp",
+        "src": "assets/suspects/reception-1-ptosis.webp",
         "title": "Arrival",
         "people": [
           "A",
@@ -27,7 +27,7 @@ window.SUSPECT_SETS=[
         "alt": "Three colleagues talking over drinks and appetizers."
       },
       {
-        "src": "assets/suspects/reception-3.webp",
+        "src": "assets/suspects/reception-3-ptosis.webp",
         "title": "Dinner",
         "people": [
           "A",
@@ -40,7 +40,7 @@ window.SUSPECT_SETS=[
         "alt": "Colleagues in conversation during the main course."
       },
       {
-        "src": "assets/suspects/reception-4.webp",
+        "src": "assets/suspects/reception-4-ptosis.webp",
         "title": "Cake",
         "people": [
           "D",
@@ -50,7 +50,7 @@ window.SUSPECT_SETS=[
         "alt": "Three colleagues serving wedding cake."
       },
       {
-        "src": "assets/suspects/reception-5.webp",
+        "src": "assets/suspects/reception-5-ptosis.webp",
         "title": "Dancing",
         "people": [
           "A",
@@ -701,9 +701,16 @@ window.SUSPECT_SETS=[
               "asymmetric eye opening",
               "uneven eyelids",
               "partially closed eye",
-              "Ptosis"
+              "Ptosis",
+              "bilateral ptosis",
+              "bilateral asymmetric ptosis",
+              "asymmetric bilateral ptosis",
+              "both eyelids droop",
+              "drooping of both eyelids",
+              "bilateral eyelid drooping",
+              "ptosis worse on right"
             ],
-            "info": "One upper eyelid sits lower than the other.",
+            "info": "Both upper eyelids droop, with the right more affected.",
             "type": "symptom",
             "hint": "Compare the height of the upper eyelids.",
             "id": "symptom-ptosis"
@@ -738,7 +745,7 @@ window.SUSPECT_SETS=[
               "ptosis increases during the evening",
               "Increasing eyelid droop over time"
             ],
-            "info": "Comparing the ordered photographs shows increasing eyelid asymmetry.",
+            "info": "Both eyelids sit progressively lower through the ordered photographs, with one side more affected.",
             "type": "symptom",
             "hint": "Compare the height of the upper eyelids.",
             "id": "symptom-increasing-eyelid-droop-over-time"
@@ -901,7 +908,7 @@ window.SUSPECT_SETS=[
         "name": "Dr. Rust",
         "color": "#dc986d",
         "observable": true,
-        "look": "Rust dress · pearl earrings · curls",
+        "look": "Rust dress · pearl earrings · dark updo",
         "cover": 3,
         "symptoms": [
           {
@@ -1114,7 +1121,7 @@ window.SUSPECT_SETS=[
     "description": "Personal belongings left on the shared desk. Look for their owners’ names.",
     "photos": [
       {
-        "src": "assets/suspects/team-room.webp",
+        "src": "assets/suspects/team-room-head-wrap.webp",
         "title": "Shared workroom",
         "people": [
           "A",
@@ -1149,9 +1156,14 @@ window.SUSPECT_SETS=[
               "pain relief",
               "headache remedies",
               "headache medication",
-              "Possible headaches"
+              "Possible headaches",
+              "head wrap",
+              "head ice pack",
+              "headache ice wrap",
+              "head cooling wrap",
+              "cold headband"
             ],
-            "info": "Head discomfort could lead someone to use a cold pack or an over-the-counter pain reliever.",
+            "info": "A wraparound head cold pack and acetaminophen suggest headache self-care.",
             "type": "symptom",
             "hint": "Consider discomfort involving the head and the mechanisms that can produce it.",
             "id": "symptom-possible-headaches"
@@ -1232,7 +1244,7 @@ window.SUSPECT_SETS=[
           "What conditions could explain the symptom you inferred?"
         ],
         "hints": [
-          "Consider what the cold pack and analgesic might be used for together.",
+          "Consider how the wraparound cold pack and analgesic might be used together.",
           "Keep common explanations as well as secondary causes in mind."
         ],
         "symptomsNeeded": 1,
@@ -1266,7 +1278,7 @@ window.SUSPECT_SETS=[
         "id": "F",
         "name": "Dr. Rust",
         "color": "#dc986d",
-        "look": "Rust dress · pearl earrings · curls",
+        "look": "Rust dress · pearl earrings · dark updo",
         "observable": true,
         "cover": 0,
         "symptoms": [
@@ -1413,17 +1425,17 @@ window.SUSPECT_SETS=[
   },
   {
     "id": "interview-notes",
-    "label": "Interview notes",
-    "title": "The handwritten interview notes",
-    "description": "Dr. Emerald wrote these notes during a patient interview. Examine the document as well as its contents.",
+    "label": "Administrative form",
+    "title": "The yearly department review",
+    "description": "Dr. Emerald returned this yearly department review. All sections cover the same review year.",
     "photos": [
       {
-        "src": "assets/suspects/interview-notes-v2.webp",
-        "title": "Patient-interview notes",
+        "src": "assets/suspects/annual-review.webp",
+        "title": "Yearly department review",
         "people": [
           "B"
         ],
-        "alt": "A printed patient-interview form completed in blue handwriting and signed by Dr. Emerald.",
+        "alt": "Dr. Emerald’s yearly department review form.",
         "width": 1024,
         "height": 1536
       }
@@ -1461,9 +1473,18 @@ window.SUSPECT_SETS=[
               "left half blank",
               "writing crowded to the right",
               "writing confined to the right side",
-              "Left sided spatial neglect"
+              "Left sided spatial neglect",
+              "left column blank",
+              "blank left column",
+              "left column unfilled",
+              "only right column filled",
+              "only right side completed",
+              "omitted left column",
+              "incomplete left side",
+              "ignoring left side",
+              "left column neglected"
             ],
-            "info": "Reduced attention to the left side of space can leave that side underused during a written task.",
+            "info": "The left-hand sections are uncompleted while the right-hand sections of the same yearly review are filled, suggesting reduced attention to the left side.",
             "type": "symptom",
             "hint": "Consider whether attention is distributed equally across both sides of space.",
             "id": "symptom-left-sided-spatial-neglect"
@@ -1536,8 +1557,8 @@ window.SUSPECT_SETS=[
           }
         ],
         "prompts": [
-          "What do you notice about how Dr. Emerald used the page?",
-          "What could account for this pattern in the author’s writing?"
+          "What do you notice about how Dr. Emerald completed the form?",
+          "What could account for this pattern of completion?"
         ],
         "hints": [
           "Compare the two sides of the sheet.",
@@ -1550,7 +1571,7 @@ window.SUSPECT_SETS=[
         "questions": [
           {
             "label": "Notice the finding",
-            "prompt": "What do you notice about how Dr. Emerald used the page?",
+            "prompt": "What do you notice about how Dr. Emerald completed the form?",
             "hint": "Compare the two sides of the sheet."
           },
           {
@@ -1565,7 +1586,7 @@ window.SUSPECT_SETS=[
           },
           {
             "label": "Build the differential",
-            "prompt": "What could account for this pattern in the author’s writing?",
+            "prompt": "What could account for this pattern in the form’s completion?",
             "hint": "Consider a persistent change in spatial attention."
           }
         ]
@@ -1579,4 +1600,4 @@ window.SUSPECT_SETS=[
     ]
   }
 ];
-window.SUSPECT_CLUES=window.SUSPECT_SETS[0];
+window.SUSPECT_CLUES=window.SUSPECT_SETS.find(set=>set.id==='reception');

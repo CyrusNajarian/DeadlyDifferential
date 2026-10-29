@@ -20,28 +20,31 @@ const hintLevel=i=>state.hints[`${key()}-${i}`]||0;
 function answerCard(a,i,matches){return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div><p>${esc(a.info||'Accepted interpretation for this clue.')}</p></article>`}
 function render(){
   renderSectionNav();
+  if(state.section==='notes')return renderNotes();
   if(state.section==='suspects')return renderSuspects();
   $('#clueNav').hidden=false;
   renderCulprit();
 }
 function renderCulprit(){
  const clue=config.clues[state.clue],stage=clue.stages[state.stage]||clue.stages[0];
- $('#clueNav').innerHTML=config.clues.map((c,i)=>`<button class="round ${i===state.clue?'active':''}" data-clue="${i}"><b>${String(i+1).padStart(2,'0')}</b><span>${esc(c.title.replace(/^The /,''))}</span></button>`).join('');
- $('#roundContent').innerHTML=`<span class="eyebrow">CLUE ${state.clue+1} OF ${config.clues.length}</span><h2 class="section-title">${esc(clue.title)}</h2><div class="stage-tabs">${clue.stages.map((s,i)=>`<button class="stage-tab ${i===state.stage?'active':''}" data-stage="${i}">${esc(s.title)}</button>`).join('')}</div>${mediaCard(stage.media||clue.media)}<div id="sharedFlow"></div>`;
- state.flow=state.flow||{};const p=state.flow['culprit-'+key()]=state.flow['culprit-'+key()]||{};
- mountFlow($('#sharedFlow'),stage,p,{section:'culprit',clue:clue.title,stage:stage.title});
+ const steps=investigationSteps(),current=steps.find(s=>s.id==='culprit-'+key());
+ $('#clueNav').innerHTML=config.clues.map((c,i)=>{const group=steps.filter(s=>s.section==='culprit'&&s.ci===i),unlocked=isStepUnlocked(group[0].id);return `<button class="round ${i===state.clue?'active':''}" data-clue="${i}" ${unlocked?'':'disabled'}><b>${String(i+1).padStart(2,'0')} ${milestoneBadge(groupStatus(group))}</b><span>${esc(c.title.replace(/^The /,''))}${unlocked?'':' · Locked'}</span></button>`}).join('');
+ $('#roundContent').innerHTML=`<span class="eyebrow">CLUE ${state.clue+1} OF ${config.clues.length}</span><h2 class="section-title">${esc(clue.title)} ${milestoneBadge(groupStatus(steps.filter(s=>s.section==='culprit'&&s.ci===state.clue)))}</h2><div class="stage-tabs">${clue.stages.map((s,i)=>{const step=steps.find(x=>x.id===`culprit-${state.clue}-${i}`);return `<button class="stage-tab ${i===state.stage?'active':''}" data-stage="${i}" ${isStepUnlocked(step.id)?'':'disabled'}>${esc(s.title)} ${milestoneBadge(stepStatus(step))}</button>`}).join('')}</div>${mediaCard(stage.media||clue.media)}<div id="sharedFlow"></div>${renderFlowNext(current)}`;
+ mountFlow($('#sharedFlow'),stage,flowRecord(current.id),{section:'culprit',clue:clue.title,stage:stage.title});
  DDLog?.screen('culprit/'+key(),{section:'culprit',clue:clue.title,stage:stage.title});
- $$('[data-clue]').forEach(b=>b.onclick=()=>{state.clue=+b.dataset.clue;state.stage=0;save();render()});
- $$('[data-stage]').forEach(b=>b.onclick=()=>{state.stage=+b.dataset.stage;save();render()});
+ $$('[data-clue]').forEach(b=>b.onclick=()=>navigateStep(`culprit-${b.dataset.clue}-0`));
+ $$('[data-stage]').forEach(b=>b.onclick=()=>navigateStep(`culprit-${state.clue}-${b.dataset.stage}`));
+ $('#nextClue')?.addEventListener('click',e=>navigateStep(e.currentTarget.dataset.nextStep));
  $$('.evidence-media img,.evidence-media audio').forEach(el=>el.onerror=()=>{el.closest('figure').querySelector('.media-error').hidden=false});
+ save();
 }
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=20');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=20');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=23');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=23');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=20';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=23';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;

@@ -1,9 +1,13 @@
-DEADLY DIFFERENTIAL — PLAYTEST UPDATE
+DEADLY DIFFERENTIAL — ORDERED PLAYTEST UPDATE
 
 NETLIFY
 Extract this ZIP. Upload the extracted folder containing index.html to your existing Netlify project's Deploys page. index.html must be directly inside the uploaded folder. This package is a normal static site and does not require a ChatGPT account.
 
 PLAYER CHANGES
+- Clue tabs display a check after BOTH symptom and diagnosis requirements are met, or a star after BOTH star milestones are earned. The same applies to suspect/person tabs; suspect-set badges summarize everyone in that set.
+- Stars must be earned before revealing answers. Revealing diagnoses permanently blocks any unearned stars for that clue; hiding the list or refreshing does not restore eligibility. Already earned stars remain. Revealing symptoms also closes off an unearned symptom star.
+- Clues must be completed in the displayed order: all culprit stages, then the suspect sets and their people. Later tabs and Next stay locked until the current symptom AND diagnosis requirements are met. Completed clues can be revisited. Direct links cannot bypass this sequence.
+- Notes is always available. Notes save automatically on the player's device for the current attempt, including across page refreshes. Reset clears them with the attempt. Notes text is not sent to Google Sheets; time on the Notes screen is logged.
 - Matching suggestions appear after SIX alphabetic characters (spaces and numbers do not count).
 - Each submission checks one answer. Choosing a suggestion fills the field; Check submits it.
 - Every clue uses the same symptom-first controls, including the suspect clues.
@@ -28,4 +32,10 @@ This uploaded older ZIP did not contain the logging files from the later convers
 The app logs submitted answers (correct, incorrect, repeated) and visible screen time for both sections. It keeps a local JSON backup downloadable at the bottom of the player page. It does not record every keystroke.
 
 VERIFICATION
-Checked all 2,557 configured terms/aliases for unambiguous category matching. Checked the six-letter boundary, grouped-answer counting, symptom gating, milestones, independent reviews, and suspect navigation. Excel import roundtrip preserves all answer lists, aliases, hints, and configured requirements. Included photographs load in the preview.
+Checked persisted star/reveal rules, sequential progression through all 12 clue/person screens, direct-link guards, and notes persistence after navigation and refresh. Checked all 2,557 configured terms/aliases for unambiguous category matching. Checked the six-letter boundary, grouped-answer counting, symptom gating, milestones, independent reviews, and suspect navigation. Excel import roundtrip preserves all answer lists, aliases, hints, and configured requirements. Included photographs load in the preview.
+
+PHOTO CLUE UPDATE
+Reception: Dr. Navy is Black, with bilateral ptosis greater on the right. Dr. Rust is East Asian. The team-room cold pack is a head wrap. Dr. Emerald returned a two-column administrative form with only the right column completed. The neck report records 10:00 AM and describes bimanual compression with weaker pressure on one side.
+
+FINAL CLUE CORRECTIONS
+The department form is one yearly review completed at one sitting. Neck contusions occur bilaterally, more pronounced on one side. Dr. Navy has clearer right-greater-than-left ptosis.
