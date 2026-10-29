@@ -42,16 +42,20 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=24');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=24');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=25');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=25');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=24';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=25';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;
  await prepareSuspectSection();
  try{config=await window.DDPreviewStore.load()||window.CASE_CONFIG}
  catch(error){config=window.CASE_CONFIG;toast('Saved preview unavailable. Showing the published case.');console.warn(error.message)}
+ // Migrate bundled photo filenames retained in device-local previews.
+ const legacyPhotos={"reception-1.webp":"reception-1-ptosis.webp","reception-3.webp":"reception-3-ptosis.webp","reception-4.webp":"reception-4-ptosis.webp","reception-5.webp":"reception-5-ptosis.webp","team-room.webp":"team-room-head-wrap.webp","interview-notes-v2.webp":"annual-review.webp"};
+ for(const set of config.suspectSets||[])for(const photo of set.photos||[]){const prefix='assets/suspects/';if(photo.src?.startsWith(prefix)){const updated=legacyPhotos[photo.src.slice(prefix.length)];if(updated)photo.src=prefix+updated;}}
+ for(const clue of config.clues||[]){const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title);if(['The Key & Safe','The Neck','The Footsteps'].includes(clue.title)&&published)for(const [i,stage] of clue.stages.entries()){if(!stage.media?.src&&published.stages[i]?.media?.src)stage.media={...published.stages[i].media};}}
  if(config.suspectSets){window.SUSPECT_SETS=config.suspectSets;window.SUSPECT_CLUES=config.suspectSets[0];}
  document.title=config.title||'Deadly Differential';$('.brand span:last-child').textContent=(config.title||'Deadly Differential').toUpperCase();$('#caseLabel').textContent=config.caseLabel||'CASE 01 · DEPARTMENT RETREAT';$('#openingHeadline').textContent=config.openingHeadline||'The retreat is over. The investigation begins.';$('#openingDescription').textContent=config.openingDescription||'';$('#playerInstructions').textContent=config.playerInstructions||'';
  $('#exportLogs').onclick=()=>DDLog.download();

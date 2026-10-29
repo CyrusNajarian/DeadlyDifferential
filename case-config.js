@@ -705,10 +705,10 @@ window.CASE_CONFIG={
           "title": "Scene Inspection",
           "revealThreshold": 2,
           "media": {
-            "type": "none",
-            "src": "",
-            "alt": "",
-            "caption": ""
+            "type": "image",
+            "src": "assets/culprit/safe-keyhole.webp",
+            "alt": "Evidence sheet showing the safe keyhole and recovered key.",
+            "caption": "Safe keyhole and recovered key"
           },
           "questions": [
             {
@@ -2095,10 +2095,10 @@ window.CASE_CONFIG={
           "title": "Muddy Path",
           "revealThreshold": 2,
           "media": {
-            "type": "none",
-            "src": "",
-            "alt": "",
-            "caption": ""
+            "type": "image",
+            "src": "assets/culprit/footsteps.webp",
+            "alt": "Footprint trail in mud leading to the shed.",
+            "caption": "Footprints leading to the shed"
           },
           "questions": [
             {
@@ -3348,7 +3348,7 @@ window.CASE_CONFIG={
       "title": "The reception photographs",
       "photos": [
         {
-          "src": "assets/suspects/reception-1.webp",
+          "src": "assets/suspects/reception-1-ptosis.webp",
           "title": "Arrival",
           "people": [
             "A",
@@ -3371,7 +3371,7 @@ window.CASE_CONFIG={
           "alt": "Three colleagues talking over drinks and appetizers."
         },
         {
-          "src": "assets/suspects/reception-3.webp",
+          "src": "assets/suspects/reception-3-ptosis.webp",
           "title": "Dinner",
           "people": [
             "A",
@@ -3384,7 +3384,7 @@ window.CASE_CONFIG={
           "alt": "Colleagues in conversation during the main course."
         },
         {
-          "src": "assets/suspects/reception-4.webp",
+          "src": "assets/suspects/reception-4-ptosis.webp",
           "title": "Cake",
           "people": [
             "D",
@@ -3394,7 +3394,7 @@ window.CASE_CONFIG={
           "alt": "Three colleagues serving wedding cake."
         },
         {
-          "src": "assets/suspects/reception-5.webp",
+          "src": "assets/suspects/reception-5-ptosis.webp",
           "title": "Dancing",
           "people": [
             "A",
@@ -4458,7 +4458,7 @@ window.CASE_CONFIG={
       "description": "Personal belongings left on the shared desk. Look for their owners’ names.",
       "photos": [
         {
-          "src": "assets/suspects/team-room.webp",
+          "src": "assets/suspects/team-room-head-wrap.webp",
           "title": "Shared workroom",
           "people": [
             "A",
@@ -4762,7 +4762,7 @@ window.CASE_CONFIG={
       "description": "Dr. Emerald wrote these notes during a patient interview. Examine the document as well as its contents.",
       "photos": [
         {
-          "src": "assets/suspects/interview-notes-v2.webp",
+          "src": "assets/suspects/annual-review.webp",
           "title": "Patient-interview notes",
           "people": [
             "B"

@@ -1,3 +1,4 @@
+let activeGallery="", selectedGalleryPhoto=0;
 /* One answer per submission, with synonyms and conservative spelling suggestions. */
 function answerWords(value){return String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim()}
 function answerDistance(a,b){const d=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const old=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=old}}return d[b.length]}
@@ -54,7 +55,9 @@ function renderSuspects(){
   const person=people.find(p=>p.id===state.suspectPerson)||people[0];
   const progress=suspectProgress(person.id);
   const unlocked=progress.symptoms.length>=1;
-  const photo=Number.isInteger(state.suspectPhoto)&&set.photos[state.suspectPhoto]?.people.includes(person.id)?state.suspectPhoto:person.cover;
+  const galleryKey=set.id+':'+person.id;
+  if(activeGallery!==galleryKey){activeGallery=galleryKey;selectedGalleryPhoto=0;}
+  const photo=set.photos[selectedGalleryPhoto]?selectedGalleryPhoto:0;
   const image=set.photos[photo];
   const steps=investigationSteps(),setSteps=steps.filter(s=>s.setId===set.id),current=steps.find(s=>s.id===`suspect-${set.id}-${person.id}`);
   const complete=setSteps.filter(s=>stepStatus(s).complete).length;
@@ -73,7 +76,7 @@ function renderSuspects(){
     ${renderFlowNext(current)}
     <dialog id="photoDialog" class="photo-dialog"><div class="dialog-bar"><span>Photo ${photo+1} · ${esc(image.title)}</span><button type="button" id="closePhoto" aria-label="Close enlarged photograph">Close ×</button></div><div class="zoom-scroll"><img src="${image.src}" alt="${esc(image.alt)}" width="${image.width||1536}" height="${image.height||1024}"></div><p>Scroll to inspect the full photograph. You can also <a href="${image.src}" target="_blank" rel="noopener">open the original</a>.</p></dialog>`;
   save();
-  $$('[data-photo]').forEach(b=>b.onclick=()=>{state.suspectPhoto=+b.dataset.photo;save();render()});
+  $$('[data-photo]').forEach(b=>b.onclick=()=>{selectedGalleryPhoto=+b.dataset.photo;render()});
   state.flow=state.flow||{};
   const flowId='suspect-'+set.id+'-'+person.id;
   const p=state.flow[flowId]=state.flow[flowId]||{};
