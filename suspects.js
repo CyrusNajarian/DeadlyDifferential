@@ -1,3 +1,9 @@
+function personFace(person){const id=/^[A-F]$/.test(person.id)?person.id:'A';return `<img class="person-face" src="assets/suspects/faces/${id}.webp" alt="" width="44" height="44">`;}
+function renderEmailEvidence(set,person){
+ const messages=person.emailId?set.emails.filter(e=>e.id===person.emailId):set.emails;
+ const body=text=>esc(text).replace(/\n/g,'<br>');
+ return `<section class="email-evidence" aria-label="Email evidence">${messages.map(e=>`<article class="email-message card"><span class="eyebrow">DEPARTMENT CORRESPONDENCE</span><h3>${esc(e.subject)}</h3><dl class="email-headers"><dt>From</dt><dd>${esc(e.from)}</dd><dt>To</dt><dd>${esc(e.to)}</dd></dl><p>${body(e.body)}</p>${e.reply?`<div class="email-reply"><strong>Reply · ${esc(e.to)}</strong><p>${body(e.reply)}</p></div>`:''}${e.earlier?`<div class="email-reply"><strong>Earlier message · ${esc(e.to)}</strong><p>${body(e.earlier)}</p></div>`:''}</article>`).join('')}</section>`;
+}
 let activeGallery="", selectedGalleryPhoto=0;
 /* One answer per submission, with synonyms and conservative spelling suggestions. */
 function answerWords(value){return String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim()}
@@ -58,23 +64,23 @@ function renderSuspects(){
   const galleryKey=set.id+':'+person.id;
   if(activeGallery!==galleryKey){activeGallery=galleryKey;selectedGalleryPhoto=0;}
   const photo=set.photos[selectedGalleryPhoto]?selectedGalleryPhoto:0;
-  const image=set.photos[photo];
+  const image=set.photos[photo]||{};
   const steps=investigationSteps(),setSteps=steps.filter(s=>s.setId===set.id),current=steps.find(s=>s.id===`suspect-${set.id}-${person.id}`);
   const complete=setSteps.filter(s=>stepStatus(s).complete).length;
   const next=people[people.indexOf(person)+1];
   $('#roundContent').innerHTML=`
     <div class="suspect-set-head"><nav class="clue-set-nav" aria-label="Suspect clue sets">${(window.SUSPECT_SETS||[set]).map(clue=>{const group=steps.filter(s=>s.setId===clue.id),first=group[0],label=esc(clue.label||clue.title);return isStepUnlocked(first.id)?`<a class="section-link ${clue.id===set.id?'selected':''}" href="${first.route}">${label} ${milestoneBadge(groupStatus(group))}</a>`:`<span class="section-link nav-locked" aria-disabled="true">${label} · Locked</span>`}).join('')}</nav><span class="eyebrow">SUSPECT CLUES</span><h2 class="section-title">${esc(set.title)}</h2><p class="section-copy">${esc(set.description)}</p></div>
-    <nav class="person-nav" aria-label="People in this clue">${people.map(p=>{const step=setSteps.find(s=>s.personId===p.id),label=`<b><i class="person-color" style="background:${p.color}" aria-hidden="true"></i>${esc(p.name)} ${milestoneBadge(stepStatus(step))}</b><span>${esc(p.look)}</span>`;return isStepUnlocked(step.id)?`<a href="${step.route}" class="person-link ${p.id===person.id?'selected':''}">${label}</a>`:`<span class="person-link nav-locked" aria-disabled="true">${label}<span>Locked</span></span>`}).join('')}</nav>
-    <div class="person-heading"><div><span class="eyebrow">${esc(person.name)}</span><h3>${esc(person.look)}</h3></div><span class="small-status">${complete}/${people.length} complete</span></div>
-    <figure class="reception-gallery card ${set.id==='interview-notes'?'document-gallery':''}">
+    <nav class="person-nav" aria-label="People in this clue">${people.map(p=>{const step=setSteps.find(s=>s.personId===p.id),label=`<b>${personFace(p)}${esc(p.name)} ${milestoneBadge(stepStatus(step))}</b>`;return isStepUnlocked(step.id)?`<a href="${step.route}" class="person-link ${p.id===person.id?'selected':''}">${label}</a>`:`<span class="person-link nav-locked" aria-disabled="true">${label}<span>Locked</span></span>`}).join('')}</nav>
+    <div class="person-heading"><div class="person-identity">${personFace(person)}<h3>${esc(person.name)}</h3></div><span class="small-status">${complete}/${people.length} complete</span></div>
+    ${set.emails?renderEmailEvidence(set,person):`<figure class="reception-gallery card ${set.id==='interview-notes'?'document-gallery':''}">
       <a href="${image.src}" target="_blank" rel="noopener" aria-label="Open photograph ${photo+1} at full size"><img class="reception-main" src="${image.src}" alt="${esc(image.alt)}" width="${image.width||1536}" height="${image.height||1024}" fetchpriority="high"></a>
       <figcaption><span>${set.photos.length>1?`Photo ${photo+1} of ${set.photos.length}`:'Evidence'} · ${esc(image.title)}</span><button type="button" class="text-button" id="zoomPhoto">Enlarge ↗</button></figcaption>
       <div class="photo-strip" ${set.photos.length===1?'hidden':''} aria-label="Photographs in order">${set.photos.map((p,i)=>`<button type="button" data-photo="${i}" class="photo-thumb ${photo===i?'selected':''}" aria-label="Photo ${i+1}: ${esc(p.title)}${p.people.includes(person.id)?'':` — ${esc(person.name)} not shown`}" aria-pressed="${photo===i}" ${p.people.includes(person.id)?'':'disabled'}><img src="${p.src.replace('.webp','-thumb.webp')}" alt="" loading="lazy"><span>${i+1} · ${esc(p.title)}</span></button>`).join('')}</div>
-    </figure>
-    <details class="photo-key card"><summary>Who’s who in this clue</summary><dl>${set.people.map(p=>`<div><dt><i class="person-color" style="background:${p.color}" aria-hidden="true"></i>${esc(p.name)}</dt><dd>${esc(p.look)}</dd></div>`).join('')}</dl></details>
+    </figure>`}
+    <details class="photo-key card"><summary>Who’s who in this clue</summary><dl>${set.people.map(p=>`<div><dt>${personFace(p)}${esc(p.name)}</dt></div>`).join('')}</dl></details>
     <div id="sharedFlow"></div>
     ${renderFlowNext(current)}
-    <dialog id="photoDialog" class="photo-dialog"><div class="dialog-bar"><span>Photo ${photo+1} · ${esc(image.title)}</span><button type="button" id="closePhoto" aria-label="Close enlarged photograph">Close ×</button></div><div class="zoom-scroll"><img src="${image.src}" alt="${esc(image.alt)}" width="${image.width||1536}" height="${image.height||1024}"></div><p>Scroll to inspect the full photograph. You can also <a href="${image.src}" target="_blank" rel="noopener">open the original</a>.</p></dialog>`;
+    ${set.emails?'':`<dialog id="photoDialog" class="photo-dialog"><div class="dialog-bar"><span>Photo ${photo+1} · ${esc(image.title)}</span><button type="button" id="closePhoto" aria-label="Close enlarged photograph">Close ×</button></div><div class="zoom-scroll"><img src="${image.src}" alt="${esc(image.alt)}" width="${image.width||1536}" height="${image.height||1024}"></div><p>Scroll to inspect the full photograph. You can also <a href="${image.src}" target="_blank" rel="noopener">open the original</a>.</p></dialog>`}`;
   save();
   $$('[data-photo]').forEach(b=>b.onclick=()=>{selectedGalleryPhoto=+b.dataset.photo;render()});
   state.flow=state.flow||{};
@@ -86,9 +92,9 @@ function renderSuspects(){
   DDLog?.screen(flowId,{section:'suspects',clue:set.title,stage:person.name});
   $('#nextClue')?.addEventListener('click',e=>navigateStep(e.currentTarget.dataset.nextStep));
   const dialog=$('#photoDialog');
-  $('#zoomPhoto').onclick=()=>dialog.showModal();
+  if(dialog){$('#zoomPhoto').onclick=()=>dialog.showModal();
   $('#closePhoto').onclick=()=>dialog.close();
-  dialog.onclick=e=>{if(e.target===dialog)dialog.close()};
+  dialog.onclick=e=>{if(e.target===dialog)dialog.close()};}
 }
 window.addEventListener('hashchange',()=>{
   suspectRoute();save();if(state.team)render();

@@ -18,7 +18,10 @@ function timer(){const sec=Math.max(0,Math.floor((Date.now()-(state.started||Dat
 const key=()=>state.clue+'-'+state.stage;
 const found=()=>state.matches[key()]||[];
 const hintLevel=i=>state.hints[`${key()}-${i}`]||0;
-function answerCard(a,i,matches){return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div><p>${esc(a.info||'Accepted interpretation for this clue.')}</p></article>`}
+function answerCard(a,i,matches){
+ const links=(a.sources||[]).filter(s=>{try{const u=new URL(s.url);return u.protocol==='https:'&&(u.hostname==='www.ninds.nih.gov'||u.hostname==='ninds.nih.gov')}catch{return false}}).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>`).join(' · ');
+ return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div>${a.evidenceLabel?`<small class="evidence-label">${esc(a.evidenceLabel)}</small>`:''}<p>${esc(a.info||'Possible interpretation for this clue.')}</p>${links?`<p class="answer-sources">${links}</p>`:''}</article>`;
+}
 function render(){
   renderSectionNav();
   if(state.section==='notes')return renderNotes();
@@ -42,10 +45,10 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=26');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=26');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=27');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=27');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=26';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=27';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;
@@ -59,6 +62,23 @@ async function initialize(){
  for(const set of config.suspectSets||[])if(set.id==='team-room'&&set.photos?.[0]?.src==='assets/suspects/team-room-prevention.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='team-room');set.photos=published.photos;set.people=published.people;}
  for(const set of config.suspectSets||[])if(set.id==='interview-notes'&&set.photos?.[0]?.src==='assets/suspects/annual-activity-log.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='interview-notes');set.photos=published.photos;set.people=published.people;set.title=published.title;set.label=published.label;set.description=published.description;}
  if(config.suspectSets){window.SUSPECT_SETS=config.suspectSets;window.SUSPECT_CLUES=config.suspectSets[0];}
+ // Apply the published order to the original five-clue case, including saved previews.
+ const order=window.CASE_CONFIG.clues.map(c=>c.title);
+ if(config.clues.length===order.length&&config.clues.every(c=>order.includes(c.title))){
+  config.clues.sort((a,b)=>order.indexOf(a.title)-order.indexOf(b.title));config.clueOrderRevision=2;
+  for(const clue of config.clues)for(const [i,stage] of clue.stages.entries()){
+   const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title)?.stages[i];
+   if(published?.previousAnswerIds&&stage.accepted.every(a=>published.previousAnswerIds.includes(a.id)))Object.assign(stage,{accepted:published.accepted,previousAnswerIds:published.previousAnswerIds,answerRevision:published.answerRevision,symptomsNeeded:1,symptomStarThreshold:1,symptomLabel:'Observations',symptomSingular:'observation',questions:published.questions});
+  }
+ }
+ if(config.suspectSets&&!config.suspectSets.some(s=>s.id==='emails'))config.suspectSets.push(window.CASE_CONFIG.suspectSets.find(s=>s.id==='emails'));
+ // Refresh known built-in answer definitions in saved previews, retaining custom entries.
+ const refreshAnswers=(answers,published)=>{for(const answer of answers||[]){const reference=published?.find(a=>a.id===answer.id&&norm(a.term)===norm(answer.term));if(reference)Object.assign(answer,{aliases:reference.aliases,info:reference.info,sources:reference.sources,evidenceLabel:reference.evidenceLabel});}};
+ for(const clue of config.clues)for(const [i,stage] of clue.stages.entries())refreshAnswers(stage.accepted,window.CASE_CONFIG.clues.find(c=>c.title===clue.title)?.stages[i]?.accepted);
+ for(const set of config.suspectSets||[])for(const person of set.people){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id===set.id)?.people.find(p=>p.id===person.id);if(published){refreshAnswers(person.symptoms,published.symptoms);refreshAnswers(person.diagnoses,published.diagnoses);if(published.symptomLabel){person.symptomLabel=published.symptomLabel;person.symptomSingular=published.symptomSingular;}}}
+ const migration=migrateCaseProgress(state,config);
+ if(migration.orderChanged){const match=location.hash.match(/^#culprit\/(\d+)\/(\d+)$/);if(match)history.replaceState(null,'',`#culprit/${migration.indexMap[match[1]]??0}/${match[2]}`);}
+ if(migration.changed)save();
  document.title=config.title||'Deadly Differential';$('.brand span:last-child').textContent=(config.title||'Deadly Differential').toUpperCase();$('#caseLabel').textContent=config.caseLabel||'CASE 01 · DEPARTMENT RETREAT';$('#openingHeadline').textContent=config.openingHeadline||'The retreat is over. The investigation begins.';$('#openingDescription').textContent=config.openingDescription||'';$('#playerInstructions').textContent=config.playerInstructions||'';
  $('#exportLogs').onclick=()=>DDLog.download();
  $('#debugButton').onclick=()=>{debugMode=!debugMode;$('#debugButton').setAttribute('aria-pressed',String(debugMode));$('#debugButton').textContent=`Debug mode: ${debugMode?'On':'Off'}`;if(state.team)render();toast(debugMode?'Debug mode on · requirements bypassed':'Debug mode off · requirements restored')};

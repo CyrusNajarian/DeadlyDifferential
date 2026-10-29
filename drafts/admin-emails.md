@@ -36,7 +36,7 @@ The handheld recording is rather shaky again, even during the quiet parts when I
 
 The sound seems fine, so hopefully we can still use the discussion.
 
-## 5. Dr. Ivory → Department administrator
+## 5. Dr. Burgundy → Department administrator
 
 **Subject: Scrub order**
 
