@@ -15,7 +15,7 @@ const DDLog=(()=>{
  function screen(key,data){if(current?.key===key)return;dwell();current={key,data};since=document.visibilityState==='visible'?performance.now():null;event('screen_view',{...data,screen:key});}
  function start(name){team=name;if(!attempt){attempt=id();localStorage.setItem('dd-attempt-v2',attempt);event('attempt_start')}flush()}
  function reset(){dwell();event('attempt_end');flush();localStorage.removeItem('dd-attempt-v2');attempt=null}
- function download(){dwell();const blob=new Blob([JSON.stringify(logs,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Deadly_Differential_Logs.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+ function download(){dwell();if(!logs.some(x=>x.kind==='answer'))toast('No submitted answers saved in this browser.');const blob=new Blob([JSON.stringify(logs,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Deadly_Differential_Logs.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000)}
  document.addEventListener('visibilitychange',()=>{dwell();if(document.visibilityState!=='visible')flush()});window.addEventListener('pagehide',()=>{dwell();flush()});window.addEventListener('online',flush);
  setInterval(()=>{dwell();flush()},15000);
  return {start,reset,event,screen,download};

@@ -1,4 +1,5 @@
 let config;
+let debugMode=false;
 const state=JSON.parse(localStorage.getItem('dd-state-v4')||'{}');
 state.matches=state.matches||{};state.hints=state.hints||{};state.revealed=state.revealed||{};state.clue=state.clue||0;state.stage=state.stage||0;
 const save=()=>localStorage.setItem('dd-state-v4',JSON.stringify(state));
@@ -41,10 +42,10 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=23');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=23');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=24');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=24');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=23';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=24';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;
@@ -54,6 +55,7 @@ async function initialize(){
  if(config.suspectSets){window.SUSPECT_SETS=config.suspectSets;window.SUSPECT_CLUES=config.suspectSets[0];}
  document.title=config.title||'Deadly Differential';$('.brand span:last-child').textContent=(config.title||'Deadly Differential').toUpperCase();$('#caseLabel').textContent=config.caseLabel||'CASE 01 · DEPARTMENT RETREAT';$('#openingHeadline').textContent=config.openingHeadline||'The retreat is over. The investigation begins.';$('#openingDescription').textContent=config.openingDescription||'';$('#playerInstructions').textContent=config.playerInstructions||'';
  $('#exportLogs').onclick=()=>DDLog.download();
+ $('#debugButton').onclick=()=>{debugMode=!debugMode;$('#debugButton').setAttribute('aria-pressed',String(debugMode));$('#debugButton').textContent=`Debug mode: ${debugMode?'On':'Off'}`;if(state.team)render();toast(debugMode?'Debug mode on · requirements bypassed':'Debug mode off · requirements restored')};
  $('#startButton').disabled=false;$('#startButton').onclick=start;$('#resetButton').onclick=()=>{if(confirm('Reset all saved progress on this phone?')){DDLog.reset();localStorage.removeItem('dd-state-v4');location.reload()}};
  if(state.team){DDLog.start(state.team);$('#welcome').classList.remove('active');$('#game').classList.add('active');$('#teamHeading').textContent=state.team;render();tick=setInterval(timer,1000);timer()}
 }

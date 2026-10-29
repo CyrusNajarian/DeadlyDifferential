@@ -47,7 +47,7 @@ function investigationSteps(){
 }
 function flowRecord(id){state.flow=state.flow||{};return state.flow[id]=state.flow[id]||{}}
 function stepStatus(step){return syncFlowAwards(step.stage,flowRecord(step.id))}
-function isStepUnlocked(id){for(const step of investigationSteps()){if(step.id===id)return true;if(!stepStatus(step).complete)return false}return false}
+function isStepUnlocked(id){if(debugMode)return investigationSteps().some(s=>s.id===id);for(const step of investigationSteps()){if(step.id===id)return true;if(!stepStatus(step).complete)return false}return false}
 function groupStatus(steps){const statuses=steps.map(stepStatus);return {complete:statuses.length>0&&statuses.every(s=>s.complete),star:statuses.length>0&&statuses.every(s=>s.star)}}
 function milestoneBadge(status){return status.star?'<span class="nav-award star" aria-label="Symptom and diagnosis stars earned">★</span>':status.complete?'<span class="nav-award milestone" aria-label="Symptoms and diagnoses completed">✓</span>':''}
 function selectStep(step){state.section=step.section;if(step.section==='culprit'){state.clue=step.ci;state.stage=step.si}else{state.suspectSet=step.setId;state.suspectPerson=step.personId;state.suspectPhase='symptoms'}history.replaceState(null,'',step.route)}
@@ -60,7 +60,7 @@ function enforceInvestigationRoute(){
 }
 function renderFlowNext(step){
  const steps=investigationSteps(),i=steps.findIndex(s=>s.id===step.id),next=steps[i+1],status=stepStatus(step);
- return next?`<div class="flow-next"><p class="small-status">${status.complete?'Requirements complete. You can continue or keep exploring this clue.':'Complete the symptom and diagnosis requirements to continue.'}</p><button type="button" class="primary" id="nextClue" ${status.complete?'':'disabled'} data-next-step="${esc(next.id)}">Next: ${esc(next.title)} <span>→</span></button></div>`:`<p class="completion-note">${status.complete?'All clues complete. You can revisit clues or review your notes.':'Complete the symptom and diagnosis requirements to finish.'}</p>`;
+ return next?`<div class="flow-next"><p class="small-status">${debugMode?'Debug mode: requirements bypassed.':status.complete?'Requirements complete. You can continue or keep exploring this clue.':'Complete the symptom and diagnosis requirements to continue.'}</p><button type="button" class="primary" id="nextClue" ${debugMode||status.complete?'':'disabled'} data-next-step="${esc(next.id)}">Next: ${esc(next.title)} <span>→</span></button></div>`:`<p class="completion-note">${status.complete?'All clues complete. You can revisit clues or review your notes.':'Complete the symptom and diagnosis requirements to finish.'}</p>`;
 }
 function renderNotes(){
  $('#clueNav').hidden=true;
@@ -73,12 +73,12 @@ function renderNotes(){
 function mountFlow(root,stage,progress,context){
  const answers=stage.accepted;progress.matches=progress.matches||[];progress.revealed=progress.revealed||{};progress.hints=progress.hints||{};progress.answerHints=progress.answerHints||{};
  const matches=progress.matches.filter(i=>answers[i]),symCount=matches.filter(i=>answers[i].type==='symptom').length;
- const symLimit=flowLimits(stage,answers,'symptom'),diagnosesUnlocked=symCount>=symLimit.needed;
+ const symLimit=flowLimits(stage,answers,'symptom'),diagnosesUnlocked=debugMode||symCount>=symLimit.needed;
  const awards=syncFlowAwards(stage,progress);
  const questions=stage.questions||[];
  root.innerHTML=['symptom','disease'].map(type=>{
   const title=type==='symptom'?'Symptoms':'Diagnoses',locked=type==='disease'&&!diagnosesUnlocked,limit=flowLimits(stage,answers,type);
-  const found=matches.filter(i=>answers[i].type===type),ready=found.length>=limit.needed,star=awards[type].star;
+  const found=matches.filter(i=>answers[i].type===type),ready=debugMode||found.length>=limit.needed,star=awards[type].star;
   const visible=progress.revealed[type]?answers.map((a,i)=>i).filter(i=>answers[i].type===type):found;
   const hintCards=questions.map((q,i)=>({q,i})).filter(({q,i})=>(/local|differential/i.test(q.label)?'disease':/notice|finding|describe|symptom/i.test(q.label)?'symptom':i<2?'symptom':'disease')===type).map(({q,i})=>{
    const level=progress.hints[i]||0;return `<article class="question card"><button type="button" class="question-toggle" data-flow-prompt="${i}" aria-expanded="${level>0}"><span><small class="question-label">${esc(q.label)}</small><span class="question-prompt">${level?esc(q.prompt):'Tap to reveal prompt'}</span></span><span>${level<2?'＋':'✓'}</span></button>${level===2?`<div class="question-answer"><p>${esc(q.hint)}</p></div>`:''}</article>`;
@@ -90,7 +90,7 @@ function mountFlow(root,stage,progress,context){
  const drafts={};
  function rerender(){for(const t of ['symptom','disease'])drafts[t]=root.querySelector('#flow-'+t)?.value||'';commit();render();for(const t of ['symptom','disease']){const el=document.querySelector('#flow-'+t);if(el)el.value=drafts[t]}}
  root.querySelectorAll('[data-flow-prompt]').forEach(b=>b.onclick=()=>{const i=b.dataset.flowPrompt;progress.hints[i]=Math.min(2,(progress.hints[i]||0)+1);DDLog?.event('hint',{...context,question:Number(i),level:progress.hints[i]});rerender()});
- root.querySelectorAll('[data-flow-reveal]').forEach(b=>b.onclick=()=>{const t=b.dataset.flowReveal;if(t==='disease'&&!diagnosesUnlocked)return;const n=matches.filter(i=>answers[i].type===t).length;if(n<flowLimits(stage,answers,t).needed)return;if(progress.revealed[t])progress.revealed[t]=false;else revealFlowAnswers(stage,progress,t);DDLog?.event('review',{...context,category:t,visible:progress.revealed[t]});rerender()});
+ root.querySelectorAll('[data-flow-reveal]').forEach(b=>b.onclick=()=>{const t=b.dataset.flowReveal;if(t==='disease'&&!diagnosesUnlocked)return;const n=matches.filter(i=>answers[i].type===t).length;if(!debugMode&&n<flowLimits(stage,answers,t).needed)return;if(progress.revealed[t])progress.revealed[t]=false;else revealFlowAnswers(stage,progress,t);DDLog?.event('review',{...context,category:t,visible:progress.revealed[t]});rerender()});
  root.querySelectorAll('[data-flow-hints]').forEach(b=>b.onclick=()=>{const t=b.dataset.flowHints;if(t==='disease'&&!diagnosesUnlocked)return;progress.answerHints[t]=true;DDLog?.event('answer_hints',{...context,category:t});rerender()});
  for(const type of ['symptom','disease']){
   const input=root.querySelector('#flow-'+type),form=root.querySelector(`[data-flow-form="${type}"]`),list=root.querySelector('#flow-suggestions-'+type);
