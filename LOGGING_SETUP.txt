@@ -1,0 +1,24 @@
+GOOGLE SHEETS LOGGING
+
+The uploaded old ZIP did not include its earlier logging implementation. This package includes a receiver and browser logger that use schemaVersion 2.
+
+To activate the matching receiver:
+1. Open the private Google Sheet you want to use.
+2. Open Extensions > Apps Script.
+3. Replace the code with Google_Sheets_Logger.gs from this package.
+4. Run setup and authorize it. This stores the bound spreadsheet ID.
+5. Deploy > Manage deployments > Edit your existing web app > New version > Deploy.
+   Keep Execute as: Me, Who has access: Anyone.
+6. Keep the same deployment URL. If it changes, replace the endpoint in logger.js.
+7. Redeploy the site to Netlify, play a test attempt, and verify rows in your Google Sheet.
+
+Layout:
+- Attempts: one row per attempt with team, submitted answer counts, visible seconds, and links to detail/summary tabs.
+- Attempt N Logs v2: full events for that attempt.
+- Attempt N Summary v2: inputs grouped by clue, stage/person, and category, with timing on screen rows.
+
+Existing incompatible overview headers use an Attempts v2 tab; existing tabs are preserved. This receiver does not migrate legacy logs. Duplicate event IDs in an attempt are ignored.
+
+Resetting creates a new attempt ID. Time is recorded only while the page is visible, with periodic checkpoints and navigation/page-exit events. A force-closed browser may lose the final timing interval. Submitted answers retain the original wording.
+
+The cross-origin Apps Script request cannot provide a readable acknowledgement in a static Netlify app. A dispatched request is not proof that a row was written. Verify the test in your sheet after deployment; the local JSON backup is retained regardless of dispatch. Browser preview checks used ?qa=1, which disables outgoing logging requests.

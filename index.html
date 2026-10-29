@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07151b">
+  <meta name="description" content="A mobile companion for Deadly Differential, a neurologic murder mystery.">
+  <title>Deadly Differential</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="config.css">
+  <link rel="stylesheet" href="enhancements.css?v=20">
+  <link rel="stylesheet" href="suspects.css?v=20">
+<link rel="stylesheet" href="play-flow.css?v=20">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="pulse" aria-hidden="true"></span><span>DEADLY DIFFERENTIAL</span></div>
+    <button class="icon-button" id="resetButton" aria-label="Reset game progress" title="Reset progress">↺</button>
+  </header>
+
+  <main>
+    <section id="welcome" class="screen active">
+      <div class="case-stamp" id="caseLabel">CASE 01 · DEPARTMENT RETREAT</div>
+      <h1 id="openingHeadline">The retreat is over.<br><em>The investigation begins.</em></h1>
+      <p class="lede" id="openingDescription">The department chair has been found dead. The evidence suggests the killer left more than fingerprints behind.</p>
+      <div class="briefing card">
+        <span class="eyebrow">YOUR CONSULT</span>
+        <p id="playerInstructions">Translate everyday observations into neurologic signs. Build a differential. Identify the culprit, diagnosis, and localization before time runs out.</p>
+      </div>
+      <label class="field-label" for="teamName">TEAM NAME</label>
+      <input id="teamName" class="text-input" placeholder="e.g., The Basal Gangsters" maxlength="32" autocomplete="off">
+      <button class="primary" id="startButton">Open case file <span>→</span></button>
+    </section>
+
+    <section id="game" class="screen">
+      <div class="case-head">
+        <div><span class="eyebrow">ACTIVE CASE</span><h2 id="teamHeading">Team</h2></div>
+        <div class="timer" aria-label="Elapsed time"><span>ELAPSED</span><strong id="timer">00:00</strong></div>
+      </div>
+
+      <nav id="sectionNav" class="section-nav" aria-label="Investigation sections"></nav>
+      <nav class="rounds" id="clueNav" aria-label="Clues"></nav>
+
+      <section id="roundContent"></section>
+      <button type="button" class="text-button" id="exportLogs">Download this device’s log backup</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="case-config.js?v=20"></script>
+  <script src="preview-storage.js?v=5"></script>
+  <script src="suspect-data.js?v=20"></script>
+  <script src="suspects.js?v=20"></script>
+  <script src="logger.js?v=20"></script>
+  <script src="play-flow.js?v=20"></script>
+  <script src="app.js?v=20"></script>
+</body>
+</html>
