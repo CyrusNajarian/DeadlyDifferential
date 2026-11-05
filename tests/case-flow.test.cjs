@@ -44,7 +44,7 @@ const context = {
   norm: value => String(value).toLowerCase().replace(/[^a-z0-9]/g, ''), setTimeout() {}, URL
 };
 vm.createContext(context);
-for (const file of ['reference-data.js', 'reference.js', 'case-config.js', 'suspect-data.js', 'case-resolution-data.js', 'case-resolution.js', 'play-flow.js', 'suspects.js']) {
+for (const file of ['reference-data.js', 'reference.js', 'case-config.js', 'case-resolution-data.js', 'case-resolution.js', 'play-flow.js', 'suspects.js']) {
   vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context);
 }
 context.DDReference = context.window.DDReference;

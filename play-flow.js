@@ -36,7 +36,7 @@ function investigationSteps(){
  const steps=[];
  config.clues.forEach((clue,ci)=>clue.stages.forEach((stage,si)=>steps.push({id:`culprit-${ci}-${si}`,section:'culprit',ci,si,stage,title:clue.title,route:`#culprit/${ci}/${si}`})));
  steps.push({id:'ranked-differential',section:'checkpoint',checkpoint:'ranking',title:'Rank your top five diagnoses',route:'#differential'});
- for(const set of window.SUSPECT_SETS||[window.SUSPECT_CLUES])for(const person of set.people.filter(p=>p.observable!==false))steps.push({id:`suspect-${set.id}-${person.id}`,section:'suspects',setId:set.id,personId:person.id,stage:suspectStage(person),title:person.name,route:`#suspects/${set.id}/${person.id}/symptoms`});
+ for(const set of config.suspectSets)for(const person of set.people.filter(p=>p.observable!==false))steps.push({id:`suspect-${set.id}-${person.id}`,section:'suspects',setId:set.id,personId:person.id,stage:suspectStage(person),title:person.name,route:`#suspects/${set.id}/${person.id}/symptoms`});
  steps.push({id:'suspect-assignment',section:'checkpoint',checkpoint:'assignments',title:'Assign all suspect diagnoses',route:'#assignments'},{id:'final-answer',section:'checkpoint',checkpoint:'final',title:'Choose the culprit',route:'#final'});
  return steps;
 }

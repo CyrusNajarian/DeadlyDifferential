@@ -16,8 +16,6 @@ function mediaCard(media){
 function start(){state.team=$('#teamName').value.trim()||'Consult Team';state.started=state.started||Date.now();DDLog.start(state.team);save();$('#welcome').classList.remove('active');$('#game').classList.add('active');$('#teamHeading').textContent=state.team;render();tick=setInterval(timer,1000);timer()}
 function timer(){const sec=Math.max(0,Math.floor((Date.now()-(state.started||Date.now()))/1000));$('#timer').textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
 const key=()=>state.clue+'-'+state.stage;
-const found=()=>state.matches[key()]||[];
-const hintLevel=i=>state.hints[`${key()}-${i}`]||0;
 function answerCard(a,i,matches){
  const description=DDReference.byId.get(a.referenceId)?.description||a.info||'';
  return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div>${description?`<p>${esc(description)}</p>`:''}</article>`;
@@ -48,8 +46,7 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=32');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=32');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=34');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
  if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=32';document.head.append(link)}
 }
@@ -61,9 +58,9 @@ async function initialize(){
  // Migrate bundled photo filenames retained in device-local previews.
  const legacyPhotos={"annual-activity-log.webp":"annual-activity-log-layered.webp","reception-1.webp":"reception-1-ptosis.webp","reception-3.webp":"reception-3-ptosis.webp","reception-4.webp":"reception-4-ptosis.webp","reception-5.webp":"reception-5-ptosis.webp","team-room.webp":"team-room-prevention.webp","team-room-head-wrap.webp":"team-room-prevention.webp","interview-notes-v2.webp":"annual-activity-log-layered.webp","annual-review.webp":"annual-activity-log-layered.webp"};
  for(const set of config.suspectSets||[])for(const photo of set.photos||[]){const prefix='assets/suspects/';if(photo.src?.startsWith(prefix)){const updated=legacyPhotos[photo.src.slice(prefix.length)];if(updated)photo.src=prefix+updated;}}
- for(const clue of config.clues||[]){const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title);if(['The Key & Safe','The Neck','The Footsteps','The Voicemail'].includes(clue.title)&&published)for(const [i,stage] of clue.stages.entries()){if(!stage.media?.src&&published.stages[i]?.media?.src)stage.media={...published.stages[i].media};}}
- for(const set of config.suspectSets||[])if(set.id==='team-room'&&set.photos?.[0]?.src==='assets/suspects/team-room-prevention.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='team-room');set.photos=published.photos;set.people=published.people;}
- for(const set of config.suspectSets||[])if(set.id==='interview-notes'&&set.photos?.[0]?.src==='assets/suspects/annual-activity-log-layered.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='interview-notes');set.photos=published.photos;set.people=published.people;set.title=published.title;set.label=published.label;set.description=published.description;}
+ for(const clue of config.clues||[]){const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title);if(['The Key & Safe','The Neck','The Footsteps','The Voicemail'].includes(clue.title)&&published)for(const [i,stage] of clue.stages.entries()){if((!stage.media?.src||/^assets\/culprit\/voicemail-0[1-4]\.mp3$/.test(stage.media.src))&&published.stages[i]?.media?.src)stage.media={...published.stages[i].media};}}
+ for(const set of config.suspectSets||[])if(set.id==='team-room'&&set.photos?.[0]?.src==='assets/suspects/team-room-prevention.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='team-room');set.photos=published.photos;if(!config.answerMatrixVersion)set.people=published.people;}
+ for(const set of config.suspectSets||[])if(set.id==='interview-notes'&&set.photos?.[0]?.src==='assets/suspects/annual-activity-log-layered.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='interview-notes');set.photos=published.photos;if(!config.answerMatrixVersion)set.people=published.people;set.title=published.title;set.label=published.label;set.description=published.description;}
  if(config.suspectSets){window.SUSPECT_SETS=config.suspectSets;window.SUSPECT_CLUES=config.suspectSets[0];}
  // Apply the published order to the original five-clue case, including saved previews.
  const order=window.CASE_CONFIG.clues.map(c=>c.title);
@@ -71,7 +68,7 @@ async function initialize(){
   config.clues.sort((a,b)=>order.indexOf(a.title)-order.indexOf(b.title));config.clueOrderRevision=2;
   for(const clue of config.clues)for(const [i,stage] of clue.stages.entries()){
    const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title)?.stages[i];
-   if(published?.previousAnswerIds&&stage.accepted.every(a=>published.previousAnswerIds.includes(a.id)))Object.assign(stage,{accepted:published.accepted,previousAnswerIds:published.previousAnswerIds,answerRevision:published.answerRevision,symptomsNeeded:1,symptomStarThreshold:1,symptomLabel:'Observations',symptomSingular:'observation',questions:published.questions});
+   if(!config.answerMatrixVersion&&published?.previousAnswerIds&&stage.accepted.every(a=>published.previousAnswerIds.includes(a.id)))Object.assign(stage,{accepted:published.accepted,previousAnswerIds:published.previousAnswerIds,answerRevision:published.answerRevision,symptomsNeeded:1,symptomStarThreshold:1,symptomLabel:'Observations',symptomSingular:'observation',questions:published.questions});
   }
  }
  for(const id of ['emails','conference-recording'])if(config.suspectSets&&!config.suspectSets.some(s=>s.id===id)){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id===id);if(published)config.suspectSets.push(published);}
@@ -80,7 +77,7 @@ async function initialize(){
  for(const clue of config.clues)for(const [i,stage] of clue.stages.entries()){
   const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title)?.stages[i];
   refreshAnswers(stage.accepted,published?.accepted);
-  if(published&&stage.accepted.every(a=>published.accepted.some(b=>b.id===a.id)))for(const answer of published.accepted)if(answer.id?.startsWith('expanded-')&&!stage.accepted.some(a=>a.id===answer.id))stage.accepted.push({...answer});
+  if(!config.answerMatrixVersion&&published&&stage.accepted.every(a=>published.accepted.some(b=>b.id===a.id)))for(const answer of published.accepted)if(answer.id?.startsWith('expanded-')&&!stage.accepted.some(a=>a.id===answer.id))stage.accepted.push({...answer});
  }
  for(const set of config.suspectSets||[])for(const person of set.people){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id===set.id)?.people.find(p=>p.id===person.id);if(published){refreshAnswers(person.symptoms,published.symptoms);refreshAnswers(person.diagnoses,published.diagnoses);if(published.symptomLabel){person.symptomLabel=published.symptomLabel;person.symptomSingular=published.symptomSingular;}}}
  config.suggestionsAfter=3;

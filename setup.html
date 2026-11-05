@@ -15,11 +15,11 @@
     <section class="setup-hero">
       <span class="eyebrow">ORGANIZER ONLY</span>
       <h1>Build the case<br><em>from Excel.</em></h1>
-      <p class="lede">Complete the template, upload it here, and generate the configuration file for the player website.</p>
+      <p class="lede">Edit the Yes/No answer matrix, upload it here, and generate the configuration file for the player website.</p>
     </section>
     <section class="upload-card card">
-      <div class="setup-step"><b>1</b><div><h2>Download the template</h2><p>Each clue slide has its own sheet. Configure symptom and diagnosis requirements, checkbox/star milestones, answer-specific hints, four reasoning categories, accepted answers and alternative wording, plus an optional picture or audio reference.</p></div></div>
-      <a class="secondary button-link" href="Deadly_Differential_Case_Template.xlsx" download>Download Excel template</a>
+      <div class="setup-step"><b>1</b><div><h2>Download the answer matrix</h2><p>Every symptom and diagnosis has its own row. Change Yes/No cells to control which clue or person accepts an answer. Keep Reference IDs, case columns and the row 5 headers.</p></div></div>
+      <a class="secondary button-link" href="Deadly_Differential_Answer_Matrix.xlsx" download>Download Excel answer matrix</a>
       <div class="setup-step"><b>2</b><div><h2>Upload the completed workbook</h2><p>Your workbook is processed locally in this browser and is not sent anywhere.</p></div></div>
       <label class="file-drop" for="workbookFile"><span>Choose Excel workbook</span><small>.xlsx or .xls</small></label>
       <input id="workbookFile" type="file" accept=".xlsx,.xls" hidden>
@@ -35,10 +35,11 @@
   </main>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="preview-storage.js?v=5"></script>
-  <script src="suspect-data.js?v=31"></script>
-  <script src="reference-data.js?v=31"></script>
-  <script src="reference.js?v=31"></script>
-  <script src="case-resolution-data.js?v=31"></script>
-  <script src="setup.js?v=31"></script>
+  <script src="case-config.js?v=34"></script>
+  <script src="answer-matrix.js?v=34"></script>
+  <script src="reference-data.js?v=34"></script>
+  <script src="reference.js?v=34"></script>
+  <script src="case-resolution-data.js?v=34"></script>
+  <script src="setup.js?v=34"></script>
 </body>
 </html>

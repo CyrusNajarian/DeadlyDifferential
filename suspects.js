@@ -12,26 +12,10 @@ function renderEmailEvidence(set,person){
  return `<section class="email-evidence" aria-label="Email evidence">${messages.map(e=>`<article class="email-message card"><span class="eyebrow">DEPARTMENT CORRESPONDENCE</span><h3>${esc(e.subject)}</h3><dl class="email-headers"><dt>From</dt><dd>${esc(e.from)}</dd><dt>To</dt><dd>${esc(e.to)}</dd></dl><p>${body(e.body)}</p>${e.reply?`<div class="email-reply"><strong>Reply · ${esc(e.to)}</strong><p>${body(e.reply)}</p></div>`:''}${e.earlier?`<div class="email-reply"><strong>Earlier message · ${esc(e.to)}</strong><p>${body(e.earlier)}</p></div>`:''}</article>`).join('')}</section>`;
 }
 let activeGallery="", selectedGalleryPhoto=0;
-/* One answer per submission, with synonyms and conservative spelling suggestions. */
-function answerWords(value){return String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim()}
-function answerDistance(a,b){const d=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const old=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=old}}return d[b.length]}
-function matchAnswerInput(raw,answers){
- const chunk=String(raw).trim(),words=answerWords(chunk),compact=norm(chunk);
- if(!compact)return {found:[],suggestions:[],unmatched:[]};
- const exact=answers.findIndex(a=>[a.term,...(a.aliases||[])].some(alias=>norm(alias)===compact));
- if(exact>=0)return {found:[exact],suggestions:[],unmatched:[]};
- if(/\b(no|not|without|denies|absent|exclude|excluding)\b|ruled out|rule out|doesnt|isnt/.test(words))return {found:[],suggestions:[],unmatched:[chunk]};
- const found=[];
- answers.forEach((a,i)=>{if([a.term,...(a.aliases||[])].some(alias=>{const aw=answerWords(alias);return (aw.length>=5||/^[A-Z0-9]{2,5}$/.test(alias))&&(' '+words+' ').includes(' '+aw+' ')}))found.push(i)});
- if(found.length===1)return {found,suggestions:[],unmatched:[]};
- const suggestions=[];
- if(found.length===0&&compact.length>=6){let best=Infinity,candidates=[];answers.forEach((a,i)=>{const score=Math.min(...[a.term,...(a.aliases||[])].map(x=>answerDistance(compact,norm(x))));if(score<best){best=score;candidates=[i]}else if(score===best)candidates.push(i)});if(best<=Math.min(2,Math.floor(compact.length/6))&&candidates.length===1)suggestions.push(candidates[0])}
- return {found:[],suggestions,unmatched:[chunk]};
-}
 /* Uses the existing game's answer normalization, styles and saved state. */
-function suspectSet(){return (window.SUSPECT_SETS||[window.SUSPECT_CLUES]).find(s=>s.id===state.suspectSet)||window.SUSPECT_CLUES}
+function suspectSet(){return config.suspectSets.find(s=>s.id===state.suspectSet)||config.suspectSets[0]}
 function suspectRoute(){
- const sets=window.SUSPECT_SETS||[window.SUSPECT_CLUES],parts=location.hash.replace(/^#/,'').split('/');
+ const sets=config.suspectSets,parts=location.hash.replace(/^#/,'').split('/');
  if(parts[0]==='suspects'){
   state.section='suspects';state.suspectSet=sets.some(s=>s.id===parts[1])?parts[1]:'reception';
   const people=suspectSet().people.filter(p=>p.observable!==false);
@@ -80,7 +64,7 @@ function renderSuspects(){
   const complete=setSteps.filter(s=>stepStatus(s).complete).length;
   const next=people[people.indexOf(person)+1];
   $('#roundContent').innerHTML=`
-    <div class="suspect-set-head"><nav class="clue-set-nav" aria-label="Suspect clue sets">${(window.SUSPECT_SETS||[set]).map(clue=>{const group=steps.filter(s=>s.setId===clue.id),first=group[0],label=esc(clue.label||clue.title);return isStepUnlocked(first.id)?`<a class="section-link ${clue.id===set.id?'selected':''}" href="${first.route}">${label} ${milestoneBadge(groupStatus(group))}</a>`:`<span class="section-link nav-locked" aria-disabled="true">${label} · Locked</span>`}).join('')}</nav><span class="eyebrow">SUSPECT CLUES</span><h2 class="section-title">${esc(set.title)}</h2><p class="section-copy">${esc(set.description)}</p></div>
+    <div class="suspect-set-head"><nav class="clue-set-nav" aria-label="Suspect clue sets">${config.suspectSets.map(clue=>{const group=steps.filter(s=>s.setId===clue.id),first=group[0],label=esc(clue.label||clue.title);return isStepUnlocked(first.id)?`<a class="section-link ${clue.id===set.id?'selected':''}" href="${first.route}">${label} ${milestoneBadge(groupStatus(group))}</a>`:`<span class="section-link nav-locked" aria-disabled="true">${label} · Locked</span>`}).join('')}</nav><span class="eyebrow">SUSPECT CLUES</span><h2 class="section-title">${esc(set.title)}</h2><p class="section-copy">${esc(set.description)}</p></div>
     <nav class="person-nav" aria-label="People in this clue">${people.map(p=>{const step=setSteps.find(s=>s.personId===p.id),label=`<b>${personFace(p)}${esc(p.name)} ${milestoneBadge(stepStatus(step))}</b>`;return isStepUnlocked(step.id)?`<a href="${step.route}" class="person-link ${p.id===person.id?'selected':''}">${label}</a>`:`<span class="person-link nav-locked" aria-disabled="true">${label}<span>Locked</span></span>`}).join('')}</nav>
     <div class="person-heading"><div class="person-identity">${personFace(person)}<h3>${esc(person.name)}</h3></div><span class="small-status">${complete}/${people.length} complete</span></div>
     ${set.video?renderVideoEvidence(set):set.emails?renderEmailEvidence(set,person):`<figure class="reception-gallery card ${set.id==='interview-notes'?'document-gallery':''}">

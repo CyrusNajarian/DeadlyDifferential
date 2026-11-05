@@ -49,14 +49,16 @@ const settle = () => new Promise(resolve=>setImmediate(resolve));
  b=browser({'dd-logs-v2':JSON.stringify(large)},ok);await settle();assert.ok(b.requests.length>1);assert.ok(b.requests.every(r=>Buffer.byteLength(r.options.body)<=48000));assert.equal(b.log.status().pending,0);
  // Server bridge only acknowledges an explicit successful receiver response.
  const {handler}=require('../netlify/functions/log-events.js'), original=global.fetch;
- const request={httpMethod:'POST',body:JSON.stringify({schemaVersion:2,events:[{eventId:'e1',attemptId:'a1',kind:'answer'}]})};
+ const request={httpMethod:'POST',body:JSON.stringify({schemaVersion:2,events:[{eventId:'e1',attemptId:'attempt-123',kind:'answer',category:'symptom',raw:'shaky',answer:'Tremor',result:'correct'}]})};
  try {
   let forwarded;
-  global.fetch=async(url,options)=>{forwarded={url,options};return {ok:true,json:async()=>({ok:true,schemaVersion:2,eventIds:['e1']})}};
+  global.fetch=async(url,options)=>{forwarded={url,options};return {ok:true,text:async()=>JSON.stringify({ok:true,schemaVersion:2,eventIds:['e1']})}};
   let r=await handler(request);assert.equal(r.statusCode,200);assert.deepEqual(JSON.parse(r.body).eventIds,['e1']);assert.ok(forwarded.url.startsWith('https://script.google.com/'));assert.equal(JSON.parse(forwarded.options.body).schemaVersion,2);
-  global.fetch=async()=>({ok:true,json:async()=>({ok:true})});assert.equal((await handler(request)).statusCode,502);
-  global.fetch=async()=>({ok:true,json:async()=>({ok:false,error:'Sheet missing'})});r=await handler(request);assert.equal(r.statusCode,502);assert.equal(JSON.parse(r.body).ok,false);
-  global.fetch=async()=>({ok:true,json:async()=>{throw Error('Login page')}});assert.equal((await handler(request)).statusCode,502);
+  const legacy=JSON.parse(forwarded.options.body).events[0];assert.equal(legacy.id,'e1');assert.equal(legacy.session,'attempt-123');assert.equal(legacy.answer,'shaky');assert.equal(legacy.canonical,'Tremor');assert.equal(legacy.event,'answer');assert.equal(JSON.parse(legacy.reason).raw,'shaky');
+  global.fetch=async()=>({ok:true,text:async()=>'OK'});assert.equal((await handler(request)).statusCode,200);
+  global.fetch=async()=>({ok:true,text:async()=>'{}'});assert.equal((await handler(request)).statusCode,502);
+  global.fetch=async()=>({ok:true,text:async()=>JSON.stringify({ok:false,error:'Sheet missing'})});r=await handler(request);assert.equal(r.statusCode,502);assert.equal(JSON.parse(r.body).ok,false);
+  global.fetch=async()=>({ok:true,text:async()=>'<html>Sign in</html>'});assert.equal((await handler(request)).statusCode,502);
   global.fetch=async()=>{throw Error('Network')};assert.equal((await handler(request)).statusCode,502);
   assert.equal((await handler({httpMethod:'GET'})).statusCode,405);
   assert.equal((await handler({...request,body:'not json'})).statusCode,400);
