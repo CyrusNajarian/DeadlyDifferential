@@ -15,7 +15,7 @@ The three checkpoints participate in the same sequential route guards as the clu
 
 `case-resolution-data.js` holds the suspect diagnosis mapping and all 118 final diagnosis explanations. An exported workbook preview retains this configuration. The mapping uses the existing case identities: Silver/brain tumor, Emerald/stroke, Charcoal/Parkinson disease, Burgundy/ALS, Navy/myasthenia gravis, Rust/dermatomyositis. Equivalent permitted answer IDs are explicit.
 
-The repository did not previously specify a final culprit. `culpritId` and `culpritDiagnosisId` are deliberately unset pending the author's answer. Do not publish the new flow to production until those fields and the associated explanatory key are confirmed. Local tests inject a fixture key; the fixture is not an author-approved solution.
+The author confirmed Dr. Silver (A) with a brain tumor as the final solution. `culpritId` is `A` and `culpritDiagnosisId` is `d-brain-tumor`. The broader intracranial-mass category is accepted as an equivalent grouped answer. Tests use this configured answer key.
 
 ## Persistence and logging
 

@@ -31,8 +31,8 @@ window.CASE_RESOLUTION={
       "d-dermatomyositis"
     ]
   },
-  "culpritId": null,
-  "culpritDiagnosisId": null,
+  "culpritId": "A",
+  "culpritDiagnosisId": "d-brain-tumor",
   "categoryFeedback": {
     "Stroke and vascular": "A vascular event can produce one-sided deficits, but the serial progression of speech and motor problems needs a matching time course; routine stroke treatment does not explain the corticosteroid clue.",
     "Movement and degeneration": "This category can explain altered movement, but compare its usual pattern with the combination of speech change, unequal force and unilateral gait dysfunction, rather than one motor clue alone.",
@@ -167,5 +167,9 @@ window.CASE_RESOLUTION={
     "d-lichen-planus": "An inflammatory condition affecting skin or mucosal surfaces. A local injury, medication effect or skin condition can explain selected findings, but the case requires one explanation spanning speech, hand control and the asymmetric arm/leg pattern.",
     "d-rosacea": "A chronic facial skin disorder often causing redness and flushing. A local injury, medication effect or skin condition can explain selected findings, but the case requires one explanation spanning speech, hand control and the asymmetric arm/leg pattern.",
     "d-epilepsy": "A seizure or postictal weakness could explain a temporary focal deficit. It fits less well when the speech and motor abnormalities persist or worsen across the case rather than occurring as discrete episodes."
-  }
+  },
+  "culpritAcceptedIds": [
+    "d-brain-tumor",
+    "d-intracranial-mass"
+  ]
 };
