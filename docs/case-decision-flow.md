@@ -13,7 +13,7 @@ The three checkpoints participate in the same sequential route guards as the clu
 
 ## Configuration
 
-`case-resolution-data.js` holds the suspect diagnosis mapping and all 118 final diagnosis explanations. An exported workbook preview retains this configuration. The mapping uses the existing case identities: Silver/brain tumor, Emerald/stroke, Charcoal/Parkinson disease, Burgundy/ALS, Navy/myasthenia gravis, Rust/dermatomyositis. Equivalent permitted answer IDs are explicit.
+`case-resolution-data.js` holds the suspect diagnosis mapping and all 114 final diagnosis explanations. An exported workbook preview retains this configuration. The mapping uses the existing case identities: Silver/brain tumor, Emerald/stroke, Charcoal/Parkinson disease, Burgundy/ALS, Navy/myasthenia gravis, Rust/dermatomyositis. Equivalent permitted answer IDs are explicit.
 
 The author confirmed Dr. Silver (A) with a brain tumor as the final solution. `culpritId` is `A` and `culpritDiagnosisId` is `d-brain-tumor`. The broader intracranial-mass category remains accepted for Dr. Silver in the diagnosis-assignment stage. Final scoring uses only the chosen suspect. Tests use this configured answer key.
 
@@ -23,7 +23,7 @@ The original ranking, all-six assignment batch, results and final accusation liv
 
 ## Validation
 
-Tests cover all 22 ordered steps, prerequisites, distinct top-five validation, ungraded ranking logs, immutable snapshots, absence of per-suspect diagnosis controls, all-six validation before grading, no early correct roster, wrong and correct final accusations, no final explanation before lock, locked-answer protection, JSON persistence, all 118 diagnosis blurbs and logging. JavaScript syntax and whitespace checks pass. Full browser rendering is unavailable in the workspace.
+Tests cover all 22 ordered steps, prerequisites, distinct top-five validation, ungraded ranking logs, immutable snapshots, absence of per-suspect diagnosis controls, all-six validation before grading, no early correct roster, wrong and correct final accusations, no final explanation before lock, locked-answer protection, JSON persistence, all 114 diagnosis blurbs and logging. JavaScript syntax and whitespace checks pass. Full browser rendering is unavailable in the workspace.
 
 ## Side tools and compatibility
 

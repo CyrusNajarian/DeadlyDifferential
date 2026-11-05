@@ -19,7 +19,13 @@ window.CASE_RESOLUTION={
       "d-ischemic-stroke"
     ],
     "C": [
-      "d-parkinson-disease"
+      "d-parkinson-disease",
+      "d-drug-induced-parkinsonism",
+      "d-vascular-parkinsonism",
+      "d-progressive-supranuclear-palsy",
+      "d-multiple-system-atrophy",
+      "d-corticobasal-syndrome",
+      "d-dementia-with-lewy-bodies"
     ],
     "D": [
       "d-amyotrophic-lateral-sclerosis"
@@ -45,10 +51,7 @@ window.CASE_RESOLUTION={
         "d-migraine": "Migraine explains headaches and use of a cold wrap, but not the navigation scan and tissue-sampling workup described in the email.",
         "d-tension-type-headache": "Tension-type headache fits simple pain relief, but does not explain the navigation imaging and planned sampling.",
         "d-chronic-subdural-hematoma": "A chronic subdural collection can cause headache and focal deficits. The planned navigation imaging and sampling favor investigation of a mass rather than drainage of a blood collection.",
-        "d-amyotrophic-lateral-sclerosis": "ALS is a motor-neuron disorder; this suspect’s evidence is headache treatment and a lesion-directed scan and sampling workup.",
-        "d-glioma": "Glioma is one kind of brain tumor, but the evidence does not establish a tissue subtype. The expected case diagnosis is the broader brain tumor category.",
-        "d-glioblastoma": "Glioblastoma is a specific tumor diagnosis that needs tissue characterization. The clues support a brain tumor without establishing that subtype.",
-        "d-meningioma": "Meningioma is one possible tumor type, but the case does not give the imaging or pathology needed to select it over other brain tumors."
+        "d-amyotrophic-lateral-sclerosis": "ALS is a motor-neuron disorder; this suspect’s evidence is headache treatment and a lesion-directed scan and sampling workup."
       }
     },
     "B": {
@@ -72,7 +75,8 @@ window.CASE_RESOLUTION={
         "d-multiple-system-atrophy": "MSA can include parkinsonism, but no prominent autonomic failure or cerebellar pattern is supplied for this suspect.",
         "d-dementia-with-lewy-bodies": "Lewy body disease can include parkinsonism, but the case does not describe the cognitive fluctuations, hallucinations or dementia needed to favor this diagnosis.",
         "d-myasthenia-gravis": "The clue pattern is reduced facial animation with tremor-related camera movement, rather than fluctuating eyelid or task-related muscle weakness."
-      }
+      },
+      "acceptanceNote": "For this game, Parkinson disease and the other parkinsonian diagnoses are all accepted. The case’s intended diagnosis is Parkinson disease."
     },
     "D": {
       "whyCorrect": "Dr. Burgundy’s reception photographs show reduced hand-muscle bulk. His email adds looser clothing across the shoulders and increasing difficulty holding a small key. The case uses this motor weakness and wasting pattern for ALS.",
@@ -146,10 +150,6 @@ window.CASE_RESOLUTION={
     "d-delirium": "Acute, fluctuating disturbance of attention and awareness. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
     "d-metabolic-encephalopathy": "Brain dysfunction caused by a metabolic disturbance. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
     "d-brain-tumor": "An evolving focal brain lesion can link the progressive speech change, impaired fine hand control, unequal arm force and one-sided gait change. Corticosteroid use can fit treatment of selected lesion-associated swelling.",
-    "d-glioma": "A CNS tumor family associated with glial cells. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
-    "d-glioblastoma": "An aggressive adult-type diffuse glioma. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
-    "d-meningioma": "A tumor arising from the coverings of the brain or spinal cord. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
-    "d-brain-metastasis": "Cancer that has spread to the brain from elsewhere. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-intracranial-mass": "A focal intracranial mass can affect speech and motor pathways together, linking the evolving speech, hand, arm and leg findings.",
     "d-hydrocephalus": "Abnormal accumulation of cerebrospinal fluid in brain ventricles. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-normal-pressure-hydrocephalus": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
@@ -195,7 +195,7 @@ window.CASE_RESOLUTION={
     "d-amyotrophic-lateral-sclerosis": "ALS can link progressive speech impairment with limb weakness and poor hand function. The weaker link is the medication clue: corticosteroids are not standard treatment for the motor-neuron disease itself.",
     "d-spinal-muscular-atrophy": "Inherited motor neuron disorders predominantly causing weakness. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-kennedy-disease": "An inherited disorder affecting lower motor neurons and androgen function. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
-    "d-myasthenia-gravis": "Myasthenia can explain speech weakness and corticosteroid treatment. The culprit evidence instead emphasizes persistent asymmetric arm/leg dysfunction, rather than a clear worsening-with-use and improvement-after-rest pattern.",
+    "d-myasthenia-gravis": "Myasthenia can explain speech weakness and prednisone treatment. Persistent asymmetric arm/leg dysfunction fits less well than fluctuating fatigability, and the early-morning calls and murder weaken the usual later-day fatigue pattern. Morning symptoms do not exclude MG, but it is a weaker fit for the combined culprit evidence.",
     "d-lambert-eaton-myasthenic-syndrome": "A presynaptic neuromuscular junction disorder causing weakness and autonomic symptoms. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-inflammatory-myopathy": "A diagnostic category of immune-mediated muscle diseases. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-dermatomyositis": "Dermatomyositis fits corticosteroid treatment and muscle weakness. Its usual proximal, often bilateral weakness is a poorer match for the focal arm/leg pattern and fine hand-control problem.",
@@ -233,23 +233,187 @@ window.CASE_RESOLUTION={
   "culpritClueExplanations": [
     {
       "title": "Choking / neck marks",
-      "text": "Unequal pressure from the two hands points to asymmetric upper-limb output or control."
+      "text": "A lesion affecting one side of the brain can reduce force or control in the opposite arm, making unequal two-handed pressure compatible with a focal motor deficit. The marks alone do not identify a tumor."
     },
     {
       "title": "Footsteps",
-      "text": "The asymmetric trail suggests unequal leg control, extending the motor pattern beyond the hand."
+      "text": "A focal brain lesion can also impair the leg on the same side as the affected arm. This can link the asymmetric trail with the unequal arm output."
     },
     {
       "title": "Safe and key",
-      "text": "Fresh scratches around a new keyhole suggest difficulty accurately guiding or manipulating the key."
+      "text": "Weakness, impaired targeting or loss of fine hand control can make key alignment and turning difficult. This fits the same focal motor pattern rather than requiring a separate hand disorder."
     },
     {
       "title": "Voicemail",
-      "text": "The evolving speech abnormality adds a cranial motor or language feature to the limb findings."
+      "text": "An evolving lesion involving motor-speech or language pathways can produce the progressive speech change. Symptoms present during the early-morning calls and murder do not require an end-of-day fatigue pattern."
     },
     {
       "title": "Medication",
-      "text": "Prednisone supplies an anti-inflammatory treatment clue. Corticosteroids can be used for selected swelling associated with brain lesions."
+      "text": "Corticosteroids can be used for edema associated with a brain tumor. Prednisone is a treatment clue, not proof of a tumor, and several other conditions can explain it."
     }
-  ]
+  ],
+  "culpritDiagnosisClues": {
+    "d-brain-tumor": [
+      {
+        "title": "Choking / neck marks",
+        "fit": "Supports",
+        "text": "A lesion affecting one side of the brain can reduce force or control in the opposite arm, making unequal two-handed pressure compatible with a focal motor deficit. The marks alone do not identify a tumor."
+      },
+      {
+        "title": "Footsteps",
+        "fit": "Supports",
+        "text": "A focal brain lesion can also impair the leg on the same side as the affected arm. This can link the asymmetric trail with the unequal arm output."
+      },
+      {
+        "title": "Safe and key",
+        "fit": "Supports",
+        "text": "Weakness, impaired targeting or loss of fine hand control can make key alignment and turning difficult. This fits the same focal motor pattern rather than requiring a separate hand disorder."
+      },
+      {
+        "title": "Voicemail",
+        "fit": "Supports",
+        "text": "An evolving lesion involving motor-speech or language pathways can produce the progressive speech change. Symptoms present during the early-morning calls and murder do not require an end-of-day fatigue pattern."
+      },
+      {
+        "title": "Medication",
+        "fit": "Compatible",
+        "text": "Corticosteroids can be used for edema associated with a brain tumor. Prednisone is a treatment clue, not proof of a tumor, and several other conditions can explain it."
+      }
+    ],
+    "d-stroke": [
+      {
+        "title": "Choking / neck marks",
+        "fit": "Supports",
+        "text": "Stroke can produce asymmetric arm weakness, altered sensation or neglect, any of which could affect the force or control of the two hands."
+      },
+      {
+        "title": "Footsteps",
+        "fit": "Supports",
+        "text": "One-sided leg weakness or spasticity after stroke can produce an asymmetric, dragging or circumducting gait."
+      },
+      {
+        "title": "Safe and key",
+        "fit": "Supports",
+        "text": "Post-stroke weakness, sensory loss, apraxia or incoordination can interfere with key use. This clue is compatible with stroke."
+      },
+      {
+        "title": "Voicemail",
+        "fit": "Weaker fit",
+        "text": "Stroke can cause dysarthria or aphasia at any time, including early morning. A single completed stroke is a weaker explanation for an evolving sequence of messages than for speech that changes suddenly and then persists; recurrent events remain possible."
+      },
+      {
+        "title": "Medication",
+        "fit": "Not supportive",
+        "text": "Prednisone is not routine treatment for an uncomplicated ischemic or hemorrhagic stroke. Stroke explains several motor clues but does not naturally explain this prescription as treatment of the same condition."
+      }
+    ],
+    "d-parkinson-disease": [
+      {
+        "title": "Choking / neck marks",
+        "fit": "Compatible",
+        "text": "Asymmetric bradykinesia, rigidity or tremor could affect hand control or contact. Markedly unequal force from focal weakness is less characteristic than reduced movement speed and amplitude."
+      },
+      {
+        "title": "Footsteps",
+        "fit": "Compatible",
+        "text": "Short shuffling steps, reduced foot clearance and asymmetric movement can fit a parkinsonian disorder. A hemiparetic dragging pattern is not specific to parkinsonism."
+      },
+      {
+        "title": "Safe and key",
+        "fit": "Supports",
+        "text": "Bradykinesia, rigidity, tremor or impaired dexterity can interfere with aligning and turning a key. This is a reasonable explanation for this clue."
+      },
+      {
+        "title": "Voicemail",
+        "fit": "Compatible",
+        "text": "Hypophonia and dysarthria can occur in parkinsonian disorders. Early-morning speech changes are possible, but the evolving focal arm/leg/speech pattern is not explained specifically by parkinsonism."
+      },
+      {
+        "title": "Medication",
+        "fit": "Not supportive",
+        "text": "Prednisone is not standard treatment for Parkinson disease or the common degenerative parkinsonian syndromes. It leaves an important part of the combined evidence unexplained."
+      }
+    ],
+    "d-amyotrophic-lateral-sclerosis": [
+      {
+        "title": "Choking / neck marks",
+        "fit": "Supports",
+        "text": "ALS can begin asymmetrically and weaken a hand or arm, making unequal grip force plausible."
+      },
+      {
+        "title": "Footsteps",
+        "fit": "Supports",
+        "text": "Asymmetric leg weakness, foot drop or spasticity in ALS can alter foot clearance and the walking pattern."
+      },
+      {
+        "title": "Safe and key",
+        "fit": "Supports",
+        "text": "Hand weakness and loss of fine motor function can make a key difficult to manipulate."
+      },
+      {
+        "title": "Voicemail",
+        "fit": "Supports",
+        "text": "Bulbar involvement can cause progressive dysarthria. Morning symptoms are possible because ALS weakness does not have to follow the rest-responsive daily pattern typical of MG."
+      },
+      {
+        "title": "Medication",
+        "fit": "Not supportive",
+        "text": "Corticosteroids are not standard disease-modifying treatment for ALS. ALS is a strong motor-pattern alternative, but the medication clue does not tie into it as well as into a steroid-treated condition."
+      }
+    ],
+    "d-myasthenia-gravis": [
+      {
+        "title": "Choking / neck marks",
+        "fit": "Compatible",
+        "text": "Fatigable weakness could reduce sustained grip force, and MG can be asymmetric. The neck marks do not demonstrate deterioration with repeated effort or recovery after rest."
+      },
+      {
+        "title": "Footsteps",
+        "fit": "Weaker fit",
+        "text": "Generalized MG can weaken the legs and change walking, but a persistent one-sided dragging or spastic-looking pattern is less typical than fluctuating fatigable weakness."
+      },
+      {
+        "title": "Safe and key",
+        "fit": "Compatible",
+        "text": "Fatigable hand weakness could impair repeated key use. The scratches do not show whether performance worsened with use or improved after resting."
+      },
+      {
+        "title": "Voicemail",
+        "fit": "Weaker fit",
+        "text": "MG can cause dysarthria, hypophonia or nasal speech. The calls and murder occur early in the morning, when symptoms are often milder after overnight rest, so the timing weakens a fatigue-based explanation. Morning symptoms remain possible and the time alone does not exclude MG."
+      },
+      {
+        "title": "Medication",
+        "fit": "Supports",
+        "text": "Prednisone is used to suppress the autoimmune process in MG. This medication supports MG as a differential, even though the focal pattern and early-morning timing make it a weaker explanation for all five clues together."
+      }
+    ],
+    "d-dermatomyositis": [
+      {
+        "title": "Choking / neck marks",
+        "fit": "Compatible",
+        "text": "Muscle weakness could reduce the ability to sustain force. Dermatomyositis usually causes proximal, often bilateral weakness, which is less characteristic of the strongly asymmetric arm-output pattern."
+      },
+      {
+        "title": "Footsteps",
+        "fit": "Weaker fit",
+        "text": "Hip-girdle weakness can change walking and cause difficulty rising or climbing. A persistent unilateral dragging pattern is less typical than a proximal myopathic gait."
+      },
+      {
+        "title": "Safe and key",
+        "fit": "Weaker fit",
+        "text": "Weakness can make arm tasks harder, but isolated fine finger-control trouble is less typical of dermatomyositis than proximal shoulder weakness."
+      },
+      {
+        "title": "Voicemail",
+        "fit": "Compatible",
+        "text": "Bulbar muscle involvement can affect swallowing and sometimes speech. The recording does not specifically establish inflammatory muscle disease; morning timing is not a distinctive clue for it."
+      },
+      {
+        "title": "Medication",
+        "fit": "Supports",
+        "text": "Prednisone is a standard treatment option for the muscle inflammation of dermatomyositis. That fits the prescription, but does not resolve the poorer match to the focal motor pattern."
+      }
+    ]
+  }
 };

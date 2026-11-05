@@ -1,10 +1,18 @@
 /* End-of-case decisions are saved separately from clue-by-clue matches. */
-function resolutionState(){return state.resolution=state.resolution||{}}
+function resolutionState(){
+ const r=state.resolution=state.resolution||{},map=id=>DDReference.canonicalId(id);let changed=false;
+ if(r.ranking?.ids?.some(id=>map(id)!==id)){r.ranking.legacyIds=r.ranking.legacyIds||[...r.ranking.ids];r.ranking.ids=[...new Set(r.ranking.ids.map(map))];changed=true;}
+ if(r.rankingDraft){const ids=r.rankingDraft.map(map);if(ids.some((id,i)=>id!==r.rankingDraft[i])){r.rankingDraft=ids;changed=true}}
+ for(const answers of [r.assignmentDraft,r.assignment?.answers])if(answers)for(const person of Object.keys(answers))if(map(answers[person])!==answers[person]){answers[person]=map(answers[person]);changed=true;}
+ for(const row of r.assignment?.results||[])if(map(row.diagnosisId)!==row.diagnosisId){row.diagnosisId=map(row.diagnosisId);changed=true;}
+ if(r.final&&map(r.final.diagnosisId)!==r.final.diagnosisId){r.final.diagnosisId=map(r.final.diagnosisId);changed=true;}
+ if(changed)save();return r;
+}
 function resolutionStepId(kind){return {ranking:'ranked-differential',assignments:'suspect-assignment',final:'final-answer'}[kind]}
 function checkpointStatus(kind){const r=resolutionState();return {complete:kind==='ranking'?!!r.ranking?.submittedAt:kind==='assignments'?!!r.assignment?.submittedAt:!!r.final?.lockedAt,star:false}}
 function resolutionPeople(){return (config.suspectSets.find(s=>s.id==='reception')?.people||[]).map(p=>({id:p.id,name:p.name}))}
-function resolutionRules(){const defaults=window.CASE_RESOLUTION||{},custom=config.caseResolution||{};return {...defaults,...custom,suspectFeedback:{...defaults.suspectFeedback,...custom.suspectFeedback},culpritDiagnosisFeedback:{...defaults.culpritDiagnosisFeedback,...custom.culpritDiagnosisFeedback},culpritClueExplanations:custom.culpritClueExplanations||defaults.culpritClueExplanations||[]};}
-function diagnosisEntry(id){return DDReference.byId.get(id)}
+function resolutionRules(){const defaults=window.CASE_RESOLUTION||{},custom=config.caseResolution||{};const rules={...defaults,...custom,suspectFeedback:{...defaults.suspectFeedback,...custom.suspectFeedback},culpritDiagnosisFeedback:{...defaults.culpritDiagnosisFeedback,...custom.culpritDiagnosisFeedback},culpritClueExplanations:custom.culpritClueExplanations||defaults.culpritClueExplanations||[]};rules.suspectAcceptedIds=Object.fromEntries(Object.entries(rules.suspectDiagnoses).map(([person,id])=>[person,DDReference.expandApprovedIds(rules.suspectAcceptedIds?.[person]||[id])]));return rules;}
+function diagnosisEntry(id){return DDReference.byId.get(DDReference.canonicalId(id))}
 function diagnosisName(id){return diagnosisEntry(id)?.term||'—'}
 function diagnosisOptions(selected=''){return '<option value="">Choose a diagnosis</option>'+DDReference.lists.disease.map(a=>`<option value="${esc(a.id)}" ${a.id===selected?'selected':''}>${esc(a.term)}</option>`).join('')}
 function validDiagnosis(id){return diagnosisEntry(id)?.type==='disease'}
@@ -30,7 +38,7 @@ function submitSuspectAssignments(answers){
 function suspectAssessment(personId,selectedId){
  const rules=resolutionRules(),correctId=rules.suspectDiagnoses[personId],profile=rules.suspectFeedback?.[personId]||{};
  const correct=(rules.suspectAcceptedIds?.[personId]||[correctId]).includes(selectedId);
- const whyCorrect=profile.whyCorrect||diagnosisEntry(correctId)?.description||'';
+ const whyCorrect=(profile.whyCorrect||diagnosisEntry(correctId)?.description||'')+(correct&&profile.acceptanceNote?' '+profile.acceptanceNote:'');
  const whySelected=correct?'':profile.wrongByDiagnosis?.[selectedId]||`${diagnosisEntry(selectedId)?.description||diagnosisName(selectedId)} ${profile.contrast||''} The case diagnosis is ${diagnosisName(correctId)}.`;
  return {correct,correctId,whyCorrect,whySelected};
 }
@@ -88,13 +96,17 @@ function renderSuspectAssignments(){
  }
  checkpointScreen('assignments');
 }
+function diagnosisClueReview(id){
+ const rows=resolutionRules().culpritDiagnosisClues?.[id]||[];
+ return `<dl class="culprit-clue-debrief" data-diagnosis-clue-review="${esc(id)}">${rows.map(item=>`<div><dt>${esc(item.title)} · ${esc(item.fit)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl>`;
+}
 function renderFinalAccusation(){
  const r=resolutionState(),rules=resolutionRules(),people=resolutionPeople(),locked=normalizeFinalAccusation();
  if(!r.ranking||!r.assignment){$('#roundContent').innerHTML='<p>Complete your ranked list and suspect diagnoses first.</p>';return}
  const chosen=locked?people.find(p=>p.id===locked.personId):null;
  const solution=people.find(p=>p.id===rules.culpritId);
- const outcome=locked?`<section class="card final-result" role="status"><h3>${locked.correct?'Case solved':'Incorrect culprit · choice locked'}</h3><p>You selected <strong>${esc(chosen?.name||'—')}</strong>, whose confirmed diagnosis is <strong>${esc(diagnosisName(rules.suspectDiagnoses[locked.personId]))}</strong>.</p>${!locked.correct?`<h4>How that diagnosis fits the culprit clues</h4><p>${esc(finalDiagnosisExplanation(rules.suspectDiagnoses[locked.personId]))}</p><p>The culprit is <strong>${esc(solution?.name||'—')}</strong>, with <strong>${esc(diagnosisName(rules.culpritDiagnosisId))}</strong>.</p>`:''}<h4>How the culprit clues fit together</h4><p>${esc(finalDiagnosisExplanation(rules.culpritDiagnosisId))}</p><dl class="culprit-clue-debrief">${rules.culpritClueExplanations.map(item=>`<div><dt>${esc(item.title)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl></section>`:'';
- $('#roundContent').innerHTML=checkpointNav()+`<span class="eyebrow">FINAL CULPRIT</span><h2 class="section-title">Who fits the culprit clues?</h2><p class="section-copy">The diagnoses are confirmed. Choose the person whose condition best matches the culprit evidence as a whole.</p><div class="final-comparison"><section class="card"><h3>Your original culprit differential</h3><ol>${r.ranking.ids.map(id=>`<li>${esc(diagnosisName(id))}</li>`).join('')}</ol></section><section class="card"><h3>Confirmed diagnoses</h3><ul class="confirmed-roster">${people.map(p=>`<li>${personFace(p)}<div><strong>${esc(p.name)}</strong><span>${esc(diagnosisName(rules.suspectDiagnoses[p.id]))}</span></div></li>`).join('')}</ul></section></div>${locked?outcome:`<form id="finalForm" class="card final-choice"><label class="field-label" for="finalPerson">CULPRIT</label><select id="finalPerson"><option value="">Choose a suspect</option>${people.map(p=>`<option value="${esc(p.id)}" ${r.finalDraft?.personId===p.id?'selected':''}>${esc(p.name)} — ${esc(diagnosisName(rules.suspectDiagnoses[p.id]))}</option>`).join('')}</select><p id="finalConfirmedDiagnosis" class="confirmed-final-diagnosis" aria-live="polite">${r.finalDraft?.personId?`Confirmed diagnosis: ${esc(diagnosisName(rules.suspectDiagnoses[r.finalDraft.personId]))}`:'The selected suspect’s diagnosis will be carried forward automatically.'}</p><p class="small-status">This locks the culprit choice for this attempt.</p><p class="decision-feedback" id="finalFeedback" role="status"></p><button type="submit" class="primary">Lock culprit <span>→</span></button></form>`}`;
- if(!locked){$('#finalPerson').onchange=()=>{const personId=$('#finalPerson').value;r.finalDraft={personId};$('#finalConfirmedDiagnosis').textContent=personId?'Confirmed diagnosis: '+diagnosisName(rules.suspectDiagnoses[personId]):'The selected suspect’s diagnosis will be carried forward automatically.';save()};$('#finalForm').onsubmit=e=>{e.preventDefault();const result=lockFinalAccusation($('#finalPerson').value);if(!result.ok){$('#finalFeedback').textContent=result.error;return}delete r.finalDraft;save();renderFinalAccusation()};}
+ const outcome=locked?`<section class="card final-result" role="status"><h3>${locked.correct?'Case solved':'Incorrect culprit · choice locked'}</h3><p>You selected <strong>${esc(chosen?.name||'—')}</strong>, whose confirmed diagnosis is <strong>${esc(diagnosisName(rules.suspectDiagnoses[locked.personId]))}</strong>.</p>${!locked.correct?`<h4>How that diagnosis fits the culprit clues</h4><p>${esc(finalDiagnosisExplanation(rules.suspectDiagnoses[locked.personId]))}</p>${diagnosisClueReview(rules.suspectDiagnoses[locked.personId])}<p>The culprit is <strong>${esc(solution?.name||'—')}</strong>, with <strong>${esc(diagnosisName(rules.culpritDiagnosisId))}</strong>.</p>`:''}<h4>How the culprit clues fit together</h4><p>${esc(finalDiagnosisExplanation(rules.culpritDiagnosisId))}</p><dl class="culprit-clue-debrief">${rules.culpritClueExplanations.map(item=>`<div><dt>${esc(item.title)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl></section>`:'';
+ $('#roundContent').innerHTML=checkpointNav()+`<span class="eyebrow">FINAL CULPRIT</span><h2 class="section-title">Who fits the culprit clues?</h2><p class="section-copy">The diagnoses are confirmed. Choose the person whose condition best matches the culprit evidence as a whole.</p><div class="final-comparison"><section class="card"><h3>Your original culprit differential</h3><ol>${r.ranking.ids.map(id=>`<li>${esc(diagnosisName(id))}</li>`).join('')}</ol></section><section class="card"><h3>Confirmed diagnoses</h3><ul class="confirmed-roster">${people.map(p=>`<li>${personFace(p)}<div><strong>${esc(p.name)}</strong><span>${esc(diagnosisName(rules.suspectDiagnoses[p.id]))}</span></div></li>`).join('')}</ul></section></div>${locked?outcome:`<form id="finalForm" class="card final-choice"><select id="finalPerson" aria-label="Select culprit"><option value="">Select culprit</option>${people.map(p=>`<option value="${esc(p.id)}" ${r.finalDraft?.personId===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select><p class="decision-feedback" id="finalFeedback" role="status"></p><button type="submit" class="primary">Lock culprit <span>→</span></button></form>`}`;
+ if(!locked){$('#finalPerson').onchange=()=>{const personId=$('#finalPerson').value;r.finalDraft={personId};save()};$('#finalForm').onsubmit=e=>{e.preventDefault();const result=lockFinalAccusation($('#finalPerson').value);if(!result.ok){$('#finalFeedback').textContent=result.error;return}delete r.finalDraft;save();renderFinalAccusation()};}
  checkpointScreen('final');
 }

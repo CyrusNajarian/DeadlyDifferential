@@ -22,6 +22,16 @@ if output.exists():
   for row in rows[5:]:
    for col in range(5, min(len(row), len(codes))):
     previous[(name, row[0], codes[col])] = 'Yes' if str(row[col] or '').strip().lower() == 'yes' else 'No'
+# Retired tumor rows merge into Brain tumor; one accepted parkinsonian member
+# makes the whole family accepted for that case.
+for case in data['cases']:
+ code = case['code']
+ tumor_ids = ['d-brain-tumor', 'd-glioma', 'd-glioblastoma', 'd-meningioma', 'd-brain-metastasis']
+ if any(previous.get(('Diagnoses', id, code)) == 'Yes' for id in tumor_ids):
+  previous[('Diagnoses', 'd-brain-tumor', code)] = 'Yes'
+ family = ['d-parkinson-disease','d-drug-induced-parkinsonism','d-vascular-parkinsonism','d-progressive-supranuclear-palsy','d-multiple-system-atrophy','d-corticobasal-syndrome','d-dementia-with-lewy-bodies']
+ if any(previous.get(('Diagnoses', id, code)) == 'Yes' for id in family):
+  for id in family: previous[('Diagnoses', id, code)] = 'Yes'
 book = xlsxwriter.Workbook(output)
 book.set_properties({'title': 'Deadly Differential — Answer Matrix', 'subject': 'Editable symptom and diagnosis approvals', 'author': 'Deadly Differential'})
 navy, teal, ink, muted = '#123940', '#137D78', '#183D44', '#5C7278'
@@ -40,9 +50,10 @@ readme.set_column('A:A', 3)
 readme.set_column('B:H', 15)
 readme.merge_range('B2:H3', 'DEADLY DIFFERENTIAL\nAnswer matrix', hero)
 notes = [
- ('What is included', '95 symptoms/signs, 118 diagnoses, and all 19 playable clue/person screens. Every reference entry is included, including entries with no approved case.'),
+ ('What is included', '95 symptoms/signs, 114 diagnoses, and all 19 playable clue/person screens. Every reference entry is included, including entries with no approved case.'),
  ('Edit answer approvals', 'Use the Yes/No dropdowns in Symptoms and Diagnoses. Yes means the entry is an approved answer or diagnostic possibility for that case. Blank is treated as No. The count updates automatically.'),
  ('Find the right case', 'Cases lists every column code and the person or clue it represents. C = culprit; R = reception; T = team room; Y = yearly review; E = emails; V = video.'),
+ ('Grouping rules', 'Tumor subtypes share one Brain tumor entry. If any parkinsonian diagnosis is accepted for a case, all seven listed parkinsonian diagnoses are accepted. This is a game scoring rule. To turn that family off in a case, set every family entry to No.'),
  ('Current scoring', 'Symptoms are checked while examining suspect clues. Suspect diagnoses are submitted together later. The diagnosis columns for suspect clues are supporting possibilities, not the final assignment key. Answer key shows the final diagnoses separately.'),
  ('Apply changes to the app', 'Replace this workbook in the repository and push to main. Netlify builds default answer approvals from it automatically. setup.html loads the repository workbook by default; upload an edited copy there for a device-only preview before committing it.'),
  ('Keep the structure', 'Keep both data sheets, all Reference ID rows, the case columns, and the row 5 headers. Rows may be sorted. Names/definitions and Answer key are reference information: edit the source JS to change those. Upload applies only Yes/No approvals.'),

@@ -1446,7 +1446,7 @@ window.CASE_CONFIG={
           "questions": [
             {
               "label": "Notice the finding",
-              "prompt": "What specifically sounds abnormal in the voicemail? Focus on how the words are produced rather than immediately naming a disease.",
+              "prompt": "What specifically sounds abnormal in the voicemail? Compare how the words are produced and note the times of the messages.",
               "hint": "Compare articulation, volume, rhythm, fluency, word choice, and comprehension. The speech sounds garbled or slurred."
             },
             {

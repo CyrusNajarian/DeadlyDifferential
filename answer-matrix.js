@@ -26,7 +26,7 @@ window.DDAnswerMatrix=(()=>{
    if(seen.size!==ref.lists[type].length)throw Error(`${sheetName}: keep every reference row; use No rather than deleting rows.`);
   }
   for(const screen of screens){
-   const symptoms=selected.symptom[screen.code],diagnoses=selected.disease[screen.code];
+   const symptoms=selected.symptom[screen.code],diagnoses=ref.expandApprovedIds(selected.disease[screen.code]);
    if(!diagnoses.length)throw Error(`${screen.code}: keep at least one diagnosis possibility.`);
    if(!symptoms.length&&!screen.stage.observationOnly)throw Error(`${screen.code}: keep at least one symptom or sign.`);
    const original=screen.stage.accepted;

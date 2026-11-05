@@ -6,8 +6,12 @@ const w=ctx.window,ref=w.DDReference,matrix=w.DDAnswerMatrix;
 const sheets=JSON.parse(fs.readFileSync(0,'utf8'));
 const wb={Sheets:sheets},XLSX={utils:{sheet_to_json:s=>s}},copy=v=>JSON.parse(JSON.stringify(v));
 const original=copy(w.CASE_CONFIG),roundtrip=matrix.parse(wb,XLSX),prepared=ref.prepareConfig(copy(original));
-assert.equal(sheets.Symptoms.length-5,95);assert.equal(sheets.Diagnoses.length-5,118);assert.equal(matrix.cases(roundtrip).length,19);
-for(const [i,screen] of matrix.cases(prepared).entries())for(const type of ['symptom','disease'])assert.deepEqual([...ref.approved(matrix.cases(roundtrip)[i].stage,type).map(a=>a.id)].sort(),[...ref.approved(screen.stage,type).map(a=>a.id)].sort());
+assert.equal(sheets.Symptoms.length-5,95);assert.equal(sheets.Diagnoses.length-5,114);assert.equal(matrix.cases(roundtrip).length,19);
+for(const screen of matrix.cases(roundtrip))for(const [sheetName,type] of [['Symptoms','symptom'],['Diagnoses','disease']]){
+ const rows=sheets[sheetName],col=rows[4].findIndex(h=>String(h).startsWith(screen.code+' | '));
+ const expected=ref.expandApprovedIds(rows.slice(5).filter(row=>row[col]==='Yes').map(row=>row[0]),type);
+ assert.deepEqual([...ref.approved(screen.stage,type).map(a=>a.id)].sort(),[...expected].sort());
+}
 assert.deepEqual(copy(w.CASE_CONFIG),original);assert.equal(roundtrip.answerMatrixVersion,1);assert.equal(roundtrip.suspectSets[4].video.src,original.suspectSets[4].video.src);assert.equal(roundtrip.caseResolution.culpritId,'A');
 // A changed approval actually changes the imported case, retaining the rest of the case.
 const edited=copy(wb),col=5,row=edited.Sheets.Symptoms.findIndex((r,i)=>i>4&&r[col]==='No'),id=edited.Sheets.Symptoms[row][0];

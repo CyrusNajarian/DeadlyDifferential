@@ -167,3 +167,29 @@ assert.equal(reload.notes, c.state.notes);
 assert.equal(JSON.stringify(reload.resolution.ranking), savedRanking);
 assert(events.some(event => event.kind === 'final_accusation' && event.mode === 'culprit-only'));
 console.log('PASS: ordered checkpoints, delayed grading, six suspect debriefs, culprit-only locking and migration, culprit-only final rationale, tab order, notes drawer, persistence and local-only notes.');
+
+// Tumor consolidation keeps search and saved progress compatible.
+for(const term of ['Glioma','Glioblastoma','Meningioma','Brain metastasis'])assert.equal(c.DDReference.resolve(term,'disease').id,'d-brain-tumor');
+assert.equal(c.DDReference.lists.disease.length,114);
+const family=c.DDReference.data.approvalGroups[0];
+for(const id of family){
+ assert(c.suspectAssessment('C',id).correct);
+ for(const anchor of family){const approvals=c.DDReference.approved({accepted:[{type:'disease',referenceIds:[anchor]}]},'disease');assert(approvals.some(a=>a.id===id));}
+}
+assert(!c.suspectAssessment('C','d-essential-tremor').correct);
+for(const [id,rows] of Object.entries(c.resolutionRules().culpritDiagnosisClues)){assert.equal(rows.length,5);assert(rows.every(row=>row.title&&row.fit&&row.text));}
+assert(c.resolutionRules().culpritDiagnosisClues['d-myasthenia-gravis'][3].text.includes('early in the morning'));
+assert(c.resolutionRules().culpritDiagnosisClues['d-myasthenia-gravis'][3].text.includes('does not exclude MG'));
+c.state.resolution={ranking:{ids:['d-glioma','d-glioblastoma','d-stroke','d-epilepsy','d-myasthenia-gravis'],submittedAt:'saved'},assignment:{answers:{C:'d-parkinson-disease'},results:[]},final:{personId:'E',diagnosisId:'d-myasthenia-gravis',mode:'culprit-only',correct:false,lockedAt:'saved'}};
+assert.equal(c.resolutionState().ranking.ids.filter(id=>id==='d-brain-tumor').length,1);assert.equal(c.resolutionState().ranking.legacyIds.length,5);
+c.renderFinalAccusation();assert($('#roundContent').innerHTML.includes('data-diagnosis-clue-review="d-myasthenia-gravis"'));assert($('#roundContent').innerHTML.includes('early in the morning'));
+delete c.state.resolution.final;c.renderFinalAccusation();
+const selector=$('#roundContent').innerHTML.split('<form id="finalForm"')[1];assert(selector.includes('aria-label="Select culprit"'));assert(!selector.includes('finalConfirmedDiagnosis'));assert(!selector.includes('carried forward'));assert(!selector.includes('This locks'));assert(!selector.includes('— Brain tumor'));assert(!selector.includes('early in the morning'));
+console.log('PASS: consolidated tumor searches/history, all parkinsonian alternatives, five-clue final comparisons, morning MG rationale and minimal selector.');
+
+const oldResolutionConfig=c.config.caseResolution;
+c.config.caseResolution={...c.resolutionRules(),suspectAcceptedIds:{C:['d-parkinson-disease']}};
+for(const id of family)assert(c.suspectAssessment('C',id).correct);
+c.config.caseResolution=oldResolutionConfig;
+const tumorProgress={catalogFound:['d-glioma','d-glioblastoma','d-brain-tumor']};
+assert.equal(c.DDReference.progress({accepted:[{type:'disease',referenceIds:['d-brain-tumor']}]},tumorProgress).length,1);

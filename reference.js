@@ -23,12 +23,18 @@ window.DDReference=(()=>{
   'Stroke':['Stroke','Ischemic stroke','Large-artery atherosclerotic stroke','Cardioembolic stroke','Lacunar stroke','Watershed stroke','Cryptogenic stroke','Hemorrhagic stroke','Intracerebral hemorrhage','Subarachnoid hemorrhage','Prior stroke with residual deficits']
  };
  const legacyIndex=new Map(Object.entries(legacy).map(([k,v])=>[key(k),v]));
+ function canonicalId(id){return data.retiredIds?.[id]||id}
+ function expandApprovedIds(ids,type='disease'){
+  const out=new Set(ids.map(canonicalId).filter(id=>byId.get(id)?.type===type));
+  for(const group of data.approvalGroups||[])if(group.some(id=>out.has(id)))for(const id of group)if(byId.get(id)?.type===type)out.add(id);
+  return [...out];
+ }
  function approvedIds(a){
-  if(Array.isArray(a.referenceIds))return [...new Set(a.referenceIds.map(id=>data.retiredIds?.[id]||id).filter(id=>byId.get(id)?.type===a.type))];
+  if(Array.isArray(a.referenceIds))return expandApprovedIds(a.referenceIds,a.type);
   const migrated=data.legacyBindings?.[a.type+':'+key(a.term)];
-  if(migrated)return migrated.filter(id=>byId.get(id)?.type===a.type);
+  if(migrated)return expandApprovedIds(migrated,a.type);
   const names=legacyIndex.get(key(a.term))||[a.term];
-  return [...new Set(names.map(name=>resolve(name,a.type)?.id).filter(Boolean))];
+  return expandApprovedIds(names.map(name=>resolve(name,a.type)?.id).filter(Boolean),a.type);
  }
  function approved(stage,type){
   const out=new Map();(stage.accepted||[]).forEach((answer,i)=>{if(!types.includes(answer.type)||(type&&answer.type!==type))return;for(const id of approvedIds(answer))if(!out.has(id))out.set(id,{id,i,entry:byId.get(id),answer})});return [...out.values()];
@@ -64,7 +70,7 @@ window.DDReference=(()=>{
   }
   config.suggestionsAfter=3;return config;
  }
- return {data,key,byId,lists,resolve,search,approvedIds,approved,progress,unknown,validateConfig,prepareConfig};
+ return {data,key,byId,lists,resolve,search,canonicalId,expandApprovedIds,approvedIds,approved,progress,unknown,validateConfig,prepareConfig};
 })();
 
 function renderReference(target=$('#referencePanelContent')){

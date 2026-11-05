@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 3,
+  "version": 4,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -1162,44 +1162,20 @@ window.NEURO_REFERENCE={
       "type": "disease",
       "category": "Brain structure and tumors",
       "term": "Brain tumor",
-      "description": "An abnormal growth of cells within or around the brain.",
+      "description": "An abnormal growth of cells in or around the brain, including primary tumors and tumors spread from elsewhere.",
       "source": "tumor",
       "searchTerms": [
         "brain tumour",
-        "intracranial tumour"
+        "intracranial tumour",
+        "Glioma",
+        "Glioblastoma",
+        "Meningioma",
+        "Brain metastasis",
+        "brain cancer",
+        "brain metastases",
+        "tumor",
+        "tumour"
       ]
-    },
-    {
-      "id": "d-glioma",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Glioma",
-      "description": "A CNS tumor family associated with glial cells.",
-      "source": "tumor"
-    },
-    {
-      "id": "d-glioblastoma",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Glioblastoma",
-      "description": "An aggressive adult-type diffuse glioma.",
-      "source": "tumor"
-    },
-    {
-      "id": "d-meningioma",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Meningioma",
-      "description": "A tumor arising from the coverings of the brain or spinal cord.",
-      "source": "tumor"
-    },
-    {
-      "id": "d-brain-metastasis",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Brain metastasis",
-      "description": "Cancer that has spread to the brain from elsewhere.",
-      "source": "tumor"
     },
     {
       "id": "d-intracranial-mass",
@@ -2291,7 +2267,11 @@ window.NEURO_REFERENCE={
     "d-postictal-neurologic-deficit": "d-epilepsy",
     "d-focal-epilepsy": "d-epilepsy",
     "d-generalized-epilepsy": "d-epilepsy",
-    "d-status-epilepticus": "d-epilepsy"
+    "d-status-epilepticus": "d-epilepsy",
+    "d-glioma": "d-brain-tumor",
+    "d-glioblastoma": "d-brain-tumor",
+    "d-meningioma": "d-brain-tumor",
+    "d-brain-metastasis": "d-brain-tumor"
   },
   "inputBindings": {
     "disease:seizure": "d-epilepsy",
@@ -2303,6 +2283,31 @@ window.NEURO_REFERENCE={
     "disease:postictalweakness": "d-epilepsy",
     "disease:toddparalysis": "d-epilepsy",
     "disease:toddparesis": "d-epilepsy",
-    "disease:statusepilepticus": "d-epilepsy"
-  }
+    "disease:statusepilepticus": "d-epilepsy",
+    "disease:glioma": "d-brain-tumor",
+    "disease:glioblastoma": "d-brain-tumor",
+    "disease:meningioma": "d-brain-tumor",
+    "disease:brainmetastasis": "d-brain-tumor",
+    "disease:braintumour": "d-brain-tumor",
+    "disease:intracranialtumour": "d-brain-tumor",
+    "disease:braincancer": "d-brain-tumor",
+    "disease:brainmetastases": "d-brain-tumor",
+    "disease:tumor": "d-brain-tumor",
+    "disease:tumour": "d-brain-tumor",
+    "disease:parkinsonism": "d-parkinson-disease",
+    "disease:parkinsonianism": "d-parkinson-disease",
+    "disease:parkinsons": "d-parkinson-disease",
+    "disease:parkinsoniansyndrome": "d-parkinson-disease"
+  },
+  "approvalGroups": [
+    [
+      "d-parkinson-disease",
+      "d-drug-induced-parkinsonism",
+      "d-vascular-parkinsonism",
+      "d-progressive-supranuclear-palsy",
+      "d-multiple-system-atrophy",
+      "d-corticobasal-syndrome",
+      "d-dementia-with-lewy-bodies"
+    ]
+  ]
 };
