@@ -37,7 +37,7 @@ function investigationSteps(){
  config.clues.forEach((clue,ci)=>clue.stages.forEach((stage,si)=>steps.push({id:`culprit-${ci}-${si}`,section:'culprit',ci,si,stage,title:clue.title,route:`#culprit/${ci}/${si}`})));
  steps.push({id:'ranked-differential',section:'checkpoint',checkpoint:'ranking',title:'Rank your top five diagnoses',route:'#differential'});
  for(const set of window.SUSPECT_SETS||[window.SUSPECT_CLUES])for(const person of set.people.filter(p=>p.observable!==false))steps.push({id:`suspect-${set.id}-${person.id}`,section:'suspects',setId:set.id,personId:person.id,stage:suspectStage(person),title:person.name,route:`#suspects/${set.id}/${person.id}/symptoms`});
- steps.push({id:'suspect-assignment',section:'checkpoint',checkpoint:'assignments',title:'Assign all suspect diagnoses',route:'#assignments'},{id:'final-answer',section:'checkpoint',checkpoint:'final',title:'Lock the final answer',route:'#final'});
+ steps.push({id:'suspect-assignment',section:'checkpoint',checkpoint:'assignments',title:'Assign all suspect diagnoses',route:'#assignments'},{id:'final-answer',section:'checkpoint',checkpoint:'final',title:'Choose the culprit',route:'#final'});
  return steps;
 }
 function flowRecord(id){state.flow=state.flow||{};return state.flow[id]=state.flow[id]||{}}
@@ -57,13 +57,7 @@ function renderFlowNext(step){
  const steps=investigationSteps(),i=steps.findIndex(s=>s.id===step.id),next=steps[i+1],status=stepStatus(step);
  return next?`<div class="flow-next"><p class="small-status">${debugMode?'Debug mode: requirements bypassed.':status.complete?'Requirements complete. You can continue or keep exploring this clue.':(step.section==='suspects'?'Complete the symptom task to continue.':'Complete the symptom and diagnosis requirements to continue.')}</p><button type="button" class="primary" id="nextClue" ${debugMode||status.complete?'':'disabled'} data-next-step="${esc(next.id)}">Next: ${esc(next.title)} <span>→</span></button></div>`:`<p class="completion-note">${status.complete?'All clues complete. You can revisit clues or review your notes.':'Complete the symptom and diagnosis requirements to finish.'}</p>`;
 }
-function renderNotes(){
- $('#clueNav').hidden=true;
- $('#roundContent').innerHTML='<span class="eyebrow">CASE NOTES</span><h2 class="section-title">Your notes</h2><p class="section-copy">Keep track of findings, possible explanations, and connections between clues.</p><label class="field-label" for="caseNotes">HIGH-LEVEL NOTES</label><textarea id="caseNotes" class="text-input case-notes" maxlength="50000" placeholder="What have you noticed? What might connect the clues?"></textarea><p class="small-status" id="notesStatus" role="status">Saved on this device for this attempt.</p>';
- const notes=$('#caseNotes');notes.value=state.notes||'';
- notes.addEventListener('input',()=>{state.notes=notes.value;try{save();$('#notesStatus').textContent='Saved on this device for this attempt.'}catch{$('#notesStatus').textContent='Device storage is full. Copy your notes somewhere safe before leaving this page.'}});
- DDLog?.screen('notes',{section:'notes',clue:'Notes',stage:'Notes'});
-}
+function renderNotes(){openNotes();}
 
 function mountFlow(root,stage,progress,context){
  const items=DDReference.approved(stage),foundIds=DDReference.progress(stage,progress);const answers=items.map(({entry,answer,i})=>({...answer,term:entry.term,type:entry.type,referenceIds:[entry.id],referenceId:entry.id,_sourceIndex:i}));progress.matches=progress.matches||[];progress.revealed=progress.revealed||{};progress.hints=progress.hints||{};progress.answerHints=progress.answerHints||{};

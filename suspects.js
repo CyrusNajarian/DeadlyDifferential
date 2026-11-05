@@ -1,3 +1,9 @@
+function restoreInvestigationRoute(){
+ const route=state.lastInvestigationRoute||'#culprit/0/0',parts=route.replace(/^#/,'').split('/');history.replaceState(null,'',route);
+ if(['differential','assignments','final'].includes(parts[0])){state.section='checkpoint';state.checkpoint={differential:'ranking',assignments:'assignments',final:'final'}[parts[0]];}
+ else if(parts[0]==='suspects'){state.section='suspects';state.suspectSet=parts[1];state.suspectPerson=parts[2];}
+ else{state.section='culprit';state.clue=Number(parts[1])||0;state.stage=Number(parts[2])||0;}
+}
 function renderVideoEvidence(set){return `<figure class="reception-gallery card"><video class="reception-main" controls playsinline preload="metadata" aria-label="Conference footage recorded by Dr. Charcoal"><source src="${esc(set.video.src)}" type="video/mp4">Your browser cannot play this video. <a href="${esc(set.video.src)}">Open the recording</a>.</video><figcaption>${esc(set.video.caption)} <a class="text-button" href="${esc(set.video.src)}" target="_blank" rel="noopener">Open recording ↗</a></figcaption></figure>`;}
 function personFace(person){const id=/^[A-F]$/.test(person.id)?person.id:'A';return `<img class="person-face" src="assets/suspects/faces/${id}.webp" alt="" width="44" height="44">`;}
 function renderEmailEvidence(set,person){
@@ -34,9 +40,9 @@ function suspectRoute(){
   if(parts[1]!==state.suspectSet||parts[2]!==state.suspectPerson){state.suspectPhase='symptoms';history.replaceState(null,'',`#suspects/${state.suspectSet}/${state.suspectPerson}/symptoms`)}
  }else if(parts[0]==='culprit'){state.section='culprit';if(parts[1]!==undefined)state.clue=Number(parts[1]);if(parts[2]!==undefined)state.stage=Number(parts[2]);}
  else if(['differential','assignments','final'].includes(parts[0])){state.section='checkpoint';state.checkpoint={differential:'ranking',assignments:'assignments',final:'final'}[parts[0]];}
- else if(parts[0]==='notes')state.section='notes';
- else if(parts[0]==='reference'){const route=state.lastInvestigationRoute||'#culprit/0/0';history.replaceState(null,'',route);if(['#differential','#assignments','#final'].includes(route)){state.section='checkpoint';state.checkpoint={'#differential':'ranking','#assignments':'assignments','#final':'final'}[route]}else state.section=route.startsWith('#suspects/')?'suspects':'culprit';openReference();}
- if(state.section==='reference')state.section='culprit';
+ else if(parts[0]==='notes'){restoreInvestigationRoute();openNotes();}
+ else if(parts[0]==='reference'){restoreInvestigationRoute();openReference();}
+ if(['reference','notes'].includes(state.section))restoreInvestigationRoute();
  state.section=state.section||'culprit';
  enforceInvestigationRoute();
 }
@@ -56,7 +62,8 @@ function renderSectionNav(){
  suspectRoute();const section=state.section,steps=investigationSteps(),culprit=steps.filter(s=>s.section==='culprit'),suspects=steps.filter(s=>s.section==='suspects');
  const ci=culprit.find(s=>s.ci===state.clue&&s.si===state.stage)||culprit[0];
  const si=suspects.find(s=>s.setId===state.suspectSet&&s.personId===state.suspectPerson)||suspects[0];
- $('#sectionNav').innerHTML=state.team?`<a class="section-link ${section==='culprit'?'selected':''}" href="${ci.route}">Culprit clues ${milestoneBadge(groupStatus(culprit))}</a>${suspects.length?(isStepUnlocked(suspects[0].id)?`<a class="section-link ${section==='suspects'?'selected':''}" href="${si.route}">Suspect clues ${milestoneBadge(groupStatus(suspects))}</a>`:'<span class="section-link nav-locked" aria-disabled="true">Suspect clues · Locked</span>'):''}${isStepUnlocked('ranked-differential')?`<a class="section-link ${section==='checkpoint'?'selected':''}" href="#differential">Decisions</a>`:'<span class="section-link nav-locked" aria-disabled="true">Decisions</span>'}<a class="section-link ${section==='notes'?'selected':''}" href="#notes">Notes</a>`:'<a class="section-link" href="#culprit/0/0">Case briefing</a>';
+ const decision=(kind,label)=>isStepUnlocked(resolutionStepId(kind))?`<a class="section-link ${section==='checkpoint'&&state.checkpoint===kind?'selected':''}" href="${{ranking:'#differential',assignments:'#assignments',final:'#final'}[kind]}">${label}</a>`:`<span class="section-link nav-locked" aria-disabled="true">${label}</span>`;
+ $('#sectionNav').innerHTML=state.team?`<a class="section-link ${section==='culprit'?'selected':''}" href="${ci.route}">Culprit clues ${milestoneBadge(groupStatus(culprit))}</a>${decision('ranking','Top five')}${suspects.length?(isStepUnlocked(suspects[0].id)?`<a class="section-link ${section==='suspects'?'selected':''}" href="${si.route}">Suspect clues ${milestoneBadge(groupStatus(suspects))}</a>`:'<span class="section-link nav-locked" aria-disabled="true">Suspect clues · Locked</span>'):''}${decision('assignments','Suspect diagnoses')}${decision('final','Choose culprit')}`:'<a class="section-link" href="#culprit/0/0">Case briefing</a>';
 }
 function renderSuspects(){
   $('#clueNav').hidden=true;

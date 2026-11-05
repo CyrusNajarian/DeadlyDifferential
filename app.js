@@ -48,10 +48,10 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=30');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=30');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=31');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=31');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=30';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=31';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;
@@ -89,11 +89,11 @@ async function initialize(){
  if(migration.orderChanged){const match=location.hash.match(/^#culprit\/(\d+)\/(\d+)$/);if(match)history.replaceState(null,'',`#culprit/${migration.indexMap[match[1]]??0}/${match[2]}`);}
  if(migration.changed)save();
  document.title=config.title||'Deadly Differential';$('.brand span:last-child').textContent=(config.title||'Deadly Differential').toUpperCase();$('#caseLabel').textContent=config.caseLabel||'CASE 01 · DEPARTMENT RETREAT';$('#openingHeadline').textContent=config.openingHeadline||'The retreat is over. The investigation begins.';$('#openingDescription').textContent=config.openingDescription||'';$('#playerInstructions').textContent=config.playerInstructions||'';
- initReferencePanel();
+ initReferencePanel();initNotesPanel();
  $('#exportLogs').onclick=()=>DDLog.download();
  $('#debugButton').onclick=()=>{debugMode=!debugMode;$('#debugButton').setAttribute('aria-pressed',String(debugMode));$('#debugButton').textContent=`Debug mode: ${debugMode?'On':'Off'}`;if(state.team||state.section==='reference')render();toast(debugMode?'Debug mode on · requirements bypassed':'Debug mode off · requirements restored')};
  $('#startButton').disabled=false;$('#startButton').onclick=start;$('#resetButton').onclick=()=>{if(confirm('Reset all saved progress on this phone?')){DDLog.reset();localStorage.removeItem('dd-state-v4');location.reload()}};
  if(state.team){DDLog.start(state.team);$('#welcome').classList.remove('active');$('#game').classList.add('active');$('#teamHeading').textContent=state.team;render();tick=setInterval(timer,1000);timer()}
- else if(location.hash.startsWith('#reference'))render();
+ else if(/^#(?:reference|notes)/.test(location.hash))render();
 }
 window.caseReady=initialize();

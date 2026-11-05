@@ -49,3 +49,6 @@ REFERENCE DRAWER AND ANSWER REVIEW
 The Reference is now a searchable side drawer, opened from the screen-edge tab without leaving the clue. Answer cards show short catalog definitions, without evidence labels or per-answer references. The repeated submission instruction has been removed. The current catalog contains 95 symptoms/signs and 118 diagnosis entries. Seizure-related diagnoses are grouped as Epilepsy; seizure, postictal deficit and related searches or inputs resolve to that group. Existing saved entries merge into one match.
 
 Tone-related alternatives and additional nerve, muscle and cord diagnoses are approved where applicable. Newly approved options are appended so existing answer indices remain stable. The accepted 10-second phone POV recording is embedded in the Conference recording suspect clue using its HeyGen-hosted playback URL; it is not a bundled local MP4.
+
+DECISION FLOW REFINEMENT
+The first decision tab sits between Culprit clues and Suspect clues. After all-six diagnosis submission, each suspect receives a correct-diagnosis explanation and a comparison with an incorrect choice. At the final stage players choose only the culprit; the confirmed diagnosis carries forward automatically. The final debrief explains only the culprit evidence. Notes now opens beside Reference as an autosaving side drawer.

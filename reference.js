@@ -83,6 +83,7 @@ function renderReference(target=$('#referencePanelContent')){
 
 let referenceReturnFocus=null;
 function openReference(){
+ closeNotes();
  const drawer=$('#referenceDrawer');if(!drawer||drawer.open)return;
  referenceReturnFocus=document.activeElement;
  if(!$('#referenceSearch'))renderReference();
@@ -97,5 +98,25 @@ function initReferencePanel(){
  document.addEventListener('click',e=>{if(e.target.closest('[data-reference-open]')){e.preventDefault();openReference();}});
  $('#closeReference').onclick=closeReference;
  drawer.addEventListener('click',e=>{if(e.target===drawer){const b=drawer.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)closeReference();}});
- drawer.addEventListener('close',()=>{document.querySelectorAll('[data-reference-open]').forEach(b=>b.setAttribute('aria-expanded','false'));if(referenceReturnFocus?.isConnected)referenceReturnFocus.focus();});
+ drawer.addEventListener('close',()=>{document.querySelectorAll('[data-reference-open]').forEach(b=>b.setAttribute('aria-expanded','false'));if(!document.querySelector('dialog[open]')&&referenceReturnFocus?.isConnected)referenceReturnFocus.focus();});
+}
+
+let notesReturnFocus=null;
+function openNotes(){
+ const drawer=$('#notesDrawer');if(!drawer||drawer.open)return;
+ closeReference();notesReturnFocus=document.activeElement;
+ $('#sideCaseNotes').value=state.notes||'';
+ $('#sideNotesStatus').textContent='Saved on this device.';
+ drawer.showModal();
+ document.querySelectorAll('[data-notes-open]').forEach(b=>b.setAttribute('aria-expanded','true'));
+ $('#sideCaseNotes').focus();
+}
+function closeNotes(){const drawer=$('#notesDrawer');if(drawer?.open)drawer.close();}
+function initNotesPanel(){
+ const drawer=$('#notesDrawer');if(!drawer||drawer.dataset.initialized)return;drawer.dataset.initialized='true';
+ document.addEventListener('click',e=>{if(e.target.closest('[data-notes-open]')){e.preventDefault();openNotes();}});
+ $('#closeNotes').onclick=closeNotes;
+ $('#sideCaseNotes').oninput=()=>{state.notes=$('#sideCaseNotes').value;try{save();$('#sideNotesStatus').textContent='Saved on this device.'}catch{$('#sideNotesStatus').textContent='Storage is full. Copy your notes somewhere safe before leaving this page.'}};
+ drawer.addEventListener('click',e=>{if(e.target===drawer){const b=drawer.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)closeNotes();}});
+ drawer.addEventListener('close',()=>{document.querySelectorAll('[data-notes-open]').forEach(b=>b.setAttribute('aria-expanded','false'));if(!document.querySelector('dialog[open]')&&notesReturnFocus?.isConnected)notesReturnFocus.focus();});
 }
