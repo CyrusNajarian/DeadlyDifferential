@@ -5,13 +5,39 @@ window.DDReference=(()=>{
  const byId=new Map(data.items.map(a=>[a.id,a]));
  const types=['symptom','disease'];
  const lists=Object.fromEntries(types.map(t=>[t,data.items.filter(a=>a.type===t).sort((a,b)=>a.term.localeCompare(b.term))]));
- const index=Object.fromEntries(types.map(t=>{const map=new Map();for(const a of lists[t]){const k=key(a.term);if(!map.has(k))map.set(k,new Set());map.get(k).add(a.id)}return [t,map]}));
+ const index=Object.fromEntries(types.map(t=>{const map=new Map();for(const a of lists[t])for(const name of [a.term,...a.aliases||[]]){const k=key(name);if(!map.has(k))map.set(k,new Set());map.get(k).add(a.id)}return [t,map]}));
+ const searchIndex=new Map(data.items.map(a=>[a.id,{
+  name:key(a.term),
+  aliases:[...new Set([...a.aliases||[],...a.searchTerms||[],...(a.subtypes||[]).map(s=>s.name)].map(key))],
+  descriptions:[a.description,...(a.subtypes||[]).map(s=>s.description)].map(key)
+ }]));
  function resolve(value,type){const found=index[type]?.get(key(value));return found?.size===1?byId.get([...found][0]):byId.get(data.inputBindings?.[type+':'+key(value)])||null}
+ // Adjacent transpositions count as one typo; fuzzy matches suggest names only.
+ function distance(a,b){
+  const rows=Array.from({length:a.length+1},(_,i)=>Array.from({length:b.length+1},(_,j)=>i===0?j:j===0?i:0));
+  for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){
+   rows[i][j]=Math.min(rows[i-1][j]+1,rows[i][j-1]+1,rows[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+   if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])rows[i][j]=Math.min(rows[i][j],rows[i-2][j-2]+1);
+  }return rows[a.length][b.length];
+ }
  function search(value,type,min=3){
-  if((String(value).match(/\p{L}/gu)||[]).length<min)return [];
-  const query=key(value);
-  const rank=a=>{const name=key(a.term);return name===query?0:name.startsWith(query)?1:name.includes(query)?2:3};
-  return lists[type].filter(a=>[a.term,a.description,...a.searchTerms||[]].some(v=>key(v).includes(query))).sort((a,b)=>rank(a)-rank(b)||a.term.localeCompare(b.term));
+  const query=key(value);if(!query)return [];
+  // Exact known abbreviations such as MG and MS work before three letters.
+  if((String(value).match(/\p{L}/gu)||[]).length<min)return lists[type].filter(a=>[a.term,...a.aliases||[]].some(name=>key(name)===query));
+  function rank(a){
+   const item=searchIndex.get(a.id),name=item.name;
+   if(name===query)return 0;if(name.startsWith(query))return 1;
+   if(item.aliases.includes(query))return 2;
+   if(item.aliases.some(v=>v.startsWith(query)))return 3;
+   if(name.includes(query))return 4;
+   if(item.aliases.some(v=>v.includes(query)))return 5;
+   if(query.length>=5&&query.length<=64){const limit=query.length>=12?2:1;for(const value of [name,...item.aliases]){
+    if(distance(query,value.slice(0,query.length))<=limit||Math.abs(query.length-value.length)<=limit&&distance(query,value)<=limit)return 6;
+   }}
+   if(item.descriptions.some(v=>v.includes(query)))return 7;
+   return Infinity;
+  }
+  return lists[type].map(a=>({a,score:rank(a)})).filter(x=>Number.isFinite(x.score)).sort((a,b)=>a.score-b.score||a.a.term.localeCompare(b.a.term)).map(x=>x.a);
  }
  const legacy={
   'Prior ischemic stroke':['Ischemic stroke'], 'Acquired brain injury':['Traumatic brain injury'], 'Brain infection':['Brain abscess','Infectious encephalitis'], 'Possible action tremor':['Tremor'], 'Possible loss of muscle bulk':['Muscle atrophy'], 'Hand clumsiness':['Impaired fine motor control'], 'Fatigable limb weakness':['Motor fatigability'], 'Photosensitivity':['Cutaneous photosensitivity'],
@@ -78,10 +104,10 @@ function renderReference(target=$('#referencePanelContent')){
  const search=$('#referenceSearch'),type=$('#referenceType'),category=$('#referenceCategory');
  function categories(){const selected=category.value;const values=[...new Set(DDReference.data.items.filter(a=>type.value==='all'||a.type===type.value).map(a=>a.category))].sort();category.innerHTML='<option value="all">All categories</option>'+values.map(c=>`<option>${esc(c)}</option>`).join('');if(values.includes(selected))category.value=selected}
  function update(){
-  const q=DDReference.key(search.value);
-  const entries=DDReference.data.items.filter(a=>(type.value==='all'||a.type===type.value)&&(category.value==='all'||a.category===category.value)&&(!q||[a.term,a.description,...a.searchTerms||[]].some(v=>DDReference.key(v).includes(q))));
+  const q=DDReference.key(search.value),matched=new Set(q?['symptom','disease'].flatMap(t=>DDReference.search(search.value,t,1).map(a=>a.id)):[]);
+  const entries=DDReference.data.items.filter(a=>(type.value==='all'||a.type===type.value)&&(category.value==='all'||a.category===category.value)&&(!q||matched.has(a.id)));
   $('#referenceCount').textContent=`${entries.length} ${entries.length===1?'entry':'entries'} · ${DDReference.lists.symptom.length} symptoms & signs · ${DDReference.lists.disease.length} diagnoses`;
-  $('#referenceResults').innerHTML=entries.length?['symptom','disease'].map(t=>{const list=entries.filter(a=>a.type===t);if(!list.length)return '';return `<section class="reference-type"><h3>${t==='symptom'?'Symptoms & signs':'Diagnoses'}</h3>${[...new Set(list.map(a=>a.category))].map(c=>`<section class="reference-group"><h4>${esc(c)}</h4><dl>${list.filter(a=>a.category===c).sort((a,b)=>a.term.localeCompare(b.term)).map(a=>`<div class="reference-entry"><dt>${esc(a.term)}</dt><dd>${esc(a.description)}</dd></div>`).join('')}</dl></section>`).join('')}</section>`}).join(''):'<p class="card reference-empty">No matching entries. Try another term or clear a filter.</p>';
+  $('#referenceResults').innerHTML=entries.length?['symptom','disease'].map(t=>{const list=entries.filter(a=>a.type===t);if(!list.length)return '';return `<section class="reference-type"><h3>${t==='symptom'?'Symptoms & signs':'Diagnoses'}</h3>${[...new Set(list.map(a=>a.category))].map(c=>`<section class="reference-group"><h4>${esc(c)}</h4><dl>${list.filter(a=>a.category===c).sort((a,b)=>a.term.localeCompare(b.term)).map(a=>`<div class="reference-entry"><dt>${esc(a.term)}</dt><dd>${esc(a.description)}${a.subtypes?.length?`<section class="reference-subtypes"><h5>${esc(a.subtypeLabel||'Types and related terms')}</h5><ul>${a.subtypes.map(item=>`<li><strong>${esc(item.name)}</strong> — ${esc(item.description)}</li>`).join('')}</ul></section>`:''}</dd></div>`).join('')}</dl></section>`).join('')}</section>`}).join(''):'<p class="card reference-empty">No matching entries. Try another term or clear a filter.</p>';
  }
  categories();update();search.oninput=update;type.onchange=()=>{categories();update()};category.onchange=update;
 

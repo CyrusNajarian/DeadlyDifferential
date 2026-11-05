@@ -6,7 +6,7 @@ const w=ctx.window,ref=w.DDReference,matrix=w.DDAnswerMatrix;
 const sheets=JSON.parse(fs.readFileSync(0,'utf8'));
 const wb={Sheets:sheets},XLSX={utils:{sheet_to_json:s=>s}},copy=v=>JSON.parse(JSON.stringify(v));
 const original=copy(w.CASE_CONFIG),roundtrip=matrix.parse(wb,XLSX),prepared=ref.prepareConfig(copy(original));
-assert.equal(sheets.Symptoms.length-5,95);assert.equal(sheets.Diagnoses.length-5,114);assert.equal(matrix.cases(roundtrip).length,19);
+assert.equal(sheets.Symptoms.length-5,ref.lists.symptom.length);assert.equal(sheets.Diagnoses.length-5,ref.lists.disease.length);assert.equal(matrix.cases(roundtrip).length,19);
 for(const screen of matrix.cases(roundtrip))for(const [sheetName,type] of [['Symptoms','symptom'],['Diagnoses','disease']]){
  const rows=sheets[sheetName],col=rows[4].findIndex(h=>String(h).startsWith(screen.code+' | '));
  const expected=ref.expandApprovedIds(rows.slice(5).filter(row=>row[col]==='Yes').map(row=>row[0]),type);
@@ -22,4 +22,5 @@ const missing=copy(wb);missing.Sheets.Symptoms.pop();assert.throws(()=>matrix.pa
 const empty=copy(wb);empty.Sheets.Diagnoses.slice(5).forEach(r=>r[col]='No');assert.throws(()=>matrix.parse(empty,XLSX),/keep at least one diagnosis/);
 const unknown=copy(wb);unknown.Sheets.Symptoms[5][0]='unknown';assert.throws(()=>matrix.parse(unknown,XLSX),/unknown or duplicate/);
 const sorted=copy(wb);sorted.Sheets.Symptoms=[...sorted.Sheets.Symptoms.slice(0,5),...sorted.Sheets.Symptoms.slice(5).reverse()];assert.equal(matrix.parse(sorted,XLSX).answerMatrixVersion,1);
+const legacy=copy(wb),cerebellar=legacy.Sheets.Diagnoses.find(r=>r[0]==='d-cerebellar-disorder');cerebellar[5]='No';legacy.Sheets.Diagnoses.push([...cerebellar]);legacy.Sheets.Diagnoses.at(-1)[0]='d-friedreich-ataxia';legacy.Sheets.Diagnoses.at(-1)[5]='Yes';const migrated=matrix.parse(legacy,XLSX);assert(ref.approved(migrated.clues[0].stages[0],'disease').some(a=>a.id==='d-cerebellar-disorder'));
 console.log('PASS: real workbook catalog coverage, 19-case roundtrip, editable approvals, preserved evidence/key, sorted rows and invalid-upload rejection.');

@@ -2,6 +2,8 @@
 
 Reviewed all **95 symptoms/signs and 114 diagnoses** against all **19 playable clue/person screens**: **3,971 approval decisions**. The checked-in Excel workbook contains the resulting Yes/No matrix and drives the default build.
 
+The subsequent reference consolidation leaves **94 symptom/sign headings and 107 diagnosis headings**. Related subtype names remain searchable and are listed within those headings. Their prior approvals migrate to the main entry; the original review scope above includes those related diagnoses.
+
 ## Review criteria
 
 - A clue-level Yes means a reasonable description, mechanism or differential for that evidence. It does not mean that every typical feature is present or that the diagnosis is the best explanation for all clues.

@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 4,
+  "version": 5,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -126,15 +126,24 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Weakness",
       "description": "Reduced muscle strength.",
-      "source": "weakness"
-    },
-    {
-      "id": "s-paralysis",
-      "type": "symptom",
-      "category": "Strength and muscle",
-      "term": "Paralysis",
-      "description": "Complete loss of voluntary movement.",
-      "source": "weakness"
+      "source": "weakness",
+      "aliases": [
+        "Paralysis",
+        "Paresis",
+        "Reduced strength",
+        "Muscle weakness"
+      ],
+      "subtypeLabel": "Severity terms",
+      "subtypes": [
+        {
+          "name": "Paresis",
+          "description": "Partial loss of muscle strength."
+        },
+        {
+          "name": "Paralysis",
+          "description": "Complete loss of voluntary strength or movement."
+        }
+      ]
     },
     {
       "id": "s-motor-fatigability",
@@ -142,7 +151,12 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Motor fatigability",
       "description": "Muscle performance worsens with repeated use.",
-      "source": "weakness"
+      "source": "weakness",
+      "aliases": [
+        "Fatigable weakness",
+        "Fatigability",
+        "Use-dependent weakness"
+      ]
     },
     {
       "id": "s-fatigue",
@@ -226,7 +240,10 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Tremor",
       "description": "Rhythmic involuntary shaking.",
-      "source": "movement"
+      "source": "movement",
+      "aliases": [
+        "Rhythmic shaking"
+      ]
     },
     {
       "id": "s-bradykinesia",
@@ -242,7 +259,12 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Hypomimia",
       "description": "Reduced spontaneous facial expression.",
-      "source": "movement"
+      "source": "movement",
+      "aliases": [
+        "Masked facies",
+        "Masklike face",
+        "Reduced facial expression"
+      ]
     },
     {
       "id": "s-micrographia",
@@ -322,7 +344,12 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Impaired fine motor control",
       "description": "Difficulty making small, precise movements.",
-      "source": "exam"
+      "source": "exam",
+      "aliases": [
+        "Hand clumsiness",
+        "Poor dexterity",
+        "Impaired dexterity"
+      ]
     },
     {
       "id": "s-hemiparetic-gait",
@@ -498,7 +525,10 @@ window.NEURO_REFERENCE={
       "category": "Speech and swallowing",
       "term": "Dysarthria",
       "description": "Imprecise speech due to impaired control of speech muscles.",
-      "source": "speech"
+      "source": "speech",
+      "aliases": [
+        "Slurred speech"
+      ]
     },
     {
       "id": "s-aphasia",
@@ -522,7 +552,11 @@ window.NEURO_REFERENCE={
       "category": "Speech and swallowing",
       "term": "Hypophonia",
       "description": "Abnormally quiet speech.",
-      "source": "speech"
+      "source": "speech",
+      "aliases": [
+        "Soft speech",
+        "Quiet speech"
+      ]
     },
     {
       "id": "s-dysphonia",
@@ -570,7 +604,12 @@ window.NEURO_REFERENCE={
       "category": "Vision and cranial nerves",
       "term": "Ptosis",
       "description": "Drooping of the upper eyelid.",
-      "source": "cranial"
+      "source": "cranial",
+      "aliases": [
+        "Droopy eyelid",
+        "Drooping eyelid",
+        "Drooping eyelids"
+      ]
     },
     {
       "id": "s-diplopia",
@@ -894,47 +933,41 @@ window.NEURO_REFERENCE={
       "category": "Stroke and vascular",
       "term": "Ischemic stroke",
       "description": "Brain infarction caused by inadequate arterial blood supply.",
-      "source": "ischemic"
-    },
-    {
-      "id": "d-large-artery-atherosclerotic-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Large-artery atherosclerotic stroke",
-      "description": "Ischemic stroke attributed to disease of a large artery.",
-      "source": "ischemic"
-    },
-    {
-      "id": "d-cardioembolic-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Cardioembolic stroke",
-      "description": "Ischemic stroke caused by an embolus from the heart.",
-      "source": "ischemic"
-    },
-    {
-      "id": "d-lacunar-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Lacunar stroke",
-      "description": "Small deep infarction, usually involving a penetrating artery.",
-      "source": "ischemic"
-    },
-    {
-      "id": "d-watershed-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Watershed stroke",
-      "description": "Infarction at the border between arterial territories.",
-      "source": "ischemic"
-    },
-    {
-      "id": "d-cryptogenic-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Cryptogenic stroke",
-      "description": "Stroke without a clearly established cause after evaluation.",
-      "source": "ischemic"
+      "source": "ischemic",
+      "aliases": [
+        "Large-artery atherosclerotic stroke",
+        "Cardioembolic stroke",
+        "Lacunar stroke",
+        "Watershed stroke",
+        "Cryptogenic stroke",
+        "Ischaemic stroke",
+        "Cerebral infarction",
+        "Ischemic CVA",
+        "Ischaemic CVA"
+      ],
+      "subtypeLabel": "Types and mechanisms",
+      "subtypes": [
+        {
+          "name": "Large-artery atherosclerotic stroke",
+          "description": "Ischemic stroke attributed to disease of a large artery."
+        },
+        {
+          "name": "Cardioembolic stroke",
+          "description": "Ischemic stroke caused by an embolus from the heart."
+        },
+        {
+          "name": "Lacunar stroke",
+          "description": "Small deep infarction, usually involving a penetrating artery."
+        },
+        {
+          "name": "Watershed stroke",
+          "description": "Infarction at the border between arterial territories."
+        },
+        {
+          "name": "Cryptogenic stroke",
+          "description": "Stroke without a clearly established cause after evaluation."
+        }
+      ]
     },
     {
       "id": "d-intracerebral-hemorrhage",
@@ -974,7 +1007,11 @@ window.NEURO_REFERENCE={
       "category": "Stroke and vascular",
       "term": "Transient ischemic attack",
       "description": "Transient focal ischemic symptoms without acute infarction.",
-      "source": "stroke"
+      "source": "stroke",
+      "aliases": [
+        "TIA",
+        "Transient ischaemic attack"
+      ]
     },
     {
       "id": "d-cerebral-venous-thrombosis",
@@ -982,7 +1019,12 @@ window.NEURO_REFERENCE={
       "category": "Stroke and vascular",
       "term": "Cerebral venous thrombosis",
       "description": "Clotting in cerebral veins or dural venous sinuses.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "CVT",
+        "Cerebral venous sinus thrombosis",
+        "CVST"
+      ]
     },
     {
       "id": "d-cervical-artery-dissection",
@@ -1019,6 +1061,12 @@ window.NEURO_REFERENCE={
         "Parkinson's disease",
         "Parkinsons disease",
         "parkinsonism"
+      ],
+      "aliases": [
+        "PD",
+        "Parkinson's disease",
+        "Parkinsons disease",
+        "Parkinsonism"
       ]
     },
     {
@@ -1043,7 +1091,10 @@ window.NEURO_REFERENCE={
       "category": "Movement and degeneration",
       "term": "Progressive supranuclear palsy",
       "description": "A degenerative disorder affecting movement, balance, and eye control.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "PSP"
+      ]
     },
     {
       "id": "d-multiple-system-atrophy",
@@ -1051,7 +1102,10 @@ window.NEURO_REFERENCE={
       "category": "Movement and degeneration",
       "term": "Multiple system atrophy",
       "description": "Degeneration affecting autonomic function and movement.",
-      "source": "dementia"
+      "source": "dementia",
+      "aliases": [
+        "MSA"
+      ]
     },
     {
       "id": "d-corticobasal-syndrome",
@@ -1059,7 +1113,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and degeneration",
       "term": "Corticobasal syndrome",
       "description": "Asymmetric movement and cortical dysfunction with several possible underlying causes.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "CBS",
+        "Corticobasal degeneration"
+      ]
     },
     {
       "id": "d-essential-tremor",
@@ -1067,7 +1125,10 @@ window.NEURO_REFERENCE={
       "category": "Movement and degeneration",
       "term": "Essential tremor",
       "description": "An action tremor disorder, often affecting both hands.",
-      "source": "movement"
+      "source": "movement",
+      "aliases": [
+        "ET"
+      ]
     },
     {
       "id": "d-huntington-disease",
@@ -1089,25 +1150,36 @@ window.NEURO_REFERENCE={
       "id": "d-cerebellar-disorder",
       "type": "disease",
       "category": "Movement and degeneration",
-      "term": "Cerebellar disorder",
-      "description": "A broad diagnostic category involving cerebellar dysfunction.",
-      "source": "cerebellar"
-    },
-    {
-      "id": "d-friedreich-ataxia",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Friedreich ataxia",
-      "description": "An inherited disorder causing progressive ataxia and other neurologic problems.",
-      "source": "cerebellar"
-    },
-    {
-      "id": "d-spinocerebellar-ataxia",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Spinocerebellar ataxia",
-      "description": "A group of inherited progressive ataxia disorders.",
-      "source": "cerebellar"
+      "term": "Cerebellar dysfunction",
+      "description": "Impaired cerebellar function affecting coordination, balance or speech.",
+      "source": "cerebellar",
+      "aliases": [
+        "Friedreich ataxia",
+        "Spinocerebellar ataxia",
+        "Cerebellar disorder",
+        "Cerebellar dysfunction",
+        "Friedreich's ataxia",
+        "Friedreichs ataxia",
+        "Freidreich ataxia",
+        "Freidrechs ataxia",
+        "SCA",
+        "Spinocerebellar degeneration"
+      ],
+      "subtypeLabel": "Related ataxia diagnoses",
+      "subtypes": [
+        {
+          "name": "Friedreich ataxia",
+          "description": "An inherited ataxia that can affect coordination, position sense and peripheral nerves."
+        },
+        {
+          "name": "Spinocerebellar ataxias",
+          "description": "Inherited disorders that progressively affect coordination and balance."
+        },
+        {
+          "name": "Acquired cerebellar dysfunction",
+          "description": "Cerebellar impairment caused by conditions such as a lesion, inflammation, toxins or injury."
+        }
+      ]
     },
     {
       "id": "d-alzheimer-disease",
@@ -1131,7 +1203,11 @@ window.NEURO_REFERENCE={
       "category": "Cognition and behavior",
       "term": "Dementia with Lewy bodies",
       "description": "Dementia often accompanied by fluctuations, hallucinations, and parkinsonism.",
-      "source": "dementia"
+      "source": "dementia",
+      "aliases": [
+        "DLB",
+        "Lewy body dementia"
+      ]
     },
     {
       "id": "d-frontotemporal-dementia",
@@ -1175,6 +1251,35 @@ window.NEURO_REFERENCE={
         "brain metastases",
         "tumor",
         "tumour"
+      ],
+      "subtypeLabel": "Examples",
+      "subtypes": [
+        {
+          "name": "Glioma",
+          "description": "A family of tumors associated with glial cells."
+        },
+        {
+          "name": "Glioblastoma",
+          "description": "An aggressive adult-type diffuse glioma."
+        },
+        {
+          "name": "Meningioma",
+          "description": "A tumor arising from the coverings of the brain or spinal cord."
+        },
+        {
+          "name": "Brain metastasis",
+          "description": "Cancer that has spread to the brain from elsewhere."
+        }
+      ],
+      "aliases": [
+        "Glioma",
+        "Glioblastoma",
+        "Glioblastoma multiforme",
+        "GBM",
+        "Meningioma",
+        "Brain metastasis",
+        "Brain metastases",
+        "Brain tumour"
       ]
     },
     {
@@ -1199,7 +1304,10 @@ window.NEURO_REFERENCE={
       "category": "Brain structure and tumors",
       "term": "Normal-pressure hydrocephalus",
       "description": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "NPH"
+      ]
     },
     {
       "id": "d-idiopathic-intracranial-hypertension",
@@ -1207,7 +1315,10 @@ window.NEURO_REFERENCE={
       "category": "Brain structure and tumors",
       "term": "Idiopathic intracranial hypertension",
       "description": "Raised intracranial pressure without an identified secondary cause.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "IIH"
+      ]
     },
     {
       "id": "d-chronic-subdural-hematoma",
@@ -1247,7 +1358,10 @@ window.NEURO_REFERENCE={
       "category": "Inflammatory and infectious",
       "term": "Multiple sclerosis",
       "description": "An immune-mediated disease affecting myelin and axons in the CNS.",
-      "source": "hopkins"
+      "source": "hopkins",
+      "aliases": [
+        "MS"
+      ]
     },
     {
       "id": "d-neuromyelitis-optica-spectrum-disorder",
@@ -1255,7 +1369,11 @@ window.NEURO_REFERENCE={
       "category": "Inflammatory and infectious",
       "term": "Neuromyelitis optica spectrum disorder",
       "description": "An inflammatory disorder often affecting optic nerves and spinal cord.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "NMOSD",
+        "Neuromyelitis optica"
+      ]
     },
     {
       "id": "d-mog-antibody-associated-disease",
@@ -1263,7 +1381,11 @@ window.NEURO_REFERENCE={
       "category": "Inflammatory and infectious",
       "term": "MOG antibody-associated disease",
       "description": "An inflammatory CNS disorder associated with antibodies to MOG.",
-      "source": "ms"
+      "source": "ms",
+      "aliases": [
+        "MOGAD",
+        "MOG antibody disease"
+      ]
     },
     {
       "id": "d-acute-disseminated-encephalomyelitis",
@@ -1490,7 +1612,11 @@ window.NEURO_REFERENCE={
       "category": "Peripheral nerves",
       "term": "Guillain–Barré syndrome",
       "description": "An acute immune-mediated polyradiculoneuropathy.",
-      "source": "pns"
+      "source": "pns",
+      "aliases": [
+        "GBS",
+        "Guillain Barre syndrome"
+      ]
     },
     {
       "id": "d-chronic-inflammatory-demyelinating-polyneuropathy",
@@ -1498,7 +1624,10 @@ window.NEURO_REFERENCE={
       "category": "Peripheral nerves",
       "term": "Chronic inflammatory demyelinating polyneuropathy",
       "description": "A chronic immune-mediated demyelinating peripheral nerve disorder.",
-      "source": "pns"
+      "source": "pns",
+      "aliases": [
+        "CIDP"
+      ]
     },
     {
       "id": "d-multifocal-motor-neuropathy",
@@ -1506,7 +1635,10 @@ window.NEURO_REFERENCE={
       "category": "Peripheral nerves",
       "term": "Multifocal motor neuropathy",
       "description": "An immune-mediated neuropathy predominantly affecting motor nerves.",
-      "source": "neuromuscular"
+      "source": "neuromuscular",
+      "aliases": [
+        "MMN"
+      ]
     },
     {
       "id": "d-charcot-marie-tooth-disease",
@@ -1514,7 +1646,11 @@ window.NEURO_REFERENCE={
       "category": "Peripheral nerves",
       "term": "Charcot–Marie–Tooth disease",
       "description": "A group of inherited peripheral neuropathies.",
-      "source": "pns"
+      "source": "pns",
+      "aliases": [
+        "CMT",
+        "Charcot Marie Tooth disease"
+      ]
     },
     {
       "id": "d-amyotrophic-lateral-sclerosis",
@@ -1525,6 +1661,12 @@ window.NEURO_REFERENCE={
       "source": "hopkins",
       "searchTerms": [
         "motor neuron disease",
+        "ALS",
+        "Motor neuron disease",
+        "Motor neurone disease",
+        "MND"
+      ],
+      "aliases": [
         "ALS"
       ]
     },
@@ -1534,7 +1676,13 @@ window.NEURO_REFERENCE={
       "category": "Motor neuron and muscle",
       "term": "Spinal muscular atrophy",
       "description": "Inherited motor neuron disorders predominantly causing weakness.",
-      "source": "pns"
+      "source": "pns",
+      "aliases": [],
+      "searchTerms": [
+        "Motor neuron disease",
+        "Motor neurone disease",
+        "MND"
+      ]
     },
     {
       "id": "d-kennedy-disease",
@@ -1542,7 +1690,13 @@ window.NEURO_REFERENCE={
       "category": "Motor neuron and muscle",
       "term": "Kennedy disease",
       "description": "An inherited disorder affecting lower motor neurons and androgen function.",
-      "source": "neuromuscular"
+      "source": "neuromuscular",
+      "aliases": [],
+      "searchTerms": [
+        "Motor neuron disease",
+        "Motor neurone disease",
+        "MND"
+      ]
     },
     {
       "id": "d-myasthenia-gravis",
@@ -1550,7 +1704,11 @@ window.NEURO_REFERENCE={
       "category": "Motor neuron and muscle",
       "term": "Myasthenia gravis",
       "description": "An autoimmune neuromuscular junction disorder causing fatigable weakness.",
-      "source": "neuromuscular"
+      "source": "neuromuscular",
+      "aliases": [
+        "MG",
+        "Myasthenia"
+      ]
     },
     {
       "id": "d-lambert-eaton-myasthenic-syndrome",
@@ -1590,7 +1748,10 @@ window.NEURO_REFERENCE={
       "category": "Motor neuron and muscle",
       "term": "Inclusion body myositis",
       "description": "A progressive muscle disease often affecting finger flexors and knee extensors.",
-      "source": "myositis"
+      "source": "myositis",
+      "aliases": [
+        "IBM"
+      ]
     },
     {
       "id": "d-myotonic-dystrophy",
@@ -1729,7 +1890,10 @@ window.NEURO_REFERENCE={
       "category": "Autonomic, sleep and functional",
       "term": "Functional neurological disorder",
       "description": "Neurologic symptoms associated with altered nervous-system functioning, diagnosed by positive clinical signs.",
-      "source": "ninds"
+      "source": "ninds",
+      "aliases": [
+        "FND"
+      ]
     },
     {
       "id": "d-alcohol-intoxication",
@@ -1844,6 +2008,41 @@ window.NEURO_REFERENCE={
         "Todd paresis",
         "status epilepticus",
         "seizure disorder"
+      ],
+      "subtypeLabel": "Seizure patterns and related terms",
+      "subtypes": [
+        {
+          "name": "Focal seizures",
+          "description": "Seizures that begin in a focal brain network."
+        },
+        {
+          "name": "Generalized seizures",
+          "description": "Seizures involving bilateral brain networks from onset."
+        },
+        {
+          "name": "Status epilepticus",
+          "description": "Prolonged seizure activity or repeated seizures without adequate recovery between them."
+        },
+        {
+          "name": "Postictal neurologic deficit",
+          "description": "Temporary neurologic dysfunction after a seizure, such as Todd paresis."
+        }
+      ],
+      "aliases": [
+        "Seizure",
+        "Seizures",
+        "Seizure disorder",
+        "Focal seizure",
+        "Generalized seizure",
+        "Focal epilepsy",
+        "Generalized epilepsy",
+        "Status epilepticus",
+        "Postictal deficit",
+        "Postictal neurologic deficit",
+        "Todd paralysis",
+        "Todd paresis",
+        "Focal seizures",
+        "Generalized seizures"
       ]
     }
   ],
@@ -1872,11 +2071,6 @@ window.NEURO_REFERENCE={
     "disease:stroke": [
       "d-stroke",
       "d-ischemic-stroke",
-      "d-large-artery-atherosclerotic-stroke",
-      "d-cardioembolic-stroke",
-      "d-lacunar-stroke",
-      "d-watershed-stroke",
-      "d-cryptogenic-stroke",
       "d-hemorrhagic-stroke",
       "d-intracerebral-hemorrhage",
       "d-subarachnoid-hemorrhage",
@@ -2271,7 +2465,15 @@ window.NEURO_REFERENCE={
     "d-glioma": "d-brain-tumor",
     "d-glioblastoma": "d-brain-tumor",
     "d-meningioma": "d-brain-tumor",
-    "d-brain-metastasis": "d-brain-tumor"
+    "d-brain-metastasis": "d-brain-tumor",
+    "d-large-artery-atherosclerotic-stroke": "d-ischemic-stroke",
+    "d-cardioembolic-stroke": "d-ischemic-stroke",
+    "d-lacunar-stroke": "d-ischemic-stroke",
+    "d-watershed-stroke": "d-ischemic-stroke",
+    "d-cryptogenic-stroke": "d-ischemic-stroke",
+    "d-friedreich-ataxia": "d-cerebellar-disorder",
+    "d-spinocerebellar-ataxia": "d-cerebellar-disorder",
+    "s-paralysis": "s-weakness"
   },
   "inputBindings": {
     "disease:seizure": "d-epilepsy",
@@ -2297,7 +2499,84 @@ window.NEURO_REFERENCE={
     "disease:parkinsonism": "d-parkinson-disease",
     "disease:parkinsonianism": "d-parkinson-disease",
     "disease:parkinsons": "d-parkinson-disease",
-    "disease:parkinsoniansyndrome": "d-parkinson-disease"
+    "disease:parkinsoniansyndrome": "d-parkinson-disease",
+    "symptom:paralysis": "s-weakness",
+    "symptom:paresis": "s-weakness",
+    "symptom:reducedstrength": "s-weakness",
+    "symptom:muscleweakness": "s-weakness",
+    "symptom:fatigableweakness": "s-motor-fatigability",
+    "symptom:fatigability": "s-motor-fatigability",
+    "symptom:usedependentweakness": "s-motor-fatigability",
+    "symptom:rhythmicshaking": "s-tremor",
+    "symptom:maskedfacies": "s-hypomimia",
+    "symptom:masklikeface": "s-hypomimia",
+    "symptom:reducedfacialexpression": "s-hypomimia",
+    "symptom:handclumsiness": "s-impaired-fine-motor-control",
+    "symptom:poordexterity": "s-impaired-fine-motor-control",
+    "symptom:impaireddexterity": "s-impaired-fine-motor-control",
+    "symptom:slurredspeech": "s-dysarthria",
+    "symptom:softspeech": "s-hypophonia",
+    "symptom:quietspeech": "s-hypophonia",
+    "symptom:droopyeyelid": "s-ptosis",
+    "symptom:droopingeyelid": "s-ptosis",
+    "symptom:droopingeyelids": "s-ptosis",
+    "disease:largearteryatheroscleroticstroke": "d-ischemic-stroke",
+    "disease:cardioembolicstroke": "d-ischemic-stroke",
+    "disease:lacunarstroke": "d-ischemic-stroke",
+    "disease:watershedstroke": "d-ischemic-stroke",
+    "disease:cryptogenicstroke": "d-ischemic-stroke",
+    "disease:ischaemicstroke": "d-ischemic-stroke",
+    "disease:cerebralinfarction": "d-ischemic-stroke",
+    "disease:ischemiccva": "d-ischemic-stroke",
+    "disease:ischaemiccva": "d-ischemic-stroke",
+    "disease:tia": "d-transient-ischemic-attack",
+    "disease:transientischaemicattack": "d-transient-ischemic-attack",
+    "disease:cvt": "d-cerebral-venous-thrombosis",
+    "disease:cerebralvenoussinusthrombosis": "d-cerebral-venous-thrombosis",
+    "disease:cvst": "d-cerebral-venous-thrombosis",
+    "disease:pd": "d-parkinson-disease",
+    "disease:parkinsonsdisease": "d-parkinson-disease",
+    "disease:psp": "d-progressive-supranuclear-palsy",
+    "disease:msa": "d-multiple-system-atrophy",
+    "disease:cbs": "d-corticobasal-syndrome",
+    "disease:corticobasaldegeneration": "d-corticobasal-syndrome",
+    "disease:et": "d-essential-tremor",
+    "disease:friedreichataxia": "d-cerebellar-disorder",
+    "disease:spinocerebellarataxia": "d-cerebellar-disorder",
+    "disease:cerebellardisorder": "d-cerebellar-disorder",
+    "disease:cerebellardysfunction": "d-cerebellar-disorder",
+    "disease:friedreichsataxia": "d-cerebellar-disorder",
+    "disease:freidreichataxia": "d-cerebellar-disorder",
+    "disease:freidrechsataxia": "d-cerebellar-disorder",
+    "disease:sca": "d-cerebellar-disorder",
+    "disease:spinocerebellardegeneration": "d-cerebellar-disorder",
+    "disease:dlb": "d-dementia-with-lewy-bodies",
+    "disease:lewybodydementia": "d-dementia-with-lewy-bodies",
+    "disease:glioblastomamultiforme": "d-brain-tumor",
+    "disease:gbm": "d-brain-tumor",
+    "disease:nph": "d-normal-pressure-hydrocephalus",
+    "disease:iih": "d-idiopathic-intracranial-hypertension",
+    "disease:ms": "d-multiple-sclerosis",
+    "disease:nmosd": "d-neuromyelitis-optica-spectrum-disorder",
+    "disease:neuromyelitisoptica": "d-neuromyelitis-optica-spectrum-disorder",
+    "disease:mogad": "d-mog-antibody-associated-disease",
+    "disease:mogantibodydisease": "d-mog-antibody-associated-disease",
+    "disease:gbs": "d-guillain-barr-syndrome",
+    "disease:guillainbarresyndrome": "d-guillain-barr-syndrome",
+    "disease:cidp": "d-chronic-inflammatory-demyelinating-polyneuropathy",
+    "disease:mmn": "d-multifocal-motor-neuropathy",
+    "disease:cmt": "d-charcot-marie-tooth-disease",
+    "disease:charcotmarietoothdisease": "d-charcot-marie-tooth-disease",
+    "disease:als": "d-amyotrophic-lateral-sclerosis",
+    "disease:mg": "d-myasthenia-gravis",
+    "disease:myasthenia": "d-myasthenia-gravis",
+    "disease:ibm": "d-inclusion-body-myositis",
+    "disease:fnd": "d-functional-neurological-disorder",
+    "disease:seizuredisorder": "d-epilepsy",
+    "disease:focalseizure": "d-epilepsy",
+    "disease:generalizedseizure": "d-epilepsy",
+    "disease:focalseizures": "d-epilepsy",
+    "disease:generalizedseizures": "d-epilepsy"
   },
   "approvalGroups": [
     [

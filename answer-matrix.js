@@ -17,16 +17,16 @@ window.DDAnswerMatrix=(()=>{
    if(headers[0]!=='Reference ID')throw Error(`${sheetName}: keep the header in row 5 and the Reference ID column.`);
    const columns=new Map();headers.forEach((value,i)=>{const code=String(value).split(' | ')[0];if(screens.some(s=>s.code===code)){if(columns.has(code))throw Error(`${sheetName}: duplicate case column ${code}.`);columns.set(code,i)}});
    if(screens.some(s=>!columns.has(s.code)))throw Error(`${sheetName}: a case column is missing. Download a fresh matrix.`);
-   const seen=new Set();selected[type]=Object.fromEntries(screens.map(s=>[s.code,[]]));
+   const seen=new Set(),rawSeen=new Set();selected[type]=Object.fromEntries(screens.map(s=>[s.code,[]]));
    for(const [index,row] of rows.slice(5).entries()){
     if(row.every(v=>String(v).trim()===''))continue;
-    const id=String(row[0]).trim(),entry=ref.byId.get(id);if(!entry||entry.type!==type||seen.has(id))throw Error(`${sheetName} row ${index+6}: unknown or duplicate Reference ID.`);seen.add(id);
+    const rawId=String(row[0]).trim(),id=ref.canonicalId(rawId),entry=ref.byId.get(id);if(!entry||entry.type!==type||rawSeen.has(rawId))throw Error(`${sheetName} row ${index+6}: unknown or duplicate Reference ID.`);rawSeen.add(rawId);seen.add(id);
     for(const screen of screens){const value=String(row[columns.get(screen.code)]??'').trim().toLowerCase();if(!['yes','no',''].includes(value))throw Error(`${sheetName} row ${index+6}, ${screen.code}: choose Yes or No.`);if(value==='yes')selected[type][screen.code].push(id)}
    }
    if(seen.size!==ref.lists[type].length)throw Error(`${sheetName}: keep every reference row; use No rather than deleting rows.`);
   }
   for(const screen of screens){
-   const symptoms=selected.symptom[screen.code],diagnoses=ref.expandApprovedIds(selected.disease[screen.code]);
+   const symptoms=[...new Set(selected.symptom[screen.code])],diagnoses=ref.expandApprovedIds(selected.disease[screen.code]);
    if(!diagnoses.length)throw Error(`${screen.code}: keep at least one diagnosis possibility.`);
    if(!symptoms.length&&!screen.stage.observationOnly)throw Error(`${screen.code}: keep at least one symptom or sign.`);
    const original=screen.stage.accepted;

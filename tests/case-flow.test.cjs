@@ -170,7 +170,7 @@ console.log('PASS: ordered checkpoints, delayed grading, six suspect debriefs, c
 
 // Tumor consolidation keeps search and saved progress compatible.
 for(const term of ['Glioma','Glioblastoma','Meningioma','Brain metastasis'])assert.equal(c.DDReference.resolve(term,'disease').id,'d-brain-tumor');
-assert.equal(c.DDReference.lists.disease.length,114);
+assert.equal(c.DDReference.lists.disease.length,107);
 const family=c.DDReference.data.approvalGroups[0];
 for(const id of family){
  assert(c.suspectAssessment('C',id).correct);
