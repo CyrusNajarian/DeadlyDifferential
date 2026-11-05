@@ -1,7 +1,7 @@
 DEADLY DIFFERENTIAL — ORDERED PLAYTEST UPDATE
 
 NETLIFY
-Extract this ZIP. Upload the extracted folder containing index.html to your existing Netlify project's Deploys page. index.html must be directly inside the uploaded folder. This package is a normal static site and does not require a ChatGPT account.
+Extract this ZIP. Upload the extracted folder containing index.html to your existing Netlify project's Deploys page. index.html must be directly inside the uploaded folder. The player is a static site and does not require a ChatGPT account. Automatic Google Sheets logging also requires the bundled Netlify function: deploy through Netlify's Git integration so the function is built; static-only drag-and-drop uploads do not include server functions.
 
 PLAYER CHANGES
 - Clue tabs display a check after BOTH symptom and diagnosis requirements are met, or a star after BOTH star milestones are earned. The same applies to suspect/person tabs; suspect-set badges summarize everyone in that set.
