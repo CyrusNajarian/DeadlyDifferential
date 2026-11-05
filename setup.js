@@ -60,7 +60,7 @@ function parseWorkbook(workbook){
   const clues=slides.filter(s=>s.section!=='suspects').sort((a,b)=>a.order-b.order).map(({title,stages})=>({title,stages}));
   if(!clues.length)throw new Error('No usable slide sheets were found.');
   const defaultThreshold=settings['Default unique answers needed to reveal full list']??settings['Default answers required before revealing all possible symptoms and diagnoses']??settings['Default answers required before revealing missed answers'];
-  return {suspectSets,suggestionsAfter:3,title:text(settings['Game title'])||'Deadly Differential',caseLabel:text(settings['Case label']),openingHeadline:text(settings['Opening headline']),openingDescription:text(settings['Opening description']),playerInstructions:text(settings['Player instructions']),revealThreshold:number(defaultThreshold,2),clues};
+  return {caseResolution:JSON.parse(JSON.stringify(window.CASE_RESOLUTION||{})),suspectSets,suggestionsAfter:3,title:text(settings['Game title'])||'Deadly Differential',caseLabel:text(settings['Case label']),openingHeadline:text(settings['Opening headline']),openingDescription:text(settings['Opening description']),playerInstructions:text(settings['Player instructions']),revealThreshold:number(defaultThreshold,2),clues};
 }
 
 fileInput.addEventListener('change',async()=>{

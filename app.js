@@ -26,6 +26,7 @@ function render(){
   $('#welcome').classList.toggle('active',!state.team);$('#game').classList.toggle('active',!!state.team);$('.case-head').hidden=!state.team;$('#exportLogs').hidden=!state.team;
   renderSectionNav();
   if(!state.team)return;
+  if(state.section==='checkpoint')return renderCheckpoint();
   if(state.section==='notes')return renderNotes();
   if(state.section==='suspects')return renderSuspects();
   $('#clueNav').hidden=false;
@@ -47,10 +48,10 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=29');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=29');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=30');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=30');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=29';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=30';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;

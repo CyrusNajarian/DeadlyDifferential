@@ -22,6 +22,7 @@ function syncFlowAwards(stage,progress){
   if(!blockedAll&&!progress.everRevealed[type]&&limit.total>0&&count>=limit.star)progress.stars[type]=true;
   status[type]={count,ready:type==='symptom'&&stage.observationOnly||limit.total>0&&count>=limit.needed,star:type==='symptom'&&stage.observationOnly||!!progress.stars[type],starBlocked:!progress.stars[type]&&(blockedAll||!!progress.everRevealed[type])};
  }
+ if(stage.deferDiagnosis){status.disease.ready=true;status.disease.star=true;if(stage.observationOnly){status.symptom.ready=!!progress.observationReviewed;status.symptom.star=false;}}
  return {symptom:status.symptom,disease:status.disease,complete:status.symptom.ready&&status.disease.ready,star:status.symptom.star&&status.disease.star};
 }
 function revealFlowAnswers(stage,progress,type){
@@ -30,29 +31,31 @@ function revealFlowAnswers(stage,progress,type){
  progress.everRevealed[type]=true;
  progress.revealed[type]=true;
 }
-function suspectStage(person){return {...person,accepted:[...person.symptoms.map(a=>({...a,type:a.type==='observation'?'observation':'symptom'})),...person.diagnoses.map(a=>({...a,type:a.type==='context'?'context':'disease'}))]}}
+function suspectStage(person){return {...person,deferDiagnosis:true,accepted:[...person.symptoms.map(a=>({...a,type:a.type==='observation'?'observation':'symptom'})),...person.diagnoses.map(a=>({...a,type:a.type==='context'?'context':'disease'}))]}}
 function investigationSteps(){
  const steps=[];
  config.clues.forEach((clue,ci)=>clue.stages.forEach((stage,si)=>steps.push({id:`culprit-${ci}-${si}`,section:'culprit',ci,si,stage,title:clue.title,route:`#culprit/${ci}/${si}`})));
+ steps.push({id:'ranked-differential',section:'checkpoint',checkpoint:'ranking',title:'Rank your top five diagnoses',route:'#differential'});
  for(const set of window.SUSPECT_SETS||[window.SUSPECT_CLUES])for(const person of set.people.filter(p=>p.observable!==false))steps.push({id:`suspect-${set.id}-${person.id}`,section:'suspects',setId:set.id,personId:person.id,stage:suspectStage(person),title:person.name,route:`#suspects/${set.id}/${person.id}/symptoms`});
+ steps.push({id:'suspect-assignment',section:'checkpoint',checkpoint:'assignments',title:'Assign all suspect diagnoses',route:'#assignments'},{id:'final-answer',section:'checkpoint',checkpoint:'final',title:'Lock the final answer',route:'#final'});
  return steps;
 }
 function flowRecord(id){state.flow=state.flow||{};return state.flow[id]=state.flow[id]||{}}
-function stepStatus(step){return syncFlowAwards(step.stage,flowRecord(step.id))}
+function stepStatus(step){if(step.section==='checkpoint')return checkpointStatus(step.checkpoint);return syncFlowAwards(step.stage,flowRecord(step.id))}
 function isStepUnlocked(id){if(debugMode)return investigationSteps().some(s=>s.id===id);for(const step of investigationSteps()){if(step.id===id)return true;if(!stepStatus(step).complete)return false}return false}
 function groupStatus(steps){const statuses=steps.map(stepStatus);return {complete:statuses.length>0&&statuses.every(s=>s.complete),star:statuses.length>0&&statuses.every(s=>s.star)}}
 function milestoneBadge(status){return status.star?'<span class="nav-award star" aria-label="Symptom and diagnosis stars earned">★</span>':status.complete?'<span class="nav-award milestone" aria-label="Symptoms and diagnoses completed">✓</span>':''}
-function selectStep(step){state.section=step.section;if(step.section==='culprit'){state.clue=step.ci;state.stage=step.si}else{state.suspectSet=step.setId;state.suspectPerson=step.personId;state.suspectPhase='symptoms'}state.lastInvestigationRoute=step.route;history.replaceState(null,'',step.route)}
+function selectStep(step){state.section=step.section;if(step.section==='culprit'){state.clue=step.ci;state.stage=step.si}else if(step.section==='checkpoint'){state.checkpoint=step.checkpoint}else{state.suspectSet=step.setId;state.suspectPerson=step.personId;state.suspectPhase='symptoms'}state.lastInvestigationRoute=step.route;history.replaceState(null,'',step.route)}
 function navigateStep(id){const step=investigationSteps().find(s=>s.id===id);if(!step||!isStepUnlocked(id))return;selectStep(step);save();render();window.scrollTo({top:0,behavior:'smooth'})}
 function enforceInvestigationRoute(){
  if(['notes','reference'].includes(state.section))return;
- const id=state.section==='suspects'?`suspect-${state.suspectSet}-${state.suspectPerson}`:`culprit-${state.clue}-${state.stage}`;
+ const id=state.section==='checkpoint'?resolutionStepId(state.checkpoint):state.section==='suspects'?`suspect-${state.suspectSet}-${state.suspectPerson}`:`culprit-${state.clue}-${state.stage}`;
  const steps=investigationSteps(),target=steps.find(s=>s.id===id);
  if(!target||!isStepUnlocked(id)){const fallback=steps.find(s=>!stepStatus(s).complete)||steps[steps.length-1];if(fallback)selectStep(fallback);save()}
 }
 function renderFlowNext(step){
  const steps=investigationSteps(),i=steps.findIndex(s=>s.id===step.id),next=steps[i+1],status=stepStatus(step);
- return next?`<div class="flow-next"><p class="small-status">${debugMode?'Debug mode: requirements bypassed.':status.complete?'Requirements complete. You can continue or keep exploring this clue.':'Complete the symptom and diagnosis requirements to continue.'}</p><button type="button" class="primary" id="nextClue" ${debugMode||status.complete?'':'disabled'} data-next-step="${esc(next.id)}">Next: ${esc(next.title)} <span>→</span></button></div>`:`<p class="completion-note">${status.complete?'All clues complete. You can revisit clues or review your notes.':'Complete the symptom and diagnosis requirements to finish.'}</p>`;
+ return next?`<div class="flow-next"><p class="small-status">${debugMode?'Debug mode: requirements bypassed.':status.complete?'Requirements complete. You can continue or keep exploring this clue.':(step.section==='suspects'?'Complete the symptom task to continue.':'Complete the symptom and diagnosis requirements to continue.')}</p><button type="button" class="primary" id="nextClue" ${debugMode||status.complete?'':'disabled'} data-next-step="${esc(next.id)}">Next: ${esc(next.title)} <span>→</span></button></div>`:`<p class="completion-note">${status.complete?'All clues complete. You can revisit clues or review your notes.':'Complete the symptom and diagnosis requirements to finish.'}</p>`;
 }
 function renderNotes(){
  $('#clueNav').hidden=true;
@@ -68,8 +71,8 @@ function mountFlow(root,stage,progress,context){
  const symLimit=flowLimits(stage,answers,'symptom'),diagnosesUnlocked=debugMode||stage.observationOnly||symCount>=symLimit.needed;
  const awards=syncFlowAwards(stage,progress);
  const questions=stage.questions||[],symptomLabel=stage.symptomLabel||'Symptoms',symptomSingular=stage.symptomSingular||'symptom';
- root.innerHTML=['symptom','disease'].map(type=>{
-  if(type==='symptom'&&stage.observationOnly)return `<section class="reasoning-section shared-reasoning"><h3 class="reasoning-heading">1 · Observation</h3><p class="card observation-note">${esc(stage.observationText||'No specific neurologic symptom is established by this evidence.')}</p></section>`;
+ root.innerHTML=(stage.deferDiagnosis?['symptom']:['symptom','disease']).map(type=>{
+  if(type==='symptom'&&stage.observationOnly)return `<section class="reasoning-section shared-reasoning"><h3 class="reasoning-heading">1 · Observation</h3><p class="card observation-note">${esc(stage.observationText||'No specific neurologic symptom is established by this evidence.')}</p>${stage.deferDiagnosis?`<button type="button" class="secondary" data-observation-reviewed>${progress.observationReviewed?'Observation reviewed':'Mark observation reviewed'}</button>`:''}</section>`;
   const title=type==='symptom'?symptomLabel:'Diagnoses',locked=type==='disease'&&!diagnosesUnlocked,limit=flowLimits(stage,answers,type);
   const found=matches.filter(i=>answers[i].type===type),ready=debugMode||found.length>=limit.needed,star=awards[type].star;
   const visible=progress.revealed[type]?answers.map((a,i)=>i).filter(i=>answers[i].type===type):found;
@@ -82,11 +85,12 @@ function mountFlow(root,stage,progress,context){
  function commit(){progress.commit?.();save();}
  const drafts={};
  function rerender(){for(const t of ['symptom','disease'])drafts[t]=root.querySelector('#flow-'+t)?.value||'';commit();render();for(const t of ['symptom','disease']){const el=document.querySelector('#flow-'+t);if(el)el.value=drafts[t]}}
+ root.querySelector('[data-observation-reviewed]')?.addEventListener('click',()=>{progress.observationReviewed=true;rerender()});
  root.querySelectorAll('[data-flow-prompt]').forEach(b=>b.onclick=()=>{const i=b.dataset.flowPrompt;progress.hints[i]=Math.min(2,(progress.hints[i]||0)+1);DDLog?.event('hint',{...context,question:Number(i),level:progress.hints[i]});rerender()});
  root.querySelectorAll('[data-flow-reveal]').forEach(b=>b.onclick=()=>{const t=b.dataset.flowReveal;if(t==='disease'&&!diagnosesUnlocked)return;const n=matches.filter(i=>answers[i].type===t).length;if(!debugMode&&n<flowLimits(stage,answers,t).needed)return;if(progress.revealed[t])progress.revealed[t]=false;else revealFlowAnswers(stage,progress,t);DDLog?.event('review',{...context,category:t,visible:progress.revealed[t]});rerender()});
  root.querySelectorAll('[data-flow-hints]').forEach(b=>b.onclick=()=>{const t=b.dataset.flowHints;if(t==='disease'&&!diagnosesUnlocked)return;progress.answerHints[t]=true;DDLog?.event('answer_hints',{...context,category:t});rerender()});
  for(const type of ['symptom','disease']){
-  if(type==='symptom'&&stage.observationOnly)continue;
+  if(type==='disease'&&stage.deferDiagnosis||type==='symptom'&&stage.observationOnly)continue;
   const input=root.querySelector('#flow-'+type),form=root.querySelector(`[data-flow-form="${type}"]`),list=root.querySelector('#flow-suggestions-'+type);
   let active=-1,options=[];
   const close=()=>{list.hidden=true;active=-1;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant')};
