@@ -8,8 +8,8 @@ PLAYER CHANGES
 - Stars must be earned before revealing answers. Revealing diagnoses permanently blocks any unearned stars for that clue; hiding the list or refreshing does not restore eligibility. Already earned stars remain. Revealing symptoms also closes off an unearned symptom star.
 - Clues must be completed in the displayed order: all culprit stages, then the suspect sets and their people. Later tabs and Next stay locked until the current symptom AND diagnosis requirements are met. Completed clues can be revisited. Direct links cannot bypass this sequence.
 - Notes is always available. Notes save automatically on the player's device for the current attempt, including across page refreshes. Reset clears them with the attempt. Notes text is not sent to Google Sheets; time on the Notes screen is logged.
-- Matching suggestions appear after SIX alphabetic characters (spaces and numbers do not count).
-- Each submission checks one answer. Choosing a suggestion fills the field; Check submits it.
+- Matching suggestions appear after THREE letters and search the fixed reference catalog.
+- Each submission checks one answer. Choosing a suggestion submits that entry immediately; Check submits a typed canonical name.
 - Every clue uses the same symptom-first controls, including the suspect clues.
 - The symptom requirement must be met with correct, distinct answers. Reviewing or requesting hints cannot bypass it.
 - Diagnosis entry, its Check button, and its hint controls stay disabled until then.
@@ -39,3 +39,8 @@ Reception: Dr. Navy is Black, with bilateral ptosis greater on the right. Dr. Ru
 
 FINAL CLUE CORRECTIONS
 The department form is one yearly review completed at one sitting. Neck contusions occur bilaterally, more pronounced on one side. Dr. Navy has clearer right-greater-than-left ptosis.
+
+FIXED REFERENCE CATALOG
+The Reference tab is available before and during play. reference-data.js contains the fixed 94 symptoms/signs and 122 diagnoses supplied in the November 5 playtest ZIP. Player inputs accept canonical catalog names only, with no alias or abbreviation matching. A catalog entry not approved for the clue returns Incorrect; suggestions never mark which unseen entries are approved. Stroke subtypes remain separate. The workbook alias column is ignored and old workbook labels are migrated internally. The included four-message voicemail audio is bundled locally.
+
+The current portraits, revised evidence photos, email clues, debug toggle, compact Check buttons and choking/footsteps/safe/voicemail/medication order are retained. Treatment/history-only clues show an observation and assess only their diagnosis possibilities; they do not invent a symptom outside the fixed catalog. Reading the Reference does not reveal answers or block stars.

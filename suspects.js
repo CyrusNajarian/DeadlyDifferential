@@ -33,6 +33,7 @@ function suspectRoute(){
   if(parts[1]!==state.suspectSet||parts[2]!==state.suspectPerson){state.suspectPhase='symptoms';history.replaceState(null,'',`#suspects/${state.suspectSet}/${state.suspectPerson}/symptoms`)}
  }else if(parts[0]==='culprit'){state.section='culprit';if(parts[1]!==undefined)state.clue=Number(parts[1]);if(parts[2]!==undefined)state.stage=Number(parts[2]);}
  else if(parts[0]==='notes')state.section='notes';
+ else if(parts[0]==='reference')state.section='reference';
  state.section=state.section||'culprit';
  enforceInvestigationRoute();
 }
@@ -52,7 +53,7 @@ function renderSectionNav(){
  suspectRoute();const section=state.section,steps=investigationSteps(),culprit=steps.filter(s=>s.section==='culprit'),suspects=steps.filter(s=>s.section==='suspects');
  const ci=culprit.find(s=>s.ci===state.clue&&s.si===state.stage)||culprit[0];
  const si=suspects.find(s=>s.setId===state.suspectSet&&s.personId===state.suspectPerson)||suspects[0];
- $('#sectionNav').innerHTML=`<a class="section-link ${section==='culprit'?'selected':''}" href="${ci.route}">Culprit clues ${milestoneBadge(groupStatus(culprit))}</a>${suspects.length?(isStepUnlocked(suspects[0].id)?`<a class="section-link ${section==='suspects'?'selected':''}" href="${si.route}">Suspect clues ${milestoneBadge(groupStatus(suspects))}</a>`:'<span class="section-link nav-locked" aria-disabled="true">Suspect clues · Locked</span>'):''}<a class="section-link ${section==='notes'?'selected':''}" href="#notes">Notes</a>`;
+ $('#sectionNav').innerHTML=state.team?`<a class="section-link ${section==='culprit'?'selected':''}" href="${ci.route}">Culprit clues ${milestoneBadge(groupStatus(culprit))}</a>${suspects.length?(isStepUnlocked(suspects[0].id)?`<a class="section-link ${section==='suspects'?'selected':''}" href="${si.route}">Suspect clues ${milestoneBadge(groupStatus(suspects))}</a>`:'<span class="section-link nav-locked" aria-disabled="true">Suspect clues · Locked</span>'):''}<a class="section-link ${section==='notes'?'selected':''}" href="#notes">Notes</a><a class="section-link ${section==='reference'?'selected':''}" href="#reference">Reference</a>`:'<a class="section-link" href="#culprit/0/0">Case briefing</a><a class="section-link selected" href="#reference">Reference</a>';
 }
 function renderSuspects(){
   $('#clueNav').hidden=true;
@@ -97,5 +98,5 @@ function renderSuspects(){
   dialog.onclick=e=>{if(e.target===dialog)dialog.close()};}
 }
 window.addEventListener('hashchange',()=>{
-  suspectRoute();save();if(state.team)render();
+  suspectRoute();save();if(state.team||state.section==='reference')render();else{$('#welcome').classList.add('active');$('#game').classList.remove('active')}
 });

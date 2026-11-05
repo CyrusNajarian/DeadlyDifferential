@@ -23,7 +23,10 @@ function answerCard(a,i,matches){
  return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div>${a.evidenceLabel?`<small class="evidence-label">${esc(a.evidenceLabel)}</small>`:''}<p>${esc(a.info||'Possible interpretation for this clue.')}</p>${links?`<p class="answer-sources">${links}</p>`:''}</article>`;
 }
 function render(){
+  const reference=location.hash.startsWith('#reference')||state.section==='reference';
+  $('#welcome').classList.toggle('active',!state.team&&!reference);$('#game').classList.toggle('active',!!state.team||reference);$('.case-head').hidden=!state.team;$('#exportLogs').hidden=!state.team;
   renderSectionNav();
+  if(state.section==='reference')return renderReference();
   if(state.section==='notes')return renderNotes();
   if(state.section==='suspects')return renderSuspects();
   $('#clueNav').hidden=false;
@@ -45,10 +48,10 @@ function renderCulprit(){
 async function prepareSuspectSection(){
  // An older cached HTML shell can load the newest app.js during a rollout.
  const loadScript=src=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.onload=resolve;script.onerror=()=>reject(new Error('Suspect clues could not load. Please refresh.'));document.body.append(script)});
- if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=27');
- if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=27');
+ if(!window.SUSPECT_CLUES)await loadScript('suspect-data.js?v=28');
+ if(typeof renderSuspects!=='function')await loadScript('suspects.js?v=28');
  if(!$('#sectionNav')){const nav=document.createElement('nav');nav.id='sectionNav';nav.className='section-nav';nav.setAttribute('aria-label','Investigation sections');$('#clueNav').before(nav)}
- if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=27';document.head.append(link)}
+ if(!document.querySelector('link[href^="suspects.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='suspects.css?v=28';document.head.append(link)}
 }
 async function initialize(){
  $('#startButton').disabled=true;
@@ -58,7 +61,7 @@ async function initialize(){
  // Migrate bundled photo filenames retained in device-local previews.
  const legacyPhotos={"reception-1.webp":"reception-1-ptosis.webp","reception-3.webp":"reception-3-ptosis.webp","reception-4.webp":"reception-4-ptosis.webp","reception-5.webp":"reception-5-ptosis.webp","team-room.webp":"team-room-prevention.webp","team-room-head-wrap.webp":"team-room-prevention.webp","interview-notes-v2.webp":"annual-activity-log.webp","annual-review.webp":"annual-activity-log.webp"};
  for(const set of config.suspectSets||[])for(const photo of set.photos||[]){const prefix='assets/suspects/';if(photo.src?.startsWith(prefix)){const updated=legacyPhotos[photo.src.slice(prefix.length)];if(updated)photo.src=prefix+updated;}}
- for(const clue of config.clues||[]){const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title);if(['The Key & Safe','The Neck','The Footsteps'].includes(clue.title)&&published)for(const [i,stage] of clue.stages.entries()){if(!stage.media?.src&&published.stages[i]?.media?.src)stage.media={...published.stages[i].media};}}
+ for(const clue of config.clues||[]){const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title);if(['The Key & Safe','The Neck','The Footsteps','The Voicemail'].includes(clue.title)&&published)for(const [i,stage] of clue.stages.entries()){if(!stage.media?.src&&published.stages[i]?.media?.src)stage.media={...published.stages[i].media};}}
  for(const set of config.suspectSets||[])if(set.id==='team-room'&&set.photos?.[0]?.src==='assets/suspects/team-room-prevention.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='team-room');set.photos=published.photos;set.people=published.people;}
  for(const set of config.suspectSets||[])if(set.id==='interview-notes'&&set.photos?.[0]?.src==='assets/suspects/annual-activity-log.webp'){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id==='interview-notes');set.photos=published.photos;set.people=published.people;set.title=published.title;set.label=published.label;set.description=published.description;}
  if(config.suspectSets){window.SUSPECT_SETS=config.suspectSets;window.SUSPECT_CLUES=config.suspectSets[0];}
@@ -76,13 +79,16 @@ async function initialize(){
  const refreshAnswers=(answers,published)=>{for(const answer of answers||[]){const reference=published?.find(a=>a.id===answer.id&&norm(a.term)===norm(answer.term));if(reference)Object.assign(answer,{aliases:reference.aliases,info:reference.info,sources:reference.sources,evidenceLabel:reference.evidenceLabel});}};
  for(const clue of config.clues)for(const [i,stage] of clue.stages.entries())refreshAnswers(stage.accepted,window.CASE_CONFIG.clues.find(c=>c.title===clue.title)?.stages[i]?.accepted);
  for(const set of config.suspectSets||[])for(const person of set.people){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id===set.id)?.people.find(p=>p.id===person.id);if(published){refreshAnswers(person.symptoms,published.symptoms);refreshAnswers(person.diagnoses,published.diagnoses);if(published.symptomLabel){person.symptomLabel=published.symptomLabel;person.symptomSingular=published.symptomSingular;}}}
+ config.suggestionsAfter=3;
+ DDReference.prepareConfig(config);
  const migration=migrateCaseProgress(state,config);
  if(migration.orderChanged){const match=location.hash.match(/^#culprit\/(\d+)\/(\d+)$/);if(match)history.replaceState(null,'',`#culprit/${migration.indexMap[match[1]]??0}/${match[2]}`);}
  if(migration.changed)save();
  document.title=config.title||'Deadly Differential';$('.brand span:last-child').textContent=(config.title||'Deadly Differential').toUpperCase();$('#caseLabel').textContent=config.caseLabel||'CASE 01 · DEPARTMENT RETREAT';$('#openingHeadline').textContent=config.openingHeadline||'The retreat is over. The investigation begins.';$('#openingDescription').textContent=config.openingDescription||'';$('#playerInstructions').textContent=config.playerInstructions||'';
  $('#exportLogs').onclick=()=>DDLog.download();
- $('#debugButton').onclick=()=>{debugMode=!debugMode;$('#debugButton').setAttribute('aria-pressed',String(debugMode));$('#debugButton').textContent=`Debug mode: ${debugMode?'On':'Off'}`;if(state.team)render();toast(debugMode?'Debug mode on · requirements bypassed':'Debug mode off · requirements restored')};
+ $('#debugButton').onclick=()=>{debugMode=!debugMode;$('#debugButton').setAttribute('aria-pressed',String(debugMode));$('#debugButton').textContent=`Debug mode: ${debugMode?'On':'Off'}`;if(state.team||state.section==='reference')render();toast(debugMode?'Debug mode on · requirements bypassed':'Debug mode off · requirements restored')};
  $('#startButton').disabled=false;$('#startButton').onclick=start;$('#resetButton').onclick=()=>{if(confirm('Reset all saved progress on this phone?')){DDLog.reset();localStorage.removeItem('dd-state-v4');location.reload()}};
  if(state.team){DDLog.start(state.team);$('#welcome').classList.remove('active');$('#game').classList.add('active');$('#teamHeading').textContent=state.team;render();tick=setInterval(timer,1000);timer()}
+ else if(location.hash.startsWith('#reference'))render();
 }
 window.caseReady=initialize();

@@ -38,27 +38,29 @@ function parseWorkbook(workbook){
       if(term){
         const type=text(row[5]).toLowerCase();
         if(!['symptom','disease'].includes(type))throw new Error(`${sheetName}: Answer Type must be symptom or disease for “${term}”.`);
-        if(!accepted.some(item=>item.type===type&&item.term.toLowerCase()===term.toLowerCase()))accepted.push({type,term,aliases:text(row[7]).split(';').map(v=>v.trim()).filter(Boolean),info:text(row[8]),hint:text(row[9])});
+        if(!accepted.some(item=>item.type===type&&item.term.toLowerCase()===term.toLowerCase()))accepted.push({type,term,referenceIds:DDReference.approvedIds({type,term}),info:text(row[8]),hint:text(row[9])});
       }
     }
     if(!questions.length&&!accepted.length)continue;
     if(!accepted.length)throw new Error(`${sheetName}: add at least one accepted symptom or disease.`);
+    const unlisted=DDReference.unknown({accepted});
+    if(unlisted.length)throw new Error(`${sheetName}: use terms from the Reference tab. Unlisted: ${unlisted.join(', ')}.`);
     questions.sort((a,b)=>a.order-b.order);
     const slideThreshold=slideSettings['Answers needed']??slideSettings['Unique answers needed to reveal full list']??slideSettings['Answers required before revealing all possible symptoms and diagnoses']??slideSettings['Answers required before revealing missed answers'];
     const defaultThreshold=settings['Default unique answers needed to reveal full list']??settings['Default answers required before revealing all possible symptoms and diagnoses']??settings['Default answers required before revealing missed answers'];
     const threshold=number(slideThreshold,number(defaultThreshold,2));
     if(!Number.isInteger(threshold)||threshold<1||threshold>accepted.length)throw new Error(`${sheetName}: the reveal threshold must be a whole number from 1 to ${accepted.length}.`);
     const knobs={};
-    for(const [label,key] of [['Symptoms needed','symptomsNeeded'],['Diagnoses needed','diagnosesNeeded'],['Symptom star threshold','symptomStarThreshold'],['Diagnosis star threshold','diagnosisStarThreshold']]){const v=number(extra[label],label.includes('star')?4:2);const count=accepted.filter(a=>a.type===(label.startsWith('Symptom')?'symptom':'disease')).length;if(!Number.isInteger(v)||v<1||v>count)throw new Error(`${sheetName}: ${label} must be 1–${count}.`);knobs[key]=v;}
+    for(const [label,key] of [['Symptoms needed','symptomsNeeded'],['Diagnoses needed','diagnosesNeeded'],['Symptom star threshold','symptomStarThreshold'],['Diagnosis star threshold','diagnosisStarThreshold']]){const v=number(extra[label],label.includes('star')?4:2);const count=DDReference.approved({accepted},label.startsWith('Symptom')?'symptom':'disease').length;if(!Number.isInteger(v)||v<1||v>count)throw new Error(`${sheetName}: ${label} must be 1–${count}.`);knobs[key]=v;}
     if(knobs.symptomStarThreshold<knobs.symptomsNeeded||knobs.diagnosisStarThreshold<knobs.diagnosesNeeded)throw new Error(`${sheetName}: star thresholds must be at least the required counts.`);
     slides.push({order:number(slideSettings['Slide order'],999),title:slideTitle,section:text(extra['Section'])||'culprit',setId:text(extra['Set ID']),personId:text(extra['Person ID']),stages:[{title:stageTitle,revealThreshold:threshold,media,...knobs,questions:questions.map(({label,prompt,hint})=>({label,prompt,hint})),accepted}]});
   }
   const suspectSets=JSON.parse(JSON.stringify(window.SUSPECT_SETS||[]));
-  for(const slide of slides.filter(s=>s.section==='suspects')){const person=suspectSets.find(s=>s.id===slide.setId)?.people.find(p=>p.id===slide.personId);if(!person)throw new Error(`Unknown suspect ${slide.setId}/${slide.personId}. Keep the template Set ID and Person ID.`);const stage=slide.stages[0];Object.assign(person,{symptoms:stage.accepted.filter(a=>a.type==='symptom'),diagnoses:stage.accepted.filter(a=>a.type==='disease'),questions:stage.questions,symptomsNeeded:stage.symptomsNeeded,diagnosesNeeded:stage.diagnosesNeeded,symptomStarThreshold:stage.symptomStarThreshold,diagnosisStarThreshold:stage.diagnosisStarThreshold});}
+  for(const slide of slides.filter(s=>s.section==='suspects')){const person=suspectSets.find(s=>s.id===slide.setId)?.people.find(p=>p.id===slide.personId);if(!person)throw new Error(`Unknown suspect ${slide.setId}/${slide.personId}. Keep the template Set ID and Person ID.`);const stage=slide.stages[0];Object.assign(person,{symptoms:stage.accepted.filter(a=>a.type==='symptom'),diagnoses:stage.accepted.filter(a=>a.type==='disease'),questions:stage.questions,symptomsNeeded:stage.symptomsNeeded,diagnosesNeeded:stage.diagnosesNeeded,symptomStarThreshold:stage.symptomStarThreshold,diagnosisStarThreshold:stage.diagnosisStarThreshold});if(DDReference.approved(stage,'symptom').length){delete person.observationOnly;delete person.observationText;}}
   const clues=slides.filter(s=>s.section!=='suspects').sort((a,b)=>a.order-b.order).map(({title,stages})=>({title,stages}));
   if(!clues.length)throw new Error('No usable slide sheets were found.');
   const defaultThreshold=settings['Default unique answers needed to reveal full list']??settings['Default answers required before revealing all possible symptoms and diagnoses']??settings['Default answers required before revealing missed answers'];
-  return {suspectSets,suggestionsAfter:number(settings['Suggestions after letters'],6),title:text(settings['Game title'])||'Deadly Differential',caseLabel:text(settings['Case label']),openingHeadline:text(settings['Opening headline']),openingDescription:text(settings['Opening description']),playerInstructions:text(settings['Player instructions']),revealThreshold:number(defaultThreshold,2),clues};
+  return {suspectSets,suggestionsAfter:3,title:text(settings['Game title'])||'Deadly Differential',caseLabel:text(settings['Case label']),openingHeadline:text(settings['Opening headline']),openingDescription:text(settings['Opening description']),playerInstructions:text(settings['Player instructions']),revealThreshold:number(defaultThreshold,2),clues};
 }
 
 fileInput.addEventListener('change',async()=>{

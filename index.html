@@ -8,9 +8,10 @@
   <title>Deadly Differential</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="config.css">
-  <link rel="stylesheet" href="enhancements.css?v=27">
-  <link rel="stylesheet" href="suspects.css?v=27">
-<link rel="stylesheet" href="play-flow.css?v=27">
+  <link rel="stylesheet" href="enhancements.css?v=28">
+  <link rel="stylesheet" href="suspects.css?v=28">
+<link rel="stylesheet" href="play-flow.css?v=28">
+  <link rel="stylesheet" href="reference.css?v=28">
 </head>
 <body>
   <header class="topbar">
@@ -30,6 +31,7 @@
       <label class="field-label" for="teamName">TEAM NAME</label>
       <input id="teamName" class="text-input" placeholder="e.g., The Basal Gangsters" maxlength="32" autocomplete="off">
       <button class="primary" id="startButton">Open case file <span>→</span></button>
+      <a href="#reference" class="text-button welcome-reference">Browse the neurology reference</a>
     </section>
 
     <section id="game" class="screen">
@@ -47,13 +49,15 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="case-config.js?v=27"></script>
+  <script src="reference-data.js?v=28"></script>
+  <script src="reference.js?v=28"></script>
+  <script src="case-config.js?v=28"></script>
   <script src="preview-storage.js?v=5"></script>
-  <script src="suspect-data.js?v=27"></script>
-  <script src="suspects.js?v=27"></script>
-  <script src="logger.js?v=27"></script>
-  <script src="play-flow.js?v=27"></script>
-  <script src="progress-migrations.js?v=27"></script>
-  <script src="app.js?v=27"></script>
+  <script src="suspect-data.js?v=28"></script>
+  <script src="suspects.js?v=28"></script>
+  <script src="logger.js?v=28"></script>
+  <script src="play-flow.js?v=28"></script>
+  <script src="progress-migrations.js?v=28"></script>
+  <script src="app.js?v=28"></script>
 </body>
 </html>
