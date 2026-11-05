@@ -1122,17 +1122,17 @@ window.SUSPECT_SETS=[
     "id": "interview-notes",
     "label": "Annual review",
     "title": "The yearly department review",
-    "description": "Dr. Emerald returned this annual activity log. Both columns request the same type of entry for the same review year.",
+    "description": "Dr. Emerald returned this two-page annual activity log, covering every month of the review year. Both columns request the same type of entry.",
     "photos": [
       {
-        "src": "assets/suspects/annual-activity-log.webp",
+        "src": "assets/suspects/annual-activity-log-layered.webp",
         "title": "Annual activity log",
         "people": [
           "B"
         ],
-        "alt": "Dr. Emerald’s annual activity log, with equivalent activity/date entry boxes in both columns.",
-        "width": 1024,
-        "height": 1536
+        "alt": "Two overlapping pages of Dr. Emerald’s annual activity log, covering January through December with all entries in the right-hand columns.",
+        "width": 1536,
+        "height": 1024
       }
     ],
     "people": [
