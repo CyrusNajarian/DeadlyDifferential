@@ -8,10 +8,10 @@
   <title>Deadly Differential</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="config.css">
-  <link rel="stylesheet" href="enhancements.css?v=28">
-  <link rel="stylesheet" href="suspects.css?v=28">
-<link rel="stylesheet" href="play-flow.css?v=28">
-  <link rel="stylesheet" href="reference.css?v=28">
+  <link rel="stylesheet" href="enhancements.css?v=29">
+  <link rel="stylesheet" href="suspects.css?v=29">
+<link rel="stylesheet" href="play-flow.css?v=29">
+  <link rel="stylesheet" href="reference.css?v=29">
 </head>
 <body>
   <header class="topbar">
@@ -31,7 +31,7 @@
       <label class="field-label" for="teamName">TEAM NAME</label>
       <input id="teamName" class="text-input" placeholder="e.g., The Basal Gangsters" maxlength="32" autocomplete="off">
       <button class="primary" id="startButton">Open case file <span>→</span></button>
-      <a href="#reference" class="text-button welcome-reference">Browse the neurology reference</a>
+      <button type="button" class="text-button welcome-reference" data-reference-open>Browse the neurology reference</button>
     </section>
 
     <section id="game" class="screen">
@@ -48,16 +48,21 @@
     </section>
   </main>
 
+  <button type="button" class="reference-tab" data-reference-open aria-controls="referenceDrawer" aria-expanded="false">Reference</button>
+  <dialog id="referenceDrawer" class="reference-drawer" aria-labelledby="referenceDrawerTitle">
+    <header class="reference-drawer-header"><h2 id="referenceDrawerTitle">Neurology reference</h2><button type="button" class="reference-close" id="closeReference" aria-label="Close reference">Close ×</button></header>
+    <div class="reference-drawer-content" id="referencePanelContent"></div>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="reference-data.js?v=28"></script>
-  <script src="reference.js?v=28"></script>
-  <script src="case-config.js?v=28"></script>
+  <script src="reference-data.js?v=29"></script>
+  <script src="reference.js?v=29"></script>
+  <script src="case-config.js?v=29"></script>
   <script src="preview-storage.js?v=5"></script>
-  <script src="suspect-data.js?v=28"></script>
-  <script src="suspects.js?v=28"></script>
-  <script src="logger.js?v=28"></script>
-  <script src="play-flow.js?v=28"></script>
-  <script src="progress-migrations.js?v=28"></script>
-  <script src="app.js?v=28"></script>
+  <script src="suspect-data.js?v=29"></script>
+  <script src="suspects.js?v=29"></script>
+  <script src="logger.js?v=29"></script>
+  <script src="play-flow.js?v=29"></script>
+  <script src="progress-migrations.js?v=29"></script>
+  <script src="app.js?v=29"></script>
 </body>
 </html>

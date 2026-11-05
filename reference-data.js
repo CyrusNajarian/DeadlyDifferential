@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 2,
+  "version": 3,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -109,6 +109,14 @@ window.NEURO_REFERENCE={
     "skin": {
       "title": "Merck Manual Professional — Dermatologic disorders",
       "url": "https://www.merckmanuals.com/professional/dermatologic-disorders"
+    },
+    "tone": {
+      "title": "NIH / NINDS — Neurological terms",
+      "url": "https://www.ninds.nih.gov/health-information/disorders/glossary-neurological-terms"
+    },
+    "seizures": {
+      "title": "NIH / NINDS — Epilepsy and seizures",
+      "url": "https://www.ninds.nih.gov/health-information/disorders/epilepsy-and-seizures"
     }
   },
   "items": [
@@ -190,7 +198,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Hypotonia",
       "description": "Abnormally low muscle tone.",
-      "source": "pns"
+      "source": "pns",
+      "searchTerms": [
+        "decreased tone",
+        "low muscle tone"
+      ]
     },
     {
       "id": "s-myotonia",
@@ -870,7 +882,11 @@ window.NEURO_REFERENCE={
       "category": "Stroke and vascular",
       "term": "Stroke",
       "description": "Brain injury caused by interrupted blood flow or bleeding.",
-      "source": "stroke"
+      "source": "stroke",
+      "searchTerms": [
+        "CVA",
+        "cerebrovascular accident"
+      ]
     },
     {
       "id": "d-ischemic-stroke",
@@ -998,7 +1014,12 @@ window.NEURO_REFERENCE={
       "category": "Movement and degeneration",
       "term": "Parkinson disease",
       "description": "A progressive disorder causing bradykinesia with rigidity or rest tremor.",
-      "source": "movement"
+      "source": "movement",
+      "searchTerms": [
+        "Parkinson's disease",
+        "Parkinsons disease",
+        "parkinsonism"
+      ]
     },
     {
       "id": "d-drug-induced-parkinsonism",
@@ -1142,7 +1163,11 @@ window.NEURO_REFERENCE={
       "category": "Brain structure and tumors",
       "term": "Brain tumor",
       "description": "An abnormal growth of cells within or around the brain.",
-      "source": "tumor"
+      "source": "tumor",
+      "searchTerms": [
+        "brain tumour",
+        "intracranial tumour"
+      ]
     },
     {
       "id": "d-glioma",
@@ -1329,46 +1354,6 @@ window.NEURO_REFERENCE={
       "source": "ninds"
     },
     {
-      "id": "d-epilepsy",
-      "type": "disease",
-      "category": "Seizures and episodic disorders",
-      "term": "Epilepsy",
-      "description": "A disease characterized by an enduring predisposition to epileptic seizures.",
-      "source": "hopkins"
-    },
-    {
-      "id": "d-focal-epilepsy",
-      "type": "disease",
-      "category": "Seizures and episodic disorders",
-      "term": "Focal epilepsy",
-      "description": "Epilepsy involving seizures arising in a focal brain network.",
-      "source": "ninds"
-    },
-    {
-      "id": "d-generalized-epilepsy",
-      "type": "disease",
-      "category": "Seizures and episodic disorders",
-      "term": "Generalized epilepsy",
-      "description": "Epilepsy involving seizures engaging bilateral brain networks from onset.",
-      "source": "ninds"
-    },
-    {
-      "id": "d-status-epilepticus",
-      "type": "disease",
-      "category": "Seizures and episodic disorders",
-      "term": "Status epilepticus",
-      "description": "Prolonged seizure activity or recurrent seizures without adequate recovery.",
-      "source": "ninds"
-    },
-    {
-      "id": "d-postictal-neurologic-deficit",
-      "type": "disease",
-      "category": "Seizures and episodic disorders",
-      "term": "Postictal neurologic deficit",
-      "description": "Temporary neurologic dysfunction following a seizure.",
-      "source": "ninds"
-    },
-    {
       "id": "d-migraine",
       "type": "disease",
       "category": "Headache and facial pain",
@@ -1510,7 +1495,10 @@ window.NEURO_REFERENCE={
       "category": "Peripheral nerves",
       "term": "Common fibular neuropathy",
       "description": "Dysfunction of the common fibular nerve near the knee.",
-      "source": "pns"
+      "source": "pns",
+      "searchTerms": [
+        "peroneal neuropathy"
+      ]
     },
     {
       "id": "d-brachial-plexopathy",
@@ -1558,7 +1546,11 @@ window.NEURO_REFERENCE={
       "category": "Motor neuron and muscle",
       "term": "Amyotrophic lateral sclerosis",
       "description": "A progressive disease affecting upper and lower motor neurons.",
-      "source": "hopkins"
+      "source": "hopkins",
+      "searchTerms": [
+        "motor neuron disease",
+        "ALS"
+      ]
     },
     {
       "id": "d-spinal-muscular-atrophy",
@@ -1630,7 +1622,10 @@ window.NEURO_REFERENCE={
       "category": "Motor neuron and muscle",
       "term": "Myotonic dystrophy",
       "description": "Inherited multisystem disorders featuring myotonia and muscle weakness.",
-      "source": "pns"
+      "source": "pns",
+      "searchTerms": [
+        "myotonia"
+      ]
     },
     {
       "id": "d-oculopharyngeal-muscular-dystrophy",
@@ -1839,6 +1834,41 @@ window.NEURO_REFERENCE={
       "term": "Rosacea",
       "description": "A chronic facial skin disorder often causing redness and flushing.",
       "source": "skin"
+    },
+    {
+      "id": "s-hypertonia",
+      "type": "symptom",
+      "category": "Strength and muscle",
+      "term": "Hypertonia",
+      "description": "Increased muscle tone that makes a limb stiff and harder to move passively.",
+      "source": "tone",
+      "searchTerms": [
+        "increased tone",
+        "high muscle tone"
+      ]
+    },
+    {
+      "id": "d-epilepsy",
+      "type": "disease",
+      "category": "Seizures and episodic disorders",
+      "term": "Epilepsy",
+      "description": "A disorder involving recurrent seizures. Seizures can affect movement or awareness and may be followed by temporary neurologic deficits.",
+      "source": "seizures",
+      "searchTerms": [
+        "seizure",
+        "seizures",
+        "convulsion",
+        "convulsions",
+        "focal epilepsy",
+        "generalized epilepsy",
+        "postictal deficit",
+        "postictal neurologic deficit",
+        "postictal weakness",
+        "Todd paralysis",
+        "Todd paresis",
+        "status epilepticus",
+        "seizure disorder"
+      ]
     }
   ],
   "legacyBindings": {
@@ -1895,7 +1925,7 @@ window.NEURO_REFERENCE={
       "d-myasthenia-gravis"
     ],
     "disease:seizurewithpostictaldeficit": [
-      "d-postictal-neurologic-deficit"
+      "d-epilepsy"
     ],
     "disease:alcoholintoxication": [
       "d-alcohol-intoxication"
@@ -2255,5 +2285,24 @@ window.NEURO_REFERENCE={
       "d-intracranial-mass",
       "d-brain-tumor"
     ]
+  },
+  "retiredIds": {
+    "d-seizure": "d-epilepsy",
+    "d-postictal-neurologic-deficit": "d-epilepsy",
+    "d-focal-epilepsy": "d-epilepsy",
+    "d-generalized-epilepsy": "d-epilepsy",
+    "d-status-epilepticus": "d-epilepsy"
+  },
+  "inputBindings": {
+    "disease:seizure": "d-epilepsy",
+    "disease:seizures": "d-epilepsy",
+    "disease:focalepilepsy": "d-epilepsy",
+    "disease:generalizedepilepsy": "d-epilepsy",
+    "disease:postictaldeficit": "d-epilepsy",
+    "disease:postictalneurologicdeficit": "d-epilepsy",
+    "disease:postictalweakness": "d-epilepsy",
+    "disease:toddparalysis": "d-epilepsy",
+    "disease:toddparesis": "d-epilepsy",
+    "disease:statusepilepticus": "d-epilepsy"
   }
 };

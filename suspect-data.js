@@ -96,8 +96,7 @@ window.SUSPECT_SETS=[
             "info": "No specific neurologic finding is clearly established for Dr. Silver in these photographs.",
             "type": "symptom",
             "hint": "Think about the functional change described by this answer's category.",
-            "id": "symptom-no-clear-neurologic-finding",
-            "evidenceLabel": "Possible interpretation"
+            "id": "symptom-no-clear-neurologic-finding"
           }
         ],
         "diagnoses": [
@@ -120,8 +119,7 @@ window.SUSPECT_SETS=[
             "info": "A diagnosis requires additional evidence beyond these photographs.",
             "type": "disease",
             "hint": "Think about the disease mechanism described by this answer's category.",
-            "id": "disease-insufficient-evidence",
-            "evidenceLabel": "Differential possibility"
+            "id": "disease-insufficient-evidence"
           }
         ],
         "prompts": [
@@ -191,8 +189,7 @@ window.SUSPECT_SETS=[
             "info": "These photographs do not clearly demonstrate a focal neurologic deficit in Dr. Emerald.",
             "type": "symptom",
             "hint": "Think about the functional change described by this answer's category.",
-            "id": "symptom-no-clear-neurologic-finding",
-            "evidenceLabel": "Possible interpretation"
+            "id": "symptom-no-clear-neurologic-finding"
           }
         ],
         "diagnoses": [
@@ -215,8 +212,7 @@ window.SUSPECT_SETS=[
             "info": "Dr. Emerald’s diagnosis needs another clue; age and appearance are insufficient.",
             "type": "disease",
             "hint": "Think about the disease mechanism described by this answer's category.",
-            "id": "disease-insufficient-evidence",
-            "evidenceLabel": "Differential possibility"
+            "id": "disease-insufficient-evidence"
           }
         ],
         "prompts": [
@@ -264,17 +260,10 @@ window.SUSPECT_SETS=[
         "symptoms": [
           {
             "term": "Hypomimia",
-            "info": "Reduced facial animation (hypomimia) is suggested across the photo sequence. A neutral pose alone is nonspecific; it does not establish Parkinson disease.",
+            "info": "Reduced spontaneous facial expression.",
             "type": "symptom",
             "hint": "Compare spontaneous facial movement across different situations.",
             "id": "symptom-reduced-facial-expression",
-            "sources": [
-              {
-                "title": "NINDS · Parkinson’s disease",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/parkinsons-disease"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-hypomimia"
             ],
@@ -284,17 +273,10 @@ window.SUSPECT_SETS=[
         "diagnoses": [
           {
             "term": "Parkinson disease",
-            "info": "A progressive movement disorder. Reduced facial expression can support this possibility, but slowness, rigidity, tremor and history are needed to assess a parkinsonian pattern.",
+            "info": "A progressive disorder causing bradykinesia with rigidity or rest tremor.",
             "type": "disease",
             "hint": "Consider a movement disorder affecting automatic movement and motor control.",
             "id": "disease-parkinson-disease",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Parkinson’s disease",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/parkinsons-disease"
-              }
-            ],
             "referenceIds": [
               "d-parkinson-disease"
             ],
@@ -302,12 +284,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Drug-induced parkinsonism",
-            "info": "Dopamine-blocking medication can reduce spontaneous movement, including facial expression.",
+            "info": "Parkinsonian movement abnormalities caused by medication.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a movement disorder affecting automatic movement and motor control.",
             "id": "disease-drug-induced-parkinsonism",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-drug-induced-parkinsonism"
             ],
@@ -315,18 +296,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Progressive supranuclear palsy",
-            "info": "An atypical parkinsonian disorder. Early balance problems and impaired eye movements help distinguish it from Parkinson disease.",
+            "info": "A degenerative disorder affecting movement, balance, and eye control.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a movement disorder affecting automatic movement and motor control.",
             "id": "disease-progressive-supranuclear-palsy",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Progressive supranuclear palsy",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/progressive-supranuclear-palsy-psp"
-              }
-            ],
             "referenceIds": [
               "d-progressive-supranuclear-palsy"
             ],
@@ -334,12 +308,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Multiple system atrophy",
-            "info": "Degeneration in movement-control systems can produce reduced spontaneous movement.",
+            "info": "Degeneration affecting autonomic function and movement.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a movement disorder affecting automatic movement and motor control.",
             "id": "disease-multiple-system-atrophy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-multiple-system-atrophy"
             ],
@@ -347,18 +320,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Dementia with Lewy bodies",
-            "info": "A disorder combining cognitive and other neurologic features, sometimes including parkinsonism. Reduced expression alone does not demonstrate dementia.",
+            "info": "Dementia often accompanied by fluctuations, hallucinations, and parkinsonism.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a movement disorder affecting automatic movement and motor control.",
             "id": "disease-dementia-with-lewy-bodies",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Lewy body dementia",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/lewy-body-dementia"
-              }
-            ],
             "referenceIds": [
               "d-dementia-with-lewy-bodies"
             ],
@@ -366,12 +332,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Vascular parkinsonism",
-            "info": "Vascular injury to movement-control pathways can produce parkinsonian features.",
+            "info": "Parkinsonism associated with cerebrovascular disease.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a movement disorder affecting automatic movement and motor control.",
             "id": "disease-vascular-parkinsonism",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-vascular-parkinsonism"
             ],
@@ -423,17 +388,10 @@ window.SUSPECT_SETS=[
         "symptoms": [
           {
             "term": "Muscle atrophy",
-            "info": "Reduced muscle bulk is suggested by hand hollowing. A photograph cannot establish a particular motor-neuron, nerve, or root disorder.",
+            "info": "Loss of muscle bulk.",
             "type": "symptom",
             "hint": "Look for changes in muscle bulk rather than just the position of a limb.",
             "id": "symptom-hand-muscle-wasting",
-            "sources": [
-              {
-                "title": "NINDS · Amyotrophic lateral sclerosis",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/NINDS_ALS_Booklet_Digital-508c.pdf"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-muscle-atrophy"
             ],
@@ -443,17 +401,10 @@ window.SUSPECT_SETS=[
         "diagnoses": [
           {
             "term": "Amyotrophic lateral sclerosis",
-            "info": "A progressive motor-neuron disorder that can cause weakness, wasting and speech changes. A single photographed finding cannot establish ALS.",
+            "info": "A progressive disease affecting upper and lower motor neurons.",
             "type": "disease",
             "hint": "Consider disease affecting the neurons that drive muscle contraction.",
             "id": "disease-amyotrophic-lateral-sclerosis",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Amyotrophic lateral sclerosis",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/NINDS_ALS_Booklet_Digital-508c.pdf"
-              }
-            ],
             "referenceIds": [
               "d-amyotrophic-lateral-sclerosis"
             ],
@@ -461,11 +412,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Ulnar neuropathy",
-            "info": "An ulnar nerve disorder can also cause interosseous wasting.",
+            "info": "Dysfunction of the ulnar nerve.",
             "type": "disease",
             "hint": "Consider dysfunction in a peripheral nerve supplying a particular region.",
             "id": "disease-ulnar-neuropathy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-ulnar-neuropathy"
             ],
@@ -473,11 +423,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Cervical radiculopathy",
-            "info": "Lower cervical nerve-root disease can cause hand-muscle wasting.",
+            "info": "Dysfunction of a spinal nerve root in the neck.",
             "type": "disease",
             "hint": "Consider dysfunction where a nerve root leaves the spine.",
             "id": "disease-cervical-radiculopathy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-cervical-radiculopathy"
             ],
@@ -485,18 +434,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Multifocal motor neuropathy",
-            "info": "A motor neuropathy that can mimic motor-neuron disease. Nerve studies and the clinical pattern are needed to separate them.",
+            "info": "An immune-mediated neuropathy predominantly affecting motor nerves.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider dysfunction in a peripheral nerve supplying a particular region.",
             "id": "disease-multifocal-motor-neuropathy",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Peripheral neuropathy",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/peripheral-neuropathy"
-              }
-            ],
             "referenceIds": [
               "d-multifocal-motor-neuropathy"
             ],
@@ -504,12 +446,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Cervical myelopathy",
-            "info": "Disease in the cervical cord can affect pathways and motor cells supplying the hands.",
+            "info": "Spinal cord dysfunction in the neck.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider pathways passing through the spinal cord.",
             "id": "disease-cervical-myelopathy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-cervical-myelopathy"
             ],
@@ -517,12 +458,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Brachial plexopathy",
-            "info": "Injury to the nerve network supplying the arm can reduce hand-muscle function and bulk.",
+            "info": "Dysfunction of the nerve network supplying the arm.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a problem in the nerve network between the neck and arm.",
             "id": "disease-brachial-plexopathy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-brachial-plexopathy"
             ],
@@ -530,12 +470,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Median neuropathy",
-            "info": "Impaired median nerve supply can cause wasting of muscles at the base of the thumb.",
+            "info": "Dysfunction of the median nerve.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider dysfunction in a peripheral nerve supplying a particular region.",
             "id": "disease-median-neuropathy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-median-neuropathy"
             ],
@@ -543,12 +482,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Spinal muscular atrophy",
-            "info": "Loss of lower motor neurons can cause weakness and muscle wasting.",
+            "info": "Inherited motor neuron disorders predominantly causing weakness.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider disease affecting the neurons that drive muscle contraction.",
             "id": "disease-spinal-muscular-atrophy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-spinal-muscular-atrophy"
             ],
@@ -556,12 +494,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Inclusion body myositis",
-            "info": "Muscle disease can cause weakness and wasting, including in muscles used for finger flexion.",
+            "info": "A progressive muscle disease often affecting finger flexors and knee extensors.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider disease affecting muscle tissue itself, sometimes with skin involvement.",
             "id": "disease-inclusion-body-myositis",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-inclusion-body-myositis"
             ],
@@ -569,12 +506,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Kennedy disease",
-            "info": "An inherited motor-neuron disorder can lead to weakness and loss of muscle bulk.",
+            "info": "An inherited disorder affecting lower motor neurons and androgen function.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider disease affecting the neurons that drive muscle contraction.",
             "id": "disease-kennedy-disease",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-kennedy-disease"
             ],
@@ -626,17 +562,10 @@ window.SUSPECT_SETS=[
         "symptoms": [
           {
             "term": "Ptosis",
-            "info": "Drooping of an upper eyelid. The photographs suggest bilateral ptosis, greater on the right; cause requires additional evidence.",
+            "info": "Drooping of the upper eyelid.",
             "type": "symptom",
             "hint": "Compare the height of the upper eyelids.",
             "id": "symptom-ptosis",
-            "sources": [
-              {
-                "title": "NINDS · Myasthenia gravis",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/myasthenia-gravis.pdf"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-ptosis"
             ],
@@ -644,17 +573,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Motor fatigability",
-            "info": "Worsening eyelid position across the sequence suggests fluctuation. Use-related worsening and improvement after rest would more strongly support fatigable weakness.",
+            "info": "Muscle performance worsens with repeated use.",
             "type": "symptom",
             "hint": "Compare the height of the upper eyelids.",
             "id": "symptom-increasing-eyelid-droop-over-time",
-            "sources": [
-              {
-                "title": "NINDS · Myasthenia gravis",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/myasthenia-gravis.pdf"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-motor-fatigability"
             ],
@@ -664,17 +586,10 @@ window.SUSPECT_SETS=[
         "diagnoses": [
           {
             "term": "Myasthenia gravis",
-            "info": "Immune-mediated failure of nerve-to-muscle signaling. Fluctuating weakness, ptosis and worsening with repeated use support this possibility.",
+            "info": "An autoimmune neuromuscular junction disorder causing fatigable weakness.",
             "type": "disease",
             "hint": "Consider impaired transmission between a nerve and its muscle.",
             "id": "disease-myasthenia-gravis",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Myasthenia gravis",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/myasthenia-gravis.pdf"
-              }
-            ],
             "referenceIds": [
               "d-myasthenia-gravis"
             ],
@@ -682,11 +597,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Third nerve palsy",
-            "info": "An oculomotor nerve disorder is another possible cause of ptosis.",
+            "info": "Dysfunction of the oculomotor nerve controlling several eye and eyelid muscles.",
             "type": "disease",
             "hint": "Consider dysfunction in a peripheral nerve supplying a particular region.",
             "id": "disease-third-nerve-palsy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-third-nerve-palsy"
             ],
@@ -694,11 +608,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Horner syndrome",
-            "info": "Interruption of sympathetic input to the eye can cause mild upper-eyelid drooping.",
+            "info": "A sympathetic pathway disorder causing ptosis and a small pupil.",
             "type": "disease",
             "hint": "Consider interruption of the sympathetic pathway supplying the eye.",
             "id": "disease-horner-syndrome",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-horner-syndrome"
             ],
@@ -706,12 +619,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Aponeurotic ptosis",
-            "info": "Stretching or separation of the eyelid support mechanism can cause lid droop.",
+            "info": "Eyelid droop caused by stretching or detachment of the lifting-muscle tendon.",
             "kind": "differential",
             "type": "disease",
             "hint": "Compare the height of the upper eyelids.",
             "id": "disease-aponeurotic-ptosis",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-aponeurotic-ptosis"
             ],
@@ -719,12 +631,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Mechanical ptosis",
-            "info": "Additional weight or a local structural change can lower an eyelid.",
+            "info": "Eyelid droop caused by excess weight or a local physical obstruction.",
             "kind": "differential",
             "type": "disease",
             "hint": "Compare the height of the upper eyelids.",
             "id": "disease-mechanical-ptosis",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-mechanical-ptosis"
             ],
@@ -732,12 +643,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Chronic progressive external ophthalmoplegia",
-            "info": "Disease affecting eye muscles can cause eyelid droop and impaired eye movements.",
+            "info": "A syndrome of slowly progressive ptosis and restricted eye movements.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a muscle disorder that can involve the eyes or other muscle groups.",
             "id": "disease-chronic-progressive-external-ophthalmoplegia",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-chronic-progressive-external-ophthalmoplegia"
             ],
@@ -745,12 +655,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Myotonic dystrophy",
-            "info": "An inherited muscle disorder can affect eyelid position and muscle function.",
+            "info": "Inherited multisystem disorders featuring myotonia and muscle weakness.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a muscle disorder that can involve the eyes or other muscle groups.",
             "id": "disease-myotonic-dystrophy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-myotonic-dystrophy"
             ],
@@ -758,12 +667,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Oculopharyngeal muscular dystrophy",
-            "info": "An inherited muscle disorder can affect the eyelids and swallowing muscles.",
+            "info": "An inherited myopathy affecting eyelids and swallowing muscles.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider a muscle disorder that can involve the eyes or other muscle groups.",
             "id": "disease-oculopharyngeal-muscular-dystrophy",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-oculopharyngeal-muscular-dystrophy"
             ],
@@ -815,17 +723,10 @@ window.SUSPECT_SETS=[
         "symptoms": [
           {
             "term": "Heliotrope rash",
-            "info": "A violet or reddish eruption around the eyelids is suggestive of dermatomyositis, especially with the knuckle findings.",
+            "info": "Purple discoloration around the upper eyelids.",
             "type": "symptom",
             "hint": "Consider the distribution and character of changes in the skin.",
             "id": "symptom-heliotrope-rash",
-            "sources": [
-              {
-                "title": "NINDS · Inflammatory myopathies",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/inflammatory-myopathies"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-heliotrope-rash"
             ],
@@ -833,17 +734,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Gottron papules",
-            "info": "Raised lesions over extensor finger joints are a characteristic dermatomyositis finding. Flat redness alone is a less specific observation.",
+            "info": "Raised reddish-purple lesions over the knuckles.",
             "type": "symptom",
             "hint": "Consider the distribution and character of changes in the skin.",
             "id": "symptom-gottron-papules",
-            "sources": [
-              {
-                "title": "NINDS · Inflammatory myopathies",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/inflammatory-myopathies"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-gottron-papules"
             ],
@@ -853,17 +747,10 @@ window.SUSPECT_SETS=[
         "diagnoses": [
           {
             "term": "Dermatomyositis",
-            "info": "An inflammatory myopathy with characteristic skin findings. The eyelid and knuckle pattern supports it; skin disease can occur without obvious weakness.",
+            "info": "An autoimmune disease with characteristic skin changes, sometimes with muscle involvement.",
             "type": "disease",
             "hint": "Consider disease affecting muscle tissue itself, sometimes with skin involvement.",
             "id": "disease-dermatomyositis",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Inflammatory myopathies",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/inflammatory-myopathies"
-              }
-            ],
             "referenceIds": [
               "d-dermatomyositis"
             ],
@@ -871,12 +758,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Cutaneous lupus erythematosus",
-            "info": "Autoimmune skin inflammation can cause discoloration or a sun-sensitive rash.",
+            "info": "Autoimmune skin disease that may be sensitive to sunlight.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider the distribution and character of changes in the skin.",
             "id": "disease-cutaneous-lupus-erythematosus",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-cutaneous-lupus-erythematosus"
             ],
@@ -884,12 +770,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Contact dermatitis",
-            "info": "Skin inflammation after an exposure can produce redness or other changes involving exposed areas.",
+            "info": "Skin inflammation caused by contact with an irritant or allergen.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider the distribution and character of changes in the skin.",
             "id": "disease-contact-dermatitis",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-contact-dermatitis"
             ],
@@ -897,12 +782,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Psoriasis",
-            "info": "Inflammatory skin changes can produce raised patches over extensor surfaces.",
+            "info": "A chronic inflammatory skin disease causing characteristic plaques.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider the distribution and character of changes in the skin.",
             "id": "disease-psoriasis",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-psoriasis"
             ],
@@ -910,12 +794,11 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Lichen planus",
-            "info": "An inflammatory skin condition can produce raised, violaceous lesions.",
+            "info": "An inflammatory condition affecting skin or mucosal surfaces.",
             "kind": "differential",
             "type": "disease",
             "hint": "Consider the distribution and character of changes in the skin.",
             "id": "disease-lichen-planus",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-lichen-planus"
             ],
@@ -1008,17 +891,10 @@ window.SUSPECT_SETS=[
         "symptoms": [
           {
             "term": "Headache",
-            "info": "A head cold pack and acetaminophen suggest possible headache treatment. They do not establish a headache type or an intracranial mass.",
+            "info": "Pain in the head.",
             "type": "symptom",
             "hint": "Consider discomfort involving the head and the mechanisms that can produce it.",
             "id": "symptom-possible-headaches",
-            "sources": [
-              {
-                "title": "NINDS · Headache",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-07/NINDS_Headache_Booklet_Digital_508c%20%281%29.pdf"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-headache"
             ],
@@ -1028,17 +904,10 @@ window.SUSPECT_SETS=[
         "diagnoses": [
           {
             "term": "Migraine",
-            "info": "A primary headache disorder with characteristic episodes and associated features. A cold pack and pain medicine alone do not establish migraine.",
+            "info": "A recurrent headache disorder often accompanied by sensory sensitivity or nausea.",
             "type": "disease",
             "hint": "Consider discomfort involving the head and the mechanisms that can produce it.",
             "id": "disease-migraine",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Headache",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-07/NINDS_Headache_Booklet_Digital_508c%20%281%29.pdf"
-              }
-            ],
             "referenceIds": [
               "d-migraine"
             ],
@@ -1046,17 +915,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Tension-type headache",
-            "info": "A common primary headache pattern, often pressure-like. The belongings do not establish its defining clinical features.",
+            "info": "A primary headache disorder commonly producing pressing or tightening pain.",
             "type": "disease",
             "hint": "Consider discomfort involving the head and the mechanisms that can produce it.",
             "id": "disease-tension-type-headache",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Headache",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-07/NINDS_Headache_Booklet_Digital_508c%20%281%29.pdf"
-              }
-            ],
             "referenceIds": [
               "d-tension-type-headache"
             ],
@@ -1064,17 +926,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Intracranial mass",
-            "info": "A structural intracranial lesion is one possible cause of headache. Imaging is needed; the cold pack and analgesic cannot distinguish it from a primary headache.",
+            "info": "A space-occupying lesion inside the skull; the cause is unspecified.",
             "type": "disease",
             "hint": "Consider a space-occupying process that can affect nearby neural pathways.",
             "id": "disease-intracranial-mass",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Neurological tests and procedures",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/neurological-diagnostic-tests-and-procedures"
-              }
-            ],
             "referenceIds": [
               "d-intracranial-mass",
               "d-brain-tumor"
@@ -1083,11 +938,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Chronic subdural hematoma",
-            "info": "A persistent collection of blood around the brain can cause head discomfort or altered neurologic function.",
+            "info": "A persistent blood collection beneath the dura.",
             "type": "disease",
             "hint": "Consider injury or its consequences for nearby brain pathways.",
             "id": "disease-chronic-subdural-hematoma",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-chronic-subdural-hematoma"
             ],
@@ -1155,22 +1009,20 @@ window.SUSPECT_SETS=[
               "aspirin 81 mg",
               "atorvastatin 80 mg"
             ],
-            "info": "Aspirin and atorvastatin are visible in a pouch labeled Dr. Emerald. These medicines can be used for vascular prevention; they do not establish a prior stroke or a specific neurologic deficit.",
+            "info": "Dr. Emerald’s pouch contains aspirin and atorvastatin.",
             "type": "observation",
             "hint": "Read the two medication labels and consider their shared use.",
             "id": "symptom-antiplatelet-and-statin-use",
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": []
           }
         ],
         "diagnoses": [
           {
             "term": "Ischemic stroke",
-            "info": "Antiplatelet therapy and intensive lipid lowering can be used after an ischemic stroke. The photograph alone cannot confirm this history.",
+            "info": "Brain infarction caused by inadequate arterial blood supply.",
             "hint": "Consider a previous vascular injury to the brain.",
             "type": "disease",
             "id": "disease-prior-ischemic-stroke",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-ischemic-stroke"
             ],
@@ -1178,17 +1030,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Transient ischemic attack",
-            "info": "A transient episode of focal neurologic dysfunction. It does not explain a lasting deficit; resolution and timing must be established.",
+            "info": "Transient focal ischemic symptoms without acute infarction.",
             "hint": "Consider transient symptoms caused by reduced brain blood flow.",
             "type": "disease",
             "id": "disease-transient-ischemic-attack",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Stroke overview",
-                "url": "https://www.ninds.nih.gov/health-information/stroke/stroke-overview"
-              }
-            ],
             "referenceIds": [
               "d-transient-ischemic-attack"
             ],
@@ -1211,7 +1056,6 @@ window.SUSPECT_SETS=[
             "hint": "Consider another organ affected by atherosclerotic vascular disease.",
             "type": "context",
             "id": "disease-coronary-artery-disease",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": []
           }
         ],
@@ -1252,7 +1096,7 @@ window.SUSPECT_SETS=[
         "symptomLabel": "Observations",
         "symptomSingular": "observation",
         "observationOnly": true,
-        "observationText": "Aspirin and atorvastatin are visible in a pouch labeled Dr. Emerald. These medicines can be used for vascular prevention; they do not establish a prior stroke or a specific neurologic deficit."
+        "observationText": "Dr. Emerald’s pouch contains aspirin and atorvastatin."
       }
     ],
     "sources": [
@@ -1302,17 +1146,10 @@ window.SUSPECT_SETS=[
         "symptoms": [
           {
             "term": "Hemispatial neglect",
-            "info": "The left side of the annual activity log is underused despite equivalent entry boxes. This suggests spatial inattention, not simply weakness or inability to see.",
+            "info": "Reduced attention to one side of space or the body.",
             "type": "symptom",
             "hint": "Consider whether attention is distributed equally across both sides of space.",
             "id": "symptom-left-sided-spatial-neglect",
-            "sources": [
-              {
-                "title": "NINDS · Stroke overview",
-                "url": "https://www.ninds.nih.gov/health-information/stroke/stroke-overview"
-              }
-            ],
-            "evidenceLabel": "Possible interpretation",
             "referenceIds": [
               "s-hemispatial-neglect"
             ],
@@ -1322,17 +1159,10 @@ window.SUSPECT_SETS=[
         "diagnoses": [
           {
             "term": "Stroke",
-            "info": "A vascular brain injury. Persistent focal deficits may follow a prior stroke; abrupt onset helps distinguish it from a slowly progressive process.",
+            "info": "Brain injury caused by interrupted blood flow or bleeding.",
             "type": "disease",
             "hint": "Consider a vascular event that interrupts or damages a region of brain tissue.",
             "id": "disease-stroke",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Stroke overview",
-                "url": "https://www.ninds.nih.gov/health-information/stroke/stroke-overview"
-              }
-            ],
             "referenceIds": [
               "d-stroke",
               "d-ischemic-stroke",
@@ -1350,17 +1180,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Intracranial mass",
-            "info": "A right-sided cerebral lesion can affect attention to left space. Imaging is required to establish a mass.",
+            "info": "A space-occupying lesion inside the skull; the cause is unspecified.",
             "type": "disease",
             "hint": "Consider a space-occupying process that can affect nearby neural pathways.",
             "id": "disease-right-hemisphere-mass-lesion",
-            "evidenceLabel": "Differential possibility",
-            "sources": [
-              {
-                "title": "NINDS · Neurological tests and procedures",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/neurological-diagnostic-tests-and-procedures"
-              }
-            ],
             "referenceIds": [
               "d-intracranial-mass",
               "d-brain-tumor"
@@ -1369,11 +1192,10 @@ window.SUSPECT_SETS=[
           },
           {
             "term": "Traumatic brain injury",
-            "info": "A right-sided brain injury is another possible cause of spatial inattention.",
+            "info": "Brain dysfunction or damage caused by external force.",
             "type": "disease",
             "hint": "Consider whether discomfort changes how a movement is performed.",
             "id": "disease-traumatic-brain-injury",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-traumatic-brain-injury"
             ],
@@ -1499,16 +1321,9 @@ window.SUSPECT_SETS=[
               "procedure and scan",
               "no symptom established"
             ],
-            "info": "A scan and planned sampling suggest investigation, not a demonstrated neurologic symptom. The site and diagnosis are not explicitly stated.",
+            "info": "Dr. Silver mentions a navigation scan, a procedure, and pending sample results.",
             "type": "observation",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
-            "sources": [
-              {
-                "title": "NINDS · Further reading",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/neurological-diagnostic-tests-and-procedures"
-              }
-            ],
             "referenceIds": []
           }
         ],
@@ -1516,10 +1331,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-brain-tumor",
             "term": "Brain tumor",
-            "info": "A mass is one possible reason for image-guided sampling; neither tumor type nor malignancy is established.",
+            "info": "An abnormal growth of cells within or around the brain.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-brain-tumor"
             ],
@@ -1535,16 +1349,14 @@ window.SUSPECT_SETS=[
             "info": "Selected inflammatory lesions may require tissue diagnosis. The procedural reference alone cannot distinguish them from a tumor.",
             "type": "context",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": []
           },
           {
             "id": "disease-brain-infection",
             "term": "Brain abscess",
-            "info": "Infection can sometimes prompt sampling. The email does not provide clinical evidence confirming infection.",
+            "info": "A localized collection of infection within the brain.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-brain-abscess",
               "d-infectious-encephalitis"
@@ -1585,7 +1397,7 @@ window.SUSPECT_SETS=[
         "symptomSingular": "finding",
         "emailId": "silver-cover",
         "observationOnly": true,
-        "observationText": "A scan and planned sampling suggest investigation, not a demonstrated neurologic symptom. The site and diagnosis are not explicitly stated."
+        "observationText": "Dr. Silver mentions a navigation scan, a procedure, and pending sample results."
       },
       {
         "id": "B",
@@ -1605,10 +1417,9 @@ window.SUSPECT_SETS=[
               "recovery after admission",
               "acute illness with recovery"
             ],
-            "info": "Emergency admission followed by a phased return suggests an acute event with recovery. The email does not name its cause.",
+            "info": "Dr. Emerald mentions an emergency admission and a phased return to work.",
             "type": "observation",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
             "referenceIds": []
           }
         ],
@@ -1616,10 +1427,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-stroke",
             "term": "Stroke",
-            "info": "An abrupt acquired deficit followed by recovery can fit a stroke history, but this message alone does not confirm it.",
+            "info": "Brain injury caused by interrupted blood flow or bleeding.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-stroke",
               "d-ischemic-stroke",
@@ -1638,10 +1448,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-acquired-brain-injury",
             "term": "Traumatic brain injury",
-            "info": "Other acquired neurologic injuries can also require admission and a graded return; a trauma history would be needed.",
+            "info": "Brain dysfunction or damage caused by external force.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-traumatic-brain-injury"
             ],
@@ -1681,7 +1490,7 @@ window.SUSPECT_SETS=[
         "symptomSingular": "finding",
         "emailId": "emerald-review",
         "observationOnly": true,
-        "observationText": "Emergency admission followed by a phased return suggests an acute event with recovery. The email does not name its cause."
+        "observationText": "Dr. Emerald mentions an emergency admission and a phased return to work."
       },
       {
         "id": "C",
@@ -1694,16 +1503,9 @@ window.SUSPECT_SETS=[
           {
             "id": "symptom-possible-action-tremor",
             "term": "Tremor",
-            "info": "Holding a camera is an active posture. The message suggests possible action-related instability, not a documented resting tremor.",
+            "info": "Rhythmic involuntary shaking.",
             "type": "symptom",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
-            "sources": [
-              {
-                "title": "NINDS · Further reading",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/Tremor.pdf"
-              }
-            ],
             "referenceIds": [
               "s-tremor"
             ],
@@ -1714,10 +1516,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-essential-tremor",
             "term": "Essential tremor",
-            "info": "Action tremor is compatible with essential tremor, but camera shake alone is insufficient.",
+            "info": "An action tremor disorder, often affecting both hands.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-essential-tremor"
             ],
@@ -1726,10 +1527,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-parkinson-disease",
             "term": "Parkinson disease",
-            "info": "Parkinsonism remains a possible context when other findings fit; this email does not demonstrate resting tremor or bradykinesia.",
+            "info": "A progressive disorder causing bradykinesia with rigidity or rest tremor.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-parkinson-disease"
             ],
@@ -1746,7 +1546,6 @@ window.SUSPECT_SETS=[
             "info": "Stress, stimulants or fatigue can accentuate normal physiologic tremor; history is needed.",
             "type": "context",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": []
           }
         ],
@@ -1794,10 +1593,9 @@ window.SUSPECT_SETS=[
           {
             "id": "symptom-possible-loss-of-muscle-bulk",
             "term": "Muscle atrophy",
-            "info": "Looser clothing suggests reduced body bulk but does not establish muscle atrophy or its cause.",
+            "info": "Loss of muscle bulk.",
             "type": "symptom",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
             "referenceIds": [
               "s-muscle-atrophy"
             ],
@@ -1806,10 +1604,9 @@ window.SUSPECT_SETS=[
           {
             "id": "symptom-hand-clumsiness",
             "term": "Impaired fine motor control",
-            "info": "Dropping a key suggests hand difficulty; strength, sensation and coordination remain unmeasured.",
+            "info": "Difficulty making small, precise movements.",
             "type": "symptom",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
             "referenceIds": [
               "s-impaired-fine-motor-control"
             ],
@@ -1820,10 +1617,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-amyotrophic-lateral-sclerosis",
             "term": "Amyotrophic lateral sclerosis",
-            "info": "Progressive weakness and muscle wasting can occur in ALS, but these emails do not establish either the diagnosis or an examination pattern.",
+            "info": "A progressive disease affecting upper and lower motor neurons.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-amyotrophic-lateral-sclerosis"
             ],
@@ -1832,10 +1628,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-peripheral-neuropathy",
             "term": "Peripheral neuropathy",
-            "info": "Peripheral nerve disease can impair hand function; distribution and sensory findings help distinguish it.",
+            "info": "A broad category of disorders affecting peripheral nerves.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-peripheral-neuropathy"
             ],
@@ -1844,10 +1639,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-cervical-myelopathy",
             "term": "Cervical myelopathy",
-            "info": "Spinal cord disease can cause hand clumsiness; examination and imaging are needed.",
+            "info": "Spinal cord dysfunction in the neck.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-cervical-myelopathy"
             ],
@@ -1898,16 +1692,9 @@ window.SUSPECT_SETS=[
           {
             "id": "symptom-fatigable-limb-weakness",
             "term": "Motor fatigability",
-            "info": "Declining performance with repeated effort and improvement after a break suggest fatigable weakness. This differs from general tiredness.",
+            "info": "Muscle performance worsens with repeated use.",
             "type": "symptom",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
-            "sources": [
-              {
-                "title": "NINDS · Further reading",
-                "url": "https://www.ninds.nih.gov/sites/default/files/2025-05/myasthenia-gravis.pdf"
-              }
-            ],
             "referenceIds": [
               "s-motor-fatigability"
             ],
@@ -1918,10 +1705,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-myasthenia-gravis",
             "term": "Myasthenia gravis",
-            "info": "Use-related weakness with recovery after rest supports this possibility; clinical assessment is still required.",
+            "info": "An autoimmune neuromuscular junction disorder causing fatigable weakness.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-myasthenia-gravis"
             ],
@@ -1972,16 +1758,9 @@ window.SUSPECT_SETS=[
           {
             "id": "symptom-photosensitivity",
             "term": "Cutaneous photosensitivity",
-            "info": "The message describes skin symptoms aggravated by sun exposure. Several inflammatory or medication-related conditions can do this.",
+            "info": "An abnormal skin reaction to sunlight.",
             "type": "symptom",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Reported observation",
-            "sources": [
-              {
-                "title": "NINDS · Further reading",
-                "url": "https://www.ninds.nih.gov/health-information/disorders/inflammatory-myopathies"
-              }
-            ],
             "referenceIds": [
               "s-cutaneous-photosensitivity"
             ],
@@ -1992,10 +1771,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-dermatomyositis",
             "term": "Dermatomyositis",
-            "info": "Sun-aggravated skin disease can fit dermatomyositis, particularly with the separate eyelid and knuckle clues.",
+            "info": "An autoimmune disease with characteristic skin changes, sometimes with muscle involvement.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-dermatomyositis"
             ],
@@ -2004,10 +1782,9 @@ window.SUSPECT_SETS=[
           {
             "id": "disease-cutaneous-lupus-erythematosus",
             "term": "Cutaneous lupus erythematosus",
-            "info": "Lupus is another possible cause of sun-sensitive skin disease; the email does not distinguish it.",
+            "info": "Autoimmune skin disease that may be sensitive to sunlight.",
             "type": "disease",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": [
               "d-cutaneous-lupus-erythematosus"
             ],
@@ -2023,7 +1800,6 @@ window.SUSPECT_SETS=[
             "info": "A medication-related reaction is another possibility if a relevant exposure is established.",
             "type": "context",
             "hint": "Consider the reported observation and its possible explanations.",
-            "evidenceLabel": "Differential possibility",
             "referenceIds": []
           }
         ],
@@ -2061,6 +1837,90 @@ window.SUSPECT_SETS=[
         "emailId": "rust-photo"
       }
     ]
+  },
+  {
+    "id": "conference-recording",
+    "label": "Conference recording",
+    "title": "Dr. Charcoal’s conference recording",
+    "description": "A short recording made by Dr. Charcoal during conference preparations. He is behind the camera.",
+    "photos": [],
+    "video": {
+      "src": "https://resource2.heygen.ai/videos/4ef0e4a638ce4d88a780ad9cc251bd23/4ef0e4a638ce4d88a780ad9cc251bd23/01a1ad1e-67d1-72f8-8b50-7d4bb1307b38.mp4",
+      "caption": "Recorded by Dr. Charcoal · conference preparations"
+    },
+    "people": [
+      {
+        "id": "C",
+        "name": "Dr. Charcoal",
+        "color": "#a1aab3",
+        "observable": true,
+        "look": "Charcoal suit · green tie · glasses",
+        "cover": 4,
+        "symptoms": [
+          {
+            "id": "symptom-filmed-camera-tremor",
+            "term": "Tremor",
+            "type": "symptom",
+            "referenceIds": [
+              "s-tremor"
+            ],
+            "info": "Rhythmic involuntary shaking affecting the hands or other body parts.",
+            "hint": "Watch the rapid movement of the whole frame while the recorder holds the phone."
+          }
+        ],
+        "diagnoses": [
+          {
+            "id": "disease-d-parkinson-disease",
+            "term": "Parkinson disease",
+            "type": "disease",
+            "referenceIds": [
+              "d-parkinson-disease"
+            ],
+            "info": "A progressive movement disorder involving slowness, rigidity, or tremor.",
+            "hint": "Consider possible tremor syndromes without treating camera shake as diagnostic."
+          },
+          {
+            "id": "disease-d-essential-tremor",
+            "term": "Essential tremor",
+            "type": "disease",
+            "referenceIds": [
+              "d-essential-tremor"
+            ],
+            "info": "A tremor disorder commonly affecting the hands during posture or movement.",
+            "hint": "Consider possible tremor syndromes without treating camera shake as diagnostic."
+          }
+        ],
+        "prompts": [
+          "Compare Dr. Charcoal’s expression across the evening. What stays the same?",
+          "Which neurologic disorders could account for this pattern?"
+        ],
+        "hints": [
+          "Look at spontaneous movement of the face in different situations.",
+          "Consider disorders that reduce the amount of spontaneous movement."
+        ],
+        "symptomsNeeded": 1,
+        "diagnosesNeeded": 1,
+        "symptomStarThreshold": 1,
+        "diagnosisStarThreshold": 2,
+        "questions": [
+          {
+            "label": "Notice the finding",
+            "prompt": "What do you notice about the movement of the whole recording?",
+            "hint": "Follow the entire frame rather than the colleague’s hands."
+          },
+          {
+            "label": "Describe the symptom",
+            "prompt": "What could make a handheld recording oscillate rhythmically?",
+            "hint": "Consider the recorder’s hand control, while allowing ordinary camera instability."
+          },
+          {
+            "label": "Build the differential",
+            "prompt": "Which conditions could explain an unsteady handheld recording, and what would you need to distinguish them?",
+            "hint": "Compare shaking during movement with shaking at rest."
+          }
+        ]
+      }
+    ]
   }
 ];
-window.SUSPECT_CLUES=window.SUSPECT_SETS.find(set=>set.id==='reception');
+window.SUSPECT_CLUES=window.SUSPECT_SETS.find(s=>s.id==='reception');
