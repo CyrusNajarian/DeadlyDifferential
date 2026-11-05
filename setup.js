@@ -7,16 +7,21 @@ const escapeScript=s=>s.replace(/<\/script/gi,'<\\/script');
 
 function parseWorkbook(workbook){return window.DDAnswerMatrix.parse(workbook,XLSX)}
 
-fileInput.addEventListener('change',async()=>{
-  validation.className='validation';actions.hidden=true;parsedConfig=null;
-  try{
-    const file=fileInput.files[0];if(!file)return;
-    const workbook=XLSX.read(await file.arrayBuffer(),{type:'array'});
-    parsedConfig=parseWorkbook(workbook);
-    const stages=parsedConfig.clues.reduce((n,c)=>n+c.stages.length,0),answers=parsedConfig.clues.reduce((n,c)=>n+c.stages.reduce((m,s)=>m+s.accepted.length,0),0);
-    validation.classList.add('success');validation.textContent=`Loaded ${parsedConfig.clues.length} slides, ${stages} stages, and ${answers} accepted answers.`;actions.hidden=false;renderMediaSetup();
-  }catch(error){validation.classList.add('error');validation.textContent=error.message||'The workbook could not be read.'}
-});
+let workbookRequest=0;
+async function loadWorkbook(read,label){
+ const request=++workbookRequest;validation.className='validation';validation.textContent='Loading '+label+'…';actions.hidden=true;parsedConfig=null;
+ try{
+  const bytes=await read();if(request!==workbookRequest)return;
+  parsedConfig=parseWorkbook(XLSX.read(bytes,{type:'array'}));
+  validation.classList.add('success');validation.textContent='Loaded '+label+' · default case approvals are ready to preview.';actions.hidden=false;renderMediaSetup();
+ }catch(error){if(request!==workbookRequest)return;validation.classList.add('error');validation.textContent=error.message||'The workbook could not be read.'}
+}
+fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(file)void loadWorkbook(()=>file.arrayBuffer(),file.name)});
+async function loadDefaultWorkbook(){
+ await loadWorkbook(async()=>{const response=await fetch('Deadly_Differential_Answer_Matrix.xlsx',{cache:'no-store'});if(!response.ok)throw Error('The default workbook could not be loaded. Choose a workbook or retry.');return response.arrayBuffer()},'the repository workbook');
+}
+document.querySelector('#loadDefaultWorkbook').onclick=()=>void loadDefaultWorkbook();
+void loadDefaultWorkbook();
 function renderMediaSetup(){
  const target=document.querySelector('#mediaSetup');target.replaceChildren();
  parsedConfig.clues.forEach((clue,i)=>{

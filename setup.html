@@ -15,17 +15,18 @@
     <section class="setup-hero">
       <span class="eyebrow">ORGANIZER ONLY</span>
       <h1>Build the case<br><em>from Excel.</em></h1>
-      <p class="lede">Edit the Yes/No answer matrix, upload it here, and generate the configuration file for the player website.</p>
+      <p class="lede">The repository answer matrix loads by default. Preview it here, or upload an edited copy.</p>
     </section>
     <section class="upload-card card">
       <div class="setup-step"><b>1</b><div><h2>Download the answer matrix</h2><p>Every symptom and diagnosis has its own row. Change Yes/No cells to control which clue or person accepts an answer. Keep Reference IDs, case columns and the row 5 headers.</p></div></div>
       <a class="secondary button-link" href="Deadly_Differential_Answer_Matrix.xlsx" download>Download Excel answer matrix</a>
+      <button type="button" class="secondary" id="loadDefaultWorkbook">Reload repository workbook</button>
       <div class="setup-step"><b>2</b><div><h2>Upload the completed workbook</h2><p>Your workbook is processed locally in this browser and is not sent anywhere.</p></div></div>
       <label class="file-drop" for="workbookFile"><span>Choose Excel workbook</span><small>.xlsx or .xls</small></label>
       <input id="workbookFile" type="file" accept=".xlsx,.xls" hidden>
       <div id="validation" class="validation" aria-live="polite"></div>
       <div id="actions" hidden>
-        <div class="setup-step"><b>3</b><div><h2>Add picture or audio evidence</h2><p>Use the media fields from Excel or choose a file for each slide below. Uploaded files are embedded in your downloaded configuration. Use public URLs for large recordings.</p></div></div>
+        <div class="setup-step"><b>3</b><div><h2>Add picture or audio evidence</h2><p>Keep the default evidence or choose a replacement file for each clue below. Uploaded files are embedded in your downloaded configuration. Use public URLs for large recordings.</p></div></div>
         <div id="mediaSetup"></div>
         <div class="setup-step"><b>4</b><div><h2>Use the case</h2><p>Preview on this device, or download the configuration for publishing. Previewing an upload does not change the shared player website.</p></div></div>
         <button class="primary" id="previewButton">Preview player experience <span>→</span></button>
@@ -35,11 +36,11 @@
   </main>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="preview-storage.js?v=5"></script>
-  <script src="case-config.js?v=34"></script>
-  <script src="answer-matrix.js?v=34"></script>
-  <script src="reference-data.js?v=34"></script>
-  <script src="reference.js?v=34"></script>
-  <script src="case-resolution-data.js?v=34"></script>
-  <script src="setup.js?v=34"></script>
+  <script src="case-config.js?v=35"></script>
+  <script src="answer-matrix.js?v=35"></script>
+  <script src="reference-data.js?v=35"></script>
+  <script src="reference.js?v=35"></script>
+  <script src="case-resolution-data.js?v=35"></script>
+  <script src="setup.js?v=35"></script>
 </body>
 </html>

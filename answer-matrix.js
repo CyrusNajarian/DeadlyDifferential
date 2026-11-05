@@ -1,4 +1,4 @@
-/* Shared Excel export/import schema. case-config.js is the only case-data source. */
+/* Shared Excel export/import schema. The checked-in workbook supplies approvals; case-config.js supplies clue content. */
 window.DDAnswerMatrix=(()=>{
  const prefixes={'reception':'R','team-room':'T','interview-notes':'Y','emails':'E','conference-recording':'V'};
  function cases(config){

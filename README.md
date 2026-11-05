@@ -14,9 +14,9 @@ Reference and Notes open from the side of the screen. Notes save on the player's
 
 ## Deploy
 
-Connect this repository's `main` branch to the existing Netlify site. Publish the repository root (`.`), leave the build command empty, and use `netlify/functions` as the functions directory (Netlify's default).
+Connect this repository's `main` branch to the existing Netlify site. The checked-in `netlify.toml` sets the build command to `npm run build`, publishes the repository root (`.`), and deploys `netlify/functions`.
 
-The player needs no build step or npm packages. The bundled `log-events` function needs Netlify's current Node runtime with built-in `fetch`. **Deploy through Netlify's Git integration:** a static-only drag-and-drop upload does not build the logging function.
+Netlify installs the locked npm dependencies and compiles the default answer approvals from `Deadly_Differential_Answer_Matrix.xlsx` into the player configuration. Invalid workbook edits fail the build instead of silently publishing different answers. The bundled `log-events` function needs Netlify's current Node runtime with built-in `fetch`. **Deploy through Netlify's Git integration:** a static-only drag-and-drop upload does not build the logging function.
 
 After deployment, start a test team and submit an answer. The status beneath the clue should change to **confirmed by Google Sheets**, and a row should appear in that attempt's log. A push to GitHub alone does not prove the Netlify deploy succeeded.
 
@@ -36,14 +36,15 @@ The workbook includes:
 
 Use filters to show accepted answers for one case. The reference columns and headers stay frozen as you scroll. Green **Yes** cells identify approved answers; dropdowns make approvals easy to edit. The count column updates automatically.
 
-To apply approvals:
+**The checked-in workbook is the default source for answer approvals.** To publish edits:
 
 1. Edit **Yes/No** cells in Symptoms or Diagnoses. Keep the Reference IDs, case columns, all reference rows, and headers in row 5. Sorting rows is supported.
-2. Open `/setup.html` on the deployed site and upload the edited workbook.
-3. Preview on your device, or download the generated `case-config.js`.
-4. Replace `case-config.js` in the repository and push to `main` to publish.
+2. Replace `Deadly_Differential_Answer_Matrix.xlsx` in the repository with your edited copy.
+3. Push to `main`. Netlify automatically imports its approvals during the build. No manual configuration export is needed.
 
-Previewing starts fresh progress on that device, preserves its log archive, and does not publish changes. Editing Excel alone does not change the live app. Uploaded approvals retain the photos, audio, emails, video, and final answer key; thresholds are bounded to the available answers.
+For a device-only preview, open `/setup.html`: it loads the repository workbook automatically. Upload a different copy to try changes before committing them. The config download remains available for inspection; the committed workbook controls the next deployment’s approvals.
+
+Previewing starts fresh progress on that device, preserves its log archive, and does not publish changes. An uncommitted local Excel edit does not change the live app. Uploaded approvals retain the photos, audio, emails, video, and final answer key; thresholds are bounded to the available answers.
 
 Names, definitions, and the Answer key sheet are reference information; workbook upload applies only the Yes/No approvals. Edit `reference-data.js` to change the vocabulary/definitions. Edit `case-resolution-data.js` to change the final key or explanations. Suspect-clue diagnosis columns represent supporting possibilities: diagnoses are graded together at the later assignment step.
 
@@ -54,7 +55,7 @@ python -m pip install xlsxwriter openpyxl
 python scripts/build-answer-workbook.py
 ```
 
-Generation also requires Node.js. `case-config.js` is the single source for both culprit and suspect clues; there is no duplicate suspect-data snapshot to keep synchronized.
+Generation also requires Node.js. Regeneration preserves existing workbook approvals by Reference ID and case code, while adding new catalog rows/case columns from source. The workbook supplies default approvals; `case-config.js` supplies the underlying clue content and media. There is no duplicate suspect-data snapshot to keep synchronized.
 
 ## Automatic logging
 
@@ -64,9 +65,11 @@ The delivery layer now translates current events into the field names required b
 
 ## Local development and checks
 
-For the player and setup UI:
+Build the default case before serving the player and setup UI:
 
 ```sh
+npm ci
+npm run build
 python -m http.server 8000
 ```
 
@@ -75,9 +78,7 @@ Open `http://localhost:8000`. A plain static server cannot run the Netlify loggi
 Run the regression checks from the repository root:
 
 ```sh
-node tests/case-flow.test.cjs
-node tests/logger.test.cjs
-node tests/logging-integration.test.cjs
+npm test
 python tests/workbook.test.py
 ```
 
@@ -96,7 +97,8 @@ The logging integration test runs the supplied Apps Script against an in-memory 
 | `preview-storage.js`, `progress-migrations.js` | Device-local previews and saved-progress compatibility |
 | `logger.js`, `netlify/functions/log-events.js`, `logging/Code.gs` | Device archive, confirmed delivery, Google Sheets receiver |
 | `assets/` | Current bundled photos, portraits and audio |
-| `scripts/`, `tests/` | Workbook generation and regression checks |
+| `scripts/`, `tests/` | Default workbook compilation, workbook generation and regression checks |
+| `netlify.toml`, `package.json`, `package-lock.json` | Automatic build configuration and locked dependencies |
 | `docs/` | Current decision flow, logging, and clinical sources |
 
 The `.css` files are all used by the current player or setup pages. The conference video plays from its hosted provider URL; it is not a local MP4. Superseded media, the older workbook, duplicate data, and historical update notes were removed; previous versions remain in Git history. Filename migrations retain compatibility with saved device previews.
