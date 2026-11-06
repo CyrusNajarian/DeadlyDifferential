@@ -49,8 +49,8 @@ The workbook includes:
 | Sheet | Contents |
 | --- | --- |
 | Read me | Editing and publishing instructions |
-| Symptoms | All 91 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
-| Diagnoses | All 92 diagnoses, definitions, and the same case columns |
+| Symptoms | All 85 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
+| Diagnoses | All 72 diagnoses, definitions, and the same case columns |
 | Cases | A guide to each case-column code and its scoring role |
 | Answer key | Correct diagnoses and permitted alternatives for the final six-suspect assignment |
 
@@ -81,15 +81,15 @@ Generation also requires Node.js. Regeneration preserves existing workbook appro
 
 Tumor subtypes (glioma, glioblastoma, meningioma and brain metastasis) share the **Brain tumor** entry. Their names still work as searches/inputs, and saved IDs migrate without duplicate credit. The nonspecific Intracranial mass entry has been removed; tumor, abscess and hematoma remain separate diagnoses.
 
-Whenever any listed parkinsonian diagnosis is accepted, all seven are accepted: Parkinson disease, drug-induced parkinsonism, vascular parkinsonism, progressive supranuclear palsy, multiple system atrophy, corticobasal syndrome and dementia with Lewy bodies. This applies to clue checks and Dr. Charcoal’s final diagnosis assignment. It is a game acceptance rule, not clinical equivalence. Set every family row to No to turn off the family for a workbook case.
+**Parkinsonism** is one scored answer covering Parkinson disease, drug-induced and vascular parkinsonism, PSP, MSA, corticobasal syndrome and Lewy body disease. Their names remain aliases; differences appear under the main reference heading. Old subtype approvals merge into one workbook row and one credit.
 
-All 183 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
+All 157 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
 
 After the final culprit is locked, an incorrect choice receives a summary plus a five-clue comparison for that suspect’s confirmed diagnosis. Morning timing makes a typical MG fatigue explanation less persuasive but does not exclude MG. The selector itself shows only suspect names, with a lock button.
 
 The dropdown and reference share the same canonical names. Typing subtype names, common synonyms, abbreviations or a close misspelling suggests the canonical entry: for example, “freidrechs ataxia” suggests **Cerebellar dysfunction**. Suggestions never disclose which answers a clue accepts. Known short abbreviations such as MG/MS can trigger a suggestion before three letters; ordinary searches still start after three letters.
 
-Ischemic stroke mechanisms now share **Stroke**, inherited ataxia diagnoses share **Cerebellar dysfunction**, and paralysis is grouped under **Weakness**. The reference displays relevant types/terms beneath these headings; Epilepsy lists focal/generalized seizures, status epilepticus and postictal deficits. These are game groupings, not statements that every related term is clinically identical. Fatigue and motor fatigability, spasticity and rigidity, and aphasia and dysarthria remain separate.
+Ischemic stroke mechanisms now share **Stroke**, inherited ataxia diagnoses share **Cerebellar dysfunction**, and paralysis is grouped under **Weakness**. The reference displays relevant types/terms beneath these headings; Epilepsy lists focal/generalized seizures, status epilepticus and postictal deficits. These are game groupings, not statements that every related term is clinically identical. Fatigue and motor fatigability, and aphasia and dysarthria remain separate. Spasticity and rigidity are explained beneath Increased muscle tone.
 
 Older workbooks and saved IDs migrate to the canonical entries. Merged workbook approvals use Yes when any previous subtype was Yes, preserving existing edits.
 
@@ -113,7 +113,7 @@ The game favors streamlined umbrella answers; subtype differences stay in the re
 - **Peripheral neuropathy** includes mononeuropathy, median/ulnar/radial/common fibular neuropathy, diabetic polyneuropathy and Charcot–Marie–Tooth disease.
 - **Intracranial hematoma** includes acute/chronic subdural and epidural hematomas.
 
-Typing subtype names selects the umbrella. Only one credit is earned per main answer, and saved IDs/old workbook approvals migrate without multiplying credit. Each umbrella is accepted if any reviewed member was accepted for the clue. The reference preserves distinctions such as ischemic versus hemorrhagic treatment and upper- versus lower-limb nerve distributions. TIA, nerve-root/plexus disorders, and immune-mediated neuropathies with distinct treatment implications remain separate.
+Typing subtype names selects the umbrella. Only one credit is earned per main answer, and saved IDs/old workbook approvals migrate without multiplying credit. Each umbrella is accepted if any reviewed member was accepted for the clue. The reference preserves distinctions such as ischemic versus hemorrhagic treatment and upper- versus lower-limb nerve distributions. TIA and nerve-root/plexus categories remain distinct from stroke and peripheral nerve disease; subtype details are explained in the reference.
 
 ## Automatic logging
 
@@ -160,3 +160,11 @@ The logging integration test runs the supplied Apps Script against an in-memory 
 | `docs/` | Current decision flow, logging, and clinical sources |
 
 The `.css` files are all used by the current player or setup pages. The conference video plays from its hosted provider URL; it is not a local MP4. Superseded media, the older workbook, duplicate data, and historical update notes were removed; previous versions remain in Git history. Filename migrations retain compatibility with saved device previews.
+
+## Final differential and streamlined families
+
+On the final Choose culprit screen, the original differential is read-only. Players can compare it with the confirmed diagnoses, then select and lock the culprit.
+
+The latest consolidation uses Parkinsonism, Dementia, Encephalitis, Radiculopathy, Hydrocephalus, Peripheral neuropathy, Myositis and Headache disorder as umbrella diagnosis answers. Individual types remain searchable and appear under the main reference heading. Myositis includes the dermatomyositis subtype intended by Dr. Rust’s skin findings. Immune-mediated neuropathies are now within Peripheral neuropathy; their differing steroid responses are explained in the reference.
+
+For symptoms, **Increased muscle tone** includes spasticity/rigidity, and **Impaired coordination** includes ataxia, dysmetria, impaired rapid alternating movements and related gait patterns. The current workbook contains 85 symptoms/signs and 72 diagnoses. A broad class can be accepted where any relevant subtype fits; it does not mean every subtype shares all findings or treatment.

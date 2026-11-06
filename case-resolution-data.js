@@ -16,13 +16,7 @@ window.CASE_RESOLUTION={
       "d-stroke"
     ],
     "C": [
-      "d-parkinson-disease",
-      "d-drug-induced-parkinsonism",
-      "d-vascular-parkinsonism",
-      "d-progressive-supranuclear-palsy",
-      "d-multiple-system-atrophy",
-      "d-corticobasal-syndrome",
-      "d-dementia-with-lewy-bodies"
+      "d-parkinson-disease"
     ],
     "D": [
       "d-amyotrophic-lateral-sclerosis"
@@ -46,7 +40,6 @@ window.CASE_RESOLUTION={
       "contrast": "The scan, procedure and sample-results thread gives this suspect a focal-lesion workup, beyond headache treatment alone.",
       "wrongByDiagnosis": {
         "d-migraine": "Migraine explains headaches and use of a cold wrap, but not the navigation scan and tissue-sampling workup described in the email.",
-        "d-tension-type-headache": "Tension-type headache fits simple pain relief, but does not explain the navigation imaging and planned sampling.",
         "d-amyotrophic-lateral-sclerosis": "ALS is a motor-neuron disorder; this suspect’s evidence is headache treatment and a lesion-directed scan and sampling workup."
       }
     },
@@ -62,17 +55,13 @@ window.CASE_RESOLUTION={
       }
     },
     "C": {
-      "whyCorrect": "Dr. Charcoal shows reduced facial animation across the reception photographs. His handheld recording and email about repeated camera shake add a tremor-related clue. The case combines hypomimia with a movement-disorder pattern and assigns Parkinson disease.",
+      "whyCorrect": "Dr. Charcoal shows reduced facial animation across the reception photographs. His handheld recording and email about repeated camera shake add a tremor-related clue. Together, these support the broad parkinsonian pattern used for this case.",
       "contrast": "The key pairing is reduced facial animation across the photos with repeated camera instability, rather than camera shake alone.",
       "wrongByDiagnosis": {
         "d-essential-tremor": "Essential tremor can explain the handheld shake, but reduced facial animation is the extra feature favoring the case’s parkinsonian pattern.",
-        "d-drug-induced-parkinsonism": "Drug-induced parkinsonism can look similar, but the case provides no causative medication exposure. Its intended diagnosis is Parkinson disease.",
-        "d-progressive-supranuclear-palsy": "PSP can reduce facial expression, but the case lacks its distinguishing eye-movement and early-fall pattern.",
-        "d-multiple-system-atrophy": "MSA can include parkinsonism, but no prominent autonomic failure or cerebellar pattern is supplied for this suspect.",
-        "d-dementia-with-lewy-bodies": "Lewy body disease can include parkinsonism, but the case does not describe the cognitive fluctuations, hallucinations or dementia needed to favor this diagnosis.",
         "d-myasthenia-gravis": "The clue pattern is reduced facial animation with tremor-related camera movement, rather than fluctuating eyelid or task-related muscle weakness."
       },
-      "acceptanceNote": "For this game, Parkinson disease and the other parkinsonian diagnoses are all accepted. The case’s intended diagnosis is Parkinson disease."
+      "acceptanceNote": "Parkinson disease and drug-induced, vascular and other parkinsonian forms share the Parkinsonism answer; their differences are explained in the reference."
     },
     "D": {
       "whyCorrect": "Dr. Burgundy’s reception photographs show reduced hand-muscle bulk. His email adds looser clothing across the shoulders and increasing difficulty holding a small key. The case uses this motor weakness and wasting pattern for ALS.",
@@ -103,9 +92,9 @@ window.CASE_RESOLUTION={
         "d-cutaneous-lupus-erythematosus": "Lupus can cause a sun-sensitive rash, but the combined heliotrope-type eyelid change and Gottron-type knuckle papules favor dermatomyositis.",
         "d-contact-dermatitis": "Contact dermatitis can affect eyelids or hands, but the characteristic paired distribution and sun-related flares fit dermatomyositis better than an exposure-specific dermatitis.",
         "d-psoriasis": "Psoriasis can affect extensor surfaces, but it does not fit the violet eyelid and knuckle-papule combination as well.",
-        "d-myasthenia-gravis": "Myasthenia causes muscle weakness and eyelid droop, rather than a violet skin eruption and raised knuckle lesions.",
-        "d-polymyositis": "Polymyositis is an inflammatory muscle disease without the characteristic dermatomyositis skin eruption emphasized here."
-      }
+        "d-myasthenia-gravis": "Myasthenia causes muscle weakness and eyelid droop, rather than a violet skin eruption and raised knuckle lesions."
+      },
+      "acceptanceNote": "The broad answer is Myositis. The skin findings specifically favor the dermatomyositis subtype, explained in the reference."
     }
   },
   "culpritDiagnosisFeedback": {
@@ -115,25 +104,16 @@ window.CASE_RESOLUTION={
     "d-cervical-artery-dissection": "A tear within a neck artery wall. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
     "d-cerebral-aneurysm": "An abnormal bulge in a brain artery. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
     "d-cns-vasculitis": "Inflammation of blood vessels supplying the brain or spinal cord. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
-    "d-parkinson-disease": "Parkinson disease can explain soft speech, reduced dexterity and gait change. A clear focal weakness pattern and markedly unequal arm force fit less well than bradykinesia and rigidity, and corticosteroids do not tie the pattern together.",
-    "d-drug-induced-parkinsonism": "Parkinsonian movement abnormalities caused by medication. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
-    "d-vascular-parkinsonism": "Parkinsonism associated with cerebrovascular disease. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
-    "d-progressive-supranuclear-palsy": "A degenerative disorder affecting movement, balance, and eye control. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
-    "d-multiple-system-atrophy": "Degeneration affecting autonomic function and movement. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
-    "d-corticobasal-syndrome": "Asymmetric movement and cortical dysfunction with several possible underlying causes. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
+    "d-parkinson-disease": "Parkinsonism can explain reduced dexterity, speech changes and altered gait. A focal arm/leg weakness pattern fits less specifically, and prednisone is not routine treatment for the common vascular, drug-induced or degenerative causes.",
     "d-essential-tremor": "Essential tremor can interfere with precise key placement, but does not explain the full progressive speech and unequal arm/leg-force pattern.",
     "d-huntington-disease": "An inherited degenerative disorder affecting movement, thinking, and behavior. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
     "d-focal-dystonia": "Dystonic contractions affecting one body region or a specific task. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
     "d-cerebellar-disorder": "A broad diagnostic category involving cerebellar dysfunction. A movement disorder can explain selected hand, speech or gait changes, but compare its pattern with unequal arm force and one-sided leg dysfunction across the evidence.",
-    "d-alzheimer-disease": "A degenerative disease that commonly causes progressive memory and cognitive decline. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
-    "d-vascular-dementia": "Cognitive impairment severe enough for dementia due to cerebrovascular injury. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
-    "d-dementia-with-lewy-bodies": "Dementia often accompanied by fluctuations, hallucinations, and parkinsonism. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
-    "d-frontotemporal-dementia": "Degeneration predominantly affecting behavior or language. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
+    "d-alzheimer-disease": "Dementia can impair planning, spatial attention or language and may affect task performance. The culprit pattern emphasizes evolving focal arm, leg and speech changes; prednisone is not routine treatment for the usual dementias and does not unify this family with the five clues.",
     "d-delirium": "Acute, fluctuating disturbance of attention and awareness. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
     "d-metabolic-encephalopathy": "Brain dysfunction caused by a metabolic disturbance. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
     "d-brain-tumor": "An evolving focal brain lesion can link the progressive speech change, impaired fine hand control, unequal arm force and one-sided gait change. Corticosteroid use can fit treatment of selected lesion-associated swelling.",
-    "d-hydrocephalus": "Abnormal accumulation of cerebrospinal fluid in brain ventricles. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
-    "d-normal-pressure-hydrocephalus": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
+    "d-hydrocephalus": "Hydrocephalus can affect gait and cognition, and raised-pressure forms can produce additional neurologic problems. It is a less specific explanation for the combined focal hand/arm, leg and speech pattern, and prednisone does not ordinarily unify it with the medication clue.",
     "d-idiopathic-intracranial-hypertension": "Raised intracranial pressure without an identified secondary cause. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-traumatic-brain-injury": "Brain dysfunction or damage caused by external force. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-multiple-sclerosis": "An immune-mediated disease affecting myelin and axons in the CNS. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
@@ -142,36 +122,25 @@ window.CASE_RESOLUTION={
     "d-acute-disseminated-encephalomyelitis": "An acute inflammatory demyelinating CNS illness. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
     "d-transverse-myelitis": "Inflammation of the spinal cord. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
     "d-optic-neuritis": "Inflammation of an optic nerve. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
-    "d-autoimmune-encephalitis": "Brain inflammation associated with an immune response against neural targets. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
+    "d-autoimmune-encephalitis": "Encephalitis can cause speech, cognitive, motor or seizure-related changes. Steroids can fit immune-mediated forms, while infectious causes need cause-specific treatment. This broad family is a differential, but the supplied pattern does not specifically establish an encephalitic illness.",
     "d-meningitis": "Inflammation of the membranes surrounding brain and spinal cord. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
-    "d-infectious-encephalitis": "Brain inflammation caused by infection. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
     "d-brain-abscess": "A localized collection of infection within the brain. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
     "d-neurosarcoidosis": "Sarcoidosis involving the nervous system. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
-    "d-migraine": "Migraine is episodic and does not explain persistent or progressive speech, hand-control and asymmetric arm/leg dysfunction across the clue sequence.",
-    "d-tension-type-headache": "A primary headache disorder commonly producing pressing or tightening pain. A headache or facial-pain condition does not explain the combined progressive speech change, unequal arm force and asymmetric walking pattern.",
-    "d-cluster-headache": "Recurrent severe unilateral headaches with cranial autonomic symptoms. A headache or facial-pain condition does not explain the combined progressive speech change, unequal arm force and asymmetric walking pattern.",
-    "d-medication-overuse-headache": "Frequent headache associated with repeated overuse of acute headache medication. A headache or facial-pain condition does not explain the combined progressive speech change, unequal arm force and asymmetric walking pattern.",
+    "d-migraine": "Some headache syndromes can include transient neurologic symptoms. They fit the persistent, evolving arm/leg, hand-control and speech pattern less well. Prednisone can be used for selected headache indications such as cluster-headache bridging, but that does not explain the complete culprit pattern.",
     "d-trigeminal-neuralgia": "Brief episodes of severe electric-shock facial pain. A headache or facial-pain condition does not explain the combined progressive speech change, unequal arm force and asymmetric walking pattern.",
     "d-cervical-myelopathy": "Cervical myelopathy can combine hand dysfunction and gait abnormalities. It does not explain the speech problem from the same cervical cord lesion.",
-    "d-cervical-radiculopathy": "Dysfunction of a spinal nerve root in the neck. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
-    "d-lumbar-radiculopathy": "Dysfunction of a lower-back spinal nerve root. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
+    "d-cervical-radiculopathy": "Radiculopathy can cause weakness, pain or sensory changes in a root distribution. Cervical disease can affect the arm and lumbar disease the leg; a single root lesion does not explain arm, leg and evolving speech abnormalities together.",
     "d-spinal-cord-compression": "Pressure on the spinal cord causing dysfunction. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
     "d-cauda-equina-syndrome": "Dysfunction of multiple nerve roots below the spinal cord. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
     "d-hereditary-spastic-paraplegia": "Inherited disorders causing progressive leg spasticity and weakness. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
-    "d-peripheral-neuropathy": "A broad category of disorders affecting peripheral nerves. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
+    "d-peripheral-neuropathy": "Peripheral neuropathy can affect limb strength, sensation, dexterity and walking. Some immune forms can also involve cranial muscles, and CIDP can be treated with steroids. Those subtype possibilities remain a differential, but the clues do not specifically establish a peripheral nerve pattern over the intended focal brain process.",
     "d-brachial-plexopathy": "Dysfunction of the nerve network supplying the arm. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-guillain-barr-syndrome": "An acute immune-mediated polyradiculoneuropathy. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-chronic-inflammatory-demyelinating-polyneuropathy": "A chronic immune-mediated demyelinating peripheral nerve disorder. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-multifocal-motor-neuropathy": "An immune-mediated neuropathy predominantly affecting motor nerves. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
     "d-amyotrophic-lateral-sclerosis": "ALS can link progressive speech impairment with limb weakness and poor hand function. The weaker link is the medication clue: corticosteroids are not standard treatment for the motor-neuron disease itself.",
     "d-spinal-muscular-atrophy": "Inherited motor neuron disorders predominantly causing weakness. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-kennedy-disease": "An inherited disorder affecting lower motor neurons and androgen function. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-myasthenia-gravis": "Myasthenia can explain speech weakness and prednisone treatment. Persistent asymmetric arm/leg dysfunction fits less well than fluctuating fatigability, and the early-morning calls and murder weaken the usual later-day fatigue pattern. Morning symptoms do not exclude MG, but it is a weaker fit for the combined culprit evidence.",
     "d-lambert-eaton-myasthenic-syndrome": "A presynaptic neuromuscular junction disorder causing weakness and autonomic symptoms. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
-    "d-inflammatory-myopathy": "A diagnostic category of immune-mediated muscle diseases. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
-    "d-dermatomyositis": "Dermatomyositis fits corticosteroid treatment and muscle weakness. Its usual proximal, often bilateral weakness is a poorer match for the focal arm/leg pattern and fine hand-control problem.",
-    "d-polymyositis": "An inflammatory myopathy diagnosed after excluding better-defined alternatives. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
-    "d-inclusion-body-myositis": "A progressive muscle disease often affecting finger flexors and knee extensors. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
+    "d-dermatomyositis": "Myositis can cause weakness, speech/swallowing difficulty and, for steroid-responsive subtypes, prednisone treatment. Its patterns vary: dermatomyositis/polymyositis are often proximal and bilateral, while inclusion body myositis may be asymmetric and distal. The broad family does not uniquely explain the complete focal culprit pattern.",
     "d-myotonic-dystrophy": "Inherited multisystem disorders featuring myotonia and muscle weakness. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-oculopharyngeal-muscular-dystrophy": "An inherited myopathy affecting eyelids and swallowing muscles. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-chronic-progressive-external-ophthalmoplegia": "A syndrome of slowly progressive ptosis and restricted eye movements. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
@@ -303,7 +272,7 @@ window.CASE_RESOLUTION={
       {
         "title": "Medication",
         "fit": "Not supportive",
-        "text": "Prednisone is not standard treatment for Parkinson disease or the common degenerative parkinsonian syndromes. It leaves an important part of the combined evidence unexplained."
+        "text": "Prednisone is not routine treatment for the common vascular, drug-induced or degenerative causes of parkinsonism. It leaves an important part of the combined evidence unexplained."
       }
     ],
     "d-amyotrophic-lateral-sclerosis": [
@@ -364,27 +333,27 @@ window.CASE_RESOLUTION={
       {
         "title": "Choking / neck marks",
         "fit": "Compatible",
-        "text": "Muscle weakness could reduce the ability to sustain force. Dermatomyositis usually causes proximal, often bilateral weakness, which is less characteristic of the strongly asymmetric arm-output pattern."
+        "text": "Inflammatory muscle disease can reduce sustained force. Unequal arm output is possible, but the pattern depends on subtype and does not identify myositis."
       },
       {
         "title": "Footsteps",
-        "fit": "Weaker fit",
-        "text": "Hip-girdle weakness can change walking and cause difficulty rising or climbing. A persistent unilateral dragging pattern is less typical than a proximal myopathic gait."
+        "fit": "Compatible",
+        "text": "Muscle weakness can alter walking. Proximal weakness is common in some subtypes; inclusion body myositis can involve knee extensors and be asymmetric. The trail does not identify a particular muscle disease."
       },
       {
         "title": "Safe and key",
-        "fit": "Weaker fit",
-        "text": "Weakness can make arm tasks harder, but isolated fine finger-control trouble is less typical of dermatomyositis than proximal shoulder weakness."
+        "fit": "Compatible",
+        "text": "Hand weakness can impair key use, especially in subtypes affecting finger flexors. This clue can fit the broad myositis family but does not distinguish it from central or nerve causes."
       },
       {
         "title": "Voicemail",
         "fit": "Compatible",
-        "text": "Bulbar muscle involvement can affect swallowing and sometimes speech. The recording does not specifically establish inflammatory muscle disease; morning timing is not a distinctive clue for it."
+        "text": "Some inflammatory myopathies affect bulbar muscles and can alter speech or swallowing. Early-morning timing is not distinctive for myositis."
       },
       {
         "title": "Medication",
-        "fit": "Supports",
-        "text": "Prednisone is a standard treatment option for the muscle inflammation of dermatomyositis. That fits the prescription, but does not resolve the poorer match to the focal motor pattern."
+        "fit": "Compatible",
+        "text": "Prednisone supports steroid-responsive inflammatory myopathies such as dermatomyositis or polymyositis. Inclusion body myositis generally responds poorly; the umbrella answer does not mean every subtype is treated alike."
       }
     ]
   }

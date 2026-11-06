@@ -19,6 +19,7 @@ function validDiagnosis(id){return diagnosisEntry(id)?.type==='disease'}
 function rankingError(ids){return ids.length!==5||ids.some(id=>!validDiagnosis(id))?'Choose five diagnoses.':new Set(ids).size!==5?'Choose five different diagnoses.':''}
 function assignmentError(answers){return resolutionPeople().some(p=>!validDiagnosis(answers[p.id]))?'Choose a diagnosis for every suspect.':''}
 function submitRankedDifferential(ids){
+ ids=ids.map(id=>DDReference.canonicalId(id));
  const r=resolutionState();if(r.ranking)return {ok:false,error:'Your original ranking is already saved.'};
  if(!isStepUnlocked('ranked-differential'))return {ok:false,error:'Complete the culprit clues first.'};
  const error=rankingError(ids);if(error)return {ok:false,error};
@@ -26,6 +27,7 @@ function submitRankedDifferential(ids){
  DDLog?.event('ranked_differential',{section:'decisions',clue:'Culprit differential',stage:'Top five',result:'ungraded',ranking:ids.map((id,i)=>({rank:i+1,referenceId:id,diagnosis:diagnosisName(id)}))});save();return {ok:true};
 }
 function submitSuspectAssignments(answers){
+ answers=Object.fromEntries(Object.entries(answers).map(([person,id])=>[person,DDReference.canonicalId(id)]));
  const r=resolutionState();if(r.assignment)return {ok:false,error:'Your suspect diagnoses are already submitted.'};
  if(!isStepUnlocked('suspect-assignment'))return {ok:false,error:'Complete your ranking and all suspect clues first.'};
  const error=assignmentError(answers);if(error)return {ok:false,error};
@@ -36,6 +38,7 @@ function submitSuspectAssignments(answers){
  save();return {ok:true};
 }
 function suspectAssessment(personId,selectedId){
+ selectedId=DDReference.canonicalId(selectedId);
  const rules=resolutionRules(),correctId=rules.suspectDiagnoses[personId],profile=rules.suspectFeedback?.[personId]||{};
  const archived=DDReference.data.removedIds?.includes(selectedId)&&state.resolution?.assignment?.results?.find(row=>row.personId===personId&&row.diagnosisId===selectedId);
  const correct=archived?!!archived.correct:(rules.suspectAcceptedIds?.[personId]||[correctId]).includes(selectedId);

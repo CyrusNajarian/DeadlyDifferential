@@ -38,9 +38,17 @@ $('#referenceSearch').value='status epilepticus';$('#referenceSearch').oninput()
 console.log('PASS: synonym/subtype/typo suggestions, short abbreviations, canonical submission names, retired IDs and nested searchable reference types.');
 
 for(const [term,id] of [['Hemorrhagic stroke','d-stroke'],['Intracerebral hemorrhage','d-stroke'],['Subarachnoid hemorrhage','d-stroke'],['Prior stroke with residual deficits','d-stroke'],['Ulnar neuropathy','d-peripheral-neuropathy'],['Radial neuropathy','d-peripheral-neuropathy'],['Median neuropathy','d-peripheral-neuropathy'],['Common fibular neuropathy','d-peripheral-neuropathy'],['Diabetic polyneuropathy','d-peripheral-neuropathy'],['Acute subdural hematoma','d-intracranial-hematoma'],['Chronic subdural hematoma','d-intracranial-hematoma'],['Epidural hematoma','d-intracranial-hematoma']]){assert.equal(ref.resolve(term,'disease').id,id);assert.equal(ref.search(term,'disease')[0].id,id)}
-assert.equal(ref.lists.disease.length,92);
+assert.equal(ref.lists.disease.length,72);
 assert.deepEqual(Array.from(ref.approvedIds({type:'disease',referenceIds:['d-lacunar-stroke','d-ischemic-stroke','d-stroke']})),['d-stroke']);
 const oldNerves={catalogFound:['d-ulnar-neuropathy','d-radial-neuropathy','d-peripheral-neuropathy']};assert.equal(ref.progress({accepted:[{type:'disease',referenceIds:['d-peripheral-neuropathy']}]},oldNerves).length,1);
 assert(ref.byId.get('d-stroke').subtypes.some(s=>s.name==='Subarachnoid hemorrhage'));
 assert(ref.byId.get('d-intracranial-hematoma').subtypes.some(s=>s.name==='Acute subdural hematoma'));
-assert(ref.byId.has('d-guillain-barr-syndrome')&&ref.byId.has('d-chronic-inflammatory-demyelinating-polyneuropathy'));
+assert.equal(ref.resolve('GBS','disease').id,'d-peripheral-neuropathy');assert.equal(ref.resolve('CIDP','disease').id,'d-peripheral-neuropathy');
+
+for(const query of ['Parkinson disease','Drug-induced parkinsonism','Vascular parkinsonism','PSP','MSA','DLB']){assert.equal(ref.search(query,'disease')[0].term,'Parkinsonism');assert.equal(ref.resolve(query,'disease').id,'d-parkinson-disease')}
+assert.equal(ref.byId.get('d-parkinson-disease').subtypes.length,7);
+const oldParkinson={catalogFound:['d-parkinson-disease','d-drug-induced-parkinsonism','d-vascular-parkinsonism']};assert.equal(ref.progress({accepted:[{type:'disease',referenceIds:['d-parkinson-disease']}]},oldParkinson).length,1);
+
+for(const [query,id] of [['Spasticity','s-hypertonia'],['Rigidity','s-hypertonia'],['Dysmetria','s-ataxia'],['Sensory ataxia','s-ataxia'],['Vascular dementia','d-alzheimer-disease'],['Infectious encephalitis','d-autoimmune-encephalitis'],['Lumbar radiculopathy','d-cervical-radiculopathy'],['Normal-pressure hydrocephalus','d-hydrocephalus'],['Polymyositis','d-dermatomyositis'],['Inclusion body myositis','d-dermatomyositis'],['Cluster headache','d-migraine']]){assert.equal(ref.resolve(query,id.startsWith('s-')?'symptom':'disease').id,id);assert.equal(ref.search(query,id.startsWith('s-')?'symptom':'disease')[0].id,id)}
+assert.equal(ref.lists.symptom.length,85);
+for(const [id,to] of Object.entries(ref.data.retiredIds))assert(ref.byId.has(to),id+' points at an inactive target');

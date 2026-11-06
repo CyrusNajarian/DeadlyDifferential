@@ -170,11 +170,11 @@ console.log('PASS: ordered checkpoints, delayed grading, six suspect debriefs, c
 
 // Tumor consolidation keeps search and saved progress compatible.
 for(const term of ['Glioma','Glioblastoma','Meningioma','Brain metastasis'])assert.equal(c.DDReference.resolve(term,'disease').id,'d-brain-tumor');
-assert.equal(c.DDReference.lists.disease.length,92);
-const family=c.DDReference.data.approvalGroups[0];
+assert.equal(c.DDReference.lists.disease.length,72);
+const family=['d-parkinson-disease','d-drug-induced-parkinsonism','d-vascular-parkinsonism','d-progressive-supranuclear-palsy','d-multiple-system-atrophy','d-corticobasal-syndrome','d-dementia-with-lewy-bodies'];
 for(const id of family){
  assert(c.suspectAssessment('C',id).correct);
- for(const anchor of family){const approvals=c.DDReference.approved({accepted:[{type:'disease',referenceIds:[anchor]}]},'disease');assert(approvals.some(a=>a.id===id));}
+ for(const anchor of family){const approvals=c.DDReference.approved({accepted:[{type:'disease',referenceIds:[anchor]}]},'disease');assert(approvals.some(a=>a.id===c.DDReference.canonicalId(id)));}
 }
 assert(!c.suspectAssessment('C','d-essential-tremor').correct);
 for(const [id,rows] of Object.entries(c.resolutionRules().culpritDiagnosisClues)){assert.equal(rows.length,5);assert(rows.every(row=>row.title&&row.fit&&row.text));}
@@ -200,3 +200,6 @@ assert(c.resolutionState().ranking.legacyIds.includes('d-intracranial-mass'));
 assert(!c.validDiagnosis('d-intracranial-mass'));
 assert(c.suspectAssessment('A','d-intracranial-mass').correct);
 assert(c.diagnosisName('d-intracranial-mass').includes('(removed)'));
+
+c.state.resolution={ranking:{ids:ranking,submittedAt:'original'},assignment:{answers:{...rules.suspectDiagnoses},results:[]}};
+c.renderFinalAccusation();assert($('#roundContent').innerHTML.includes('Your original culprit differential'));assert(!$('#roundContent').innerHTML.includes('Edit differential'));assert(!$('#roundContent').innerHTML.includes('finalDifferentialForm'));

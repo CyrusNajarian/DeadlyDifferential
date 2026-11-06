@@ -13,7 +13,7 @@ The three checkpoints participate in the same sequential route guards as the clu
 
 ## Configuration
 
-`case-resolution-data.js` holds the suspect diagnosis mapping and all 92 final diagnosis explanations. An exported workbook preview retains this configuration. The mapping uses the existing case identities: Silver/brain tumor, Emerald/stroke, Charcoal/Parkinson disease, Burgundy/ALS, Navy/myasthenia gravis, Rust/dermatomyositis. Equivalent permitted answer IDs are explicit.
+`case-resolution-data.js` holds the suspect diagnosis mapping and all 72 final diagnosis explanations. An exported workbook preview retains this configuration. The mapping uses the existing case identities: Silver/brain tumor, Emerald/stroke, Charcoal/Parkinsonism, Burgundy/ALS, Navy/myasthenia gravis, Rust/Myositis (dermatomyositis subtype). Equivalent permitted answer IDs are explicit.
 
 The author confirmed Dr. Silver (A) with a brain tumor as the final solution. `culpritId` is `A` and `culpritDiagnosisId` is `d-brain-tumor`. The broader intracranial-mass category remains accepted for Dr. Silver in the diagnosis-assignment stage. Final scoring uses only the chosen suspect. Tests use this configured answer key.
 
@@ -23,7 +23,7 @@ The original ranking, all-six assignment batch, results and final accusation liv
 
 ## Validation
 
-Tests cover all 22 ordered steps, prerequisites, distinct top-five validation, ungraded ranking logs, immutable snapshots, absence of per-suspect diagnosis controls, all-six validation before grading, no early correct roster, wrong and correct final accusations, no final explanation before lock, locked-answer protection, JSON persistence, all 92 diagnosis blurbs and logging. JavaScript syntax and whitespace checks pass. Full browser rendering is unavailable in the workspace.
+Tests cover all 22 ordered steps, prerequisites, distinct top-five validation, ungraded ranking logs, immutable snapshots, absence of per-suspect diagnosis controls, all-six validation before grading, no early correct roster, wrong and correct final accusations, no final explanation before lock, locked-answer protection, JSON persistence, all 72 diagnosis blurbs and logging. JavaScript syntax and whitespace checks pass. Full browser rendering is unavailable in the workspace.
 
 ## Side tools and compatibility
 
@@ -32,3 +32,7 @@ Top navigation follows the play sequence: Culprit clues, Top five, Suspect clues
 Older locked accusations retain their chosen suspect and lock timestamp. Their entered diagnosis and old result are retained as legacy fields while display/scoring adopts the culprit-only format. New records explicitly identify this mode. The suspect debrief uses suspect evidence; the final debrief uses only choking, footsteps, safe/key, voicemail and medication.
 
 Run `node tests/case-flow.test.cjs` for the current regression checks.
+
+## Read-only final differential
+
+The final screen displays the original top-five list without editing controls. It remains an immutable record of the pre-suspect decision. Players select only the culprit at the final step.

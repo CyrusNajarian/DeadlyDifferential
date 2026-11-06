@@ -180,3 +180,11 @@ Sources: [Merck sensory examination](https://www.merckmanuals.com/en-ca/professi
 The current catalog has 91 symptom/sign entries and 92 diagnosis headings. All stroke presentations are now Stroke, including ischemic/hemorrhagic, intracerebral/subarachnoid hemorrhage and prior-stroke entries. Peripheral neuropathy absorbs the overlapping single-nerve, diabetic and inherited peripheral neuropathy labels. Acute/chronic subdural and epidural collections share Intracranial hematoma. Their previous Yes approvals are combined at the umbrella level, as requested; this deliberately sacrifices subtype precision in clue scoring. Subtypes remain searchable and are explained under the main reference heading.
 
 Aspirin/statin clues support the ischemic side of Stroke; the umbrella does not imply that those drugs treat an uncomplicated hemorrhagic stroke. The same distinction applies to anatomical nerve patterns and timing/location of hematomas: the game checks the broad family while the reference explains the differences. Immune neuropathies retain separate entries because, for example, CIDP versus GBS differs in corticosteroid treatment.
+
+## Parkinsonism umbrella
+
+Parkinsonism now replaces the seven separately scored parkinsonian diagnoses. Drug-induced, vascular, idiopathic Parkinson disease and atypical degenerative forms remain described beneath the main heading. The workbook has one row, and synonyms/saved subtype IDs resolve to that row without duplicate credit. Dr. Charcoal’s key and explanation use Parkinsonism. The current catalog has 91 symptoms/signs and 86 diagnoses.
+
+## Additional umbrella pass
+
+Further consolidation leaves 85 symptom/sign headings and 72 diagnoses. The new groupings cover Parkinsonism, Dementia, Encephalitis, Radiculopathy, Hydrocephalus, Peripheral neuropathy (including immune types), Myositis and Headache disorder. Increased muscle tone and Impaired coordination absorb their related symptom patterns. Earlier subtype-specific exclusions become explanations in the reference rather than separate scored rows. Treatment differences remain explicit, including CIDP versus GBS and steroid-responsive myositis versus inclusion body myositis. Dr. Rust’s intended subtype remains dermatomyositis within the scored Myositis family.

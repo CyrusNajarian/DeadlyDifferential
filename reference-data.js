@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 8,
+  "version": 10,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -211,30 +211,6 @@ window.NEURO_REFERENCE={
       }
     },
     {
-      "id": "s-spasticity",
-      "type": "symptom",
-      "category": "Strength and muscle",
-      "term": "Spasticity",
-      "description": "Muscle tone increases more with faster stretching.",
-      "source": "weakness",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
-    },
-    {
-      "id": "s-rigidity",
-      "type": "symptom",
-      "category": "Strength and muscle",
-      "term": "Rigidity",
-      "description": "Increased resistance throughout passive limb movement.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
-    },
-    {
       "id": "s-hypotonia",
       "type": "symptom",
       "category": "Strength and muscle",
@@ -378,37 +354,43 @@ window.NEURO_REFERENCE={
       "id": "s-ataxia",
       "type": "symptom",
       "category": "Movement and coordination",
-      "term": "Ataxia",
-      "description": "Impaired coordination of movement or balance.",
+      "term": "Impaired coordination",
+      "description": "Poor coordination of limb movement or walking. The pattern can reflect cerebellar dysfunction or impaired position feedback.",
       "source": "cerebellar",
       "qualifiers": {
         "side": true,
         "region": true
-      }
-    },
-    {
-      "id": "s-dysmetria",
-      "type": "symptom",
-      "category": "Movement and coordination",
-      "term": "Dysmetria",
-      "description": "Overshooting or undershooting a movement target.",
-      "source": "cerebellar",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
-    },
-    {
-      "id": "s-dysdiadochokinesia",
-      "type": "symptom",
-      "category": "Movement and coordination",
-      "term": "Dysdiadochokinesia",
-      "description": "Difficulty performing rapid alternating movements.",
-      "source": "cerebellar",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      },
+      "aliases": [
+        "Ataxia",
+        "Dysmetria",
+        "Dysdiadochokinesia",
+        "Ataxic gait",
+        "Sensory ataxia"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Ataxia",
+          "description": "Impaired coordination of movement or balance."
+        },
+        {
+          "name": "Dysmetria",
+          "description": "Overshooting or undershooting a movement target."
+        },
+        {
+          "name": "Dysdiadochokinesia",
+          "description": "Difficulty performing rapid alternating movements."
+        },
+        {
+          "name": "Ataxic gait",
+          "description": "Unsteady walking from impaired coordination or sensory guidance."
+        },
+        {
+          "name": "Sensory ataxia",
+          "description": "Poor coordination caused by impaired position sense."
+        }
+      ]
     },
     {
       "id": "s-impaired-fine-motor-control",
@@ -473,30 +455,6 @@ window.NEURO_REFERENCE={
       "qualifiers": {
         "side": true,
         "fixedRegion": "lower"
-      }
-    },
-    {
-      "id": "s-ataxic-gait",
-      "type": "symptom",
-      "category": "Gait and balance",
-      "term": "Ataxic gait",
-      "description": "Unsteady walking from impaired coordination or sensory guidance.",
-      "source": "cerebellar",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
-    },
-    {
-      "id": "s-sensory-ataxia",
-      "type": "symptom",
-      "category": "Gait and balance",
-      "term": "Sensory ataxia",
-      "description": "Poor coordination caused by impaired position sense.",
-      "source": "pns",
-      "qualifiers": {
-        "side": true,
-        "region": true
       }
     },
     {
@@ -1183,8 +1141,8 @@ window.NEURO_REFERENCE={
       "id": "d-parkinson-disease",
       "type": "disease",
       "category": "Movement and degeneration",
-      "term": "Parkinson disease",
-      "description": "A progressive disorder causing bradykinesia with rigidity or rest tremor.",
+      "term": "Parkinsonism",
+      "description": "A movement syndrome involving bradykinesia with features such as rigidity or tremor. Drug-induced, vascular and degenerative forms share this game answer.",
       "source": "movement",
       "searchTerms": [
         "Parkinson's disease",
@@ -1195,57 +1153,54 @@ window.NEURO_REFERENCE={
         "PD",
         "Parkinson's disease",
         "Parkinsons disease",
-        "Parkinsonism"
-      ]
-    },
-    {
-      "id": "d-drug-induced-parkinsonism",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Drug-induced parkinsonism",
-      "description": "Parkinsonian movement abnormalities caused by medication.",
-      "source": "movement"
-    },
-    {
-      "id": "d-vascular-parkinsonism",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Vascular parkinsonism",
-      "description": "Parkinsonism associated with cerebrovascular disease.",
-      "source": "movement"
-    },
-    {
-      "id": "d-progressive-supranuclear-palsy",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Progressive supranuclear palsy",
-      "description": "A degenerative disorder affecting movement, balance, and eye control.",
-      "source": "ninds",
-      "aliases": [
-        "PSP"
-      ]
-    },
-    {
-      "id": "d-multiple-system-atrophy",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Multiple system atrophy",
-      "description": "Degeneration affecting autonomic function and movement.",
-      "source": "dementia",
-      "aliases": [
-        "MSA"
-      ]
-    },
-    {
-      "id": "d-corticobasal-syndrome",
-      "type": "disease",
-      "category": "Movement and degeneration",
-      "term": "Corticobasal syndrome",
-      "description": "Asymmetric movement and cortical dysfunction with several possible underlying causes.",
-      "source": "ninds",
-      "aliases": [
+        "Parkinsonism",
+        "Parkinsonianism",
+        "Parkinsonian syndrome",
+        "parkinsonism",
+        "Drug-induced parkinsonism",
+        "Vascular parkinsonism",
+        "Progressive supranuclear palsy",
+        "PSP",
+        "Multiple system atrophy",
+        "MSA",
+        "Corticobasal syndrome",
         "CBS",
-        "Corticobasal degeneration"
+        "Corticobasal degeneration",
+        "Dementia with Lewy bodies",
+        "DLB",
+        "Lewy body dementia",
+        "Parkinson disease"
+      ],
+      "subtypeLabel": "Types and causes",
+      "subtypes": [
+        {
+          "name": "Parkinson disease",
+          "description": "A progressive degenerative cause of parkinsonism, often with an asymmetric onset."
+        },
+        {
+          "name": "Drug-induced parkinsonism",
+          "description": "Parkinsonian movement abnormalities caused by medication."
+        },
+        {
+          "name": "Vascular parkinsonism",
+          "description": "Parkinsonism associated with cerebrovascular disease."
+        },
+        {
+          "name": "Progressive supranuclear palsy",
+          "description": "A degenerative disorder affecting movement, balance, and eye control."
+        },
+        {
+          "name": "Multiple system atrophy",
+          "description": "Degeneration affecting autonomic function and movement."
+        },
+        {
+          "name": "Corticobasal syndrome",
+          "description": "Asymmetric movement and cortical dysfunction with several possible underlying causes."
+        },
+        {
+          "name": "Dementia with Lewy bodies",
+          "description": "Dementia often accompanied by fluctuations, hallucinations, and parkinsonism."
+        }
       ]
     },
     {
@@ -1314,37 +1269,29 @@ window.NEURO_REFERENCE={
       "id": "d-alzheimer-disease",
       "type": "disease",
       "category": "Cognition and behavior",
-      "term": "Alzheimer disease",
-      "description": "A degenerative disease that commonly causes progressive memory and cognitive decline.",
-      "source": "dementia"
-    },
-    {
-      "id": "d-vascular-dementia",
-      "type": "disease",
-      "category": "Cognition and behavior",
-      "term": "Vascular dementia",
-      "description": "Cognitive impairment severe enough for dementia due to cerebrovascular injury.",
-      "source": "dementia"
-    },
-    {
-      "id": "d-dementia-with-lewy-bodies",
-      "type": "disease",
-      "category": "Cognition and behavior",
-      "term": "Dementia with Lewy bodies",
-      "description": "Dementia often accompanied by fluctuations, hallucinations, and parkinsonism.",
+      "term": "Dementia",
+      "description": "A broad group of disorders causing persistent cognitive decline; the dominant symptoms and causes vary by type.",
       "source": "dementia",
       "aliases": [
-        "DLB",
-        "Lewy body dementia"
+        "Alzheimer disease",
+        "Vascular dementia",
+        "Frontotemporal dementia"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Alzheimer disease",
+          "description": "A degenerative disease that commonly causes progressive memory and cognitive decline."
+        },
+        {
+          "name": "Vascular dementia",
+          "description": "Cognitive impairment severe enough for dementia due to cerebrovascular injury."
+        },
+        {
+          "name": "Frontotemporal dementia",
+          "description": "Degeneration predominantly affecting behavior or language."
+        }
       ]
-    },
-    {
-      "id": "d-frontotemporal-dementia",
-      "type": "disease",
-      "category": "Cognition and behavior",
-      "term": "Frontotemporal dementia",
-      "description": "Degeneration predominantly affecting behavior or language.",
-      "source": "dementia"
     },
     {
       "id": "d-delirium",
@@ -1416,18 +1363,23 @@ window.NEURO_REFERENCE={
       "type": "disease",
       "category": "Brain structure and tumors",
       "term": "Hydrocephalus",
-      "description": "Abnormal accumulation of cerebrospinal fluid in brain ventricles.",
-      "source": "hopkins"
-    },
-    {
-      "id": "d-normal-pressure-hydrocephalus",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Normal-pressure hydrocephalus",
-      "description": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control.",
-      "source": "ninds",
+      "description": "Abnormal accumulation of cerebrospinal fluid in brain ventricles; pressure and symptoms vary by type.",
+      "source": "hopkins",
       "aliases": [
+        "Hydrocephalus",
+        "Normal-pressure hydrocephalus",
         "NPH"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Hydrocephalus",
+          "description": "Abnormal accumulation of cerebrospinal fluid in brain ventricles."
+        },
+        {
+          "name": "Normal-pressure hydrocephalus",
+          "description": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control."
+        }
       ]
     },
     {
@@ -1512,9 +1464,24 @@ window.NEURO_REFERENCE={
       "id": "d-autoimmune-encephalitis",
       "type": "disease",
       "category": "Inflammatory and infectious",
-      "term": "Autoimmune encephalitis",
-      "description": "Brain inflammation associated with an immune response against neural targets.",
-      "source": "ninds"
+      "term": "Encephalitis",
+      "description": "Inflammation of brain tissue caused by infection or immune processes. Treatment depends on the cause.",
+      "source": "ninds",
+      "aliases": [
+        "Autoimmune encephalitis",
+        "Infectious encephalitis"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Autoimmune encephalitis",
+          "description": "Brain inflammation associated with an immune response against neural targets."
+        },
+        {
+          "name": "Infectious encephalitis",
+          "description": "Brain inflammation caused by infection."
+        }
+      ]
     },
     {
       "id": "d-meningitis",
@@ -1522,14 +1489,6 @@ window.NEURO_REFERENCE={
       "category": "Inflammatory and infectious",
       "term": "Meningitis",
       "description": "Inflammation of the membranes surrounding brain and spinal cord.",
-      "source": "hopkins"
-    },
-    {
-      "id": "d-infectious-encephalitis",
-      "type": "disease",
-      "category": "Inflammatory and infectious",
-      "term": "Infectious encephalitis",
-      "description": "Brain inflammation caused by infection.",
       "source": "hopkins"
     },
     {
@@ -1552,33 +1511,34 @@ window.NEURO_REFERENCE={
       "id": "d-migraine",
       "type": "disease",
       "category": "Headache and facial pain",
-      "term": "Migraine",
-      "description": "A recurrent headache disorder often accompanied by sensory sensitivity or nausea.",
-      "source": "headache"
-    },
-    {
-      "id": "d-tension-type-headache",
-      "type": "disease",
-      "category": "Headache and facial pain",
-      "term": "Tension-type headache",
-      "description": "A primary headache disorder commonly producing pressing or tightening pain.",
-      "source": "headache"
-    },
-    {
-      "id": "d-cluster-headache",
-      "type": "disease",
-      "category": "Headache and facial pain",
-      "term": "Cluster headache",
-      "description": "Recurrent severe unilateral headaches with cranial autonomic symptoms.",
-      "source": "headache"
-    },
-    {
-      "id": "d-medication-overuse-headache",
-      "type": "disease",
-      "category": "Headache and facial pain",
-      "term": "Medication-overuse headache",
-      "description": "Frequent headache associated with repeated overuse of acute headache medication.",
-      "source": "overuse"
+      "term": "Headache disorder",
+      "description": "Primary and medication-associated headache syndromes, including migraine, tension-type, cluster and medication-overuse headache.",
+      "source": "headache",
+      "aliases": [
+        "Migraine",
+        "Tension-type headache",
+        "Cluster headache",
+        "Medication-overuse headache"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Migraine",
+          "description": "A recurrent headache disorder often accompanied by sensory sensitivity or nausea."
+        },
+        {
+          "name": "Tension-type headache",
+          "description": "A primary headache disorder commonly producing pressing or tightening pain."
+        },
+        {
+          "name": "Cluster headache",
+          "description": "Recurrent severe unilateral headaches with cranial autonomic symptoms."
+        },
+        {
+          "name": "Medication-overuse headache",
+          "description": "Frequent headache associated with repeated overuse of acute headache medication."
+        }
+      ]
     },
     {
       "id": "d-trigeminal-neuralgia",
@@ -1600,17 +1560,24 @@ window.NEURO_REFERENCE={
       "id": "d-cervical-radiculopathy",
       "type": "disease",
       "category": "Spinal cord and roots",
-      "term": "Cervical radiculopathy",
-      "description": "Dysfunction of a spinal nerve root in the neck.",
-      "source": "pns"
-    },
-    {
-      "id": "d-lumbar-radiculopathy",
-      "type": "disease",
-      "category": "Spinal cord and roots",
-      "term": "Lumbar radiculopathy",
-      "description": "Dysfunction of a lower-back spinal nerve root.",
-      "source": "pns"
+      "term": "Radiculopathy",
+      "description": "Dysfunction of a spinal nerve root. Cervical roots affect the arm/hand; lumbar roots affect the leg/foot.",
+      "source": "pns",
+      "aliases": [
+        "Cervical radiculopathy",
+        "Lumbar radiculopathy"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Cervical radiculopathy",
+          "description": "Dysfunction of a spinal nerve root in the neck."
+        },
+        {
+          "name": "Lumbar radiculopathy",
+          "description": "Dysfunction of a lower-back spinal nerve root."
+        }
+      ]
     },
     {
       "id": "d-spinal-cord-compression",
@@ -1641,9 +1608,10 @@ window.NEURO_REFERENCE={
       "type": "disease",
       "category": "Peripheral nerves",
       "term": "Peripheral neuropathy",
-      "description": "Dysfunction of one or more peripheral nerves, causing weakness, sensory changes or both. Individual nerve and polyneuropathy patterns share this game answer.",
+      "description": "Dysfunction of one or more peripheral nerves. Focal, inherited, metabolic and immune-mediated forms share this game answer; their course and treatment differ.",
       "source": "pns",
       "aliases": [
+        "Peripheral neuropathy",
         "Peripheral mononeuropathy",
         "Median neuropathy",
         "Ulnar neuropathy",
@@ -1653,9 +1621,16 @@ window.NEURO_REFERENCE={
         "Diabetic polyneuropathy",
         "Charcot–Marie–Tooth disease",
         "CMT",
-        "Charcot Marie Tooth disease"
+        "Charcot Marie Tooth disease",
+        "Guillain–Barré syndrome",
+        "GBS",
+        "Guillain Barre syndrome",
+        "Chronic inflammatory demyelinating polyneuropathy",
+        "CIDP",
+        "Multifocal motor neuropathy",
+        "MMN"
       ],
-      "subtypeLabel": "Types and related patterns",
+      "subtypeLabel": "Types and patterns",
       "subtypes": [
         {
           "name": "Peripheral mononeuropathy",
@@ -1684,6 +1659,18 @@ window.NEURO_REFERENCE={
         {
           "name": "Charcot–Marie–Tooth disease",
           "description": "A group of inherited peripheral neuropathies."
+        },
+        {
+          "name": "Guillain–Barré syndrome",
+          "description": "An acute immune-mediated polyradiculoneuropathy. Corticosteroids are not an effective routine treatment."
+        },
+        {
+          "name": "Chronic inflammatory demyelinating polyneuropathy",
+          "description": "A chronic immune-mediated demyelinating peripheral nerve disorder. Corticosteroids can be used for treatment."
+        },
+        {
+          "name": "Multifocal motor neuropathy",
+          "description": "An immune-mediated neuropathy predominantly affecting motor nerves."
         }
       ]
     },
@@ -1694,40 +1681,6 @@ window.NEURO_REFERENCE={
       "term": "Brachial plexopathy",
       "description": "Dysfunction of the nerve network supplying the arm.",
       "source": "pns"
-    },
-    {
-      "id": "d-guillain-barr-syndrome",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Guillain–Barré syndrome",
-      "description": "An acute immune-mediated polyradiculoneuropathy.",
-      "source": "pns",
-      "aliases": [
-        "GBS",
-        "Guillain Barre syndrome"
-      ]
-    },
-    {
-      "id": "d-chronic-inflammatory-demyelinating-polyneuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Chronic inflammatory demyelinating polyneuropathy",
-      "description": "A chronic immune-mediated demyelinating peripheral nerve disorder.",
-      "source": "pns",
-      "aliases": [
-        "CIDP"
-      ]
-    },
-    {
-      "id": "d-multifocal-motor-neuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Multifocal motor neuropathy",
-      "description": "An immune-mediated neuropathy predominantly affecting motor nerves.",
-      "source": "neuromuscular",
-      "aliases": [
-        "MMN"
-      ]
     },
     {
       "id": "d-amyotrophic-lateral-sclerosis",
@@ -1796,38 +1749,37 @@ window.NEURO_REFERENCE={
       "source": "pns"
     },
     {
-      "id": "d-inflammatory-myopathy",
-      "type": "disease",
-      "category": "Motor neuron and muscle",
-      "term": "Inflammatory myopathy",
-      "description": "A diagnostic category of immune-mediated muscle diseases.",
-      "source": "myositis"
-    },
-    {
       "id": "d-dermatomyositis",
       "type": "disease",
       "category": "Motor neuron and muscle",
-      "term": "Dermatomyositis",
-      "description": "An autoimmune disease with characteristic skin changes, sometimes with muscle involvement.",
-      "source": "myositis"
-    },
-    {
-      "id": "d-polymyositis",
-      "type": "disease",
-      "category": "Motor neuron and muscle",
-      "term": "Polymyositis",
-      "description": "An inflammatory myopathy diagnosed after excluding better-defined alternatives.",
-      "source": "myositis"
-    },
-    {
-      "id": "d-inclusion-body-myositis",
-      "type": "disease",
-      "category": "Motor neuron and muscle",
-      "term": "Inclusion body myositis",
-      "description": "A progressive muscle disease often affecting finger flexors and knee extensors.",
+      "term": "Myositis",
+      "description": "An umbrella for inflammatory muscle diseases. Skin findings, weakness distribution and response to steroids depend on the subtype.",
       "source": "myositis",
       "aliases": [
+        "Dermatomyositis",
+        "Inflammatory myopathy",
+        "Polymyositis",
+        "Inclusion body myositis",
         "IBM"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Dermatomyositis",
+          "description": "An autoimmune disease with characteristic skin changes, sometimes with muscle involvement."
+        },
+        {
+          "name": "Inflammatory myopathy",
+          "description": "A diagnostic category of immune-mediated muscle diseases."
+        },
+        {
+          "name": "Polymyositis",
+          "description": "An inflammatory myopathy diagnosed after excluding better-defined alternatives."
+        },
+        {
+          "name": "Inclusion body myositis",
+          "description": "A progressive muscle disease often affecting finger flexors and knee extensors."
+        }
       ]
     },
     {
@@ -2056,8 +2008,8 @@ window.NEURO_REFERENCE={
       "id": "s-hypertonia",
       "type": "symptom",
       "category": "Strength and muscle",
-      "term": "Hypertonia",
-      "description": "Increased muscle tone that makes a limb stiff and harder to move passively.",
+      "term": "Increased muscle tone",
+      "description": "Increased resistance to passive movement, including spasticity and rigidity. Their examination patterns differ.",
       "source": "tone",
       "searchTerms": [
         "increased tone",
@@ -2066,7 +2018,29 @@ window.NEURO_REFERENCE={
       "qualifiers": {
         "side": true,
         "region": true
-      }
+      },
+      "aliases": [
+        "Hypertonia",
+        "increased tone",
+        "high muscle tone",
+        "Spasticity",
+        "Rigidity"
+      ],
+      "subtypeLabel": "Types and patterns",
+      "subtypes": [
+        {
+          "name": "Hypertonia",
+          "description": "Increased muscle tone that makes a limb stiff and harder to move passively."
+        },
+        {
+          "name": "Spasticity",
+          "description": "Muscle tone increases more with faster stretching."
+        },
+        {
+          "name": "Rigidity",
+          "description": "Increased resistance throughout passive limb movement."
+        }
+      ]
     },
     {
       "id": "d-epilepsy",
@@ -2299,10 +2273,10 @@ window.NEURO_REFERENCE={
       "s-monoprosody"
     ],
     "disease:progressivesupranuclearpalsy": [
-      "d-progressive-supranuclear-palsy"
+      "d-parkinson-disease"
     ],
     "disease:multiplesystematrophy": [
-      "d-multiple-system-atrophy"
+      "d-parkinson-disease"
     ],
     "disease:huntingtondisease": [
       "d-huntington-disease"
@@ -2323,7 +2297,7 @@ window.NEURO_REFERENCE={
       "s-bradykinesia"
     ],
     "symptom:dysmetria": [
-      "s-dysmetria"
+      "s-ataxia"
     ],
     "symptom:sensoryloss": [],
     "symptom:apraxia": [
@@ -2355,13 +2329,13 @@ window.NEURO_REFERENCE={
       "d-sedative-medication-effect"
     ],
     "symptom:handrigidity": [
-      "s-rigidity"
+      "s-hypertonia"
     ],
     "symptom:myoclonus": [
       "s-myoclonus"
     ],
     "disease:corticobasalsyndrome": [
-      "d-corticobasal-syndrome"
+      "d-parkinson-disease"
     ],
     "symptom:ataxia": [
       "s-ataxia"
@@ -2373,7 +2347,7 @@ window.NEURO_REFERENCE={
       "s-weakness"
     ],
     "symptom:upperlimbdysmetria": [
-      "s-dysmetria"
+      "s-ataxia"
     ],
     "symptom:unilateraltremor": [
       "s-tremor"
@@ -2394,13 +2368,13 @@ window.NEURO_REFERENCE={
       "d-upper-limb-injury"
     ],
     "symptom:armspasticity": [
-      "s-spasticity"
+      "s-hypertonia"
     ],
     "symptom:motorfatigability": [
       "s-motor-fatigability"
     ],
     "symptom:armrigidity": [
-      "s-rigidity"
+      "s-hypertonia"
     ],
     "symptom:limbapraxia": [
       "s-apraxia"
@@ -2409,7 +2383,7 @@ window.NEURO_REFERENCE={
       "d-focal-dystonia"
     ],
     "disease:inflammatorymyopathy": [
-      "d-inflammatory-myopathy"
+      "d-dermatomyositis"
     ],
     "symptom:hemipareticgait": [
       "s-hemiparetic-gait"
@@ -2430,16 +2404,16 @@ window.NEURO_REFERENCE={
       "s-parkinsonian-gait"
     ],
     "symptom:ataxicgait": [
-      "s-ataxic-gait"
+      "s-ataxia"
     ],
     "symptom:antalgicgait": [
       "s-antalgic-gait"
     ],
     "symptom:proprioceptivegaitimpairment": [
-      "s-sensory-ataxia"
+      "s-ataxia"
     ],
     "disease:lumbarradiculopathy": [
-      "d-lumbar-radiculopathy"
+      "d-cervical-radiculopathy"
     ],
     "disease:commonperonealneuropathy": [
       "d-peripheral-neuropathy"
@@ -2451,7 +2425,7 @@ window.NEURO_REFERENCE={
       "s-freezing-of-gait"
     ],
     "symptom:legrigidity": [
-      "s-rigidity"
+      "s-hypertonia"
     ],
     "symptom:dystonicgait": [
       "s-dystonic-gait"
@@ -2496,7 +2470,7 @@ window.NEURO_REFERENCE={
       "d-optic-neuritis"
     ],
     "disease:chronicinflammatorydemyelinatingpolyneuropathy": [
-      "d-chronic-inflammatory-demyelinating-polyneuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:acutedisseminatedencephalomyelitis": [
       "d-acute-disseminated-encephalomyelitis"
@@ -2518,13 +2492,13 @@ window.NEURO_REFERENCE={
       "s-hypomimia"
     ],
     "disease:druginducedparkinsonism": [
-      "d-drug-induced-parkinsonism"
+      "d-parkinson-disease"
     ],
     "disease:dementiawithlewybodies": [
-      "d-dementia-with-lewy-bodies"
+      "d-parkinson-disease"
     ],
     "disease:vascularparkinsonism": [
-      "d-vascular-parkinsonism"
+      "d-parkinson-disease"
     ],
     "symptom:handmusclewasting": [
       "s-muscle-atrophy"
@@ -2533,7 +2507,7 @@ window.NEURO_REFERENCE={
       "d-peripheral-neuropathy"
     ],
     "disease:multifocalmotorneuropathy": [
-      "d-multifocal-motor-neuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:medianneuropathy": [
       "d-peripheral-neuropathy"
@@ -2542,7 +2516,7 @@ window.NEURO_REFERENCE={
       "d-spinal-muscular-atrophy"
     ],
     "disease:inclusionbodymyositis": [
-      "d-inclusion-body-myositis"
+      "d-dermatomyositis"
     ],
     "disease:kennedydisease": [
       "d-kennedy-disease"
@@ -2602,7 +2576,7 @@ window.NEURO_REFERENCE={
       "d-migraine"
     ],
     "disease:tensiontypeheadache": [
-      "d-tension-type-headache"
+      "d-migraine"
     ],
     "disease:intracranialmass": [
       "d-brain-tumor"
@@ -2656,7 +2630,33 @@ window.NEURO_REFERENCE={
     "d-charcot-marie-tooth-disease": "d-peripheral-neuropathy",
     "d-chronic-subdural-hematoma": "d-intracranial-hematoma",
     "d-acute-subdural-hematoma": "d-intracranial-hematoma",
-    "d-epidural-hematoma": "d-intracranial-hematoma"
+    "d-epidural-hematoma": "d-intracranial-hematoma",
+    "d-drug-induced-parkinsonism": "d-parkinson-disease",
+    "d-vascular-parkinsonism": "d-parkinson-disease",
+    "d-progressive-supranuclear-palsy": "d-parkinson-disease",
+    "d-multiple-system-atrophy": "d-parkinson-disease",
+    "d-corticobasal-syndrome": "d-parkinson-disease",
+    "d-dementia-with-lewy-bodies": "d-parkinson-disease",
+    "d-vascular-dementia": "d-alzheimer-disease",
+    "d-frontotemporal-dementia": "d-alzheimer-disease",
+    "d-infectious-encephalitis": "d-autoimmune-encephalitis",
+    "d-lumbar-radiculopathy": "d-cervical-radiculopathy",
+    "d-normal-pressure-hydrocephalus": "d-hydrocephalus",
+    "d-guillain-barr-syndrome": "d-peripheral-neuropathy",
+    "d-chronic-inflammatory-demyelinating-polyneuropathy": "d-peripheral-neuropathy",
+    "d-multifocal-motor-neuropathy": "d-peripheral-neuropathy",
+    "d-inflammatory-myopathy": "d-dermatomyositis",
+    "d-polymyositis": "d-dermatomyositis",
+    "d-inclusion-body-myositis": "d-dermatomyositis",
+    "d-tension-type-headache": "d-migraine",
+    "d-cluster-headache": "d-migraine",
+    "d-medication-overuse-headache": "d-migraine",
+    "s-spasticity": "s-hypertonia",
+    "s-rigidity": "s-hypertonia",
+    "s-dysmetria": "s-ataxia",
+    "s-dysdiadochokinesia": "s-ataxia",
+    "s-ataxic-gait": "s-ataxia",
+    "s-sensory-ataxia": "s-ataxia"
   },
   "inputBindings": {
     "disease:seizure": "d-epilepsy",
@@ -2719,10 +2719,10 @@ window.NEURO_REFERENCE={
     "disease:cvst": "d-cerebral-venous-thrombosis",
     "disease:pd": "d-parkinson-disease",
     "disease:parkinsonsdisease": "d-parkinson-disease",
-    "disease:psp": "d-progressive-supranuclear-palsy",
-    "disease:msa": "d-multiple-system-atrophy",
-    "disease:cbs": "d-corticobasal-syndrome",
-    "disease:corticobasaldegeneration": "d-corticobasal-syndrome",
+    "disease:psp": "d-parkinson-disease",
+    "disease:msa": "d-parkinson-disease",
+    "disease:cbs": "d-parkinson-disease",
+    "disease:corticobasaldegeneration": "d-parkinson-disease",
     "disease:et": "d-essential-tremor",
     "disease:friedreichataxia": "d-cerebellar-disorder",
     "disease:spinocerebellarataxia": "d-cerebellar-disorder",
@@ -2733,27 +2733,27 @@ window.NEURO_REFERENCE={
     "disease:freidrechsataxia": "d-cerebellar-disorder",
     "disease:sca": "d-cerebellar-disorder",
     "disease:spinocerebellardegeneration": "d-cerebellar-disorder",
-    "disease:dlb": "d-dementia-with-lewy-bodies",
-    "disease:lewybodydementia": "d-dementia-with-lewy-bodies",
+    "disease:dlb": "d-parkinson-disease",
+    "disease:lewybodydementia": "d-parkinson-disease",
     "disease:glioblastomamultiforme": "d-brain-tumor",
     "disease:gbm": "d-brain-tumor",
-    "disease:nph": "d-normal-pressure-hydrocephalus",
+    "disease:nph": "d-hydrocephalus",
     "disease:iih": "d-idiopathic-intracranial-hypertension",
     "disease:ms": "d-multiple-sclerosis",
     "disease:nmosd": "d-neuromyelitis-optica-spectrum-disorder",
     "disease:neuromyelitisoptica": "d-neuromyelitis-optica-spectrum-disorder",
     "disease:mogad": "d-mog-antibody-associated-disease",
     "disease:mogantibodydisease": "d-mog-antibody-associated-disease",
-    "disease:gbs": "d-guillain-barr-syndrome",
-    "disease:guillainbarresyndrome": "d-guillain-barr-syndrome",
-    "disease:cidp": "d-chronic-inflammatory-demyelinating-polyneuropathy",
-    "disease:mmn": "d-multifocal-motor-neuropathy",
+    "disease:gbs": "d-peripheral-neuropathy",
+    "disease:guillainbarresyndrome": "d-peripheral-neuropathy",
+    "disease:cidp": "d-peripheral-neuropathy",
+    "disease:mmn": "d-peripheral-neuropathy",
     "disease:cmt": "d-peripheral-neuropathy",
     "disease:charcotmarietoothdisease": "d-peripheral-neuropathy",
     "disease:als": "d-amyotrophic-lateral-sclerosis",
     "disease:mg": "d-myasthenia-gravis",
     "disease:myasthenia": "d-myasthenia-gravis",
-    "disease:ibm": "d-inclusion-body-myositis",
+    "disease:ibm": "d-dermatomyositis",
     "disease:fnd": "d-functional-neurological-disorder",
     "disease:seizuredisorder": "d-epilepsy",
     "disease:focalseizure": "d-epilepsy",
@@ -2801,19 +2801,46 @@ window.NEURO_REFERENCE={
     "disease:subduralhematoma": "d-intracranial-hematoma",
     "disease:subduralhaematoma": "d-intracranial-hematoma",
     "disease:epiduralhaematoma": "d-intracranial-hematoma",
-    "disease:intracranialhaematoma": "d-intracranial-hematoma"
+    "disease:intracranialhaematoma": "d-intracranial-hematoma",
+    "disease:druginducedparkinsonism": "d-parkinson-disease",
+    "disease:vascularparkinsonism": "d-parkinson-disease",
+    "disease:progressivesupranuclearpalsy": "d-parkinson-disease",
+    "disease:multiplesystematrophy": "d-parkinson-disease",
+    "disease:corticobasalsyndrome": "d-parkinson-disease",
+    "disease:dementiawithlewybodies": "d-parkinson-disease",
+    "disease:parkinsondisease": "d-parkinson-disease",
+    "symptom:ataxia": "s-ataxia",
+    "symptom:dysmetria": "s-ataxia",
+    "symptom:dysdiadochokinesia": "s-ataxia",
+    "symptom:ataxicgait": "s-ataxia",
+    "symptom:sensoryataxia": "s-ataxia",
+    "disease:alzheimerdisease": "d-alzheimer-disease",
+    "disease:vasculardementia": "d-alzheimer-disease",
+    "disease:frontotemporaldementia": "d-alzheimer-disease",
+    "disease:hydrocephalus": "d-hydrocephalus",
+    "disease:normalpressurehydrocephalus": "d-hydrocephalus",
+    "disease:autoimmuneencephalitis": "d-autoimmune-encephalitis",
+    "disease:infectiousencephalitis": "d-autoimmune-encephalitis",
+    "disease:migraine": "d-migraine",
+    "disease:tensiontypeheadache": "d-migraine",
+    "disease:clusterheadache": "d-migraine",
+    "disease:medicationoveruseheadache": "d-migraine",
+    "disease:cervicalradiculopathy": "d-cervical-radiculopathy",
+    "disease:lumbarradiculopathy": "d-cervical-radiculopathy",
+    "disease:peripheralneuropathy": "d-peripheral-neuropathy",
+    "disease:chronicinflammatorydemyelinatingpolyneuropathy": "d-peripheral-neuropathy",
+    "disease:multifocalmotorneuropathy": "d-peripheral-neuropathy",
+    "disease:dermatomyositis": "d-dermatomyositis",
+    "disease:inflammatorymyopathy": "d-dermatomyositis",
+    "disease:polymyositis": "d-dermatomyositis",
+    "disease:inclusionbodymyositis": "d-dermatomyositis",
+    "symptom:hypertonia": "s-hypertonia",
+    "symptom:increasedtone": "s-hypertonia",
+    "symptom:highmuscletone": "s-hypertonia",
+    "symptom:spasticity": "s-hypertonia",
+    "symptom:rigidity": "s-hypertonia"
   },
-  "approvalGroups": [
-    [
-      "d-parkinson-disease",
-      "d-drug-induced-parkinsonism",
-      "d-vascular-parkinsonism",
-      "d-progressive-supranuclear-palsy",
-      "d-multiple-system-atrophy",
-      "d-corticobasal-syndrome",
-      "d-dementia-with-lewy-bodies"
-    ]
-  ],
+  "approvalGroups": [],
   "removedIds": [
     "s-inflammation",
     "s-extensor-plantar-response",

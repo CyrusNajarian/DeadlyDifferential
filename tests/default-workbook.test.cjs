@@ -7,7 +7,7 @@ try {
  // The default artifact contains the reviewed clinical approvals, not stale JS lists.
  const approved=(stage,id)=>stage.accepted.some(a=>a.referenceIds?.includes(id));
  assert(approved(initial.clues[4].stages[0],'d-dermatomyositis'));
- assert(approved(initial.clues[4].stages[0],'d-polymyositis'));
+ assert(approved(initial.clues[4].stages[0],'d-peripheral-neuropathy')); // CIDP is a steroid-responsive subtype.
  assert(!approved(initial.clues[4].stages[0],'d-guillain-barr-syndrome'));
  assert(!approved(initial.clues[4].stages[0],'d-inclusion-body-myositis'));
  assert(!initial.clues[4].stages[0].accepted.some(a=>a.type==='symptom'));
