@@ -95,7 +95,7 @@ Older workbooks and saved IDs migrate to the canonical entries. Merged workbook 
 
 ## Symptom location and distribution
 
-After entering/selecting a localized symptom, players must choose its side/distribution and, where applicable, its body region before checking it. The only options are **Unilateral / Bilateral** and **Arm/hand / Leg/foot**. Non-limb findings do not require an irrelevant limb selection. Foot/gait and eyelid terms already specify their region, so they ask only for distribution. Other symptoms such as headache do not show irrelevant arm/leg controls.
+After entering/selecting a localized symptom, players must choose its side/distribution and, where applicable, its body region before checking it. The only options are **Right / Left / Bilateral** and **Arm/hand / Leg/foot**. Non-limb findings do not require an irrelevant limb selection. Foot/gait and eyelid terms already specify their region, so they ask only for distribution. Other symptoms such as headache do not show irrelevant arm/leg controls.
 
 The selected distribution is matched against the evidence where the clue establishes a location: arm/hand for neck/key/hand/camera tasks, leg/foot for footsteps, speech muscles for voicemail fatigability, and eyelids for the ptosis photos. The photos accept bilateral ptosis; unequal involvement of both sides is included under Bilateral. Visual and spatial mechanisms retain their appropriate exceptions rather than being rejected as arm symptoms. Existing saved matches for retained entries are preserved; new submissions require the follow-up choices. The choices save with progress and in detailed logging JSON. A different qualifier does not earn a second credit for the same main symptom.
 
@@ -168,3 +168,9 @@ On the final Choose culprit screen, the original differential is read-only. Play
 The latest consolidation uses Parkinsonism, Dementia, Encephalitis, Radiculopathy, Hydrocephalus, Peripheral neuropathy, Myositis and Headache disorder as umbrella diagnosis answers. Individual types remain searchable and appear under the main reference heading. Myositis includes the dermatomyositis subtype intended by Dr. Rust’s skin findings. Immune-mediated neuropathies are now within Peripheral neuropathy; their differing steroid responses are explained in the reference.
 
 For symptoms, **Increased muscle tone** includes spasticity/rigidity, and **Impaired coordination** includes ataxia, dysmetria, impaired rapid alternating movements and related gait patterns. The current workbook contains 85 symptoms/signs and 72 diagnoses. A broad class can be accepted where any relevant subtype fits; it does not mean every subtype shares all findings or treatment.
+
+## Focused location follow-ups
+
+Location choices are limited to focal weakness/wasting, sensory and extremity-pain findings, foot-drop/hemiparetic patterns, and relevant eye/face/spatial findings. Broad movement descriptions such as chorea, tremor, dystonia, myoclonus, tics, bradykinesia, increased tone and impaired coordination no longer force distribution choices. This keeps the game focused; it does not mean those phenomena can never have a focal distribution clinically.
+
+The side menu is Right, Left or Bilateral. The body menu remains Arm/hand or Leg/foot where relevant. Explicit evidence is checked—for example, the yearly form’s left-side omissions support left spatial neglect. Where a clue establishes asymmetry but not which limb is affected, either Right or Left is accepted rather than inventing precision. Older unilateral records are retained without assigning an invented side; new submissions require a current selection.

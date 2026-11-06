@@ -3297,7 +3297,17 @@ window.CASE_CONFIG={
               "prompt": "What could explain this spatial pattern of completion?",
               "hint": "Consider a persistent change in spatial attention."
             }
-          ]
+          ],
+          "symptomDistribution": {
+            "sidesById": {
+              "s-hemispatial-neglect": [
+                "left"
+              ],
+              "s-visual-field-loss": [
+                "left"
+              ]
+            }
+          }
         }
       ],
       "sources": [

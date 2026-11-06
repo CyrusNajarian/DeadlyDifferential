@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 10,
+  "version": 11,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -160,11 +160,7 @@ window.NEURO_REFERENCE={
         "Fatigable weakness",
         "Fatigability",
         "Use-dependent weakness"
-      ],
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      ]
     },
     {
       "id": "s-fatigue",
@@ -192,11 +188,7 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Fasciculations",
       "description": "Small, visible muscle twitches under the skin.",
-      "source": "pns",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "pns"
     },
     {
       "id": "s-muscle-cramps",
@@ -204,11 +196,7 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Muscle cramps",
       "description": "Painful involuntary muscle contractions.",
-      "source": "symptoms",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "symptoms"
     },
     {
       "id": "s-hypotonia",
@@ -220,11 +208,7 @@ window.NEURO_REFERENCE={
       "searchTerms": [
         "decreased tone",
         "low muscle tone"
-      ],
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      ]
     },
     {
       "id": "s-myotonia",
@@ -232,11 +216,7 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Myotonia",
       "description": "Delayed muscle relaxation after contraction.",
-      "source": "pns",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "pns"
     },
     {
       "id": "s-bulbar-weakness",
@@ -255,11 +235,7 @@ window.NEURO_REFERENCE={
       "source": "movement",
       "aliases": [
         "Rhythmic shaking"
-      ],
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      ]
     },
     {
       "id": "s-bradykinesia",
@@ -267,11 +243,7 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Bradykinesia",
       "description": "Slowed movement with reduced amplitude or speed during repetition.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "movement"
     },
     {
       "id": "s-hypomimia",
@@ -300,11 +272,7 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Dystonia",
       "description": "Sustained or intermittent contractions cause abnormal postures or movements.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "movement"
     },
     {
       "id": "s-chorea",
@@ -312,11 +280,7 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Chorea",
       "description": "Irregular, flowing involuntary movements.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "movement"
     },
     {
       "id": "s-myoclonus",
@@ -324,11 +288,7 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Myoclonus",
       "description": "Brief, sudden involuntary muscle jerks.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "movement"
     },
     {
       "id": "s-tics",
@@ -336,11 +296,7 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Tics",
       "description": "Repeated movements or sounds, often temporarily suppressible.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "movement"
     },
     {
       "id": "s-akathisia",
@@ -357,10 +313,6 @@ window.NEURO_REFERENCE={
       "term": "Impaired coordination",
       "description": "Poor coordination of limb movement or walking. The pattern can reflect cerebellar dysfunction or impaired position feedback.",
       "source": "cerebellar",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      },
       "aliases": [
         "Ataxia",
         "Dysmetria",
@@ -403,11 +355,7 @@ window.NEURO_REFERENCE={
         "Hand clumsiness",
         "Poor dexterity",
         "Impaired dexterity"
-      ],
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      ]
     },
     {
       "id": "s-hemiparetic-gait",
@@ -439,11 +387,7 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Spastic gait",
       "description": "Stiff-legged walking associated with increased muscle tone.",
-      "source": "weakness",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
+      "source": "weakness"
     },
     {
       "id": "s-parkinsonian-gait",
@@ -451,11 +395,7 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Parkinsonian gait",
       "description": "Short, shuffling steps with reduced automatic movement.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
+      "source": "movement"
     },
     {
       "id": "s-antalgic-gait",
@@ -463,11 +403,7 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Antalgic gait",
       "description": "Walking modified to avoid pain.",
-      "source": "exam",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
+      "source": "exam"
     },
     {
       "id": "s-foot-drop",
@@ -487,11 +423,7 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Freezing of gait",
       "description": "Brief inability to initiate or continue stepping.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
+      "source": "movement"
     },
     {
       "id": "s-dystonic-gait",
@@ -499,11 +431,7 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Dystonic gait",
       "description": "Walking distorted by abnormal muscle contractions or postures.",
-      "source": "movement",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
+      "source": "movement"
     },
     {
       "id": "s-postural-instability",
@@ -941,11 +869,7 @@ window.NEURO_REFERENCE={
       "category": "Other relevant findings",
       "term": "Hyperreflexia",
       "description": "Exaggerated deep-tendon reflexes.",
-      "source": "weakness",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "weakness"
     },
     {
       "id": "s-hyporeflexia",
@@ -953,11 +877,7 @@ window.NEURO_REFERENCE={
       "category": "Other relevant findings",
       "term": "Hyporeflexia",
       "description": "Reduced tendon reflexes.",
-      "source": "weakness",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "weakness"
     },
     {
       "id": "s-clonus",
@@ -965,11 +885,7 @@ window.NEURO_REFERENCE={
       "category": "Other relevant findings",
       "term": "Clonus",
       "description": "Repeated rhythmic contractions triggered by sustained stretch.",
-      "source": "weakness",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
+      "source": "weakness"
     },
     {
       "id": "s-cerebral-edema",
@@ -2015,10 +1931,6 @@ window.NEURO_REFERENCE={
         "increased tone",
         "high muscle tone"
       ],
-      "qualifiers": {
-        "side": true,
-        "region": true
-      },
       "aliases": [
         "Hypertonia",
         "increased tone",
