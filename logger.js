@@ -1,6 +1,6 @@
 /* Every event stays in the device archive; only confirmed events leave the sync queue. */
 const DDLog=(()=>{
- const endpoint='/.netlify/functions/log-events';
+ const endpoint=location.hostname==='cyrusnajarian.github.io'?'https://deadly-differential.netlify.app/.netlify/functions/log-events':'/.netlify/functions/log-events';
  const id=()=>globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
  const read=key=>{try{return localStorage.getItem(key)}catch{return null}};
  let attempt=read('dd-attempt-v2'),team='',current=null,since=null,busy=false,error='',storageFailed=false;

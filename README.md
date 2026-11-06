@@ -12,13 +12,33 @@ A browser-based neurology murder mystery, hosted on Netlify. Players inspect evi
 
 Reference and Notes open from the side of the screen. Notes save on the player's device. Debug mode bypasses progression requirements; it does not submit answers or complete missing decisions.
 
-## Deploy
+## Deploy with GitHub Pages
 
-Connect this repository's `main` branch to the existing Netlify site. The checked-in `netlify.toml` sets the build command to `npm run build`, publishes the repository root (`.`), and deploys `netlify/functions`.
+The game now targets GitHub Pages. `.github/workflows/pages.yml` installs dependencies, runs tests, compiles the committed Excel approvals, and deploys a browser-only `_site/` artifact on pushes to `main` or a manual workflow run.
 
-Netlify installs the locked npm dependencies and compiles the default answer approvals from `Deadly_Differential_Answer_Matrix.xlsx` into the player configuration. Invalid workbook edits fail the build instead of silently publishing different answers. The bundled `log-events` function needs Netlify's current Node runtime with built-in `fetch`. **Deploy through Netlify's Git integration:** a static-only drag-and-drop upload does not build the logging function.
+One-time setup: repository **Settings → Pages → Build and deployment → Source → GitHub Actions**. Then run **Actions → Deploy GitHub Pages → Run workflow** if the first push ran before Pages was enabled. The connected GitHub app cannot change the repository’s Pages setting.
 
-After deployment, start a test team and submit an answer. The status beneath the clue should change to **confirmed by Google Sheets**, and a row should appear in that attempt's log. A push to GitHub alone does not prove the Netlify deploy succeeded.
+This repository is private. GitHub Pages for private repositories requires an eligible paid GitHub plan. Keep the repository private; do not change its visibility merely to enable hosting. See [GitHub’s publishing-source documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+After a successful deployment the intended project URL is `https://cyrusnajarian.github.io/DeadlyDifferential/`. Use the URL reported by the deployment job as the verified live address. All browser assets use relative paths and support the repository subdirectory.
+
+### Logging backend
+
+GitHub Pages cannot execute server functions. The game uses `https://deadly-differential.netlify.app/.netlify/functions/log-events` for confirmed Google Sheets delivery. The Netlify function permits requests from `https://cyrusnajarian.github.io`. Keep that backend deployed; deploy this commit on Netlify too so the CORS change takes effect. The game itself is served by GitHub Pages.
+
+The existing `netlify.toml` remains for backend deployment. No Apps Script change is required. If uploads are unavailable, the device archive and retry queue remain intact and the status reports the failure. Do not delete the Netlify project while it supplies this backend.
+
+Browser saves are origin-specific: old Netlify progress/logs do not automatically appear on the GitHub Pages origin. Reopen the old Netlify site to export or sync that browser’s retained logs before abandoning it.
+
+To preview the actual Pages artifact locally:
+
+```sh
+npm ci
+npm run build:pages
+python -m http.server 8000 --directory _site
+```
+
+A local static server does not execute the logging function. After deployment, submit a test answer and verify both confirmed browser status and the Google Sheet row.
 
 ## Edit answers in Excel
 
@@ -40,7 +60,7 @@ Use filters to show accepted answers for one case. The reference columns and hea
 
 1. Edit **Yes/No** cells in Symptoms or Diagnoses. Keep the Reference IDs, case columns, all reference rows, and headers in row 5. Sorting rows is supported.
 2. Replace `Deadly_Differential_Answer_Matrix.xlsx` in the repository with your edited copy.
-3. Push to `main`. Netlify automatically imports its approvals during the build. No manual configuration export is needed.
+3. Push to `main`. The GitHub Pages workflow automatically imports its approvals during the build. No manual configuration export is needed.
 
 For a device-only preview, open `/setup.html`: it loads the repository workbook automatically. Upload a different copy to try changes before committing them. The config download remains available for inspection; the committed workbook controls the next deployment’s approvals.
 

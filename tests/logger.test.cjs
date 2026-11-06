@@ -3,12 +3,12 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../logger.js'), 'utf8');
-function browser(initial = {}, fetcher, online = true) {
+function browser(initial = {}, fetcher, online = true, hostname = '') {
  const values = new Map(Object.entries(initial)), nodes = new Map(), timers = [], requests = [];
  const listeners = {};
  const ctx = {
   localStorage: {getItem: k => values.get(k) ?? null, setItem: (k,v) => values.set(k,v), removeItem: k => values.delete(k)},
-  navigator: {onLine: online}, location: {search: ''}, crypto: require('node:crypto').webcrypto,
+  navigator: {onLine: online}, location: {search: '',hostname}, crypto: require('node:crypto').webcrypto,
   performance: {now: () => 100}, Blob, AbortController, URLSearchParams, URL, console,
   setTimeout: () => 1, clearTimeout() {}, setInterval: fn => timers.push(fn),
   document: {visibilityState: 'visible', querySelector: id => {if (!nodes.has(id)) nodes.set(id, {});return nodes.get(id)}, addEventListener: (k,fn) => listeners[k] = fn},
@@ -27,6 +27,7 @@ const settle = () => new Promise(resolve=>setImmediate(resolve));
  assert.ok(b.events().every(e=>e.syncedAt));assert.equal(b.log.status().pending,0);
  assert.equal(b.requests.at(-1).url,'/.netlify/functions/log-events');
  assert.ok(b.nodes.get('#logStatus').textContent.includes('confirmed by Google Sheets'));
+ b=browser({},ok,true,'cyrusnajarian.github.io');b.log.start('Pages');await settle();assert.equal(b.requests[0].url,'https://deadly-differential.netlify.app/.netlify/functions/log-events');
  // Neither opaque replies nor receiver errors acknowledge anything. A retry can recover it.
  let works=false;b=browser({},async(...args)=>works?ok(...args):({ok:true,json:async()=>({ok:false,error:'Receiver rejected batch'})}));
  b.log.start('Keep me');await settle();b.log.event('answer',{raw:'Stroke'});await settle();
@@ -53,7 +54,8 @@ const settle = () => new Promise(resolve=>setImmediate(resolve));
  try {
   let forwarded;
   global.fetch=async(url,options)=>{forwarded={url,options};return {ok:true,text:async()=>JSON.stringify({ok:true,schemaVersion:2,eventIds:['e1']})}};
-  let r=await handler(request);assert.equal(r.statusCode,200);assert.deepEqual(JSON.parse(r.body).eventIds,['e1']);assert.ok(forwarded.url.startsWith('https://script.google.com/'));assert.equal(JSON.parse(forwarded.options.body).schemaVersion,2);
+  let r=await handler({httpMethod:'OPTIONS'});assert.equal(r.statusCode,204);assert.equal(r.headers['Access-Control-Allow-Origin'],'https://cyrusnajarian.github.io');assert(r.headers['Access-Control-Allow-Headers'].includes('Content-Type'));
+  r=await handler(request);assert.equal(r.statusCode,200);assert.deepEqual(JSON.parse(r.body).eventIds,['e1']);assert.ok(forwarded.url.startsWith('https://script.google.com/'));assert.equal(JSON.parse(forwarded.options.body).schemaVersion,2);
   const legacy=JSON.parse(forwarded.options.body).events[0];assert.equal(legacy.id,'e1');assert.equal(legacy.session,'attempt-123');assert.equal(legacy.answer,'shaky');assert.equal(legacy.canonical,'Tremor');assert.equal(legacy.event,'answer');assert.equal(JSON.parse(legacy.reason).raw,'shaky');
   global.fetch=async()=>({ok:true,text:async()=>'OK'});assert.equal((await handler(request)).statusCode,200);
   global.fetch=async()=>({ok:true,text:async()=>'{}'});assert.equal((await handler(request)).statusCode,502);

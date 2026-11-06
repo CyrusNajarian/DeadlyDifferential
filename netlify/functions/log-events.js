@@ -1,6 +1,6 @@
 // This bridge supports the original deployed Code.gs and the version 2 receiver.
 const receiver = 'https://script.google.com/macros/s/AKfycbzaFiqXTc9UYiDzw-ykDGQ1ncOrIS4M2twlHrdkyW89T204CLl9CDeiYdTZRtGf7tQ-/exec';
-const reply = (statusCode, body) => ({statusCode, headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-store'}, body: JSON.stringify(body)});
+const reply = (statusCode, body) => ({statusCode, headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin':'https://cyrusnajarian.github.io', 'Access-Control-Allow-Methods':'POST, OPTIONS', 'Access-Control-Allow-Headers':'Content-Type'}, body: JSON.stringify(body)});
 function transportEvent(e) {
  // Original Code.gs accepts only these three event names and validates session IDs.
  // Keep the full original event in reason so ranking, hints and final choices survive.
@@ -14,6 +14,7 @@ function transportEvent(e) {
   reason:JSON.stringify(e)};
 }
 exports.handler = async function(event) {
+ if (event.httpMethod === 'OPTIONS') return reply(204, {});
  if (event.httpMethod !== 'POST') return reply(405, {ok:false, error:'Use POST.'});
  let body;
  try {

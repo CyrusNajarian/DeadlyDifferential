@@ -52,3 +52,7 @@ The repository stores no Google account credentials. The Apps Script and Sheet p
 | No local answers in the download | Check the original site origin/browser/device; reset alone does not erase the archive |
 
 Live Google Sheets delivery and Netlify deployment must be verified after deployment. Local regression tests use a simulated Sheet and do not create test rows in the live log.
+
+## GitHub Pages hosting
+
+The game is published using the GitHub Pages Actions workflow. Its browser logger sends to the existing Netlify backend at https://deadly-differential.netlify.app/.netlify/functions/log-events. That function permits cross-origin POST/preflight requests from https://cyrusnajarian.github.io and retains confirmed delivery semantics. Deploy the CORS update on Netlify before expecting Pages uploads to work. Local progress/archives from the old origin stay there; reopen the old site to export or sync them.
