@@ -1,6 +1,7 @@
 function restoreInvestigationRoute(){
  const route=state.lastInvestigationRoute||'#culprit/0/0',parts=route.replace(/^#/,'').split('/');history.replaceState(null,'',route);
- if(['differential','assignments','final'].includes(parts[0])){state.section='checkpoint';state.checkpoint={differential:'ranking',assignments:'assignments',final:'final'}[parts[0]];}
+ if(parts[0]==='revision'){state.section='checkpoint';state.checkpoint=parts[1];}
+ else if(['differential','assignments','final'].includes(parts[0])){state.section='checkpoint';state.checkpoint={differential:'ranking',assignments:'assignments',final:'final'}[parts[0]];}
  else if(parts[0]==='suspects'){state.section='suspects';state.suspectSet=parts[1];state.suspectPerson=parts[2];}
  else{state.section='culprit';state.clue=Number(parts[1])||0;state.stage=Number(parts[2])||0;}
 }
@@ -22,7 +23,8 @@ function suspectRoute(){
   state.suspectPerson=people.some(p=>p.id===parts[2])?parts[2]:people[0].id;
   state.suspectPhase=parts[3]==='diagnoses'?'diagnoses':'symptoms';
   if(parts[1]!==state.suspectSet||parts[2]!==state.suspectPerson){state.suspectPhase='symptoms';history.replaceState(null,'',`#suspects/${state.suspectSet}/${state.suspectPerson}/symptoms`)}
- }else if(parts[0]==='culprit'){state.section='culprit';if(parts[1]!==undefined)state.clue=Number(parts[1]);if(parts[2]!==undefined)state.stage=Number(parts[2]);}
+ }else if(parts[0]==='revision'){state.section='checkpoint';state.checkpoint=parts[1];}
+ else if(parts[0]==='culprit'){state.section='culprit';if(parts[1]!==undefined)state.clue=Number(parts[1]);if(parts[2]!==undefined)state.stage=Number(parts[2]);}
  else if(['differential','assignments','final'].includes(parts[0])){state.section='checkpoint';state.checkpoint={differential:'ranking',assignments:'assignments',final:'final'}[parts[0]];}
  else if(parts[0]==='notes'){restoreInvestigationRoute();openNotes();}
  else if(parts[0]==='reference'){restoreInvestigationRoute();openReference();}

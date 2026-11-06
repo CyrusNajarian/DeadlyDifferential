@@ -39,7 +39,7 @@ const context = {
   state: { team: 'QA', section: 'culprit', clue: 0, stage: 0, flow: {}, notes: 'Existing notes' },
   config: null, location: { hash: '' }, history: { replaceState() {} }, debugMode: false,
   DDLog: { event: (kind, data) => events.push({ kind, ...data }), screen() {} },
-  save() {}, render() {}, toast() {}, $,
+  save() {}, render() {}, toast() {}, mediaCard: media => media ? `<img src="${media.src}">` : '', $,
   $$: () => [], esc: value => String(value ?? ''),
   norm: value => String(value).toLowerCase().replace(/[^a-z0-9]/g, ''), setTimeout() {}, URL
 };
@@ -51,8 +51,10 @@ context.DDReference = context.window.DDReference;
 context.config = context.window.CASE_CONFIG;
 const c = context, rules = c.resolutionRules(), steps = c.investigationSteps();
 assert.equal(rules.culpritId, 'A');
-assert.equal(steps.length, 22);
-assert.equal(steps[5].id, 'ranked-differential');
+assert.equal(steps.filter(s=>s.revision==='culprit').length,2);
+assert.equal(steps.filter(s=>s.revision==='suspects').length,6);
+assert.equal(steps.filter(s=>s.section==='culprit').length,5);
+assert.equal(steps[2].id,'revise-culprit-2');
 assert.equal(steps.at(-2).id, 'suspect-assignment');
 assert.equal(steps.at(-1).id, 'final-answer');
 for (const step of steps.filter(s => s.section === 'suspects')) {
@@ -69,7 +71,19 @@ function complete(step) {
   record.matches = [];
   if (step.stage.observationOnly) record.observationReviewed = true;
 }
-steps.filter(s => s.section === 'culprit').forEach(complete);
+assert(!c.submitRevision('revise-culprit-2',ranking).ok);
+for(const step of steps){
+ if(step.section==='culprit')complete(step);
+ if(step.revision==='culprit'){
+  assert(!c.submitRevision(step.id,[ranking[0]]).ok);
+  assert(c.submitRevision(step.id,step.through===4?ranking.toReversed():ranking).ok);
+  assert.equal(events.at(-1).result,'ungraded');
+  assert(!c.submitRevision(step.id,ranking.toReversed()).ok);
+ }
+}
+assert.equal(JSON.stringify(c.latestRevision('culprit').ids),JSON.stringify(ranking.toReversed()));
+assert.equal(JSON.stringify(c.resolutionState().revisions['revise-culprit-2'].ids),JSON.stringify(ranking));
+const resumed=JSON.parse(JSON.stringify(c.state));assert.equal(JSON.stringify(resumed.resolution.revisions['revise-culprit-4'].ids),JSON.stringify(ranking.toReversed()));
 assert(!c.isStepUnlocked(steps.find(s => s.section === 'suspects').id));
 assert(!c.submitRankedDifferential([ranking[0], ...ranking.slice(0, 4)]).ok);
 assert(c.submitRankedDifferential(ranking).ok);
@@ -79,9 +93,32 @@ assert(!c.submitRankedDifferential(ranking.toReversed()).ok);
 c.renderSuspectAssignments();
 assert(!$('#roundContent').innerHTML.includes('Why Brain tumor fits'));
 assert(!$('#roundContent').innerHTML.includes('suspect-explanation'));
+assert.equal(($('#roundContent').innerHTML.match(/Clues to assess/g)||[]).length,6);
 const guesses = { A: 'd-migraine', B: 'd-brain-tumor', C: 'd-essential-tremor', D: 'd-ulnar-neuropathy', E: 'd-horner-syndrome', F: 'd-cutaneous-lupus-erythematosus' };
 assert(!c.submitSuspectAssignments(guesses).ok);
-steps.filter(s => s.section === 'suspects').forEach(complete);
+for(const step of steps){
+ if(step.section==='suspects')complete(step);
+ if(step.revision==='suspects'){
+  const evidence=c.revisionEvidenceSteps(step),seen=[...new Set(evidence.map(s=>s.personId))];
+  assert(!c.submitRevision(step.id,{}).ok);
+  c.renderRevisionCheckpoint(step.id);
+  const view=$('#roundContent').innerHTML;
+  assert(view.includes('Clues to assess'));
+  assert(!view.includes('Why Brain tumor fits'));
+  assert(!view.includes('of 6 correct'));
+  for(const set of c.config.suspectSets){if(!evidence.some(s=>s.setId===set.id))assert(!view.includes(`<h5>${set.title}</h5>`));}
+  assert(c.submitRevision(step.id,Object.fromEntries(seen.map(id=>[id,guesses[id]]))).ok);
+  assert.equal(events.at(-1).result,'ungraded');
+ }
+}
+for(const person of c.resolutionPeople()){
+ const html=c.suspectEvidence(person.id);
+ for(const set of c.config.suspectSets.filter(s=>s.people.some(p=>p.id===person.id&&p.observable!==false))){
+  assert(html.includes(set.title));
+  if(set.emails){const p=set.people.find(p=>p.id===person.id);for(const email of set.emails.filter(e=>!p.emailId||e.id===p.emailId))assert(html.includes(email.body.replace(/\n/g,'<br>')));}
+ }
+}
+
 assert(!c.submitSuspectAssignments({ A: guesses.A }).ok);
 assert(c.submitSuspectAssignments(guesses).ok);
 assert(!c.submitSuspectAssignments(rules.suspectDiagnoses).ok);
@@ -203,3 +240,8 @@ assert(c.diagnosisName('d-intracranial-mass').includes('(removed)'));
 
 c.state.resolution={ranking:{ids:ranking,submittedAt:'original'},assignment:{answers:{...rules.suspectDiagnoses},results:[]}};
 c.renderFinalAccusation();assert($('#roundContent').innerHTML.includes('Your original culprit differential'));assert(!$('#roundContent').innerHTML.includes('Edit differential'));assert(!$('#roundContent').innerHTML.includes('finalDifferentialForm'));
+
+// Routes and archived attempts remain accessible after checkpoints are added.
+c.location.hash='#revision/revise-culprit-2';c.suspectRoute();assert.equal(c.state.checkpoint,'revise-culprit-2');
+c.state.resolution.assignment.submittedAt='historic';
+assert(c.checkpointStatus('revise-culprit-2').complete);assert(c.checkpointStatus('revise-suspects-2').complete);

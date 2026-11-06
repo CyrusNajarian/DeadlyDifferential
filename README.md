@@ -1,16 +1,16 @@
 # Deadly Differential
 
-A browser-based neurology murder mystery, hosted on Netlify. Players inspect evidence, identify symptoms, build a differential, diagnose six suspects together, and choose the culprit at the end.
+A browser-based neurology murder mystery, hosted on GitHub Pages. Players inspect evidence, identify symptoms, build a differential, diagnose six suspects together, and choose the culprit at the end.
 
 ## Play sequence
 
-1. Complete the culprit clues: choking → footsteps → safe/key → voicemail → medication.
+1. Complete the culprit clues: choking → footsteps → safe/key → voicemail → medication. After every two segments, save or revise a working top-five differential without feedback.
 2. Save a ranked list of five diagnoses, without correctness feedback.
-3. Review the suspect clues: reception photos, team-room photo, annual review, emails, and phone recording.
-4. Assign diagnoses to all six suspects in one submission, then read the explanations.
+3. Review the suspect clues: reception photos, team-room photo, annual review, emails, and phone recording. After every two clue/person segments, revise working diagnoses for the suspects encountered so far. Previous choices carry forward; feedback waits until the final batch.
+4. Assess each suspect’s evidence directly beneath their diagnosis selector. Assign diagnoses to all six suspects in one submission, then read the explanations.
 5. Compare the original ranking with the confirmed diagnoses and lock in the culprit. The diagnosis carries forward automatically.
 
-Reference and Notes open from the side of the screen. Notes save on the player's device. Debug mode bypasses progression requirements; it does not submit answers or complete missing decisions.
+Reference and Notes open from the side of the screen. Notes save on the player's device. Checkpoints keep separate ungraded snapshots and local drafts, and log saved revisions. Existing submitted rankings and assignments remain valid. The pre-suspect top five and final culprit choice stay locked. Debug mode bypasses progression requirements; it does not submit answers or complete missing decisions.
 
 ## Deploy with GitHub Pages
 

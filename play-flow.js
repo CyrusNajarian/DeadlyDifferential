@@ -34,9 +34,12 @@ function revealFlowAnswers(stage,progress,type){
 function suspectStage(person){return {...person,deferDiagnosis:true,accepted:[...person.symptoms.map(a=>({...a,type:a.type==='observation'?'observation':'symptom'})),...person.diagnoses.map(a=>({...a,type:a.type==='context'?'context':'disease'}))]}}
 function investigationSteps(){
  const steps=[];
- config.clues.forEach((clue,ci)=>clue.stages.forEach((stage,si)=>steps.push({id:`culprit-${ci}-${si}`,section:'culprit',ci,si,stage,title:clue.title,route:`#culprit/${ci}/${si}`})));
- steps.push({id:'ranked-differential',section:'checkpoint',checkpoint:'ranking',title:'Rank your top five diagnoses',route:'#differential'});
- for(const set of config.suspectSets)for(const person of set.people.filter(p=>p.observable!==false))steps.push({id:`suspect-${set.id}-${person.id}`,section:'suspects',setId:set.id,personId:person.id,stage:suspectStage(person),title:person.name,route:`#suspects/${set.id}/${person.id}/symptoms`});
+ const culprit=config.clues.flatMap((clue,ci)=>clue.stages.map((stage,si)=>({id:`culprit-${ci}-${si}`,section:'culprit',ci,si,stage,title:clue.title,route:`#culprit/${ci}/${si}`})));
+ const suspects=config.suspectSets.flatMap(set=>set.people.filter(p=>p.observable!==false).map(person=>({id:`suspect-${set.id}-${person.id}`,section:'suspects',setId:set.id,personId:person.id,stage:suspectStage(person),title:person.name,route:`#suspects/${set.id}/${person.id}/symptoms`})));
+ for(const [section,list] of [['culprit',culprit],['suspects',suspects]]){
+  list.forEach((step,i)=>{steps.push(step);if((i+1)%2===0&&i<list.length-1){const id=`revise-${section}-${i+1}`;steps.push({id,section:'checkpoint',checkpoint:id,revision:section,through:i+1,title:section==='culprit'?'Revise your culprit differential':'Revise suspect diagnoses',route:`#revision/${id}`})}});
+  if(section==='culprit')steps.push({id:'ranked-differential',section:'checkpoint',checkpoint:'ranking',title:'Rank your top five diagnoses',route:'#differential'});
+ }
  steps.push({id:'suspect-assignment',section:'checkpoint',checkpoint:'assignments',title:'Assign all suspect diagnoses',route:'#assignments'},{id:'final-answer',section:'checkpoint',checkpoint:'final',title:'Choose the culprit',route:'#final'});
  return steps;
 }

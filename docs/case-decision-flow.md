@@ -1,38 +1,19 @@
-# Case decision checkpoints
+# Case decisions
 
-## Sequence
+Culprit clues run in order: choking, footsteps, safe/key, voicemail, medication. After segments two and four, players rank five distinct diagnoses. The next checkpoint carries forward the preceding choices so they can revise them. Each saved checkpoint is a separate ungraded snapshot. After the fifth clue, players save their pre-suspect top five; that list remains read-only on the final culprit screen.
 
-1. Complete the culprit clues.
-2. Rank exactly five distinct diagnoses and save the original ordered list. No correctness evaluation or feedback is produced here.
-3. Review all suspect clues. These now assess symptoms or acknowledge observations; they do not grade or reveal a diagnosis per person.
-4. Assign diagnoses to all six suspects on one form. Only a complete submission is graded. The results explain each correct diagnosis and why an incorrect selection fits less well for that particular suspect. The original batch is saved and cannot be replaced.
-5. Review the batch result, then continue to the final comparison: original top-five list alongside the correct suspect–diagnosis roster.
-6. Choose only the culprit and lock the accusation. The diagnosis is carried forward from the confirmed roster rather than selected again. Only after locking does the culprit-clue debrief appear; suspect-clue explanations are not repeated here. The culprit choice cannot be changed within the attempt.
+Suspect clues defer diagnosis grading. After every two clue/person segments, players select or revise one working diagnosis for each suspect encountered so far. The preceding checkpoint’s choices carry forward. Each selector has that suspect’s revealed photos, email correspondence, or video underneath. Future evidence and answer-key explanations stay hidden. The final all-six diagnosis form shows all evidence under each suspect’s selector.
 
-The three checkpoints participate in the same sequential route guards as the clues. Saved notes, clue matches, stars and existing routes are retained. Older attempts that have already visited suspects return to the newly required ranking checkpoint without losing their clue progress.
+After all suspect clues, players submit all six diagnoses together. Only then does the app give correctness feedback and explain the correct diagnosis and why the selected alternative does not fit. Finally, players compare their pre-suspect differential with the confirmed roster and choose only the culprit. The final debrief explains the culprit clues without repeating suspect-clue explanations.
 
-## Configuration
+## State and compatibility
 
-`case-resolution-data.js` holds the suspect diagnosis mapping and all 72 final diagnosis explanations. An exported workbook preview retains this configuration. The mapping uses the existing case identities: Silver/brain tumor, Emerald/stroke, Charcoal/Parkinsonism, Burgundy/ALS, Navy/myasthenia gravis, Rust/Myositis (dermatomyositis subtype). Equivalent permitted answer IDs are explicit.
+`state.resolution.revisions` stores ungraded checkpoint snapshots. `revisionDrafts` stores unfinished choices. Each checkpoint has a stable `#revision/revise-culprit-N` or `#revision/revise-suspects-N` route and participates in sequential progression. Checkpoint navigation lets players revisit saved versions. New snapshots log a `diagnostic_revision` event with the checkpoint ID, canonical diagnosis IDs, and `ungraded` result.
 
-The author confirmed Dr. Silver (A) with a brain tumor as the final solution. `culpritId` is `A` and `culpritDiagnosisId` is `d-brain-tumor`. The broader intracranial-mass category remains accepted for Dr. Silver in the diagnosis-assignment stage. Final scoring uses only the chosen suspect. Tests use this configured answer key.
+The pre-suspect ranking, simultaneous suspect assignment, and locked culprit remain in the existing `ranking`, `assignment`, and `final` fields. Submitted rankings satisfy newly inserted culprit checkpoints; submitted assignments satisfy newly inserted suspect checkpoints, so older completed attempts remain accessible. Existing snapshots normalize retired diagnosis IDs through the canonical catalog mapping. Reset clears decisions along with the game state.
 
-## Persistence and logging
+## Configuration and validation
 
-The original ranking, all-six assignment batch, results and final accusation live in `state.resolution`, with drafts stored separately. A saved ranking and a locked final answer are immutable through the UI. Reset clears them with the game state. Ranking submission is logged as ungraded; assignment rows are logged after the simultaneous submission; the final accusation is logged with its outcome.
+`case-resolution-data.js` contains the final diagnosis mapping and feedback. Silver/brain tumor is the culprit; Emerald/stroke, Charcoal/Parkinsonism, Burgundy/ALS, Navy/MG, and Rust/Myositis (dermatomyositis subtype) complete the roster. Answer approvals still come from the repository workbook.
 
-## Validation
-
-Tests cover all 22 ordered steps, prerequisites, distinct top-five validation, ungraded ranking logs, immutable snapshots, absence of per-suspect diagnosis controls, all-six validation before grading, no early correct roster, wrong and correct final accusations, no final explanation before lock, locked-answer protection, JSON persistence, all 72 diagnosis blurbs and logging. JavaScript syntax and whitespace checks pass. Full browser rendering is unavailable in the workspace.
-
-## Side tools and compatibility
-
-Top navigation follows the play sequence: Culprit clues, Top five, Suspect clues, Suspect diagnoses, Choose culprit. Notes is now an autosaving side drawer beside Reference. Neither drawer replaces the live clue, so input drafts stay intact. Notes text is not sent to the logging receiver. Old #notes links restore the last investigation route and open the drawer.
-
-Older locked accusations retain their chosen suspect and lock timestamp. Their entered diagnosis and old result are retained as legacy fields while display/scoring adopts the culprit-only format. New records explicitly identify this mode. The suspect debrief uses suspect evidence; the final debrief uses only choking, footsteps, safe/key, voicemail and medication.
-
-Run `node tests/case-flow.test.cjs` for the current regression checks.
-
-## Read-only final differential
-
-The final screen displays the original top-five list without editing controls. It remains an immutable record of the pre-suspect decision. Players select only the culprit at the final step.
+`npm test` checks checkpoint order, sequential guards, distinct rankings, revision persistence, no premature feedback or future evidence, evidence grouped by suspect, all-six grading, legacy attempt compatibility, final locking, side tools, logging, and Pages artifact creation. Tests run without writing live Google Sheet rows.
