@@ -92,14 +92,14 @@ function mountFlow(root,stage,progress,context){
   function updateDetails(entry){
    if(type!=='symptom')return;
    if(detailEntry?.id===entry?.id&&entry)return;
-   detailEntry=entry;const fields=window.DDSymptomDetails.fields(entry);detailsPanel.hidden=!fields.length;
-   const draft=progress.symptomDraft?.referenceId===entry?.id?progress.symptomDraft:{};
+   detailEntry=entry;const fields=window.DDSymptomDetails.fields(entry,stage);detailsPanel.hidden=!fields.length;
+   const draft=entry&&progress.symptomDraft?.referenceId===entry.id?{...progress.symptomDraft,side:progress.symptomDraft.side==='asymmetric_bilateral'?'bilateral':progress.symptomDraft.side}:{};
    detailsPanel.innerHTML=fields.map(field=>`<label for="detail-${field}">${field==='side'?'Side / distribution':'Body region'}<select id="detail-${field}" data-detail="${field}" required><option value="">Select ${field==='side'?'distribution':'body region'}</option>${window.DDSymptomDetails[field==='side'?'sides':'regions'].map(([value,label])=>`<option value="${value}" ${draft[field]===value?'selected':''}>${esc(label)}</option>`).join('')}</select></label>`).join('');
    for(const field of fields){const select=form.querySelector(`[data-detail="${field}"]`);select.onchange=()=>{progress.symptomDraft={referenceId:entry.id,...readDetails()};commit()};}
   }
-  function readDetails(){return Object.fromEntries(window.DDSymptomDetails.fields(detailEntry).map(field=>[field,form.querySelector(`[data-detail="${field}"]`)?.value||'']))}
+  function readDetails(){return Object.fromEntries(window.DDSymptomDetails.fields(detailEntry,stage).map(field=>[field,form.querySelector(`[data-detail="${field}"]`)?.value||'']))}
   input.refreshDetails=()=>updateDetails(window.DDSymptomDetails.resolve(input.value));
-  function choose(id){const entry=DDReference.byId.get(id);input.value=entry.term;close();if(type==='symptom'){updateDetails(entry);const fields=window.DDSymptomDetails.fields(entry);if(fields.length){form.querySelector(`[data-detail="${fields[0]}"]`).focus();return}}input.focus();form.requestSubmit();}
+  function choose(id){const entry=DDReference.byId.get(id);input.value=entry.term;close();if(type==='symptom'){updateDetails(entry);const fields=window.DDSymptomDetails.fields(entry,stage);if(fields.length){form.querySelector(`[data-detail="${fields[0]}"]`).focus();return}}input.focus();form.requestSubmit();}
   input.addEventListener('input',()=>{
    if(type==='symptom')input.refreshDetails();
    options=flowSuggestions(input.value,answers,type,3);active=-1;list.innerHTML=options.map(({a,i},n)=>`<button type="button" role="option" aria-selected="false" id="option-${type}-${n}" data-option="${i}">${esc(a.term)}${foundIds.includes(i)?' · found':''}</button>`).join('');list.hidden=!options.length;input.setAttribute('aria-expanded',String(options.length>0));
