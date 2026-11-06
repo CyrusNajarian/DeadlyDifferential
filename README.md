@@ -50,7 +50,7 @@ The workbook includes:
 | --- | --- |
 | Read me | Editing and publishing instructions |
 | Symptoms | All 91 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
-| Diagnoses | All 106 diagnoses, definitions, and the same case columns |
+| Diagnoses | All 92 diagnoses, definitions, and the same case columns |
 | Cases | A guide to each case-column code and its scoring role |
 | Answer key | Correct diagnoses and permitted alternatives for the final six-suspect assignment |
 
@@ -83,13 +83,13 @@ Tumor subtypes (glioma, glioblastoma, meningioma and brain metastasis) share the
 
 Whenever any listed parkinsonian diagnosis is accepted, all seven are accepted: Parkinson disease, drug-induced parkinsonism, vascular parkinsonism, progressive supranuclear palsy, multiple system atrophy, corticobasal syndrome and dementia with Lewy bodies. This applies to clue checks and Dr. Charcoal’s final diagnosis assignment. It is a game acceptance rule, not clinical equivalence. Set every family row to No to turn off the family for a workbook case.
 
-All 197 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
+All 183 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
 
 After the final culprit is locked, an incorrect choice receives a summary plus a five-clue comparison for that suspect’s confirmed diagnosis. Morning timing makes a typical MG fatigue explanation less persuasive but does not exclude MG. The selector itself shows only suspect names, with a lock button.
 
 The dropdown and reference share the same canonical names. Typing subtype names, common synonyms, abbreviations or a close misspelling suggests the canonical entry: for example, “freidrechs ataxia” suggests **Cerebellar dysfunction**. Suggestions never disclose which answers a clue accepts. Known short abbreviations such as MG/MS can trigger a suggestion before three letters; ordinary searches still start after three letters.
 
-Ischemic stroke mechanisms now share **Ischemic stroke**, inherited ataxia diagnoses share **Cerebellar dysfunction**, and paralysis is grouped under **Weakness**. The reference displays relevant types/terms beneath these headings; Epilepsy lists focal/generalized seizures, status epilepticus and postictal deficits. These are game groupings, not statements that every related term is clinically identical. Fatigue and motor fatigability, spasticity and rigidity, and aphasia and dysarthria remain separate.
+Ischemic stroke mechanisms now share **Stroke**, inherited ataxia diagnoses share **Cerebellar dysfunction**, and paralysis is grouped under **Weakness**. The reference displays relevant types/terms beneath these headings; Epilepsy lists focal/generalized seizures, status epilepticus and postictal deficits. These are game groupings, not statements that every related term is clinically identical. Fatigue and motor fatigability, spasticity and rigidity, and aphasia and dysarthria remain separate.
 
 Older workbooks and saved IDs migrate to the canonical entries. Merged workbook approvals use Yes when any previous subtype was Yes, preserving existing edits.
 
@@ -104,6 +104,16 @@ Arm pain is now **Extremity pain**, with arm/leg pain retained as search terms. 
 Coma, Visual loss and Reduced foot clearance have also been removed. The broad Sensory loss entry is replaced by **Reduced touch sensation**, **Reduced pain sensation**, **Reduced temperature sensation**, and the retained **Impaired proprioception** entry. Their definitions describe the relevant pathways without treating all touch as a single tract.
 
 Touch and position-feedback alternatives are approved for the neck, footsteps and key clues. Isolated pain/temperature loss is not inferred from those actions and remains unapproved without supporting evidence. These remain searchable reference entries. Old broad sensory-loss answers are not silently converted to a specific modality; older workbook rows require explicit modality review. Foot drop, Visual field loss and Loss of consciousness remain available.
+
+## Broad diagnosis answers
+
+The game favors streamlined umbrella answers; subtype differences stay in the reference instead of occupying separate dropdown/ranking/workbook rows:
+
+- **Stroke** includes ischemic stroke, hemorrhagic stroke, intracerebral hemorrhage, subarachnoid hemorrhage and prior stroke with residual deficits. Its reference also explains ischemic mechanisms.
+- **Peripheral neuropathy** includes mononeuropathy, median/ulnar/radial/common fibular neuropathy, diabetic polyneuropathy and Charcot–Marie–Tooth disease.
+- **Intracranial hematoma** includes acute/chronic subdural and epidural hematomas.
+
+Typing subtype names selects the umbrella. Only one credit is earned per main answer, and saved IDs/old workbook approvals migrate without multiplying credit. Each umbrella is accepted if any reviewed member was accepted for the clue. The reference preserves distinctions such as ischemic versus hemorrhagic treatment and upper- versus lower-limb nerve distributions. TIA, nerve-root/plexus disorders, and immune-mediated neuropathies with distinct treatment implications remain separate.
 
 ## Automatic logging
 

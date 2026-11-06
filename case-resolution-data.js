@@ -13,9 +13,7 @@ window.CASE_RESOLUTION={
       "d-brain-tumor"
     ],
     "B": [
-      "d-stroke",
-      "d-prior-stroke-with-residual-deficits",
-      "d-ischemic-stroke"
+      "d-stroke"
     ],
     "C": [
       "d-parkinson-disease",
@@ -49,7 +47,6 @@ window.CASE_RESOLUTION={
       "wrongByDiagnosis": {
         "d-migraine": "Migraine explains headaches and use of a cold wrap, but not the navigation scan and tissue-sampling workup described in the email.",
         "d-tension-type-headache": "Tension-type headache fits simple pain relief, but does not explain the navigation imaging and planned sampling.",
-        "d-chronic-subdural-hematoma": "A chronic subdural collection can cause headache and focal deficits. The planned navigation imaging and sampling favor investigation of a mass rather than drainage of a blood collection.",
         "d-amyotrophic-lateral-sclerosis": "ALS is a motor-neuron disorder; this suspect’s evidence is headache treatment and a lesion-directed scan and sampling workup."
       }
     },
@@ -81,8 +78,6 @@ window.CASE_RESOLUTION={
       "whyCorrect": "Dr. Burgundy’s reception photographs show reduced hand-muscle bulk. His email adds looser clothing across the shoulders and increasing difficulty holding a small key. The case uses this motor weakness and wasting pattern for ALS.",
       "contrast": "The hand wasting must be considered alongside declining body bulk and worsening everyday motor function.",
       "wrongByDiagnosis": {
-        "d-ulnar-neuropathy": "An ulnar lesion can explain some intrinsic hand wasting, but it is a narrower explanation than the broader loss-of-bulk and motor-function story used for this suspect.",
-        "d-median-neuropathy": "Median neuropathy can affect selected hand muscles, but the evidence is not confined to a median-nerve distribution and includes wider loss of bulk.",
         "d-cervical-radiculopathy": "A root lesion can cause focal hand wasting and weakness, but no matching radicular pain or root-distribution story is given; the intended case pattern is progressive motor-unit loss.",
         "d-parkinson-disease": "Parkinson disease explains slowness and rigidity more directly than conspicuous hand-muscle wasting and loss of body bulk.",
         "d-myasthenia-gravis": "Myasthenia is characterized by fluctuating, use-related weakness. Prominent muscle wasting and declining body bulk are not its characteristic presentation.",
@@ -115,11 +110,6 @@ window.CASE_RESOLUTION={
   },
   "culpritDiagnosisFeedback": {
     "d-stroke": "Stroke can explain speech and one-sided motor problems. A single abrupt event is a weaker match for the evolving sequence of messages and motor changes, and corticosteroids are not routine stroke treatment.",
-    "d-ischemic-stroke": "Brain infarction caused by inadequate arterial blood supply. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
-    "d-intracerebral-hemorrhage": "Bleeding directly into brain tissue. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
-    "d-subarachnoid-hemorrhage": "Bleeding into the space around the brain. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
-    "d-hemorrhagic-stroke": "Stroke caused by bleeding; a broader category than location-specific types. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
-    "d-prior-stroke-with-residual-deficits": "A prior stroke can leave an asymmetric deficit, but a stable residual problem fits the progressive sequence less well.",
     "d-transient-ischemic-attack": "Transient focal ischemic symptoms without acute infarction. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
     "d-cerebral-venous-thrombosis": "Clotting in cerebral veins or dural venous sinuses. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
     "d-cervical-artery-dissection": "A tear within a neck artery wall. A vascular event can explain focal deficits, but the serial progression of speech and motor problems and the corticosteroid clue fit less neatly than an evolving focal lesion.",
@@ -145,9 +135,6 @@ window.CASE_RESOLUTION={
     "d-hydrocephalus": "Abnormal accumulation of cerebrospinal fluid in brain ventricles. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-normal-pressure-hydrocephalus": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-idiopathic-intracranial-hypertension": "Raised intracranial pressure without an identified secondary cause. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
-    "d-chronic-subdural-hematoma": "A chronic subdural collection can also cause progressive focal deficits and remains a reasonable structural differential from the culprit clues alone. The culprit pattern favors a focal brain process, but these clues do not establish its tissue type.",
-    "d-acute-subdural-hematoma": "A newly developed blood collection beneath the dura. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
-    "d-epidural-hematoma": "A blood collection between the skull and dura. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-traumatic-brain-injury": "Brain dysfunction or damage caused by external force. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-multiple-sclerosis": "An immune-mediated disease affecting myelin and axons in the CNS. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
     "d-neuromyelitis-optica-spectrum-disorder": "An inflammatory disorder often affecting optic nerves and spinal cord. Inflammation can connect focal deficits and corticosteroid treatment. Its time course and distribution must still explain the speech, arm, hand and gait findings together.",
@@ -172,17 +159,10 @@ window.CASE_RESOLUTION={
     "d-cauda-equina-syndrome": "Dysfunction of multiple nerve roots below the spinal cord. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
     "d-hereditary-spastic-paraplegia": "Inherited disorders causing progressive leg spasticity and weakness. A cord or root lesion can affect limbs, but does not explain the speech abnormality from the same lesion.",
     "d-peripheral-neuropathy": "A broad category of disorders affecting peripheral nerves. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-diabetic-polyneuropathy": "Diffuse peripheral nerve damage associated with diabetes. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-peripheral-mononeuropathy": "Dysfunction of a single peripheral nerve. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-median-neuropathy": "Dysfunction of the median nerve. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-ulnar-neuropathy": "Dysfunction of the ulnar nerve. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-radial-neuropathy": "Dysfunction of the radial nerve. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-common-fibular-neuropathy": "Dysfunction of the common fibular nerve near the knee. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
     "d-brachial-plexopathy": "Dysfunction of the nerve network supplying the arm. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
     "d-guillain-barr-syndrome": "An acute immune-mediated polyradiculoneuropathy. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
     "d-chronic-inflammatory-demyelinating-polyneuropathy": "A chronic immune-mediated demyelinating peripheral nerve disorder. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
     "d-multifocal-motor-neuropathy": "An immune-mediated neuropathy predominantly affecting motor nerves. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
-    "d-charcot-marie-tooth-disease": "A group of inherited peripheral neuropathies. A limb nerve disorder can impair hand or foot function, but does not unify speech changes with problems in both an arm and a leg.",
     "d-amyotrophic-lateral-sclerosis": "ALS can link progressive speech impairment with limb weakness and poor hand function. The weaker link is the medication clue: corticosteroids are not standard treatment for the motor-neuron disease itself.",
     "d-spinal-muscular-atrophy": "Inherited motor neuron disorders predominantly causing weakness. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
     "d-kennedy-disease": "An inherited disorder affecting lower motor neurons and androgen function. The diagnosis needs to explain speech, hand control and the asymmetric motor distribution, as well as the medication clue.",
@@ -219,7 +199,8 @@ window.CASE_RESOLUTION={
     "d-psoriasis": "A chronic inflammatory skin disease causing characteristic plaques. A local injury, skin disorder or drug effect may explain a single observation, but does not readily unite the speech, dexterity and asymmetric limb clues.",
     "d-lichen-planus": "An inflammatory condition affecting skin or mucosal surfaces. A local injury, skin disorder or drug effect may explain a single observation, but does not readily unite the speech, dexterity and asymmetric limb clues.",
     "d-rosacea": "A chronic facial skin disorder often causing redness and flushing. A local injury, skin disorder or drug effect may explain a single observation, but does not readily unite the speech, dexterity and asymmetric limb clues.",
-    "d-epilepsy": "Seizures and postictal weakness can produce temporary focal deficits. A sequence of persistent or worsening speech and motor abnormalities fits an evolving lesion more closely."
+    "d-epilepsy": "Seizures and postictal weakness can produce temporary focal deficits. A sequence of persistent or worsening speech and motor abnormalities fits an evolving lesion more closely.",
+    "d-intracranial-hematoma": "An intracranial hematoma can explain headache, focal weakness, gait changes and altered speech. Acute and chronic collections differ in timing. Prednisone is not routine treatment for an ordinary traumatic intracranial hematoma, so the prescription is a weaker link in the culprit evidence."
   },
   "culpritClueExplanations": [
     {

@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 7,
+  "version": 8,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -1058,21 +1058,20 @@ window.NEURO_REFERENCE={
       "type": "disease",
       "category": "Stroke and vascular",
       "term": "Stroke",
-      "description": "Brain injury caused by interrupted blood flow or bleeding.",
+      "description": "Brain injury caused by interrupted blood flow or bleeding. Ischemic, hemorrhagic and prior-stroke presentations share this game answer.",
       "source": "stroke",
       "searchTerms": [
         "CVA",
-        "cerebrovascular accident"
-      ]
-    },
-    {
-      "id": "d-ischemic-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Ischemic stroke",
-      "description": "Brain infarction caused by inadequate arterial blood supply.",
-      "source": "ischemic",
+        "cerebrovascular accident",
+        "brain hemorrhage",
+        "hemorrhages",
+        "hemorrhage",
+        "hemhorrages",
+        "haemorrhage",
+        "hemorragic stroke"
+      ],
       "aliases": [
+        "Ischemic stroke",
         "Large-artery atherosclerotic stroke",
         "Cardioembolic stroke",
         "Lacunar stroke",
@@ -1081,10 +1080,18 @@ window.NEURO_REFERENCE={
         "Ischaemic stroke",
         "Cerebral infarction",
         "Ischemic CVA",
-        "Ischaemic CVA"
+        "Ischaemic CVA",
+        "Hemorrhagic stroke",
+        "Intracerebral hemorrhage",
+        "Subarachnoid hemorrhage",
+        "Prior stroke with residual deficits"
       ],
-      "subtypeLabel": "Types and mechanisms",
+      "subtypeLabel": "Types and related patterns",
       "subtypes": [
+        {
+          "name": "Ischemic stroke",
+          "description": "Brain infarction caused by inadequate arterial blood supply."
+        },
         {
           "name": "Large-artery atherosclerotic stroke",
           "description": "Ischemic stroke attributed to disease of a large artery."
@@ -1104,40 +1111,24 @@ window.NEURO_REFERENCE={
         {
           "name": "Cryptogenic stroke",
           "description": "Stroke without a clearly established cause after evaluation."
+        },
+        {
+          "name": "Hemorrhagic stroke",
+          "description": "Stroke caused by bleeding; a broader category than location-specific types."
+        },
+        {
+          "name": "Intracerebral hemorrhage",
+          "description": "Bleeding directly into brain tissue."
+        },
+        {
+          "name": "Subarachnoid hemorrhage",
+          "description": "Bleeding into the space around the brain."
+        },
+        {
+          "name": "Prior stroke with residual deficits",
+          "description": "Persistent neurologic effects of an earlier stroke."
         }
       ]
-    },
-    {
-      "id": "d-intracerebral-hemorrhage",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Intracerebral hemorrhage",
-      "description": "Bleeding directly into brain tissue.",
-      "source": "hemorrhage"
-    },
-    {
-      "id": "d-subarachnoid-hemorrhage",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Subarachnoid hemorrhage",
-      "description": "Bleeding into the space around the brain.",
-      "source": "hemorrhage"
-    },
-    {
-      "id": "d-hemorrhagic-stroke",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Hemorrhagic stroke",
-      "description": "Stroke caused by bleeding; a broader category than location-specific types.",
-      "source": "hemorrhage"
-    },
-    {
-      "id": "d-prior-stroke-with-residual-deficits",
-      "type": "disease",
-      "category": "Stroke and vascular",
-      "term": "Prior stroke with residual deficits",
-      "description": "Persistent neurologic effects of an earlier stroke.",
-      "source": "stroke"
     },
     {
       "id": "d-transient-ischemic-attack",
@@ -1451,30 +1442,6 @@ window.NEURO_REFERENCE={
       ]
     },
     {
-      "id": "d-chronic-subdural-hematoma",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Chronic subdural hematoma",
-      "description": "A persistent blood collection beneath the dura.",
-      "source": "headache"
-    },
-    {
-      "id": "d-acute-subdural-hematoma",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Acute subdural hematoma",
-      "description": "A newly developed blood collection beneath the dura.",
-      "source": "hopkins"
-    },
-    {
-      "id": "d-epidural-hematoma",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Epidural hematoma",
-      "description": "A blood collection between the skull and dura.",
-      "source": "hopkins"
-    },
-    {
       "id": "d-traumatic-brain-injury",
       "type": "disease",
       "category": "Brain structure and tumors",
@@ -1674,58 +1641,50 @@ window.NEURO_REFERENCE={
       "type": "disease",
       "category": "Peripheral nerves",
       "term": "Peripheral neuropathy",
-      "description": "A broad category of disorders affecting peripheral nerves.",
-      "source": "pns"
-    },
-    {
-      "id": "d-diabetic-polyneuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Diabetic polyneuropathy",
-      "description": "Diffuse peripheral nerve damage associated with diabetes.",
-      "source": "pns"
-    },
-    {
-      "id": "d-peripheral-mononeuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Peripheral mononeuropathy",
-      "description": "Dysfunction of a single peripheral nerve.",
-      "source": "pns"
-    },
-    {
-      "id": "d-median-neuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Median neuropathy",
-      "description": "Dysfunction of the median nerve.",
-      "source": "pns"
-    },
-    {
-      "id": "d-ulnar-neuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Ulnar neuropathy",
-      "description": "Dysfunction of the ulnar nerve.",
-      "source": "pns"
-    },
-    {
-      "id": "d-radial-neuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Radial neuropathy",
-      "description": "Dysfunction of the radial nerve.",
-      "source": "pns"
-    },
-    {
-      "id": "d-common-fibular-neuropathy",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Common fibular neuropathy",
-      "description": "Dysfunction of the common fibular nerve near the knee.",
+      "description": "Dysfunction of one or more peripheral nerves, causing weakness, sensory changes or both. Individual nerve and polyneuropathy patterns share this game answer.",
       "source": "pns",
-      "searchTerms": [
-        "peroneal neuropathy"
+      "aliases": [
+        "Peripheral mononeuropathy",
+        "Median neuropathy",
+        "Ulnar neuropathy",
+        "Radial neuropathy",
+        "Common fibular neuropathy",
+        "peroneal neuropathy",
+        "Diabetic polyneuropathy",
+        "Charcot–Marie–Tooth disease",
+        "CMT",
+        "Charcot Marie Tooth disease"
+      ],
+      "subtypeLabel": "Types and related patterns",
+      "subtypes": [
+        {
+          "name": "Peripheral mononeuropathy",
+          "description": "Dysfunction of a single peripheral nerve."
+        },
+        {
+          "name": "Median neuropathy",
+          "description": "Dysfunction of the median nerve."
+        },
+        {
+          "name": "Ulnar neuropathy",
+          "description": "Dysfunction of the ulnar nerve."
+        },
+        {
+          "name": "Radial neuropathy",
+          "description": "Dysfunction of the radial nerve."
+        },
+        {
+          "name": "Common fibular neuropathy",
+          "description": "Dysfunction of the common fibular nerve near the knee."
+        },
+        {
+          "name": "Diabetic polyneuropathy",
+          "description": "Diffuse peripheral nerve damage associated with diabetes."
+        },
+        {
+          "name": "Charcot–Marie–Tooth disease",
+          "description": "A group of inherited peripheral neuropathies."
+        }
       ]
     },
     {
@@ -1768,18 +1727,6 @@ window.NEURO_REFERENCE={
       "source": "neuromuscular",
       "aliases": [
         "MMN"
-      ]
-    },
-    {
-      "id": "d-charcot-marie-tooth-disease",
-      "type": "disease",
-      "category": "Peripheral nerves",
-      "term": "Charcot–Marie–Tooth disease",
-      "description": "A group of inherited peripheral neuropathies.",
-      "source": "pns",
-      "aliases": [
-        "CMT",
-        "Charcot Marie Tooth disease"
       ]
     },
     {
@@ -2250,6 +2197,38 @@ window.NEURO_REFERENCE={
         "spinothalamic",
         "temperature pathway"
       ]
+    },
+    {
+      "id": "d-intracranial-hematoma",
+      "type": "disease",
+      "category": "Brain structure and tumors",
+      "term": "Intracranial hematoma",
+      "description": "A collection of blood within the skull, including subdural and epidural hematomas.",
+      "source": "tumor",
+      "aliases": [
+        "Chronic subdural hematoma",
+        "Acute subdural hematoma",
+        "Epidural hematoma",
+        "Subdural hematoma",
+        "Subdural haematoma",
+        "Epidural haematoma",
+        "Intracranial haematoma"
+      ],
+      "subtypeLabel": "Types and related patterns",
+      "subtypes": [
+        {
+          "name": "Chronic subdural hematoma",
+          "description": "A persistent blood collection beneath the dura."
+        },
+        {
+          "name": "Acute subdural hematoma",
+          "description": "A newly developed blood collection beneath the dura."
+        },
+        {
+          "name": "Epidural hematoma",
+          "description": "A blood collection between the skull and dura."
+        }
+      ]
     }
   ],
   "legacyBindings": {
@@ -2275,12 +2254,7 @@ window.NEURO_REFERENCE={
       "d-brain-tumor"
     ],
     "disease:stroke": [
-      "d-stroke",
-      "d-ischemic-stroke",
-      "d-hemorrhagic-stroke",
-      "d-intracerebral-hemorrhage",
-      "d-subarachnoid-hemorrhage",
-      "d-prior-stroke-with-residual-deficits"
+      "d-stroke"
     ],
     "disease:transientischemicattack": [
       "d-transient-ischemic-attack"
@@ -2371,8 +2345,7 @@ window.NEURO_REFERENCE={
       "d-peripheral-neuropathy"
     ],
     "disease:medianorulnarneuropathy": [
-      "d-median-neuropathy",
-      "d-ulnar-neuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:focalhanddystonia": [
       "d-focal-dystonia"
@@ -2415,7 +2388,7 @@ window.NEURO_REFERENCE={
       "d-brachial-plexopathy"
     ],
     "disease:peripheralmononeuropathy": [
-      "d-peripheral-mononeuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:rotatorcufforarminjury": [
       "d-upper-limb-injury"
@@ -2469,7 +2442,7 @@ window.NEURO_REFERENCE={
       "d-lumbar-radiculopathy"
     ],
     "disease:commonperonealneuropathy": [
-      "d-common-fibular-neuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:hipkneeorankleinjury": [
       "d-lower-limb-injury"
@@ -2557,13 +2530,13 @@ window.NEURO_REFERENCE={
       "s-muscle-atrophy"
     ],
     "disease:ulnarneuropathy": [
-      "d-ulnar-neuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:multifocalmotorneuropathy": [
       "d-multifocal-motor-neuropathy"
     ],
     "disease:medianneuropathy": [
-      "d-median-neuropathy"
+      "d-peripheral-neuropathy"
     ],
     "disease:spinalmuscularatrophy": [
       "d-spinal-muscular-atrophy"
@@ -2635,7 +2608,7 @@ window.NEURO_REFERENCE={
       "d-brain-tumor"
     ],
     "disease:chronicsubduralhematoma": [
-      "d-chronic-subdural-hematoma"
+      "d-intracranial-hematoma"
     ],
     "symptom:possiblephotosensitivity": [
       "s-cutaneous-photosensitivity"
@@ -2660,15 +2633,30 @@ window.NEURO_REFERENCE={
     "d-glioblastoma": "d-brain-tumor",
     "d-meningioma": "d-brain-tumor",
     "d-brain-metastasis": "d-brain-tumor",
-    "d-large-artery-atherosclerotic-stroke": "d-ischemic-stroke",
-    "d-cardioembolic-stroke": "d-ischemic-stroke",
-    "d-lacunar-stroke": "d-ischemic-stroke",
-    "d-watershed-stroke": "d-ischemic-stroke",
-    "d-cryptogenic-stroke": "d-ischemic-stroke",
+    "d-large-artery-atherosclerotic-stroke": "d-stroke",
+    "d-cardioembolic-stroke": "d-stroke",
+    "d-lacunar-stroke": "d-stroke",
+    "d-watershed-stroke": "d-stroke",
+    "d-cryptogenic-stroke": "d-stroke",
     "d-friedreich-ataxia": "d-cerebellar-disorder",
     "d-spinocerebellar-ataxia": "d-cerebellar-disorder",
     "s-paralysis": "s-weakness",
-    "s-arm-pain": "s-extremity-pain"
+    "s-arm-pain": "s-extremity-pain",
+    "d-ischemic-stroke": "d-stroke",
+    "d-hemorrhagic-stroke": "d-stroke",
+    "d-intracerebral-hemorrhage": "d-stroke",
+    "d-subarachnoid-hemorrhage": "d-stroke",
+    "d-prior-stroke-with-residual-deficits": "d-stroke",
+    "d-peripheral-mononeuropathy": "d-peripheral-neuropathy",
+    "d-median-neuropathy": "d-peripheral-neuropathy",
+    "d-ulnar-neuropathy": "d-peripheral-neuropathy",
+    "d-radial-neuropathy": "d-peripheral-neuropathy",
+    "d-common-fibular-neuropathy": "d-peripheral-neuropathy",
+    "d-diabetic-polyneuropathy": "d-peripheral-neuropathy",
+    "d-charcot-marie-tooth-disease": "d-peripheral-neuropathy",
+    "d-chronic-subdural-hematoma": "d-intracranial-hematoma",
+    "d-acute-subdural-hematoma": "d-intracranial-hematoma",
+    "d-epidural-hematoma": "d-intracranial-hematoma"
   },
   "inputBindings": {
     "disease:seizure": "d-epilepsy",
@@ -2715,15 +2703,15 @@ window.NEURO_REFERENCE={
     "symptom:droopyeyelid": "s-ptosis",
     "symptom:droopingeyelid": "s-ptosis",
     "symptom:droopingeyelids": "s-ptosis",
-    "disease:largearteryatheroscleroticstroke": "d-ischemic-stroke",
-    "disease:cardioembolicstroke": "d-ischemic-stroke",
-    "disease:lacunarstroke": "d-ischemic-stroke",
-    "disease:watershedstroke": "d-ischemic-stroke",
-    "disease:cryptogenicstroke": "d-ischemic-stroke",
-    "disease:ischaemicstroke": "d-ischemic-stroke",
-    "disease:cerebralinfarction": "d-ischemic-stroke",
-    "disease:ischemiccva": "d-ischemic-stroke",
-    "disease:ischaemiccva": "d-ischemic-stroke",
+    "disease:largearteryatheroscleroticstroke": "d-stroke",
+    "disease:cardioembolicstroke": "d-stroke",
+    "disease:lacunarstroke": "d-stroke",
+    "disease:watershedstroke": "d-stroke",
+    "disease:cryptogenicstroke": "d-stroke",
+    "disease:ischaemicstroke": "d-stroke",
+    "disease:cerebralinfarction": "d-stroke",
+    "disease:ischemiccva": "d-stroke",
+    "disease:ischaemiccva": "d-stroke",
     "disease:tia": "d-transient-ischemic-attack",
     "disease:transientischaemicattack": "d-transient-ischemic-attack",
     "disease:cvt": "d-cerebral-venous-thrombosis",
@@ -2760,8 +2748,8 @@ window.NEURO_REFERENCE={
     "disease:guillainbarresyndrome": "d-guillain-barr-syndrome",
     "disease:cidp": "d-chronic-inflammatory-demyelinating-polyneuropathy",
     "disease:mmn": "d-multifocal-motor-neuropathy",
-    "disease:cmt": "d-charcot-marie-tooth-disease",
-    "disease:charcotmarietoothdisease": "d-charcot-marie-tooth-disease",
+    "disease:cmt": "d-peripheral-neuropathy",
+    "disease:charcotmarietoothdisease": "d-peripheral-neuropathy",
     "disease:als": "d-amyotrophic-lateral-sclerosis",
     "disease:mg": "d-myasthenia-gravis",
     "disease:myasthenia": "d-myasthenia-gravis",
@@ -2794,7 +2782,26 @@ window.NEURO_REFERENCE={
     "symptom:lossofproprioception": "s-impaired-proprioception",
     "symptom:proprioceptiveloss": "s-impaired-proprioception",
     "symptom:positionsenseloss": "s-impaired-proprioception",
-    "symptom:lossofjointpositionsense": "s-impaired-proprioception"
+    "symptom:lossofjointpositionsense": "s-impaired-proprioception",
+    "disease:ischemicstroke": "d-stroke",
+    "disease:hemorrhagicstroke": "d-stroke",
+    "disease:intracerebralhemorrhage": "d-stroke",
+    "disease:subarachnoidhemorrhage": "d-stroke",
+    "disease:priorstrokewithresidualdeficits": "d-stroke",
+    "disease:peripheralmononeuropathy": "d-peripheral-neuropathy",
+    "disease:medianneuropathy": "d-peripheral-neuropathy",
+    "disease:ulnarneuropathy": "d-peripheral-neuropathy",
+    "disease:radialneuropathy": "d-peripheral-neuropathy",
+    "disease:commonfibularneuropathy": "d-peripheral-neuropathy",
+    "disease:peronealneuropathy": "d-peripheral-neuropathy",
+    "disease:diabeticpolyneuropathy": "d-peripheral-neuropathy",
+    "disease:chronicsubduralhematoma": "d-intracranial-hematoma",
+    "disease:acutesubduralhematoma": "d-intracranial-hematoma",
+    "disease:epiduralhematoma": "d-intracranial-hematoma",
+    "disease:subduralhematoma": "d-intracranial-hematoma",
+    "disease:subduralhaematoma": "d-intracranial-hematoma",
+    "disease:epiduralhaematoma": "d-intracranial-hematoma",
+    "disease:intracranialhaematoma": "d-intracranial-hematoma"
   },
   "approvalGroups": [
     [

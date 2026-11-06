@@ -174,3 +174,9 @@ Rechecked all 19 screens: neck pressure, key manipulation and gait can involve t
 Old broad sensory-loss credit is not assigned to a narrower modality without a new choice. Workbook imports recognize the retired broad row but do not fan its Yes values into unestablished modalities.
 
 Sources: [Merck sensory examination](https://www.merckmanuals.com/en-ca/professional/neurologic-disorders/neurologic-examination/how-to-assess-sensation) and [University of Utah sensory pathway anatomy](https://neurologicexam.med.utah.edu/adult/html/sensory_anatomy.html).
+
+## Broad diagnosis consolidation
+
+The current catalog has 91 symptom/sign entries and 92 diagnosis headings. All stroke presentations are now Stroke, including ischemic/hemorrhagic, intracerebral/subarachnoid hemorrhage and prior-stroke entries. Peripheral neuropathy absorbs the overlapping single-nerve, diabetic and inherited peripheral neuropathy labels. Acute/chronic subdural and epidural collections share Intracranial hematoma. Their previous Yes approvals are combined at the umbrella level, as requested; this deliberately sacrifices subtype precision in clue scoring. Subtypes remain searchable and are explained under the main reference heading.
+
+Aspirin/statin clues support the ischemic side of Stroke; the umbrella does not imply that those drugs treat an uncomplicated hemorrhagic stroke. The same distinction applies to anatomical nerve patterns and timing/location of hematomas: the game checks the broad family while the reference explains the differences. Immune neuropathies retain separate entries because, for example, CIDP versus GBS differs in corticosteroid treatment.

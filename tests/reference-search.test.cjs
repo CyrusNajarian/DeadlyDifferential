@@ -9,8 +9,8 @@ for(const [query,type,id,name] of [
  ["Friedreich's ataxia",'disease','d-cerebellar-disorder','Cerebellar dysfunction'],
  ['fiedreich ataxia','disease','d-cerebellar-disorder','Cerebellar dysfunction'],
  ['spinocerebellar','disease','d-cerebellar-disorder','Cerebellar dysfunction'],
- ['cardioembolic stroke','disease','d-ischemic-stroke','Ischemic stroke'],
- ['lacunar stroke','disease','d-ischemic-stroke','Ischemic stroke'],
+ ['cardioembolic stroke','disease','d-stroke','Stroke'],
+ ['lacunar stroke','disease','d-stroke','Stroke'],
  ['status epilepticus','disease','d-epilepsy','Epilepsy'],
  ['focal seizures','disease','d-epilepsy','Epilepsy'],
  ['generalized seizures','disease','d-epilepsy','Epilepsy'],
@@ -36,3 +36,11 @@ for(const term of ['Focal seizures','Generalized seizures','Status epilepticus',
 $('#referenceSearch').value='freidrechs ataxia';$('#referenceSearch').oninput();assert($('#referenceResults').innerHTML.includes('<dt>Cerebellar dysfunction</dt>'));assert(!$('#referenceResults').innerHTML.includes('<dt>Epilepsy</dt>'));
 $('#referenceSearch').value='status epilepticus';$('#referenceSearch').oninput();assert($('#referenceResults').innerHTML.includes('<dt>Epilepsy</dt>'));
 console.log('PASS: synonym/subtype/typo suggestions, short abbreviations, canonical submission names, retired IDs and nested searchable reference types.');
+
+for(const [term,id] of [['Hemorrhagic stroke','d-stroke'],['Intracerebral hemorrhage','d-stroke'],['Subarachnoid hemorrhage','d-stroke'],['Prior stroke with residual deficits','d-stroke'],['Ulnar neuropathy','d-peripheral-neuropathy'],['Radial neuropathy','d-peripheral-neuropathy'],['Median neuropathy','d-peripheral-neuropathy'],['Common fibular neuropathy','d-peripheral-neuropathy'],['Diabetic polyneuropathy','d-peripheral-neuropathy'],['Acute subdural hematoma','d-intracranial-hematoma'],['Chronic subdural hematoma','d-intracranial-hematoma'],['Epidural hematoma','d-intracranial-hematoma']]){assert.equal(ref.resolve(term,'disease').id,id);assert.equal(ref.search(term,'disease')[0].id,id)}
+assert.equal(ref.lists.disease.length,92);
+assert.deepEqual(Array.from(ref.approvedIds({type:'disease',referenceIds:['d-lacunar-stroke','d-ischemic-stroke','d-stroke']})),['d-stroke']);
+const oldNerves={catalogFound:['d-ulnar-neuropathy','d-radial-neuropathy','d-peripheral-neuropathy']};assert.equal(ref.progress({accepted:[{type:'disease',referenceIds:['d-peripheral-neuropathy']}]},oldNerves).length,1);
+assert(ref.byId.get('d-stroke').subtypes.some(s=>s.name==='Subarachnoid hemorrhage'));
+assert(ref.byId.get('d-intracranial-hematoma').subtypes.some(s=>s.name==='Acute subdural hematoma'));
+assert(ref.byId.has('d-guillain-barr-syndrome')&&ref.byId.has('d-chronic-inflammatory-demyelinating-polyneuropathy'));
