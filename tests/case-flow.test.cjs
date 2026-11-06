@@ -44,7 +44,7 @@ const context = {
   norm: value => String(value).toLowerCase().replace(/[^a-z0-9]/g, ''), setTimeout() {}, URL
 };
 vm.createContext(context);
-for (const file of ['reference-data.js', 'reference.js', 'case-config.js', 'case-resolution-data.js', 'case-resolution.js', 'play-flow.js', 'suspects.js']) {
+for (const file of ['reference-data.js', 'reference.js', 'case-config.js', 'case-resolution-data.js', 'case-resolution.js', 'symptom-details.js', 'play-flow.js', 'suspects.js']) {
   vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context);
 }
 context.DDReference = context.window.DDReference;
@@ -170,7 +170,7 @@ console.log('PASS: ordered checkpoints, delayed grading, six suspect debriefs, c
 
 // Tumor consolidation keeps search and saved progress compatible.
 for(const term of ['Glioma','Glioblastoma','Meningioma','Brain metastasis'])assert.equal(c.DDReference.resolve(term,'disease').id,'d-brain-tumor');
-assert.equal(c.DDReference.lists.disease.length,107);
+assert.equal(c.DDReference.lists.disease.length,106);
 const family=c.DDReference.data.approvalGroups[0];
 for(const id of family){
  assert(c.suspectAssessment('C',id).correct);
@@ -193,3 +193,10 @@ for(const id of family)assert(c.suspectAssessment('C',id).correct);
 c.config.caseResolution=oldResolutionConfig;
 const tumorProgress={catalogFound:['d-glioma','d-glioblastoma','d-brain-tumor']};
 assert.equal(c.DDReference.progress({accepted:[{type:'disease',referenceIds:['d-brain-tumor']}]},tumorProgress).length,1);
+
+c.state.resolution={ranking:{ids:['d-intracranial-mass','d-brain-tumor','d-stroke','d-epilepsy','d-myasthenia-gravis'],submittedAt:'saved'},assignment:{answers:{A:'d-intracranial-mass'},results:[{personId:'A',diagnosisId:'d-intracranial-mass',correct:true}]}};
+assert(!c.resolutionState().ranking.ids.includes('d-intracranial-mass'));
+assert(c.resolutionState().ranking.legacyIds.includes('d-intracranial-mass'));
+assert(!c.validDiagnosis('d-intracranial-mass'));
+assert(c.suspectAssessment('A','d-intracranial-mass').correct);
+assert(c.diagnosisName('d-intracranial-mass').includes('(removed)'));

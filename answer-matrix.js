@@ -20,7 +20,7 @@ window.DDAnswerMatrix=(()=>{
    const seen=new Set(),rawSeen=new Set();selected[type]=Object.fromEntries(screens.map(s=>[s.code,[]]));
    for(const [index,row] of rows.slice(5).entries()){
     if(row.every(v=>String(v).trim()===''))continue;
-    const rawId=String(row[0]).trim(),id=ref.canonicalId(rawId),entry=ref.byId.get(id);if(!entry||entry.type!==type||rawSeen.has(rawId))throw Error(`${sheetName} row ${index+6}: unknown or duplicate Reference ID.`);rawSeen.add(rawId);seen.add(id);
+    const rawId=String(row[0]).trim();if(ref.data.removedIds?.includes(rawId))continue;const id=ref.canonicalId(rawId),entry=ref.byId.get(id);if(!entry||entry.type!==type||rawSeen.has(rawId))throw Error(`${sheetName} row ${index+6}: unknown or duplicate Reference ID.`);rawSeen.add(rawId);seen.add(id);
     for(const screen of screens){const value=String(row[columns.get(screen.code)]??'').trim().toLowerCase();if(!['yes','no',''].includes(value))throw Error(`${sheetName} row ${index+6}, ${screen.code}: choose Yes or No.`);if(value==='yes')selected[type][screen.code].push(id)}
    }
    if(seen.size!==ref.lists[type].length)throw Error(`${sheetName}: keep every reference row; use No rather than deleting rows.`);

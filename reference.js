@@ -44,7 +44,6 @@ window.DDReference=(()=>{
   'Hand or arm weakness':['Weakness'],'unilateral arm weakness':['Weakness'],'unilateral leg weakness':['Weakness'],'proximal muscle weakness':['Weakness'],
   'median or ulnar neuropathy':['Median neuropathy','Ulnar neuropathy'],
   'alcohol or sedative intoxication':['Alcohol intoxication','Sedative medication effect'],
-  'Intracranial mass':['Intracranial mass','Brain tumor'],
   'Right-hemisphere mass lesion':['Intracranial mass','Brain tumor'],
   'Stroke':['Stroke','Ischemic stroke','Large-artery atherosclerotic stroke','Cardioembolic stroke','Lacunar stroke','Watershed stroke','Cryptogenic stroke','Hemorrhagic stroke','Intracerebral hemorrhage','Subarachnoid hemorrhage','Prior stroke with residual deficits']
  };

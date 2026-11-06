@@ -2,7 +2,7 @@
 
 Reviewed all **95 symptoms/signs and 114 diagnoses** against all **19 playable clue/person screens**: **3,971 approval decisions**. The checked-in Excel workbook contains the resulting Yes/No matrix and drives the default build.
 
-The subsequent reference consolidation leaves **94 symptom/sign headings and 107 diagnosis headings**. Related subtype names remain searchable and are listed within those headings. Their prior approvals migrate to the main entry; the original review scope above includes those related diagnoses.
+The subsequent reference consolidation leaves **92 symptom/sign headings and 106 diagnosis headings**. Related subtype names remain searchable and are listed within those headings. Their prior approvals migrate to the main entry; the original review scope above includes those related diagnoses.
 
 ## Review criteria
 
@@ -14,13 +14,13 @@ The subsequent reference consolidation leaves **94 symptom/sign headings and 107
 
 ## Catalog and scoring changes
 
-Glioma, glioblastoma, meningioma and brain metastasis now resolve to the single Brain tumor entry. Intracranial mass remains separate, since non-tumor lesions can also form a mass. Retired searches and stored IDs are retained/migrated.
+Glioma, glioblastoma, meningioma and brain metastasis now resolve to the single Brain tumor entry. The nonspecific Intracranial mass entry was subsequently removed; specific tumor, abscess and hematoma entries remain. Retired searches and stored IDs are retained/migrated.
 
 The seven parkinsonian entries are accepted together whenever any member is accepted, including the final Dr. Charcoal assignment. Other movement diagnoses, such as essential tremor, do not inherit that final assignment credit.
 
 The review adds **424 clue-level approvals** and removes infectious encephalitis from the navigation-scan/sample email: uncomplicated encephalitis is not a usual focal navigation-guided tissue-procedure explanation. Infection remains represented by a focal brain abscess. These counts include the requested parkinsonian-family extensions.
 
-## Per-screen decisions
+## Initial review snapshot by screen
 
 | Code | Clue/person | Symptoms accepted | Diagnoses accepted | Newly accepted entries |
 | --- | --- | ---: | ---: | ---: |
@@ -152,3 +152,15 @@ NINDS disorder pages sometimes returned HTTP 403. Accessible indexed NINDS text/
 ## Validation
 
 Regression checks cover all catalog rows and case columns, workbook/build roundtrip, edited approvals, anatomy-based exclusions, retired tumor searches and saved ranking migration, all parkinsonian alternatives, final feedback coverage, morning MG wording and the minimal culprit selector. No live logging rows are written by tests.
+
+## Distribution follow-up audit
+
+Removed the nonspecific Inflammation and Intracranial mass entries and the author-requested Extensor plantar response entry. Arm pain is now Extremity pain, with an explicit region choice. Reviewed all 19 screens after these changes and verified every approved symptom can be submitted with at least one clinically compatible distribution.
+
+The follow-up adds six direct symptom approvals: extremity pain for a painful walking pattern; sensory ataxia for arm/hand force-feedback and key-control mechanisms; and muscle cramps as a painful force/movement-limiting mechanism in the neck, footsteps and key clues. Sensory ataxia is not restricted to legs: impaired position sense can also impair hand targeting.
+
+No further pair was merged: foot drop specifies dorsiflexor weakness whereas reduced foot clearance describes an observation with several possible causes; proprioception is a different sensory modality from touch/pain/temperature; field defects can spare acuity; and coma denotes sustained unarousable unresponsiveness rather than every episode of loss of consciousness.
+
+Location matching now rejects leg weakness for the neck/hand task and arm weakness for footsteps, while retaining visual-field and spatial-attention alternatives for key use. Eyelid photos accept bilateral/asymmetric bilateral ptosis. The choices do not ask for unsupported left-versus-right precision.
+
+Reference distinctions checked against [MedlinePlus focal neurologic deficits](https://medlineplus.gov/ency/article/003191.htm), [NHS foot drop](https://www.nhs.uk/conditions/foot-drop/), and [Merck’s overview of coma and impaired consciousness](https://www.merckmanuals.com/professional/neurologic-disorders/coma-and-impaired-consciousness/overview-of-coma-and-impaired-consciousness).

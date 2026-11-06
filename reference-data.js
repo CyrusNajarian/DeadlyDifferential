@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 5,
+  "version": 6,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -143,7 +143,11 @@ window.NEURO_REFERENCE={
           "name": "Paralysis",
           "description": "Complete loss of voluntary strength or movement."
         }
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-motor-fatigability",
@@ -156,7 +160,11 @@ window.NEURO_REFERENCE={
         "Fatigable weakness",
         "Fatigability",
         "Use-dependent weakness"
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-fatigue",
@@ -172,7 +180,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Muscle atrophy",
       "description": "Loss of muscle bulk.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-fasciculations",
@@ -180,7 +192,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Fasciculations",
       "description": "Small, visible muscle twitches under the skin.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-muscle-cramps",
@@ -188,7 +204,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Muscle cramps",
       "description": "Painful involuntary muscle contractions.",
-      "source": "symptoms"
+      "source": "symptoms",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-spasticity",
@@ -196,7 +216,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Spasticity",
       "description": "Muscle tone increases more with faster stretching.",
-      "source": "weakness"
+      "source": "weakness",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-rigidity",
@@ -204,7 +228,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Rigidity",
       "description": "Increased resistance throughout passive limb movement.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-hypotonia",
@@ -216,7 +244,11 @@ window.NEURO_REFERENCE={
       "searchTerms": [
         "decreased tone",
         "low muscle tone"
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-myotonia",
@@ -224,7 +256,11 @@ window.NEURO_REFERENCE={
       "category": "Strength and muscle",
       "term": "Myotonia",
       "description": "Delayed muscle relaxation after contraction.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-bulbar-weakness",
@@ -243,7 +279,11 @@ window.NEURO_REFERENCE={
       "source": "movement",
       "aliases": [
         "Rhythmic shaking"
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-bradykinesia",
@@ -251,7 +291,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Bradykinesia",
       "description": "Slowed movement with reduced amplitude or speed during repetition.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-hypomimia",
@@ -280,7 +324,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Dystonia",
       "description": "Sustained or intermittent contractions cause abnormal postures or movements.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-chorea",
@@ -288,7 +336,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Chorea",
       "description": "Irregular, flowing involuntary movements.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-myoclonus",
@@ -296,7 +348,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Myoclonus",
       "description": "Brief, sudden involuntary muscle jerks.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-tics",
@@ -304,7 +360,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Tics",
       "description": "Repeated movements or sounds, often temporarily suppressible.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-akathisia",
@@ -320,7 +380,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Ataxia",
       "description": "Impaired coordination of movement or balance.",
-      "source": "cerebellar"
+      "source": "cerebellar",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-dysmetria",
@@ -328,7 +392,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Dysmetria",
       "description": "Overshooting or undershooting a movement target.",
-      "source": "cerebellar"
+      "source": "cerebellar",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-dysdiadochokinesia",
@@ -336,7 +404,11 @@ window.NEURO_REFERENCE={
       "category": "Movement and coordination",
       "term": "Dysdiadochokinesia",
       "description": "Difficulty performing rapid alternating movements.",
-      "source": "cerebellar"
+      "source": "cerebellar",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-impaired-fine-motor-control",
@@ -349,7 +421,11 @@ window.NEURO_REFERENCE={
         "Hand clumsiness",
         "Poor dexterity",
         "Impaired dexterity"
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-hemiparetic-gait",
@@ -357,7 +433,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Hemiparetic gait",
       "description": "Walking altered by weakness on one side.",
-      "source": "weakness"
+      "source": "weakness",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-circumduction-gait",
@@ -365,7 +445,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Circumduction gait",
       "description": "The leg swings outward in an arc.",
-      "source": "exam"
+      "source": "exam",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-spastic-gait",
@@ -373,7 +457,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Spastic gait",
       "description": "Stiff-legged walking associated with increased muscle tone.",
-      "source": "weakness"
+      "source": "weakness",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-parkinsonian-gait",
@@ -381,7 +469,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Parkinsonian gait",
       "description": "Short, shuffling steps with reduced automatic movement.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-ataxic-gait",
@@ -389,7 +481,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Ataxic gait",
       "description": "Unsteady walking from impaired coordination or sensory guidance.",
-      "source": "cerebellar"
+      "source": "cerebellar",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-sensory-ataxia",
@@ -397,7 +493,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Sensory ataxia",
       "description": "Poor coordination caused by impaired position sense.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-antalgic-gait",
@@ -405,15 +505,23 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Antalgic gait",
       "description": "Walking modified to avoid pain.",
-      "source": "exam"
+      "source": "exam",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-foot-drop",
       "type": "symptom",
       "category": "Gait and balance",
       "term": "Foot drop",
-      "description": "Difficulty lifting the front of the foot.",
-      "source": "pns"
+      "description": "Weakness of ankle dorsiflexion that makes it difficult to lift the front of the foot.",
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-freezing-of-gait",
@@ -421,7 +529,11 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Freezing of gait",
       "description": "Brief inability to initiate or continue stepping.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-dystonic-gait",
@@ -429,15 +541,23 @@ window.NEURO_REFERENCE={
       "category": "Gait and balance",
       "term": "Dystonic gait",
       "description": "Walking distorted by abnormal muscle contractions or postures.",
-      "source": "movement"
+      "source": "movement",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-reduced-foot-clearance",
       "type": "symptom",
       "category": "Gait and balance",
       "term": "Reduced foot clearance",
-      "description": "The foot does not lift adequately during a step.",
-      "source": "exam"
+      "description": "The foot does not lift enough during a step; this can occur without ankle dorsiflexor weakness.",
+      "source": "exam",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "lower"
+      }
     },
     {
       "id": "s-postural-instability",
@@ -452,8 +572,12 @@ window.NEURO_REFERENCE={
       "type": "symptom",
       "category": "Sensation and pain",
       "term": "Sensory loss",
-      "description": "Reduced ability to feel touch, pain, or temperature.",
-      "source": "symptoms"
+      "description": "Reduced ability to feel touch, pain or temperature. Joint-position sense is listed separately as impaired proprioception.",
+      "source": "symptoms",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-paresthesia",
@@ -461,7 +585,11 @@ window.NEURO_REFERENCE={
       "category": "Sensation and pain",
       "term": "Paresthesia",
       "description": "Abnormal sensations such as tingling or pins and needles.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-dysesthesia",
@@ -469,7 +597,11 @@ window.NEURO_REFERENCE={
       "category": "Sensation and pain",
       "term": "Dysesthesia",
       "description": "Unpleasant abnormal sensation.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-neuropathic-pain",
@@ -477,7 +609,11 @@ window.NEURO_REFERENCE={
       "category": "Sensation and pain",
       "term": "Neuropathic pain",
       "description": "Pain caused by a lesion or disease of the somatosensory system.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-allodynia",
@@ -485,15 +621,23 @@ window.NEURO_REFERENCE={
       "category": "Sensation and pain",
       "term": "Allodynia",
       "description": "Pain from a normally nonpainful stimulus.",
-      "source": "pns"
+      "source": "pns",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-impaired-proprioception",
       "type": "symptom",
       "category": "Sensation and pain",
       "term": "Impaired proprioception",
-      "description": "Reduced awareness of body or joint position.",
-      "source": "exam"
+      "description": "Reduced awareness of body or joint position, even when touch or pain sensation may be preserved.",
+      "source": "exam",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-headache",
@@ -512,12 +656,23 @@ window.NEURO_REFERENCE={
       "source": "headache"
     },
     {
-      "id": "s-arm-pain",
+      "id": "s-extremity-pain",
       "type": "symptom",
       "category": "Sensation and pain",
-      "term": "Arm pain",
-      "description": "Pain affecting an upper limb, sometimes limiting effort.",
-      "source": "exam"
+      "term": "Extremity pain",
+      "description": "Pain affecting an arm, hand, leg or foot; it may limit movement or effort.",
+      "source": "exam",
+      "aliases": [
+        "Arm pain",
+        "Leg pain",
+        "Limb pain",
+        "Hand pain",
+        "Foot pain"
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-dysarthria",
@@ -609,7 +764,11 @@ window.NEURO_REFERENCE={
         "Droopy eyelid",
         "Drooping eyelid",
         "Drooping eyelids"
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "eyes"
+      }
     },
     {
       "id": "s-diplopia",
@@ -648,16 +807,24 @@ window.NEURO_REFERENCE={
       "type": "symptom",
       "category": "Vision and cranial nerves",
       "term": "Visual loss",
-      "description": "Reduced or absent vision.",
-      "source": "cranial"
+      "description": "Reduced vision, including reduced visual acuity or more extensive loss of sight.",
+      "source": "cranial",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "eyes"
+      }
     },
     {
       "id": "s-visual-field-loss",
       "type": "symptom",
       "category": "Vision and cranial nerves",
       "term": "Visual field loss",
-      "description": "Loss of part of the area normally seen.",
-      "source": "cranial"
+      "description": "Loss of part of the area normally seen; central visual acuity may remain intact.",
+      "source": "cranial",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "eyes"
+      }
     },
     {
       "id": "s-facial-weakness",
@@ -665,7 +832,11 @@ window.NEURO_REFERENCE={
       "category": "Vision and cranial nerves",
       "term": "Facial weakness",
       "description": "Reduced strength of facial muscles.",
-      "source": "cranial"
+      "source": "cranial",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "face"
+      }
     },
     {
       "id": "s-hearing-loss",
@@ -737,7 +908,11 @@ window.NEURO_REFERENCE={
       "category": "Cognition and awareness",
       "term": "Hemispatial neglect",
       "description": "Reduced attention to one side of space or the body.",
-      "source": "symptoms"
+      "source": "symptoms",
+      "qualifiers": {
+        "side": true,
+        "fixedRegion": "spatial"
+      }
     },
     {
       "id": "s-agnosia",
@@ -760,7 +935,7 @@ window.NEURO_REFERENCE={
       "type": "symptom",
       "category": "Cognition and awareness",
       "term": "Loss of consciousness",
-      "description": "Temporary or sustained loss of awareness and responsiveness.",
+      "description": "An episode of loss of awareness and responsiveness; the cause and duration can vary.",
       "source": "symptoms"
     },
     {
@@ -768,7 +943,7 @@ window.NEURO_REFERENCE={
       "type": "symptom",
       "category": "Cognition and awareness",
       "term": "Coma",
-      "description": "Profound unresponsiveness without wakefulness.",
+      "description": "Sustained unresponsiveness without wakefulness; the person cannot be awakened.",
       "source": "symptoms"
     },
     {
@@ -840,8 +1015,12 @@ window.NEURO_REFERENCE={
       "type": "symptom",
       "category": "Other relevant findings",
       "term": "Hyperreflexia",
-      "description": "Exaggerated tendon reflexes.",
-      "source": "weakness"
+      "description": "Exaggerated deep-tendon reflexes.",
+      "source": "weakness",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-hyporeflexia",
@@ -849,7 +1028,11 @@ window.NEURO_REFERENCE={
       "category": "Other relevant findings",
       "term": "Hyporeflexia",
       "description": "Reduced tendon reflexes.",
-      "source": "weakness"
+      "source": "weakness",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-clonus",
@@ -857,15 +1040,11 @@ window.NEURO_REFERENCE={
       "category": "Other relevant findings",
       "term": "Clonus",
       "description": "Repeated rhythmic contractions triggered by sustained stretch.",
-      "source": "weakness"
-    },
-    {
-      "id": "s-extensor-plantar-response",
-      "type": "symptom",
-      "category": "Other relevant findings",
-      "term": "Extensor plantar response",
-      "description": "Upgoing great toe with plantar stimulation.",
-      "source": "weakness"
+      "source": "weakness",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "s-cerebral-edema",
@@ -882,14 +1061,6 @@ window.NEURO_REFERENCE={
       "term": "Raised intracranial pressure",
       "description": "Abnormally high pressure within the skull.",
       "source": "headache"
-    },
-    {
-      "id": "s-inflammation",
-      "type": "symptom",
-      "category": "Other relevant findings",
-      "term": "Inflammation",
-      "description": "An immune or tissue response that may cause swelling or dysfunction.",
-      "source": "myositis"
     },
     {
       "id": "s-heliotrope-rash",
@@ -1281,14 +1452,6 @@ window.NEURO_REFERENCE={
         "Brain metastases",
         "Brain tumour"
       ]
-    },
-    {
-      "id": "d-intracranial-mass",
-      "type": "disease",
-      "category": "Brain structure and tumors",
-      "term": "Intracranial mass",
-      "description": "A space-occupying lesion inside the skull; the cause is unspecified.",
-      "source": "headache"
     },
     {
       "id": "d-hydrocephalus",
@@ -1985,7 +2148,11 @@ window.NEURO_REFERENCE={
       "searchTerms": [
         "increased tone",
         "high muscle tone"
-      ]
+      ],
+      "qualifiers": {
+        "side": true,
+        "region": true
+      }
     },
     {
       "id": "d-epilepsy",
@@ -2205,7 +2372,7 @@ window.NEURO_REFERENCE={
       "s-hemispatial-neglect"
     ],
     "symptom:armpainlimitingeffort": [
-      "s-arm-pain"
+      "s-extremity-pain"
     ],
     "disease:brachialplexopathy": [
       "d-brachial-plexopathy"
@@ -2294,9 +2461,7 @@ window.NEURO_REFERENCE={
     "symptom:intracranialpressuresymptoms": [
       "s-raised-intracranial-pressure"
     ],
-    "symptom:inflammatoryneurologicflare": [
-      "s-inflammation"
-    ],
+    "symptom:inflammatoryneurologicflare": [],
     "disease:multiplesclerosisrelapse": [
       "d-multiple-sclerosis"
     ],
@@ -2342,9 +2507,7 @@ window.NEURO_REFERENCE={
     "symptom:fatigability": [
       "s-motor-fatigability"
     ],
-    "symptom:inflammation": [
-      "s-inflammation"
-    ],
+    "symptom:inflammation": [],
     "symptom:reducedfacialexpression": [
       "s-hypomimia"
     ],
@@ -2436,7 +2599,6 @@ window.NEURO_REFERENCE={
       "d-tension-type-headache"
     ],
     "disease:intracranialmass": [
-      "d-intracranial-mass",
       "d-brain-tumor"
     ],
     "disease:chronicsubduralhematoma": [
@@ -2452,7 +2614,6 @@ window.NEURO_REFERENCE={
       "s-hemispatial-neglect"
     ],
     "disease:righthemispheremasslesion": [
-      "d-intracranial-mass",
       "d-brain-tumor"
     ]
   },
@@ -2473,7 +2634,8 @@ window.NEURO_REFERENCE={
     "d-cryptogenic-stroke": "d-ischemic-stroke",
     "d-friedreich-ataxia": "d-cerebellar-disorder",
     "d-spinocerebellar-ataxia": "d-cerebellar-disorder",
-    "s-paralysis": "s-weakness"
+    "s-paralysis": "s-weakness",
+    "s-arm-pain": "s-extremity-pain"
   },
   "inputBindings": {
     "disease:seizure": "d-epilepsy",
@@ -2576,7 +2738,13 @@ window.NEURO_REFERENCE={
     "disease:focalseizure": "d-epilepsy",
     "disease:generalizedseizure": "d-epilepsy",
     "disease:focalseizures": "d-epilepsy",
-    "disease:generalizedseizures": "d-epilepsy"
+    "disease:generalizedseizures": "d-epilepsy",
+    "symptom:extremitypain": "s-extremity-pain",
+    "symptom:armpain": "s-extremity-pain",
+    "symptom:legpain": "s-extremity-pain",
+    "symptom:limbpain": "s-extremity-pain",
+    "symptom:handpain": "s-extremity-pain",
+    "symptom:footpain": "s-extremity-pain"
   },
   "approvalGroups": [
     [
@@ -2588,5 +2756,21 @@ window.NEURO_REFERENCE={
       "d-corticobasal-syndrome",
       "d-dementia-with-lewy-bodies"
     ]
-  ]
+  ],
+  "removedIds": [
+    "s-inflammation",
+    "s-extensor-plantar-response",
+    "d-intracranial-mass"
+  ],
+  "removedEntries": {
+    "d-intracranial-mass": {
+      "term": "Intracranial mass"
+    },
+    "s-inflammation": {
+      "term": "Inflammation"
+    },
+    "s-extensor-plantar-response": {
+      "term": "Extensor plantar response"
+    }
+  }
 };

@@ -29,8 +29,8 @@ The workbook includes:
 | Sheet | Contents |
 | --- | --- |
 | Read me | Editing and publishing instructions |
-| Symptoms | All 94 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
-| Diagnoses | All 107 diagnoses, definitions, and the same case columns |
+| Symptoms | All 92 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
+| Diagnoses | All 106 diagnoses, definitions, and the same case columns |
 | Cases | A guide to each case-column code and its scoring role |
 | Answer key | Correct diagnoses and permitted alternatives for the final six-suspect assignment |
 
@@ -59,11 +59,11 @@ Generation also requires Node.js. Regeneration preserves existing workbook appro
 
 ## Answer grouping and review
 
-Tumor subtypes (glioma, glioblastoma, meningioma and brain metastasis) share the **Brain tumor** entry. Their names still work as searches/inputs, and saved IDs migrate without duplicate credit. Intracranial mass stays separate because a mass is not necessarily a tumor.
+Tumor subtypes (glioma, glioblastoma, meningioma and brain metastasis) share the **Brain tumor** entry. Their names still work as searches/inputs, and saved IDs migrate without duplicate credit. The nonspecific Intracranial mass entry has been removed; tumor, abscess and hematoma remain separate diagnoses.
 
 Whenever any listed parkinsonian diagnosis is accepted, all seven are accepted: Parkinson disease, drug-induced parkinsonism, vascular parkinsonism, progressive supranuclear palsy, multiple system atrophy, corticobasal syndrome and dementia with Lewy bodies. This applies to clue checks and Dr. Charcoal’s final diagnosis assignment. It is a game acceptance rule, not clinical equivalence. Set every family row to No to turn off the family for a workbook case.
 
-All 201 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
+All 198 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
 
 After the final culprit is locked, an incorrect choice receives a summary plus a five-clue comparison for that suspect’s confirmed diagnosis. Morning timing makes a typical MG fatigue explanation less persuasive but does not exclude MG. The selector itself shows only suspect names, with a lock button.
 
@@ -72,6 +72,16 @@ The dropdown and reference share the same canonical names. Typing subtype names,
 Ischemic stroke mechanisms now share **Ischemic stroke**, inherited ataxia diagnoses share **Cerebellar dysfunction**, and paralysis is grouped under **Weakness**. The reference displays relevant types/terms beneath these headings; Epilepsy lists focal/generalized seizures, status epilepticus and postictal deficits. These are game groupings, not statements that every related term is clinically identical. Fatigue and motor fatigability, spasticity and rigidity, and aphasia and dysarthria remain separate.
 
 Older workbooks and saved IDs migrate to the canonical entries. Merged workbook approvals use Yes when any previous subtype was Yes, preserving existing edits.
+
+## Symptom location and distribution
+
+After entering/selecting a localized symptom, players must choose its side/distribution and, where applicable, its body region before checking it. Options include one-sided, bilateral, unequal bilateral, or not established. Foot/gait and eyelid terms already specify their region, so they ask only for distribution. Other symptoms such as headache do not show irrelevant arm/leg controls.
+
+The selected distribution is matched against the evidence where the clue establishes a location: arm/hand for neck/key/hand/camera tasks, leg/foot for footsteps, speech muscles for voicemail fatigability, and eyelids for the ptosis photos. The photos accept bilateral or unequal bilateral ptosis. Visual and spatial mechanisms retain their appropriate exceptions rather than being rejected as arm symptoms. Existing saved matches for retained entries are preserved; new submissions require the follow-up choices. The choices save with progress and in detailed logging JSON. A different qualifier does not earn a second credit for the same main symptom.
+
+Arm pain is now **Extremity pain**, with arm/leg pain retained as search terms. The generic Inflammation, Extensor plantar response and Intracranial mass entries have been removed. Older workbook rows for removed entries are ignored rather than reassigned to a different diagnosis.
+
+Foot drop remains distinct from reduced foot clearance; sensory loss from impaired proprioception; visual loss from visual-field loss; and loss of consciousness from coma. Their reference definitions explain the differences. Location qualifiers refine these terms without combining clinically different findings.
 
 ## Automatic logging
 
@@ -107,7 +117,7 @@ The logging integration test runs the supplied Apps Script against an in-memory 
 | `index.html`, `app.js` | Player shell, startup, saved state, evidence rendering |
 | `case-config.js` | Published clue/suspect content, approved answers, media |
 | `reference-data.js`, `reference.js` | Vocabulary, matching, reference and notes drawers |
-| `play-flow.js`, `suspects.js` | Clue controls, progress, suspect galleries and routing |
+| `play-flow.js`, `symptom-details.js`, `suspects.js` | Clue controls, progress, suspect galleries and routing |
 | `case-resolution-data.js`, `case-resolution.js` | Final answer key, checkpoints, grading and explanations |
 | `setup.html`, `setup.js`, `answer-matrix.js` | Excel approval import, preview and config export |
 | `preview-storage.js`, `progress-migrations.js` | Device-local previews and saved-progress compatibility |

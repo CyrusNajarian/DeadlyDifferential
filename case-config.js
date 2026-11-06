@@ -109,12 +109,12 @@ window.CASE_CONFIG={
             },
             {
               "type": "symptom",
-              "term": "Arm pain",
-              "info": "Pain affecting an upper limb, sometimes limiting effort.",
+              "term": "Extremity pain",
+              "info": "Pain affecting an arm, hand, leg or foot; it may limit movement or effort.",
               "hint": "Consider whether discomfort changes how a movement is performed.",
               "id": "symptom-arm-pain-limiting-effort",
               "referenceIds": [
-                "s-arm-pain"
+                "s-extremity-pain"
               ],
               "legacyTerm": "arm pain limiting effort"
             },
@@ -138,11 +138,6 @@ window.CASE_CONFIG={
               "referenceIds": [
                 "d-stroke",
                 "d-ischemic-stroke",
-                "d-large-artery-atherosclerotic-stroke",
-                "d-cardioembolic-stroke",
-                "d-lacunar-stroke",
-                "d-watershed-stroke",
-                "d-cryptogenic-stroke",
                 "d-hemorrhagic-stroke",
                 "d-intracerebral-hemorrhage",
                 "d-subarachnoid-hemorrhage",
@@ -492,7 +487,23 @@ window.CASE_CONFIG={
           "symptomsNeeded": 2,
           "diagnosesNeeded": 2,
           "symptomStarThreshold": 4,
-          "diagnosisStarThreshold": 4
+          "diagnosisStarThreshold": 4,
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ],
+            "sidesById": {
+              "s-weakness": [
+                "unilateral",
+                "asymmetric_bilateral"
+              ]
+            },
+            "regionsById": {
+              "s-hemispatial-neglect": [
+                "spatial"
+              ]
+            }
+          }
         }
       ]
     },
@@ -650,11 +661,6 @@ window.CASE_CONFIG={
               "referenceIds": [
                 "d-stroke",
                 "d-ischemic-stroke",
-                "d-large-artery-atherosclerotic-stroke",
-                "d-cardioembolic-stroke",
-                "d-lacunar-stroke",
-                "d-watershed-stroke",
-                "d-cryptogenic-stroke",
                 "d-hemorrhagic-stroke",
                 "d-intracerebral-hemorrhage",
                 "d-subarachnoid-hemorrhage",
@@ -944,7 +950,12 @@ window.CASE_CONFIG={
           "symptomsNeeded": 2,
           "diagnosesNeeded": 2,
           "symptomStarThreshold": 4,
-          "diagnosisStarThreshold": 4
+          "diagnosisStarThreshold": 4,
+          "symptomDistribution": {
+            "regions": [
+              "lower"
+            ]
+          }
         }
       ]
     },
@@ -1091,11 +1102,6 @@ window.CASE_CONFIG={
               "referenceIds": [
                 "d-stroke",
                 "d-ischemic-stroke",
-                "d-large-artery-atherosclerotic-stroke",
-                "d-cardioembolic-stroke",
-                "d-lacunar-stroke",
-                "d-watershed-stroke",
-                "d-cryptogenic-stroke",
                 "d-hemorrhagic-stroke",
                 "d-intracerebral-hemorrhage",
                 "d-subarachnoid-hemorrhage",
@@ -1427,7 +1433,23 @@ window.CASE_CONFIG={
           "symptomsNeeded": 2,
           "diagnosesNeeded": 2,
           "symptomStarThreshold": 4,
-          "diagnosisStarThreshold": 4
+          "diagnosisStarThreshold": 4,
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ],
+            "regionsById": {
+              "s-visual-loss": [
+                "eyes"
+              ],
+              "s-visual-field-loss": [
+                "eyes"
+              ],
+              "s-hemispatial-neglect": [
+                "spatial"
+              ]
+            }
+          }
         }
       ]
     },
@@ -1552,11 +1574,6 @@ window.CASE_CONFIG={
               "referenceIds": [
                 "d-stroke",
                 "d-ischemic-stroke",
-                "d-large-artery-atherosclerotic-stroke",
-                "d-cardioembolic-stroke",
-                "d-lacunar-stroke",
-                "d-watershed-stroke",
-                "d-cryptogenic-stroke",
                 "d-hemorrhagic-stroke",
                 "d-intracerebral-hemorrhage",
                 "d-subarachnoid-hemorrhage",
@@ -1796,7 +1813,12 @@ window.CASE_CONFIG={
           "symptomsNeeded": 2,
           "diagnosesNeeded": 2,
           "symptomStarThreshold": 4,
-          "diagnosisStarThreshold": 4
+          "diagnosisStarThreshold": 4,
+          "symptomDistribution": {
+            "regions": [
+              "bulbar"
+            ]
+          }
         }
       ]
     },
@@ -2054,7 +2076,8 @@ window.CASE_CONFIG={
           "symptomLabel": "Observations",
           "symptomSingular": "observation",
           "observationOnly": true,
-          "observationText": "The medication bottle is labeled prednisone, a corticosteroid."
+          "observationText": "The medication bottle is labeled prednisone, a corticosteroid.",
+          "symptomDistribution": {}
         }
       ]
     }
@@ -2616,7 +2639,12 @@ window.CASE_CONFIG={
               "prompt": "What conditions could explain the visible hand changes?",
               "hint": "Consider motor-neuron, nerve-root and peripheral-nerve causes."
             }
-          ]
+          ],
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ]
+          }
         },
         {
           "id": "E",
@@ -2777,7 +2805,18 @@ window.CASE_CONFIG={
               "prompt": "Which conditions could account for the eye findings and their time course?",
               "hint": "Consider nerve-to-muscle signaling as well as other causes of an eyelid sitting lower."
             }
-          ]
+          ],
+          "symptomDistribution": {
+            "regions": [
+              "eyes"
+            ],
+            "sidesById": {
+              "s-ptosis": [
+                "bilateral",
+                "asymmetric_bilateral"
+              ]
+            }
+          }
         },
         {
           "id": "F",
@@ -2989,18 +3028,6 @@ window.CASE_CONFIG={
                 "d-tension-type-headache"
               ],
               "legacyTerm": "Tension-type headache"
-            },
-            {
-              "term": "Intracranial mass",
-              "info": "A space-occupying lesion inside the skull; the cause is unspecified.",
-              "type": "disease",
-              "hint": "Consider a space-occupying process that can affect nearby neural pathways.",
-              "id": "disease-intracranial-mass",
-              "referenceIds": [
-                "d-intracranial-mass",
-                "d-brain-tumor"
-              ],
-              "legacyTerm": "Intracranial mass"
             },
             {
               "term": "Chronic subdural hematoma",
@@ -3232,29 +3259,12 @@ window.CASE_CONFIG={
               "referenceIds": [
                 "d-stroke",
                 "d-ischemic-stroke",
-                "d-large-artery-atherosclerotic-stroke",
-                "d-cardioembolic-stroke",
-                "d-lacunar-stroke",
-                "d-watershed-stroke",
-                "d-cryptogenic-stroke",
                 "d-hemorrhagic-stroke",
                 "d-intracerebral-hemorrhage",
                 "d-subarachnoid-hemorrhage",
                 "d-prior-stroke-with-residual-deficits"
               ],
               "legacyTerm": "Stroke"
-            },
-            {
-              "term": "Intracranial mass",
-              "info": "A space-occupying lesion inside the skull; the cause is unspecified.",
-              "type": "disease",
-              "hint": "Consider a space-occupying process that can affect nearby neural pathways.",
-              "id": "disease-right-hemisphere-mass-lesion",
-              "referenceIds": [
-                "d-intracranial-mass",
-                "d-brain-tumor"
-              ],
-              "legacyTerm": "Right-hemisphere mass lesion"
             },
             {
               "term": "Traumatic brain injury",
@@ -3499,11 +3509,6 @@ window.CASE_CONFIG={
               "referenceIds": [
                 "d-stroke",
                 "d-ischemic-stroke",
-                "d-large-artery-atherosclerotic-stroke",
-                "d-cardioembolic-stroke",
-                "d-lacunar-stroke",
-                "d-watershed-stroke",
-                "d-cryptogenic-stroke",
                 "d-hemorrhagic-stroke",
                 "d-intracerebral-hemorrhage",
                 "d-subarachnoid-hemorrhage",
@@ -3646,7 +3651,12 @@ window.CASE_CONFIG={
           ],
           "symptomLabel": "Findings & observations",
           "symptomSingular": "finding",
-          "emailId": "charcoal-camera"
+          "emailId": "charcoal-camera",
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ]
+          }
         },
         {
           "id": "D",
@@ -3745,7 +3755,12 @@ window.CASE_CONFIG={
           ],
           "symptomLabel": "Findings & observations",
           "symptomSingular": "finding",
-          "emailId": "burgundy-scrubs"
+          "emailId": "burgundy-scrubs",
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ]
+          }
         },
         {
           "id": "E",
@@ -3811,7 +3826,12 @@ window.CASE_CONFIG={
           ],
           "symptomLabel": "Findings & observations",
           "symptomSingular": "finding",
-          "emailId": "navy-packets"
+          "emailId": "navy-packets",
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ]
+          }
         },
         {
           "id": "F",
@@ -3984,7 +4004,12 @@ window.CASE_CONFIG={
               "prompt": "Which conditions could explain an unsteady handheld recording, and what would you need to distinguish them?",
               "hint": "Compare shaking during movement with shaking at rest."
             }
-          ]
+          ],
+          "symptomDistribution": {
+            "regions": [
+              "upper"
+            ]
+          }
         }
       ]
     }

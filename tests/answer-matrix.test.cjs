@@ -24,3 +24,6 @@ const unknown=copy(wb);unknown.Sheets.Symptoms[5][0]='unknown';assert.throws(()=
 const sorted=copy(wb);sorted.Sheets.Symptoms=[...sorted.Sheets.Symptoms.slice(0,5),...sorted.Sheets.Symptoms.slice(5).reverse()];assert.equal(matrix.parse(sorted,XLSX).answerMatrixVersion,1);
 const legacy=copy(wb),cerebellar=legacy.Sheets.Diagnoses.find(r=>r[0]==='d-cerebellar-disorder');cerebellar[5]='No';legacy.Sheets.Diagnoses.push([...cerebellar]);legacy.Sheets.Diagnoses.at(-1)[0]='d-friedreich-ataxia';legacy.Sheets.Diagnoses.at(-1)[5]='Yes';const migrated=matrix.parse(legacy,XLSX);assert(ref.approved(migrated.clues[0].stages[0],'disease').some(a=>a.id==='d-cerebellar-disorder'));
 console.log('PASS: real workbook catalog coverage, 19-case roundtrip, editable approvals, preserved evidence/key, sorted rows and invalid-upload rejection.');
+
+const withRemoved=copy(wb);for(const [sheet,id] of [['Diagnoses','d-intracranial-mass'],['Symptoms','s-inflammation'],['Symptoms','s-extensor-plantar-response']]){const row=[...withRemoved.Sheets[sheet][5]];row[0]=id;row[5]='Yes';withRemoved.Sheets[sheet].push(row)}
+const withoutRemoved=matrix.parse(withRemoved,XLSX);for(const screen of matrix.cases(withoutRemoved))assert(!screen.stage.accepted.some(a=>a.referenceIds?.some(id=>ref.data.removedIds.includes(id))));

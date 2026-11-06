@@ -18,7 +18,7 @@ function timer(){const sec=Math.max(0,Math.floor((Date.now()-(state.started||Dat
 const key=()=>state.clue+'-'+state.stage;
 function answerCard(a,i,matches){
  const description=DDReference.byId.get(a.referenceId)?.description||a.info||'';
- return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div>${description?`<p>${esc(description)}</p>`:''}</article>`;
+ return `<article class="answer-card ${matches.includes(i)?'found':''}"><div><strong>${esc(a.term)}</strong>${matches.includes(i)?'<span class="found-badge">FOUND</span>':''}</div>${a.detailLabel?`<p class="answer-detail-label">${esc(a.detailLabel)}</p>`:''}${description?`<p>${esc(description)}</p>`:''}</article>`;
 }
 function render(){
   $('#welcome').classList.toggle('active',!state.team);$('#game').classList.toggle('active',!!state.team);$('.case-head').hidden=!state.team;$('#exportLogs').hidden=!state.team;
@@ -77,9 +77,10 @@ async function initialize(){
  for(const clue of config.clues)for(const [i,stage] of clue.stages.entries()){
   const published=window.CASE_CONFIG.clues.find(c=>c.title===clue.title)?.stages[i];
   refreshAnswers(stage.accepted,published?.accepted);
+  if(!stage.symptomDistribution&&published?.symptomDistribution)stage.symptomDistribution=published.symptomDistribution;
   if(!config.answerMatrixVersion&&published&&stage.accepted.every(a=>published.accepted.some(b=>b.id===a.id)))for(const answer of published.accepted)if(answer.id?.startsWith('expanded-')&&!stage.accepted.some(a=>a.id===answer.id))stage.accepted.push({...answer});
  }
- for(const set of config.suspectSets||[])for(const person of set.people){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id===set.id)?.people.find(p=>p.id===person.id);if(published){refreshAnswers(person.symptoms,published.symptoms);refreshAnswers(person.diagnoses,published.diagnoses);if(published.symptomLabel){person.symptomLabel=published.symptomLabel;person.symptomSingular=published.symptomSingular;}}}
+ for(const set of config.suspectSets||[])for(const person of set.people){const published=window.CASE_CONFIG.suspectSets.find(s=>s.id===set.id)?.people.find(p=>p.id===person.id);if(published){if(!person.symptomDistribution&&published.symptomDistribution)person.symptomDistribution=published.symptomDistribution;refreshAnswers(person.symptoms,published.symptoms);refreshAnswers(person.diagnoses,published.diagnoses);if(published.symptomLabel){person.symptomLabel=published.symptomLabel;person.symptomSingular=published.symptomSingular;}}}
  config.suggestionsAfter=3;
  DDReference.prepareConfig(config);
  const migration=migrateCaseProgress(state,config);

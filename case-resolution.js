@@ -1,7 +1,7 @@
 /* End-of-case decisions are saved separately from clue-by-clue matches. */
 function resolutionState(){
  const r=state.resolution=state.resolution||{},map=id=>DDReference.canonicalId(id);let changed=false;
- if(r.ranking?.ids?.some(id=>map(id)!==id)){r.ranking.legacyIds=r.ranking.legacyIds||[...r.ranking.ids];r.ranking.ids=[...new Set(r.ranking.ids.map(map))];changed=true;}
+ if(r.ranking?.ids?.some(id=>map(id)!==id||DDReference.data.removedIds?.includes(id))){r.ranking.legacyIds=r.ranking.legacyIds||[...r.ranking.ids];r.ranking.ids=[...new Set(r.ranking.ids.map(map).filter(id=>!DDReference.data.removedIds?.includes(id)))];changed=true;}
  if(r.rankingDraft){const ids=r.rankingDraft.map(map);if(ids.some((id,i)=>id!==r.rankingDraft[i])){r.rankingDraft=ids;changed=true}}
  for(const answers of [r.assignmentDraft,r.assignment?.answers])if(answers)for(const person of Object.keys(answers))if(map(answers[person])!==answers[person]){answers[person]=map(answers[person]);changed=true;}
  for(const row of r.assignment?.results||[])if(map(row.diagnosisId)!==row.diagnosisId){row.diagnosisId=map(row.diagnosisId);changed=true;}
@@ -13,7 +13,7 @@ function checkpointStatus(kind){const r=resolutionState();return {complete:kind=
 function resolutionPeople(){return (config.suspectSets.find(s=>s.id==='reception')?.people||[]).map(p=>({id:p.id,name:p.name}))}
 function resolutionRules(){const defaults=window.CASE_RESOLUTION||{},custom=config.caseResolution||{};const rules={...defaults,...custom,suspectFeedback:{...defaults.suspectFeedback,...custom.suspectFeedback},culpritDiagnosisFeedback:{...defaults.culpritDiagnosisFeedback,...custom.culpritDiagnosisFeedback},culpritClueExplanations:custom.culpritClueExplanations||defaults.culpritClueExplanations||[]};rules.suspectAcceptedIds=Object.fromEntries(Object.entries(rules.suspectDiagnoses).map(([person,id])=>[person,DDReference.expandApprovedIds(rules.suspectAcceptedIds?.[person]||[id])]));return rules;}
 function diagnosisEntry(id){return DDReference.byId.get(DDReference.canonicalId(id))}
-function diagnosisName(id){return diagnosisEntry(id)?.term||'—'}
+function diagnosisName(id){const removed=DDReference.data.removedEntries?.[id];return diagnosisEntry(id)?.term||(removed?removed.term+' (removed)':'—')}
 function diagnosisOptions(selected=''){return '<option value="">Choose a diagnosis</option>'+DDReference.lists.disease.map(a=>`<option value="${esc(a.id)}" ${a.id===selected?'selected':''}>${esc(a.term)}</option>`).join('')}
 function validDiagnosis(id){return diagnosisEntry(id)?.type==='disease'}
 function rankingError(ids){return ids.length!==5||ids.some(id=>!validDiagnosis(id))?'Choose five diagnoses.':new Set(ids).size!==5?'Choose five different diagnoses.':''}
@@ -37,7 +37,8 @@ function submitSuspectAssignments(answers){
 }
 function suspectAssessment(personId,selectedId){
  const rules=resolutionRules(),correctId=rules.suspectDiagnoses[personId],profile=rules.suspectFeedback?.[personId]||{};
- const correct=(rules.suspectAcceptedIds?.[personId]||[correctId]).includes(selectedId);
+ const archived=DDReference.data.removedIds?.includes(selectedId)&&state.resolution?.assignment?.results?.find(row=>row.personId===personId&&row.diagnosisId===selectedId);
+ const correct=archived?!!archived.correct:(rules.suspectAcceptedIds?.[personId]||[correctId]).includes(selectedId);
  const whyCorrect=(profile.whyCorrect||diagnosisEntry(correctId)?.description||'')+(correct&&profile.acceptanceNote?' '+profile.acceptanceNote:'');
  const whySelected=correct?'':profile.wrongByDiagnosis?.[selectedId]||`${diagnosisEntry(selectedId)?.description||diagnosisName(selectedId)} ${profile.contrast||''} The case diagnosis is ${diagnosisName(correctId)}.`;
  return {correct,correctId,whyCorrect,whySelected};

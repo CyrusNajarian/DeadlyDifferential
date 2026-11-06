@@ -10,8 +10,7 @@ window.CASE_RESOLUTION={
   },
   "suspectAcceptedIds": {
     "A": [
-      "d-brain-tumor",
-      "d-intracranial-mass"
+      "d-brain-tumor"
     ],
     "B": [
       "d-stroke",
@@ -143,7 +142,6 @@ window.CASE_RESOLUTION={
     "d-delirium": "Acute, fluctuating disturbance of attention and awareness. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
     "d-metabolic-encephalopathy": "Brain dysfunction caused by a metabolic disturbance. A primarily cognitive or behavioral syndrome does not unite the progressive speech, hand-control and asymmetric arm/leg findings.",
     "d-brain-tumor": "An evolving focal brain lesion can link the progressive speech change, impaired fine hand control, unequal arm force and one-sided gait change. Corticosteroid use can fit treatment of selected lesion-associated swelling.",
-    "d-intracranial-mass": "A focal intracranial mass can affect speech and motor pathways together, linking the evolving speech, hand, arm and leg findings.",
     "d-hydrocephalus": "Abnormal accumulation of cerebrospinal fluid in brain ventricles. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-normal-pressure-hydrocephalus": "A hydrocephalus syndrome often affecting gait, cognition, and bladder control. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",
     "d-idiopathic-intracranial-hypertension": "Raised intracranial pressure without an identified secondary cause. A focal structural process can affect speech and motor pathways together. The sequence favors a process evolving over time, with corticosteroid use as a supporting treatment clue.",

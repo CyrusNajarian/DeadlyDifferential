@@ -54,6 +54,7 @@ notes = [
  ('Edit answer approvals', 'Use the Yes/No dropdowns in Symptoms and Diagnoses. Yes means the entry is an approved answer or diagnostic possibility for that case. Blank is treated as No. The count updates automatically.'),
  ('Find the right case', 'Cases lists every column code and the person or clue it represents. C = culprit; R = reception; T = team room; Y = yearly review; E = emails; V = video.'),
  ('Grouping rules', 'Tumor subtypes share Brain tumor; ischemic stroke mechanisms share Ischemic stroke; inherited ataxias share Cerebellar dysfunction; paralysis shares Weakness. If any parkinsonian diagnosis is accepted for a case, all seven listed parkinsonian diagnoses are accepted. This is a game scoring rule. To turn that family off in a case, set every family entry to No.'),
+ ('Symptom follow-up', 'Localized symptoms require a side/distribution choice and, where needed, a body region before checking. The Cases guide lists the clue region. A different location does not earn another credit for the same main symptom. Body-region rules come from the clue configuration.'),
  ('Current scoring', 'Symptoms are checked while examining suspect clues. Suspect diagnoses are submitted together later. The diagnosis columns for suspect clues are supporting possibilities, not the final assignment key. Answer key shows the final diagnoses separately.'),
  ('Apply changes to the app', 'Replace this workbook in the repository and push to main. Netlify builds default answer approvals from it automatically. setup.html loads the repository workbook by default; upload an edited copy there for a device-only preview before committing it.'),
  ('Keep the structure', 'Keep both data sheets, all Reference ID rows, the case columns, and the row 5 headers. Rows may be sorted. Names/definitions and Answer key are reference information: edit the source JS to change those. Upload applies only Yes/No approvals.'),
@@ -98,10 +99,11 @@ for name, kind, field in [('Symptoms', 'symptom', 'symptoms'), ('Diagnoses', 'di
 
 ws = book.add_worksheet('Cases'); ws.hide_gridlines(2)
 ws.merge_range('A1:F2', 'CASE COLUMN GUIDE', hero)
-headers = ['Code', 'Section', 'Clue / evidence', 'Stage / person', 'Symptom task', 'Diagnosis role']
-rows = [[c['code'], c['section'].title(), c['label'], c['detail'], 'Observation acknowledgement' if c['observationOnly'] else 'Scored symptoms', 'Scored possibilities' if c['section']=='culprit' else 'Supporting possibilities; batch assignment later'] for c in cases]
-ws.add_table(4,0,4+len(rows),5,{'name':'CaseGuide','style':'Table Style Medium 2','columns':[{'header':h,'header_format':heading} for h in headers],'data':rows})
-ws.set_column('A:B',16,body);ws.set_column('C:D',34,body);ws.set_column('E:F',42,body)
+headers = ['Code', 'Section', 'Clue / evidence', 'Stage / person', 'Symptom task', 'Diagnosis role', 'Symptom region follow-up']
+region_names = {'upper': 'Arm / hand', 'lower': 'Leg / foot', 'eyes': 'Eyelids / eye muscles', 'bulbar': 'Speech / swallowing muscles'}
+rows = [[c['code'], c['section'].title(), c['label'], c['detail'], 'Observation acknowledgement' if c['observationOnly'] else 'Scored symptoms', 'Scored possibilities' if c['section']=='culprit' else 'Supporting possibilities; batch assignment later', ', '.join(region_names.get(region, region) for region in c.get('distribution', {}).get('regions', [])) or ('No symptom task' if c['observationOnly'] else 'Depends on selected finding')] for c in cases]
+ws.add_table(4,0,4+len(rows),6,{'name':'CaseGuide','style':'Table Style Medium 2','columns':[{'header':h,'header_format':heading} for h in headers],'data':rows})
+ws.set_column('A:B',16,body);ws.set_column('C:D',34,body);ws.set_column('E:F',42,body);ws.set_column('G:G',34,body)
 for r in range(5,5+len(rows)):ws.set_row(r,42)
 ws.freeze_panes(5,2);ws.set_row(4,32)
 

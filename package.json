@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-default-case.cjs",
-    "test": "node tests/case-flow.test.cjs && node tests/logger.test.cjs && node tests/logging-integration.test.cjs && node tests/default-workbook.test.cjs && node tests/reference-search.test.cjs"
+    "test": "node tests/case-flow.test.cjs && node tests/logger.test.cjs && node tests/logging-integration.test.cjs && node tests/default-workbook.test.cjs && node tests/reference-search.test.cjs && node tests/symptom-details.test.cjs"
   },
   "dependencies": {
     "xlsx": "0.18.5"
