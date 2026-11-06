@@ -27,7 +27,7 @@ window.CASE_CONFIG={
             {
               "label": "Describe the symptom",
               "prompt": "If the victim was neurologically healthy, what functional problem in the assailant could create unequal bilateral force?",
-              "hint": "Consider differences in strength, grip, coordination, sensation, attention, pain-limited effort, or involuntary movement between the arms."
+              "hint": "Consider differences in strength, grip, coordination, touch feedback, joint-position sense, attention, pain-limited effort or involuntary movement between the arms."
             },
             {
               "label": "Where is it localized?",
@@ -87,12 +87,12 @@ window.CASE_CONFIG={
             },
             {
               "type": "symptom",
-              "term": "Sensory loss",
-              "info": "Reduced ability to feel touch, pain, or temperature.",
+              "term": "Reduced touch sensation",
+              "info": "Reduced ability to detect touch. Discriminative touch depends mainly on dorsal-column pathways; crude touch has additional pathways.",
               "hint": "Consider impaired feedback about touch or the position of a body part.",
               "id": "symptom-sensory-loss",
               "referenceIds": [
-                "s-sensory-loss"
+                "s-reduced-touch-sensation"
               ],
               "legacyTerm": "sensory loss"
             },
@@ -528,7 +528,7 @@ window.CASE_CONFIG={
             {
               "label": "Describe the symptom",
               "prompt": "What gait descriptions could account for an asymmetric short or dragging step?",
-              "hint": "Consider weakness, foot-clearance failure, stiffness, slowness, incoordination, sensory dependence, or pain-limited walking."
+              "hint": "Consider weakness, stiffness, slowness, incoordination, impaired joint-position or plantar-touch feedback, or pain-limited walking."
             },
             {
               "label": "Where is it localized?",
@@ -801,17 +801,6 @@ window.CASE_CONFIG={
               "legacyTerm": "dystonic gait"
             },
             {
-              "type": "symptom",
-              "term": "Reduced foot clearance",
-              "info": "The foot does not lift adequately during a step.",
-              "hint": "Consider whether the front of the foot clears the ground during a step.",
-              "id": "symptom-reduced-foot-clearance",
-              "referenceIds": [
-                "s-reduced-foot-clearance"
-              ],
-              "legacyTerm": "reduced foot clearance"
-            },
-            {
               "type": "disease",
               "term": "Corticobasal syndrome",
               "info": "Asymmetric movement and cortical dysfunction with several possible underlying causes.",
@@ -980,7 +969,7 @@ window.CASE_CONFIG={
             {
               "label": "Describe the symptom",
               "prompt": "What types of motor, sensory, or planning deficits could interfere with precise key use?",
-              "hint": "Think about force, movement speed, steadiness, targeting accuracy, sensation, learned motor planning, and abnormal posture."
+              "hint": "Think about force, movement speed, steadiness, targeting accuracy, touch and joint-position feedback, learned motor planning, and abnormal posture."
             },
             {
               "label": "Where is it localized?",
@@ -990,7 +979,7 @@ window.CASE_CONFIG={
             {
               "label": "Build the differential",
               "prompt": "Which neurologic and non-neurologic conditions could produce clumsy or inaccurate key use?",
-              "hint": "Include focal central lesions, movement disorders, demyelination, cord or peripheral nerve disease, intoxication, visual limitations, pain, and mechanical explanations."
+              "hint": "Include focal central lesions, movement disorders, demyelination, cord or peripheral nerve disease, intoxication, visual-field limitations, pain, and mechanical explanations."
             }
           ],
           "accepted": [
@@ -1051,12 +1040,12 @@ window.CASE_CONFIG={
             },
             {
               "type": "symptom",
-              "term": "Sensory loss",
-              "info": "Reduced ability to feel touch, pain, or temperature.",
+              "term": "Reduced touch sensation",
+              "info": "Reduced ability to detect touch. Discriminative touch depends mainly on dorsal-column pathways; crude touch has additional pathways.",
               "hint": "Consider impaired feedback about touch or the position of a body part.",
               "id": "symptom-sensory-loss",
               "referenceIds": [
-                "s-sensory-loss"
+                "s-reduced-touch-sensation"
               ],
               "legacyTerm": "sensory loss"
             },
@@ -1439,9 +1428,6 @@ window.CASE_CONFIG={
               "upper"
             ],
             "regionsById": {
-              "s-visual-loss": [
-                "eyes"
-              ],
               "s-visual-field-loss": [
                 "eyes"
               ],

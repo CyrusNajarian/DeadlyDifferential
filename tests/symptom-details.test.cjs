@@ -36,3 +36,10 @@ for(const screen of c.window.DDAnswerMatrix.cases(c.window.CASE_CONFIG))for(cons
 }
 
 assert.equal(details.resolve('unilateral leg pain').id,'s-extremity-pain');assert.equal(c.flowSuggestions('unilateral arm weakness',[],'symptom')[0].a.id,'s-weakness');
+
+for(const id of ['s-coma','s-visual-loss','s-reduced-foot-clearance','s-sensory-loss'])assert(!ref.byId.has(id));
+assert.equal(ref.resolve('sensory loss','symptom'),null);
+for(const id of ['s-reduced-touch-sensation','s-reduced-pain-sensation','s-reduced-temperature-sensation','s-impaired-proprioception'])assert(ref.search('sensory loss','symptom').some(a=>a.id===id));
+for(const screen of c.window.DDAnswerMatrix.cases(c.window.CASE_CONFIG))assert(!ref.approved(screen.stage,'symptom').some(a=>['s-reduced-pain-sensation','s-reduced-temperature-sensation'].includes(a.id)));
+for(const i of [0,1,2])assert(ref.approved(c.window.CASE_CONFIG.clues[i].stages[0],'symptom').some(a=>a.id==='s-reduced-touch-sensation'));
+const oldSensory={catalogFound:['s-sensory-loss']};assert.equal(ref.progress(c.window.CASE_CONFIG.clues[0].stages[0],oldSensory).length,0);

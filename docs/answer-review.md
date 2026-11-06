@@ -2,7 +2,7 @@
 
 Reviewed all **95 symptoms/signs and 114 diagnoses** against all **19 playable clue/person screens**: **3,971 approval decisions**. The checked-in Excel workbook contains the resulting Yes/No matrix and drives the default build.
 
-The subsequent reference consolidation leaves **92 symptom/sign headings and 106 diagnosis headings**. Related subtype names remain searchable and are listed within those headings. Their prior approvals migrate to the main entry; the original review scope above includes those related diagnoses.
+The subsequent reference consolidation leaves **91 symptom/sign headings and 106 diagnosis headings**. Related subtype names remain searchable and are listed within those headings. Their prior approvals migrate to the main entry; the original review scope above includes those related diagnoses.
 
 ## Review criteria
 
@@ -164,3 +164,13 @@ No further pair was merged: foot drop specifies dorsiflexor weakness whereas red
 Location matching now rejects leg weakness for the neck/hand task and arm weakness for footsteps, while retaining visual-field and spatial-attention alternatives for key use. Eyelid photos accept bilateral/asymmetric bilateral ptosis. The choices do not ask for unsupported left-versus-right precision.
 
 Reference distinctions checked against [MedlinePlus focal neurologic deficits](https://medlineplus.gov/ency/article/003191.htm), [NHS foot drop](https://www.nhs.uk/conditions/foot-drop/), and [Merck’s overview of coma and impaired consciousness](https://www.merckmanuals.com/professional/neurologic-disorders/coma-and-impaired-consciousness/overview-of-coma-and-impaired-consciousness).
+
+## Sensory modality revision
+
+Removed Coma, Visual loss and Reduced foot clearance, retaining Loss of consciousness, Visual field loss and Foot drop. Replaced generic Sensory loss with three explicit entries for reduced touch, pain and temperature sensation; Impaired proprioception supplies the fourth modality. All retain applicable side/body-region follow-ups.
+
+Rechecked all 19 screens: neck pressure, key manipulation and gait can involve tactile or joint-position feedback. Their touch and proprioception approvals remain. They do not establish reduced pinprick or thermal sensation, and isolated pain/temperature loss is not a direct explanation for these actions, so those modalities are not marked correct for these clues. The prompts now specify touch/position feedback rather than undifferentiated sensory loss. No other clue supplies a sensory examination that warrants adding the new modalities.
+
+Old broad sensory-loss credit is not assigned to a narrower modality without a new choice. Workbook imports recognize the retired broad row but do not fan its Yes values into unestablished modalities.
+
+Sources: [Merck sensory examination](https://www.merckmanuals.com/en-ca/professional/neurologic-disorders/neurologic-examination/how-to-assess-sensation) and [University of Utah sensory pathway anatomy](https://neurologicexam.med.utah.edu/adult/html/sensory_anatomy.html).

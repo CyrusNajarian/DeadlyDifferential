@@ -1,5 +1,5 @@
 window.NEURO_REFERENCE={
-  "version": 6,
+  "version": 7,
   "reviewed": "2026-11-05",
   "sources": {
     "symptoms": {
@@ -548,36 +548,12 @@ window.NEURO_REFERENCE={
       }
     },
     {
-      "id": "s-reduced-foot-clearance",
-      "type": "symptom",
-      "category": "Gait and balance",
-      "term": "Reduced foot clearance",
-      "description": "The foot does not lift enough during a step; this can occur without ankle dorsiflexor weakness.",
-      "source": "exam",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "lower"
-      }
-    },
-    {
       "id": "s-postural-instability",
       "type": "symptom",
       "category": "Gait and balance",
       "term": "Postural instability",
       "description": "Difficulty maintaining or recovering balance.",
       "source": "movement"
-    },
-    {
-      "id": "s-sensory-loss",
-      "type": "symptom",
-      "category": "Sensation and pain",
-      "term": "Sensory loss",
-      "description": "Reduced ability to feel touch, pain or temperature. Joint-position sense is listed separately as impaired proprioception.",
-      "source": "symptoms",
-      "qualifiers": {
-        "side": true,
-        "region": true
-      }
     },
     {
       "id": "s-paresthesia",
@@ -632,12 +608,23 @@ window.NEURO_REFERENCE={
       "type": "symptom",
       "category": "Sensation and pain",
       "term": "Impaired proprioception",
-      "description": "Reduced awareness of body or joint position, even when touch or pain sensation may be preserved.",
+      "description": "Reduced awareness of joint or body position, carried mainly by dorsal-column pathways in the limbs. It may be impaired even when pain and temperature sensation remain intact.",
       "source": "exam",
       "qualifiers": {
         "side": true,
         "region": true
-      }
+      },
+      "aliases": [
+        "Loss of proprioception",
+        "Proprioceptive loss",
+        "Position sense loss",
+        "Loss of joint position sense"
+      ],
+      "searchTerms": [
+        "sensory loss",
+        "dorsal column",
+        "position pathway"
+      ]
     },
     {
       "id": "s-headache",
@@ -803,18 +790,6 @@ window.NEURO_REFERENCE={
       "source": "cranial"
     },
     {
-      "id": "s-visual-loss",
-      "type": "symptom",
-      "category": "Vision and cranial nerves",
-      "term": "Visual loss",
-      "description": "Reduced vision, including reduced visual acuity or more extensive loss of sight.",
-      "source": "cranial",
-      "qualifiers": {
-        "side": true,
-        "fixedRegion": "eyes"
-      }
-    },
-    {
       "id": "s-visual-field-loss",
       "type": "symptom",
       "category": "Vision and cranial nerves",
@@ -936,14 +911,6 @@ window.NEURO_REFERENCE={
       "category": "Cognition and awareness",
       "term": "Loss of consciousness",
       "description": "An episode of loss of awareness and responsiveness; the cause and duration can vary.",
-      "source": "symptoms"
-    },
-    {
-      "id": "s-coma",
-      "type": "symptom",
-      "category": "Cognition and awareness",
-      "term": "Coma",
-      "description": "Sustained unresponsiveness without wakefulness; the person cannot be awakened.",
       "source": "symptoms"
     },
     {
@@ -2211,6 +2178,78 @@ window.NEURO_REFERENCE={
         "Focal seizures",
         "Generalized seizures"
       ]
+    },
+    {
+      "id": "s-reduced-touch-sensation",
+      "type": "symptom",
+      "category": "Sensation and pain",
+      "term": "Reduced touch sensation",
+      "description": "Reduced ability to detect touch. Discriminative touch depends mainly on dorsal-column pathways; crude touch has additional pathways.",
+      "source": "symptoms",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      },
+      "aliases": [
+        "Touch loss",
+        "Loss of touch sensation",
+        "Tactile sensory loss",
+        "Reduced touch"
+      ],
+      "searchTerms": [
+        "sensory loss",
+        "sensation",
+        "dorsal column",
+        "touch pathway"
+      ]
+    },
+    {
+      "id": "s-reduced-pain-sensation",
+      "type": "symptom",
+      "category": "Sensation and pain",
+      "term": "Reduced pain sensation",
+      "description": "Reduced ability to detect painful stimuli, carried mainly by anterolateral/spinothalamic pathways. This is different from having extremity pain.",
+      "source": "symptoms",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      },
+      "aliases": [
+        "Pain sensation loss",
+        "Loss of pain sensation",
+        "Impaired pain sensation",
+        "Hypoalgesia",
+        "Analgesia"
+      ],
+      "searchTerms": [
+        "sensory loss",
+        "nociception",
+        "spinothalamic",
+        "pain pathway"
+      ]
+    },
+    {
+      "id": "s-reduced-temperature-sensation",
+      "type": "symptom",
+      "category": "Sensation and pain",
+      "term": "Reduced temperature sensation",
+      "description": "Reduced ability to distinguish warmth and cold, carried mainly by anterolateral/spinothalamic pathways.",
+      "source": "symptoms",
+      "qualifiers": {
+        "side": true,
+        "region": true
+      },
+      "aliases": [
+        "Temperature loss",
+        "Loss of temperature sensation",
+        "Impaired temperature sensation",
+        "Thermal sensory loss"
+      ],
+      "searchTerms": [
+        "sensory loss",
+        "spinothalamic",
+        "temperature pathway"
+      ]
     }
   ],
   "legacyBindings": {
@@ -2312,9 +2351,7 @@ window.NEURO_REFERENCE={
     "symptom:dysmetria": [
       "s-dysmetria"
     ],
-    "symptom:sensoryloss": [
-      "s-sensory-loss"
-    ],
+    "symptom:sensoryloss": [],
     "symptom:apraxia": [
       "s-apraxia"
     ],
@@ -2446,9 +2483,7 @@ window.NEURO_REFERENCE={
     "symptom:dystonicgait": [
       "s-dystonic-gait"
     ],
-    "symptom:reducedfootclearance": [
-      "s-reduced-foot-clearance"
-    ],
+    "symptom:reducedfootclearance": [],
     "disease:hereditaryspasticparaplegia": [
       "d-hereditary-spastic-paraplegia"
     ],
@@ -2483,9 +2518,7 @@ window.NEURO_REFERENCE={
     "symptom:proximalmuscleweakness": [
       "s-weakness"
     ],
-    "symptom:inflammatoryvisualloss": [
-      "s-visual-loss"
-    ],
+    "symptom:inflammatoryvisualloss": [],
     "disease:opticneuritis": [
       "d-optic-neuritis"
     ],
@@ -2744,7 +2777,24 @@ window.NEURO_REFERENCE={
     "symptom:legpain": "s-extremity-pain",
     "symptom:limbpain": "s-extremity-pain",
     "symptom:handpain": "s-extremity-pain",
-    "symptom:footpain": "s-extremity-pain"
+    "symptom:footpain": "s-extremity-pain",
+    "symptom:touchloss": "s-reduced-touch-sensation",
+    "symptom:lossoftouchsensation": "s-reduced-touch-sensation",
+    "symptom:tactilesensoryloss": "s-reduced-touch-sensation",
+    "symptom:reducedtouch": "s-reduced-touch-sensation",
+    "symptom:painsensationloss": "s-reduced-pain-sensation",
+    "symptom:lossofpainsensation": "s-reduced-pain-sensation",
+    "symptom:impairedpainsensation": "s-reduced-pain-sensation",
+    "symptom:hypoalgesia": "s-reduced-pain-sensation",
+    "symptom:analgesia": "s-reduced-pain-sensation",
+    "symptom:temperatureloss": "s-reduced-temperature-sensation",
+    "symptom:lossoftemperaturesensation": "s-reduced-temperature-sensation",
+    "symptom:impairedtemperaturesensation": "s-reduced-temperature-sensation",
+    "symptom:thermalsensoryloss": "s-reduced-temperature-sensation",
+    "symptom:lossofproprioception": "s-impaired-proprioception",
+    "symptom:proprioceptiveloss": "s-impaired-proprioception",
+    "symptom:positionsenseloss": "s-impaired-proprioception",
+    "symptom:lossofjointpositionsense": "s-impaired-proprioception"
   },
   "approvalGroups": [
     [
@@ -2760,7 +2810,11 @@ window.NEURO_REFERENCE={
   "removedIds": [
     "s-inflammation",
     "s-extensor-plantar-response",
-    "d-intracranial-mass"
+    "d-intracranial-mass",
+    "s-coma",
+    "s-visual-loss",
+    "s-reduced-foot-clearance",
+    "s-sensory-loss"
   ],
   "removedEntries": {
     "d-intracranial-mass": {
@@ -2771,6 +2825,25 @@ window.NEURO_REFERENCE={
     },
     "s-extensor-plantar-response": {
       "term": "Extensor plantar response"
+    },
+    "s-reduced-foot-clearance": {
+      "term": "Reduced foot clearance"
+    },
+    "s-sensory-loss": {
+      "term": "Sensory loss"
+    },
+    "s-visual-loss": {
+      "term": "Visual loss"
+    },
+    "s-coma": {
+      "term": "Coma"
     }
+  },
+  "splitIds": {
+    "s-sensory-loss": [
+      "s-reduced-touch-sensation",
+      "s-reduced-pain-sensation",
+      "s-reduced-temperature-sensation"
+    ]
   }
 };

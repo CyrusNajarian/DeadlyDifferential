@@ -18,7 +18,7 @@ The game now targets GitHub Pages. `.github/workflows/pages.yml` installs depend
 
 One-time setup: repository **Settings → Pages → Build and deployment → Source → GitHub Actions**. Then run **Actions → Deploy GitHub Pages → Run workflow** if the first push ran before Pages was enabled. The connected GitHub app cannot change the repository’s Pages setting.
 
-This repository is private. GitHub Pages for private repositories requires an eligible paid GitHub plan. Keep the repository private; do not change its visibility merely to enable hosting. See [GitHub’s publishing-source documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+The repository is public and GitHub Pages is enabled with GitHub Actions as the publishing source. See [GitHub’s publishing-source documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 After a successful deployment the intended project URL is `https://cyrusnajarian.github.io/DeadlyDifferential/`. Use the URL reported by the deployment job as the verified live address. All browser assets use relative paths and support the repository subdirectory.
 
@@ -49,7 +49,7 @@ The workbook includes:
 | Sheet | Contents |
 | --- | --- |
 | Read me | Editing and publishing instructions |
-| Symptoms | All 92 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
+| Symptoms | All 91 symptoms/signs, definitions, and Yes/No approval columns for 19 clue/person screens |
 | Diagnoses | All 106 diagnoses, definitions, and the same case columns |
 | Cases | A guide to each case-column code and its scoring role |
 | Answer key | Correct diagnoses and permitted alternatives for the final six-suspect assignment |
@@ -83,7 +83,7 @@ Tumor subtypes (glioma, glioblastoma, meningioma and brain metastasis) share the
 
 Whenever any listed parkinsonian diagnosis is accepted, all seven are accepted: Parkinson disease, drug-induced parkinsonism, vascular parkinsonism, progressive supranuclear palsy, multiple system atrophy, corticobasal syndrome and dementia with Lewy bodies. This applies to clue checks and Dr. Charcoal’s final diagnosis assignment. It is a game acceptance rule, not clinical equivalence. Set every family row to No to turn off the family for a workbook case.
 
-All 198 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
+All 197 current main catalog entries were reviewed against the 19 clue/person screens. See [the answer review](docs/answer-review.md) for case-by-case criteria, changes and sources. A Yes means a reasonable answer/differential for that single clue, not proof or the final best diagnosis.
 
 After the final culprit is locked, an incorrect choice receives a summary plus a five-clue comparison for that suspect’s confirmed diagnosis. Morning timing makes a typical MG fatigue explanation less persuasive but does not exclude MG. The selector itself shows only suspect names, with a lock button.
 
@@ -101,7 +101,9 @@ The selected distribution is matched against the evidence where the clue establi
 
 Arm pain is now **Extremity pain**, with arm/leg pain retained as search terms. The generic Inflammation, Extensor plantar response and Intracranial mass entries have been removed. Older workbook rows for removed entries are ignored rather than reassigned to a different diagnosis.
 
-Foot drop remains distinct from reduced foot clearance; sensory loss from impaired proprioception; visual loss from visual-field loss; and loss of consciousness from coma. Their reference definitions explain the differences. Location qualifiers refine these terms without combining clinically different findings.
+Coma, Visual loss and Reduced foot clearance have also been removed. The broad Sensory loss entry is replaced by **Reduced touch sensation**, **Reduced pain sensation**, **Reduced temperature sensation**, and the retained **Impaired proprioception** entry. Their definitions describe the relevant pathways without treating all touch as a single tract.
+
+Touch and position-feedback alternatives are approved for the neck, footsteps and key clues. Isolated pain/temperature loss is not inferred from those actions and remains unapproved without supporting evidence. These remain searchable reference entries. Old broad sensory-loss answers are not silently converted to a specific modality; older workbook rows require explicit modality review. Foot drop, Visual field loss and Loss of consciousness remain available.
 
 ## Automatic logging
 

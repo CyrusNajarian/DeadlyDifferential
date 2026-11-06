@@ -27,3 +27,5 @@ console.log('PASS: real workbook catalog coverage, 19-case roundtrip, editable a
 
 const withRemoved=copy(wb);for(const [sheet,id] of [['Diagnoses','d-intracranial-mass'],['Symptoms','s-inflammation'],['Symptoms','s-extensor-plantar-response']]){const row=[...withRemoved.Sheets[sheet][5]];row[0]=id;row[5]='Yes';withRemoved.Sheets[sheet].push(row)}
 const withoutRemoved=matrix.parse(withRemoved,XLSX);for(const screen of matrix.cases(withoutRemoved))assert(!screen.stage.accepted.some(a=>a.referenceIds?.some(id=>ref.data.removedIds.includes(id))));
+
+const broadLegacy=copy(wb);broadLegacy.Sheets.Symptoms=broadLegacy.Sheets.Symptoms.filter(r=>!['s-reduced-touch-sensation','s-reduced-pain-sensation','s-reduced-temperature-sensation'].includes(r[0]));const oldRow=[...wb.Sheets.Symptoms[5]];oldRow[0]='s-sensory-loss';oldRow[5]='Yes';broadLegacy.Sheets.Symptoms.push(oldRow);const split=matrix.parse(broadLegacy,XLSX);assert(!ref.approved(split.clues[0].stages[0],'symptom').some(a=>a.id.startsWith('s-reduced-')&&a.id.endsWith('-sensation')));

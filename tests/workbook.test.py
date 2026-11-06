@@ -7,7 +7,7 @@ root = Path(__file__).resolve().parents[1]
 file = root / 'Deadly_Differential_Answer_Matrix.xlsx'
 book = openpyxl.load_workbook(file, data_only=True)
 assert book.sheetnames == ['Read me', 'Symptoms', 'Diagnoses', 'Cases', 'Answer key']
-for name, count in [('Symptoms', 92), ('Diagnoses', 106)]:
+for name, count in [('Symptoms', 91), ('Diagnoses', 106)]:
  sheet = book[name]
  assert sheet.max_row == count + 5
  assert sheet.max_column == 24
